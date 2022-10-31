@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Shared.Models;
 
 namespace Elearn.Data.Data;
 
@@ -15,5 +16,5 @@ public class DataContext : DbContext
         Database.Migrate();
     }
     
-    
+    public DbSet<Post> Posts { get; set; }
 }
