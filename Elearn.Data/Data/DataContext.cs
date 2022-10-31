@@ -13,8 +13,12 @@ public class DataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Post>()
+            .HasOne(p => p.Author)
+            .WithMany();
         Database.Migrate();
     }
     
     public DbSet<Post> Posts { get; set; }
+    public DbSet<User> Users { get; set; }
 }
