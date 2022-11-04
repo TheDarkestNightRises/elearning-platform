@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components.Web;
+using MudBlazor.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Elearn.BlazorWASM;
 using MudBlazor.Services;
