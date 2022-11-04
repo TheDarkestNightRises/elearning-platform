@@ -12,7 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
+      <ProjectReference Include="..\Elearn.Application\Elearn.Application.csproj" />
+      <ProjectReference Include="..\Elearn.Data\Elearn.Data.csproj" />
     </ItemGroup>
 
 </Project>
