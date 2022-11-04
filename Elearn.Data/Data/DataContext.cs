@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.EntityFrameworkCore;
 using Shared.Models;
 
 namespace Elearn.Data.Data;
@@ -16,9 +17,15 @@ public class DataContext : DbContext
         modelBuilder.Entity<Post>()
             .HasOne(p => p.Author)
             .WithMany();
+        modelBuilder.Entity<Comment>()
+            .HasOne(c => c.Post)
+            .WithMany();
         Database.Migrate();
+        
+     
     }
     
     public DbSet<Post> Posts { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Comment> Comments { get; set; }
 }
