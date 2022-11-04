@@ -31,5 +31,10 @@ public class PostRepository : IPostRepository
         await _dataContext.SaveChangesAsync();
         return post;
     }
+
+    public async Task<Post?> GetByIdAsync(int dtoPostId)
+    {
+        return await _dataContext.Posts.FirstOrDefaultAsync(p => p.PostId.Equals(dtoPostId));
+    }
 }
 
