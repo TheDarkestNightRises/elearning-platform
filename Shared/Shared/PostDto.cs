@@ -12,6 +12,10 @@ public class PostDto
     public User Author{ get; set; }
     public DateTime DateCreated { get; set; }
 
+    public PostDto()
+    {
+        
+    }
     public PostDto(int id, string title, string body, string url, string image, User author, DateTime dateCreated)
     {
         Id = id;
