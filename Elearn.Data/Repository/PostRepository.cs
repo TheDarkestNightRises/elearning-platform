@@ -1,7 +1,9 @@
-﻿using Elearn.Data.Data;
+﻿using Elearn.Application.RepositoryInterfaces;
+using Elearn.Data.Data;
 using Microsoft.EntityFrameworkCore;
 using Shared.Models;
 
+    
 namespace Elearn.Data.Repository;
 
 public class PostRepository : IPostRepository
@@ -30,3 +32,4 @@ public class PostRepository : IPostRepository
         return post;
     }
 }
+
