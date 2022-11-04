@@ -7,13 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Blazored.TextEditor" Version="1.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.9" PrivateAssets="all" />
         <PackageReference Include="MudBlazor" Version="6.0.17" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Pages\Components" />
     </ItemGroup>
 
 </Project>
