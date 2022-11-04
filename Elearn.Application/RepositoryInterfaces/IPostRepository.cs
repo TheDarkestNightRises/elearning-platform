@@ -1,6 +1,6 @@
 ﻿using Shared.Models;
 
-namespace Elearn.Data.Repository;
+namespace Elearn.Application.RepositoryInterfaces;
 
 public interface IPostRepository
 {
