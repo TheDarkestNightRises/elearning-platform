@@ -1,6 +1,5 @@
 ﻿using Elearn.Application.LogicInterfaces;
 using Elearn.Application.RepositoryInterfaces;
-using Elearn.Data.Repository;
 using Shared;
 using Shared.Models;
 
