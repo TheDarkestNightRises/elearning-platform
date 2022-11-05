@@ -1,4 +1,6 @@
-﻿using Shared.Models;
+﻿
+using Elearn.Shared.Dtos;
+using Elearn.Shared.Models;
 
 namespace Shared.Extensions;
 

@@ -1,6 +1,6 @@
 ﻿
+using Elearn.Shared.Models;
 using Microsoft.EntityFrameworkCore;
-using Shared.Models;
 
 namespace Elearn.Data.Data;
 

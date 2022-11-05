@@ -1,4 +1,4 @@
-﻿namespace Shared.Models;
+﻿namespace Elearn.Shared.Models;
 
 public class User
 {

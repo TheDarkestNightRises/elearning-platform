@@ -1,7 +1,7 @@
 ﻿using Elearn.Application.RepositoryInterfaces;
 using Elearn.Data.Data;
+using Elearn.Shared.Models;
 using Microsoft.EntityFrameworkCore;
-using Shared.Models;
 
     
 namespace Elearn.Data.Repository;

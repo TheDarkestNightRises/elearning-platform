@@ -1,4 +1,4 @@
-﻿using Shared.Models;
+﻿using Elearn.Shared.Models;
 
 namespace Elearn.Application.RepositoryInterfaces;
 

@@ -15,7 +15,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Elearn.HttpClients\Elearn.HttpClients.csproj" />
-      <ProjectReference Include="..\Shared\Shared.csproj" />
+      <ProjectReference Include="..\Elearn.Shared\Elearn.Shared.csproj" />
     </ItemGroup>
 
 </Project>

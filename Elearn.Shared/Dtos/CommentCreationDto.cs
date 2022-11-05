@@ -1,4 +1,4 @@
-﻿namespace Shared.Dtos;
+﻿namespace Elearn.Shared.Dtos;
 
 public class CommentCreationDto
 {

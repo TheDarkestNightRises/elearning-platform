@@ -1,6 +1,7 @@
 ﻿
-using Shared;
-using Shared.Models;
+
+using Elearn.Shared.Dtos;
+using Elearn.Shared.Models;
 
 namespace Elearn.BlazorWASM;
 

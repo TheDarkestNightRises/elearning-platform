@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 
-namespace Shared.Models;
+namespace Elearn.Shared.Models;
 public class Post
 {
     public int Id { get; set; }

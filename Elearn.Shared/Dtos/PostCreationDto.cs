@@ -1,6 +1,7 @@
-﻿using Shared.Models;
+﻿
+using Elearn.Shared.Models;
 
-namespace Shared;
+namespace Elearn.Shared.Dtos;
 
 public class PostCreationDto
 {

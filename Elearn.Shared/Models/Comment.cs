@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Shared.Models;
 
-namespace Shared.Models;
+namespace Elearn.Shared.Models;
 
 public class Comment
 {

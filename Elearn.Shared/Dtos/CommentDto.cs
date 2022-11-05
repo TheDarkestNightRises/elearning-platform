@@ -1,6 +1,6 @@
-﻿using Shared.Models;
+﻿using Elearn.Shared.Models;
 
-namespace Shared.Dtos;
+namespace Elearn.Shared.Dtos;
 
 public class CommentDto
 {

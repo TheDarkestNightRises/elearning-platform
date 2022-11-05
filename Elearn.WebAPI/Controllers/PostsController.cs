@@ -1,8 +1,9 @@
 ﻿using Elearn.Application.LogicInterfaces;
+using Elearn.Shared.Dtos;
+using Elearn.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
-using Shared;
 using Shared.Extensions;
-using Shared.Models;
+
 
 namespace Elearn.WebAPI.Controllers;
 [ApiController]

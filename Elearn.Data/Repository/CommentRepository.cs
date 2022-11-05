@@ -1,6 +1,6 @@
 ﻿using Elearn.Application.RepositoryInterfaces;
 using Elearn.Data.Data;
-using Shared.Models;
+using Elearn.Shared.Models;
 
 namespace Elearn.Data.Repository;
 
@@ -14,7 +14,7 @@ public class CommentRepository : ICommentRepository
     }
     public async Task<Comment> CreateAsync(Comment comment)
     {
-        _dataContext.Add(comment);
+        await _dataContext.AddAsync(comment);
         await _dataContext.SaveChangesAsync();
         return comment;
     }
