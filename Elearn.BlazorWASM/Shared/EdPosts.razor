@@ -1,0 +1,32 @@
+@using Elearn.BlazorWASM
+@using global::Shared.Models
+@inject IPostService PostService
+
+@if (Posts == null)
+{
+    <span>Getting the blog posts...</span>
+}
+@if (Posts.Count == 0)
+{
+    <span> No posts </span>
+}
+@foreach (var post in Posts)
+{
+    <div class="card my-2">
+        <div class="card-body">
+            <h5 class="card-title">@post.Title</h5>
+            <p class="card-text">
+                <span class="text-muted">@post.DateCreated </span>
+            </p>
+            <a href="/posts/@post.Url" class="btn btn-primary">Read more...</a>
+        </div>
+    </div> }
+
+@code {
+    private List<Post> Posts = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Posts = await PostService.GetPostsAsync();
+    }
+}

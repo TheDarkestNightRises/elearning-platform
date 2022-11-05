@@ -2,10 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace Shared.Models;
-[Index( nameof(Url), IsUnique=true)] 
 public class Post
 {
-    public int PostId { get; set; }
+    public int Id { get; set; }
 
     [Required, StringLength(20, ErrorMessage = "Please use only 20 characters")]
     public string Url { get; set; }
@@ -27,9 +26,9 @@ public class Post
         Author = author;
     }
 
-    public Post(int postId, string url, string image, string title, string body, User author)
+    public Post(int id, string url, string image, string title, string body, User author)
     {
-        PostId = postId;
+        Id = id;
         Url = url;
         Image = image;
         Title = title;

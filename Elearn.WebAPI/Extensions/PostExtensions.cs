@@ -2,13 +2,13 @@
 
 namespace Shared.Extensions;
 
-public static class Extensions
+public static class PostExtensions
 {
     public static PostDto AsDto(this Post post) 
     {
         return new PostDto
         {
-            Id = post.PostId,
+            Id = post.Id,
             Url = post.Url,
             Image = post.Image,
             Title = post.Title,
@@ -22,13 +22,13 @@ public static class Extensions
         var products = (from post in posts 
             select new PostDto 
             {
-                Id = post.PostId,
+                Id = post.Id,
                 Url = post.Url,
                 Image = post.Image,
                 Title = post.Title,
                 Body = post.Body,
-                DateCreated = post.DateCreated
-                
+                DateCreated = post.DateCreated,
+                Author = post.Author
             });
         return products;                
     }
@@ -36,12 +36,13 @@ public static class Extensions
     {
         return new Post
         {
-            PostId = postDto.Id,
+            Id = postDto.Id,
             Url = postDto.Url,
             Image = postDto.Image,
             Title = postDto.Title,
             Body = postDto.Body,
-            DateCreated = postDto.DateCreated
+            DateCreated = postDto.DateCreated,
+            Author = postDto.Author
         };
     }
     public static Post AsBaseFromCreation(this PostCreationDto postDto) 
@@ -52,6 +53,7 @@ public static class Extensions
             Image = postDto.Image,
             Title = postDto.Title,
             Body = postDto.Body,
+            Author = postDto.Author
         };
     }
 }
