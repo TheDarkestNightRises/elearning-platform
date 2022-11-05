@@ -30,6 +30,12 @@ public class PostLogic : IPostLogic
     {
         return await _postRepository.GetAllPostsAsync();
     }
+
+    public async Task<Post?> GetPostAsync(string url)
+    {
+        return await _postRepository.GetPostAsync(url);
+    }
+
     private void ValidateCreationDto(PostCreationDto dto)
     {
         if (string.IsNullOrEmpty(dto.Title)) throw new Exception("Title cannot be empty.");

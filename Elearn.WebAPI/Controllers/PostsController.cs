@@ -31,4 +31,39 @@ public class PostsController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpGet]
+    public async Task<ActionResult<List<Post>>> GetAllPostsAsync()
+    {
+        try
+        {
+            var posts = await postLogic.GetAllPostsAsync();
+            return Ok(posts);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
+        }
+   
+    }
+
+    [HttpGet("{url}")]
+    public async Task<ActionResult<Post>> GetBlogPostAsync(string url)
+    {
+        try
+        {
+            var post = await postLogic.GetPostAsync(url);
+            if (post is null)
+            {
+                return NotFound("This post does not exist");
+            }
+            return Ok(post);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 }
