@@ -2,7 +2,7 @@
 using Shared;
 using Shared.Models;
 
-namespace Blog.BlazorWASM;
+namespace Elearn.BlazorWASM;
 
 public interface IPostService
 {
