@@ -24,7 +24,11 @@ public class Comment
         Post = post;
         Text = text;
     }
-    
+
+    public Comment()
+    {
+        
+    }
     public override string ToString()
     {
         return $"{CommentId} {AuthorId} {Post} {Text} {DateCreated}";

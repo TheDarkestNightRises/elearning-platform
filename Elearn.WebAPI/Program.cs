@@ -17,6 +17,7 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
+builder.Services.AddScoped<IPostLogic, PostLogic>();
 
 var app = builder.Build();
 
