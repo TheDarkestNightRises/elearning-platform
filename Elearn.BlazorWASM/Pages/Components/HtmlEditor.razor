@@ -1,0 +1,66 @@
+@using Blazored.TextEditor
+<div class="card-body mb-5" style="height:200px;">
+    <!-- Text editor -->
+    <BlazoredTextEditor @ref=QuillHtml Placeholder="write somthing...">
+
+        <ToolbarContent>
+            <select class="ql-header">
+                <option selected=""></option>
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+            </select>
+            <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+            </span>
+            <span class="ql-formats">
+                <select class="ql-color"></select>
+                <select class="ql-background"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-link"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-video"></button>
+            </span>
+
+        </ToolbarContent>
+
+    </BlazoredTextEditor>
+    
+<!-- Preview card -->
+</div>
+<div class="card-header my-4">
+    <button type="button" class="btn btn-success" @onclick=@(async () => await ShowAoutPutPreview())>Show OutPut</button>
+</div>
+<div class="card my-4">
+    <div class="card-header">
+        the preview Of html editor
+    </div>
+    <div class="card-body">
+        @preview
+    </div>
+</div>
+
+@code {
+    private BlazoredTextEditor QuillHtml;
+    private MarkupString preview;
+    
+    
+    private async Task ShowAoutPutPreview()
+    {
+        if (!string.IsNullOrWhiteSpace(await QuillHtml.GetText()))
+        {
+            preview = (MarkupString)await QuillHtml.GetHTML();
+        }
+    }
+}

@@ -17,9 +17,36 @@ namespace Elearn.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0-rc.2.22472.11");
 
+            modelBuilder.Entity("Shared.Models.Comment", b =>
+                {
+                    b.Property<int>("CommentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CommentId");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Shared.Models.Post", b =>
                 {
-                    b.Property<int>("PostId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -46,9 +73,12 @@ namespace Elearn.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("PostId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AuthorUserId");
+
+                    b.HasIndex("Url")
+                        .IsUnique();
 
                     b.ToTable("Posts");
                 });
@@ -59,9 +89,32 @@ namespace Elearn.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Shared.Models.Comment", b =>
+                {
+                    b.HasOne("Shared.Models.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("Shared.Models.Post", b =>
