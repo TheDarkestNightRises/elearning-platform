@@ -3,7 +3,7 @@ using Elearn.Shared.Models;
 
 namespace Elearn.BlazorWASM;
 
-public interface ICommentService
+public interface ICommentService 
 {
     Task<Comment> Create(CommentCreationDto dto);
 }
