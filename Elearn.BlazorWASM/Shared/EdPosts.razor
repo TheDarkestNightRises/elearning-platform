@@ -1,5 +1,5 @@
+@using Elearn.BlazorWASM
 @using global::Shared.Models
-@using Blog.BlazorWASM
 @inject IPostService PostService
 
 @if (Posts == null)
@@ -20,8 +20,7 @@
             </p>
             <a href="/posts/@post.Url" class="btn btn-primary">Read more...</a>
         </div>
-    </div> 
-}
+    </div> }
 
 @code {
     private List<Post> Posts = new();
