@@ -34,7 +34,7 @@ public class PostRepository : IPostRepository
 
     public async Task<Post?> GetByIdAsync(int dtoPostId)
     {
-        return await _dataContext.Posts.FirstOrDefaultAsync(p => p.PostId.Equals(dtoPostId));
+        return await _dataContext.Posts.FirstOrDefaultAsync(p => p.Id.Equals(dtoPostId));
     }
 }
 

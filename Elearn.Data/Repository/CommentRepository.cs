@@ -1,6 +1,5 @@
 ﻿using Elearn.Application.RepositoryInterfaces;
 using Elearn.Data.Data;
-using Elearn.Data.Migrations;
 using Shared.Models;
 
 namespace Elearn.Data.Repository;

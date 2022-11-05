@@ -20,6 +20,9 @@ public class DataContext : DbContext
         modelBuilder.Entity<Comment>()
             .HasOne(c => c.Post)
             .WithMany();
+        modelBuilder.Entity<Post>()
+            .HasIndex(p => p.Url)
+            .IsUnique();
         Database.Migrate();
         
      

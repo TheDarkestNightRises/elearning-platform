@@ -17,7 +17,7 @@ namespace Elearn.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0-rc.2.22472.11");
 
-            modelBuilder.Entity("Blog.Shared.Models.Comment", b =>
+            modelBuilder.Entity("Shared.Models.Comment", b =>
                 {
                     b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace Elearn.Data.Migrations
 
             modelBuilder.Entity("Shared.Models.Post", b =>
                 {
-                    b.Property<int>("PostId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -73,9 +73,12 @@ namespace Elearn.Data.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("PostId");
+                    b.HasKey("Id");
 
                     b.HasIndex("AuthorUserId");
+
+                    b.HasIndex("Url")
+                        .IsUnique();
 
                     b.ToTable("Posts");
                 });
@@ -103,15 +106,15 @@ namespace Elearn.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Blog.Shared.Models.Comment", b =>
+            modelBuilder.Entity("Shared.Models.Comment", b =>
                 {
-                    b.HasOne("Shared.Models.Post", "post")
+                    b.HasOne("Shared.Models.Post", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("post");
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("Shared.Models.Post", b =>

@@ -8,7 +8,7 @@ public static class PostExtensions
     {
         return new PostDto
         {
-            Id = post.PostId,
+            Id = post.Id,
             Url = post.Url,
             Image = post.Image,
             Title = post.Title,
@@ -22,7 +22,7 @@ public static class PostExtensions
         var products = (from post in posts 
             select new PostDto 
             {
-                Id = post.PostId,
+                Id = post.Id,
                 Url = post.Url,
                 Image = post.Image,
                 Title = post.Title,
@@ -36,7 +36,7 @@ public static class PostExtensions
     {
         return new Post
         {
-            PostId = postDto.Id,
+            Id = postDto.Id,
             Url = postDto.Url,
             Image = postDto.Image,
             Title = postDto.Title,
