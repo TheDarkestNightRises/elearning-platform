@@ -1,4 +1,5 @@
 ﻿
+using Elearn.Data.Seed;
 using Elearn.Shared.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,9 +24,9 @@ public class DataContext : DbContext
         modelBuilder.Entity<Post>()
             .HasIndex(p => p.Url)
             .IsUnique();
+        UserSeed userSeed = new UserSeed(modelBuilder);
+        userSeed.CreateUsers();
         Database.Migrate();
-        
-     
     }
     
     public DbSet<Post> Posts { get; set; }

@@ -6,31 +6,10 @@ namespace Elearn.Application.Logic;
 
 public class AuthLogic : IAuthLogic
 {
-
-    private readonly IList<User> users = new List<User>
-    {
-        new User
-        {
-            Email = "trmo@via.dk",
-            Name = "Troels Mortensen",
-            Password = "onetwo3FOUR",
-            Role = "Teacher",
-            Username = "trmo",
-            SecurityLevel = 4
-        },
-        new User
-        {
-            Email = "jakob@gmail.com",
-            Name = "Jakob Rasmussen",
-            Password = "password",
-            Role = "Student",
-            Username = "jknr",
-            SecurityLevel = 2
-        }
-    };
-
+    private 
     public Task<User> ValidateUser(string username, string password)
     {
+        User? existingUser = 
         User? existingUser = users.FirstOrDefault(u => 
             u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
         
