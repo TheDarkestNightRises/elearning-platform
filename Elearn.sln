@@ -4,13 +4,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.WebAPI", "Elearn.Web
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.BlazorWASM", "Elearn.BlazorWASM\Elearn.BlazorWASM.csproj", "{C01B2194-D06A-4F37-B02B-2E372B16F8B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{1329C679-5F2B-4FA1-B4DC-78C43FB194C5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.Data", "Elearn.Data\Elearn.Data.csproj", "{147B217F-A263-4AEE-A2ED-E0DB37DD3B7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.Application", "Elearn.Application\Elearn.Application.csproj", "{38487873-832F-444A-BA43-1E73A15F3FEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.HttpClients", "Elearn.HttpClients\Elearn.HttpClients.csproj", "{8122240D-941E-4E70-8186-001489656220}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.Shared", "Elearn.Shared\Elearn.Shared.csproj", "{2BF0FC0D-7683-4FD9-9EE1-4530B6E0A293}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +26,6 @@ Global
 		{C01B2194-D06A-4F37-B02B-2E372B16F8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C01B2194-D06A-4F37-B02B-2E372B16F8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C01B2194-D06A-4F37-B02B-2E372B16F8B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1329C679-5F2B-4FA1-B4DC-78C43FB194C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1329C679-5F2B-4FA1-B4DC-78C43FB194C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1329C679-5F2B-4FA1-B4DC-78C43FB194C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1329C679-5F2B-4FA1-B4DC-78C43FB194C5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{147B217F-A263-4AEE-A2ED-E0DB37DD3B7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{147B217F-A263-4AEE-A2ED-E0DB37DD3B7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{147B217F-A263-4AEE-A2ED-E0DB37DD3B7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -42,5 +38,9 @@ Global
 		{8122240D-941E-4E70-8186-001489656220}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8122240D-941E-4E70-8186-001489656220}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8122240D-941E-4E70-8186-001489656220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BF0FC0D-7683-4FD9-9EE1-4530B6E0A293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BF0FC0D-7683-4FD9-9EE1-4530B6E0A293}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BF0FC0D-7683-4FD9-9EE1-4530B6E0A293}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BF0FC0D-7683-4FD9-9EE1-4530B6E0A293}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
