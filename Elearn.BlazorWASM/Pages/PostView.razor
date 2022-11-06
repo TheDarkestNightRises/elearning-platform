@@ -1,0 +1,48 @@
+@page "/posts/{url}"
+@using Elearn.Shared.Models
+@inject IPostService PostService
+@inject ICommentService CommentService
+@using Elearn.BlazorWASM.Pages.Components
+ 
+
+@if (currentPost == null)
+{
+    <span>Getting the blog post...</span>
+}
+else
+{
+    <h3>@currentPost.Title</h3>
+    @((MarkupString)currentPost.Body)
+}
+
+<CreateComment CurrentPost= "@currentPost"></CreateComment>
+
+@if (Comments == null)
+{
+    <span>Comments Loading...</span>
+}
+@if (Comments.Count == 0)
+{
+    <span> No comments </span>
+}
+
+@foreach (var comment in Comments)
+{
+    <CommentBody Text= "@comment.Text"></CommentBody>
+}
+
+
+@code {
+    private Post? currentPost;
+    private List<Comment> Comments = new();
+
+    [Parameter]
+    public String Url { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentPost = await PostService.GetPostByUrlAsync(Url);
+        Comments = await CommentService.GetCommentsByPostUrlAsync(Url);
+    }
+
+}
