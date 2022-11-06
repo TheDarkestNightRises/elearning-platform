@@ -1,0 +1,35 @@
+@using Elearn.BlazorWASM
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Models
+@inject IPostService PostService
+
+@if (_posts == null)
+{
+    <span>Getting the educational posts...</span>
+    <MudProgressCircular></MudProgressCircular>
+}
+else
+{
+    @if (_posts.Count == 0)
+    {
+        <span> No posts </span>
+    }
+    else
+    {
+        @foreach (var post in _posts)
+        {
+            <PostCard Post="@post"></PostCard>
+        }
+    }
+}
+
+
+@code {
+    private List<Post>? _posts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _posts = await PostService.GetPostsAsync();
+    }
+
+}
