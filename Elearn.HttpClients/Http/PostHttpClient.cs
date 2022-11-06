@@ -1,9 +1,10 @@
 ﻿using System.Net.Http.Json;
+using Elearn.HttpClients.Service;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
 
-namespace Elearn.BlazorWASM;
+namespace Elearn.HttpClients.Http;
 
 public class PostHttpClient : IPostService
 {
