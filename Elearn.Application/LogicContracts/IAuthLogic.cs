@@ -4,8 +4,8 @@ namespace Elearn.Application.LogicInterfaces;
 
 public interface IAuthLogic
 {
-    Task<User> GetUser(string username, string password);
-    Task RegisterUser(User user);
+    Task<User> GetUserAsync(string username, string password);
+    Task<User> RegisterUserAsync(User user);
 
-    Task<User> ValidateUser(string username, string password);
+    Task<User> ValidateUserAsync(string username, string password);
 }

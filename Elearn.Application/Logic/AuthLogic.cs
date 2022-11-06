@@ -1,38 +1,22 @@
 using System.ComponentModel.DataAnnotations;
 using Elearn.Application.LogicInterfaces;
+using Elearn.Application.RepositoryInterfaces;
 using Elearn.Shared.Models;
 
 namespace Elearn.Application.Logic;
 
 public class AuthLogic : IAuthLogic
 {
+    private readonly IUserRepository _userRepository;
 
-    private readonly IList<User> users = new List<User>
+    public AuthLogic(IUserRepository userRepository)
     {
-        new User
-        {
-            Email = "trmo@via.dk",
-            Name = "Troels Mortensen",
-            Password = "onetwo3FOUR",
-            Role = "Teacher",
-            Username = "trmo",
-            SecurityLevel = 4
-        },
-        new User
-        {
-            Email = "jakob@gmail.com",
-            Name = "Jakob Rasmussen",
-            Password = "password",
-            Role = "Student",
-            Username = "jknr",
-            SecurityLevel = 2
-        }
-    };
+        _userRepository = userRepository;
+    }
 
-    public Task<User> ValidateUser(string username, string password)
+    public async Task<User> ValidateUserAsync(string username, string password)
     {
-        User? existingUser = users.FirstOrDefault(u => 
-            u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+        User? existingUser = await _userRepository.GetUserByNameAsync(username);
         
         if (existingUser == null)
         {
@@ -44,17 +28,16 @@ public class AuthLogic : IAuthLogic
             throw new Exception("Password mismatch");
         }
 
-        return Task.FromResult(existingUser);
+        return existingUser;
     }
 
-    public Task<User> GetUser(string username, string password)
+    public async Task<User> GetUserAsync(string username, string password)
     {
         throw new NotImplementedException();
     }
 
-    public Task RegisterUser(User user)
+    public async Task<User> RegisterUserAsync(User user)
     {
-
         if (string.IsNullOrEmpty(user.Username))
         {
             throw new ValidationException("Username cannot be null");
@@ -64,12 +47,7 @@ public class AuthLogic : IAuthLogic
         {
             throw new ValidationException("Password cannot be null");
         }
-        // Do more user info validation here
-        
-        // save to persistence instead of list
-        
-        users.Add(user);
-        
-        return Task.CompletedTask;
+
+        return await _userRepository.CreateNewUserAsync(user);
     }
 }

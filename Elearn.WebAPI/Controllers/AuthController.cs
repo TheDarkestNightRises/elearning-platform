@@ -65,7 +65,7 @@ public class AuthController : ControllerBase
     {
         try
         {
-            User user = await authLogic.ValidateUser(userLoginDto.Username, userLoginDto.Password);
+            User user = await authLogic.ValidateUserAsync(userLoginDto.Username, userLoginDto.Password);
             string token = GenerateJwt(user);
     
             return Ok(token);
