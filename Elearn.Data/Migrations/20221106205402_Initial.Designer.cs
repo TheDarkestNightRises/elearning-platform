@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Elearn.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221105185243_Initial")]
+    [Migration("20221106205402_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace Elearn.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0-rc.2.22472.11");
 
-            modelBuilder.Entity("Shared.Models.Comment", b =>
+            modelBuilder.Entity("Elearn.Shared.Models.Comment", b =>
                 {
                     b.Property<int>("CommentId")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace Elearn.Data.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Shared.Models.Post", b =>
+            modelBuilder.Entity("Elearn.Shared.Models.Post", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,7 +86,7 @@ namespace Elearn.Data.Migrations
                     b.ToTable("Posts");
                 });
 
-            modelBuilder.Entity("Shared.Models.User", b =>
+            modelBuilder.Entity("Elearn.Shared.Models.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -96,9 +96,20 @@ namespace Elearn.Data.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SecurityLevel")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -107,11 +118,33 @@ namespace Elearn.Data.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            Email = "trmo@via.dk",
+                            Name = "Troels Mortensen",
+                            Password = "onetwo3FOUR",
+                            Role = "Teacher",
+                            SecurityLevel = 4,
+                            Username = "trmo"
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            Email = "jakob@gmail.com",
+                            Name = "Jakob Rasmussen",
+                            Password = "password",
+                            Role = "Student",
+                            SecurityLevel = 2,
+                            Username = "jknr"
+                        });
                 });
 
-            modelBuilder.Entity("Shared.Models.Comment", b =>
+            modelBuilder.Entity("Elearn.Shared.Models.Comment", b =>
                 {
-                    b.HasOne("Shared.Models.Post", "Post")
+                    b.HasOne("Elearn.Shared.Models.Post", "Post")
                         .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -120,9 +153,9 @@ namespace Elearn.Data.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("Shared.Models.Post", b =>
+            modelBuilder.Entity("Elearn.Shared.Models.Post", b =>
                 {
-                    b.HasOne("Shared.Models.User", "Author")
+                    b.HasOne("Elearn.Shared.Models.User", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorUserId")
                         .OnDelete(DeleteBehavior.Cascade)

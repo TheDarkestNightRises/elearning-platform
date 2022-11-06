@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Elearn.Data.Migrations
 {
     /// <inheritdoc />
@@ -19,7 +21,10 @@ namespace Elearn.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Username = table.Column<string>(type: "TEXT", nullable: false),
                     Password = table.Column<string>(type: "TEXT", nullable: false),
-                    Email = table.Column<string>(type: "TEXT", nullable: false)
+                    Email = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Role = table.Column<string>(type: "TEXT", nullable: false),
+                    SecurityLevel = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,6 +75,15 @@ namespace Elearn.Data.Migrations
                         principalTable: "Posts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "UserId", "Email", "Name", "Password", "Role", "SecurityLevel", "Username" },
+                values: new object[,]
+                {
+                    { 1, "trmo@via.dk", "Troels Mortensen", "onetwo3FOUR", "Teacher", 4, "trmo" },
+                    { 2, "jakob@gmail.com", "Jakob Rasmussen", "password", "Student", 2, "jknr" }
                 });
 
             migrationBuilder.CreateIndex(

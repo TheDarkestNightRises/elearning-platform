@@ -16,7 +16,8 @@ public class UserRepository : IUserRepository
 
     public async Task<User?> GetUserByNameAsync(string name)
     {
-        return await _dataContext.Users.FirstOrDefaultAsync(u => u.Name.Equals(name));
+        return await _dataContext.Users.FirstOrDefaultAsync(u =>
+            u.Username.Equals(name));
     }
 
     public async Task<User> CreateNewUserAsync(User user)
