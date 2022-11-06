@@ -18,6 +18,8 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<IPostLogic, PostLogic>();
+builder.Services.AddScoped<IAuthLogic, AuthLogic>();
+
 
 var app = builder.Build();
 app.UseCors(x => x
