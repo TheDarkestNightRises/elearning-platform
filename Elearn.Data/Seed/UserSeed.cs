@@ -17,6 +17,7 @@ public class UserSeed
         _modelBuilder.Entity<User>().HasData(
             new User
             {
+                UserId = 1,
                 Email = "trmo@via.dk",
                 Name = "Troels Mortensen",
                 Password = "onetwo3FOUR",
@@ -27,6 +28,7 @@ public class UserSeed
         _modelBuilder.Entity<User>().HasData(
             new User
             {
+                UserId = 2,
                 Email = "jakob@gmail.com",
                 Name = "Jakob Rasmussen",
                 Password = "password",
