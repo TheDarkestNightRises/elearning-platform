@@ -1,7 +1,7 @@
 using System.Security.Claims;
 using Elearn.Shared.Models;
 
-namespace Elearn.BlazorWASM;
+namespace Elearn.HttpClients.Service;
 
 public interface IAuthService
 {

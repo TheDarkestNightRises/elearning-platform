@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Elearn.HttpClients.Service;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Elearn.BlazorWASM.Auth;
@@ -6,7 +7,7 @@ namespace Elearn.BlazorWASM.Auth;
 public class CustomAuthProvider : AuthenticationStateProvider
 {
     private readonly IAuthService authService;
-
+    
     public CustomAuthProvider(IAuthService authService)
     {
         this.authService = authService;

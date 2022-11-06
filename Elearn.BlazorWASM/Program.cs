@@ -3,6 +3,8 @@ using MudBlazor.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Elearn.BlazorWASM;
 using Elearn.BlazorWASM.Auth;
+using Elearn.HttpClients.Http;
+using Elearn.HttpClients.Service;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor.Services;
 using Shared.Auth;

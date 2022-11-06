@@ -1,7 +1,7 @@
 ﻿using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
-namespace Elearn.BlazorWASM;
+namespace Elearn.HttpClients.Service;
 
 public interface ICommentService 
 {

@@ -1,9 +1,10 @@
 using System.Net.Http.Json;
 using System.Text.Json;
+using Elearn.HttpClients.Service;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
-namespace Elearn.BlazorWASM;
+namespace Elearn.HttpClients.Http;
 
 public class CommentHttpClient : ICommentService
 {
