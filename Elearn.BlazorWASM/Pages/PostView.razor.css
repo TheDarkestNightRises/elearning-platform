@@ -7,6 +7,7 @@
     background-color:#3C4048;
     padding-right: 5px;
     display: table;
+
 }
 
 .field {
@@ -78,8 +79,4 @@
 
 .mud-avatar{
     padding-right: 10px;
-}
-
-.section{
-    padding-bottom: 30px;
 }

@@ -6,4 +6,7 @@ namespace Elearn.BlazorWASM;
 public interface ICommentService 
 {
     Task<Comment> Create(CommentCreationDto dto);
+
+
+    Task<List<Comment>> GetCommentsByPostUrlAsync(string url);
 }

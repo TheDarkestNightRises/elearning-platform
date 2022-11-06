@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Elearn.WebAPI.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("comments")]
+
 public class CommentsController : ControllerBase
 {
     private readonly ICommentLogic commentLogic;
@@ -23,12 +24,27 @@ public class CommentsController : ControllerBase
         try
         {
             Comment created = await commentLogic.CreateAsync(dto);
-            return Created($"/comments/{created.Post.Url}/{created.CommentId}", created);
+            return Created($"/comments/{created.Post.Url}", created);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             return StatusCode(500, e.Message);
+        }
+    }
+
+    [HttpGet("{url}")]
+    public  Task<ActionResult<List<Comment>>> GetAllCommentsByPostUrlAsync(string url)
+    {
+        try
+        {
+            var comments =  commentLogic.GetAllCommentsByPostUrlAsync(url);
+            return Task.FromResult<ActionResult<List<Comment>>>(Ok(comments));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return Task.FromResult<ActionResult<List<Comment>>>(StatusCode(500, e.Message));
         }
     }
 }

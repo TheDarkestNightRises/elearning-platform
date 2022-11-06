@@ -46,7 +46,12 @@ public class CommentLogic : ICommentLogic
     {
         throw new NotImplementedException();
     }
-    
+
+    public IQueryable<Comment> GetAllCommentsByPostUrlAsync(string url)
+    {
+        return commentRepository.GetAllCommentsByPostUrlAsync(url);
+    }
+
     private void ValidateComment(CommentCreationDto dto)
     {
         if (string.IsNullOrEmpty(dto.Text)) throw new Exception("Input cannot be empty.");
