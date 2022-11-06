@@ -29,4 +29,10 @@ public class CommentHttpClient : ICommentService
         })!;
         return comment;
     }
+
+    public async Task<List<Comment>> GetCommentsByPostUrlAsync(string url)
+    {
+        return await client.GetFromJsonAsync<List<Comment>>($"/comments/{url}");
+    }
+    
 }

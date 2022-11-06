@@ -1,6 +1,7 @@
 ﻿using Elearn.Application.RepositoryInterfaces;
 using Elearn.Data.Data;
 using Elearn.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Elearn.Data.Repository;
 
@@ -17,5 +18,10 @@ public class CommentRepository : ICommentRepository
         await _dataContext.AddAsync(comment);
         await _dataContext.SaveChangesAsync();
         return comment;
+    }
+
+    public IQueryable<Comment> GetAllCommentsByPostUrlAsync(string url)
+    {
+        return _dataContext.Comments.Where(c => c.Post.Url.Equals(url));
     }
 }

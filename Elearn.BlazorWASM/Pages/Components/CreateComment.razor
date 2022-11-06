@@ -2,11 +2,12 @@
 @using Elearn.Shared.Dtos
 
 @inject ICommentService CommentService
-
+<div class="section">
 <div class="card">
     
     <div class="form-group field flex-container">
         <div class="comment-section">Comment section below</div>
+        <MudAvatar Size="Size.Small" Image = "img/avatar.jpg"/>
         <input class="comment-input" type="text" placeholder="Post a comment" @bind="bodyText" @bind:event="oninput"/>
         <div class="button-row">
             <button @onclick="Create" disabled="@(string.IsNullOrEmpty(bodyText))" class="acceptbtn">
@@ -14,7 +15,7 @@
             </button>
         </div>
     </div>
-
+</div>
 </div>
 
 @code

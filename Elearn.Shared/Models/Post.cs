@@ -13,6 +13,8 @@ public class Post
     
     public string Body { get; set; }
 
+    public Boolean RightAnswer = false;
+
     public DateTime DateCreated { get; set; } = DateTime.Now;
     public User Author { get; set; }
 
