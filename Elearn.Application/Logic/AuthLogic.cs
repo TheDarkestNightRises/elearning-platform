@@ -1,17 +1,22 @@
 using System.ComponentModel.DataAnnotations;
 using Elearn.Application.LogicInterfaces;
+using Elearn.Application.RepositoryInterfaces;
 using Elearn.Shared.Models;
 
 namespace Elearn.Application.Logic;
 
 public class AuthLogic : IAuthLogic
 {
-    private 
-    public Task<User> ValidateUser(string username, string password)
+    private readonly IUserRepository _userRepository;
+
+    public AuthLogic(IUserRepository userRepository)
     {
-        User? existingUser = 
-        User? existingUser = users.FirstOrDefault(u => 
-            u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+        _userRepository = userRepository;
+    }
+
+    public async Task<User> ValidateUserAsync(string username, string password)
+    {
+        User? existingUser = await _userRepository.GetUserByNameAsync(username);
         
         if (existingUser == null)
         {
@@ -23,17 +28,16 @@ public class AuthLogic : IAuthLogic
             throw new Exception("Password mismatch");
         }
 
-        return Task.FromResult(existingUser);
+        return existingUser;
     }
 
-    public Task<User> GetUser(string username, string password)
+    public async Task<User> GetUserAsync(string username, string password)
     {
         throw new NotImplementedException();
     }
 
-    public Task RegisterUser(User user)
+    public async Task<User> RegisterUserAsync(User user)
     {
-
         if (string.IsNullOrEmpty(user.Username))
         {
             throw new ValidationException("Username cannot be null");
@@ -43,12 +47,7 @@ public class AuthLogic : IAuthLogic
         {
             throw new ValidationException("Password cannot be null");
         }
-        // Do more user info validation here
-        
-        // save to persistence instead of list
-        
-        users.Add(user);
-        
-        return Task.CompletedTask;
+
+        return await _userRepository.CreateNewUserAsync(user);
     }
 }
