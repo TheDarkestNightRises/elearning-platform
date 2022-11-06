@@ -1,0 +1,43 @@
+@using Elearn.Shared.Models
+@using Elearn.Shared.Dtos
+@using Elearn.HttpClients.Service
+@inject ICommentService CommentService
+<div class="section">
+<div class="card">
+    
+    <div class="form-group field flex-container">
+        <div class="comment-section">Comment section below</div>
+        <MudAvatar Size="Size.Small" Image = "img/avatar.jpg"/>
+        <input class="comment-input" type="text" placeholder="Post a comment" @bind="bodyText" @bind:event="oninput"/>
+        <div class="button-row">
+            <button @onclick="Create" disabled="@(string.IsNullOrEmpty(bodyText))" class="acceptbtn">
+                <img src="img/comment.png" class="comment_img" alt="comment_icon">
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+
+@code
+{
+    private string bodyText = "";
+    
+    [Parameter]
+    public Post CurrentPost { get; set; }
+    
+
+    private async Task Create()
+    {
+        try
+        {
+            await CommentService.Create(new CommentCreationDto(1, CurrentPost.Id, bodyText));
+            bodyText = "";
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            
+        }
+    }
+
+}
