@@ -1,15 +1,18 @@
-﻿namespace Elearn.Shared.Models;
+namespace Elearn.Shared.Dtos;
 
-public class User
+public class UserCreationDto
 {
-    public int UserId { get; set; }
     public string Username { get; set; }
+    
     public string Password { get; set; }
+    
     public string Email { get; set; }
+    
     public string Name { get; set; }
+    
     public string Role { get; set; }
-    public int SecurityLevel { get; set; }
-    public User(string username, string password, string email, string name, string role)
+    
+    public UserCreationDto(string username, string password, string email, string name, string role)
     {
         Username = username;
         Password = password;
@@ -17,12 +20,13 @@ public class User
         Name = name;
         Role = role;
     }
-    public User()
+    
+    public UserCreationDto()
     {
     }
     
     public override string ToString()
     {
-        return $"{UserId} {Name}";
+        return  $"{Name}";
     }
 }

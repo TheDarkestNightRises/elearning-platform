@@ -21,7 +21,7 @@ public class AuthController : ControllerBase
         this.config = config;
         this.authLogic = authLogic;
     }
-    
+
     private List<Claim> GenerateClaims(User user)
     {
         var claims = new[]
@@ -37,29 +37,29 @@ public class AuthController : ControllerBase
         };
         return claims.ToList();
     }
-    
+
     private string GenerateJwt(User user)
     {
         List<Claim> claims = GenerateClaims(user);
-    
+
         SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
         SigningCredentials signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-    
+
         JwtHeader header = new JwtHeader(signIn);
-    
+
         JwtPayload payload = new JwtPayload(
             config["Jwt:Issuer"],
             config["Jwt:Audience"],
-            claims, 
+            claims,
             null,
             DateTime.UtcNow.AddMinutes(60));
-    
+
         JwtSecurityToken token = new JwtSecurityToken(header, payload);
-    
+
         string serializedToken = new JwtSecurityTokenHandler().WriteToken(token);
         return serializedToken;
     }
-    
+
     [HttpPost, Route("login")]
     public async Task<ActionResult> Login([FromBody] UserLoginDto userLoginDto)
     {
@@ -67,7 +67,23 @@ public class AuthController : ControllerBase
         {
             User user = await authLogic.ValidateUserAsync(userLoginDto.Username, userLoginDto.Password);
             string token = GenerateJwt(user);
-    
+
+            return Ok(token);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
+    [HttpPost, Route("register")]
+    public async Task<ActionResult> Register([FromBody] UserCreationDto dto)
+    {
+        try
+        {
+            User user = await authLogic.RegisterUserAsync(dto);
+            string token = GenerateJwt(user);
+
             return Ok(token);
         }
         catch (Exception e)

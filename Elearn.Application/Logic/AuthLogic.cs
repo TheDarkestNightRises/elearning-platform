@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Elearn.Application.LogicInterfaces;
 using Elearn.Application.RepositoryInterfaces;
+using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
 namespace Elearn.Application.Logic;
@@ -36,18 +37,26 @@ public class AuthLogic : IAuthLogic
         throw new NotImplementedException();
     }
 
-    public async Task<User> RegisterUserAsync(User user)
+    public async Task<User> RegisterUserAsync(UserCreationDto dto)
     {
-        if (string.IsNullOrEmpty(user.Username))
+        if (string.IsNullOrEmpty(dto.Username))
         {
             throw new ValidationException("Username cannot be null");
         }
-
-        if (string.IsNullOrEmpty(user.Password))
+        if (string.IsNullOrEmpty(dto.Password))
         {
             throw new ValidationException("Password cannot be null");
         }
-
-        return await _userRepository.CreateNewUserAsync(user);
+        if (string.IsNullOrEmpty(dto.Email))
+        {
+            throw new ValidationException("Email cannot be null");
+        }
+        if (string.IsNullOrEmpty(dto.Name))
+        {
+            throw new ValidationException("Name cannot be null");
+        }
+        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role);
+        User created = await _userRepository.CreateNewUserAsync(user);
+        return created;
     }
 }
