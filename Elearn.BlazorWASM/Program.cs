@@ -5,6 +5,7 @@ using Elearn.BlazorWASM;
 using Elearn.BlazorWASM.Auth;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor.Services;
+using Shared.Auth;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -13,6 +14,8 @@ builder.Services.AddScoped<IPostService, PostHttpClient>();
 builder.Services.AddScoped<ICommentService, CommentHttpClient>();
 builder.Services.AddScoped<IAuthService, JwtHttpClient>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
+AuthorizationPolicies.AddPolicies(builder.Services);
+
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7219") });
 builder.Services.AddMudServices();
