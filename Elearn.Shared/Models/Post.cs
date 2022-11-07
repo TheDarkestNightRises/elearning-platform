@@ -18,7 +18,7 @@ public class Post
     public DateTime DateCreated { get; set; } = DateTime.Now;
     public User Author { get; set; }
 
-    public Post(string url, string image, string title, string body, User author)
+    public Post(string title, string body, string url, string image, User author)
     {
         Url = url;
         Image = image;
@@ -27,7 +27,7 @@ public class Post
         Author = author;
     }
 
-    public Post(int id, string url, string image, string title, string body, User author)
+    public Post(int id, string title, string body, string url, string image, User author)
     {
         Id = id;
         Url = url;

@@ -55,7 +55,7 @@ public static class PostExtensions
             Image = postDto.Image,
             Title = postDto.Title,
             Body = postDto.Body,
-            Author = postDto.Author
+            //Author = postDto.Author
         };
     }
 }
