@@ -9,18 +9,21 @@ namespace Elearn.Application.Logic;
 public class PostLogic : IPostLogic
 {
     private readonly IPostRepository _postRepository;
+    private readonly IUserRepository _userRepository;
 
-    public PostLogic(IPostRepository postRepository)
+    public PostLogic(IPostRepository postRepository, IUserRepository userRepository)
     {
         this._postRepository = postRepository;
+        this._userRepository = userRepository;
     }
 
-    public async Task<Post> CreateAsync(Post post)
+    public async Task<Post> CreateAsync(PostCreationDto dto)
     {
         //TODO: validate user when login part done
         //TODO: validate unique url
         //ValidateCreationDto(dto);
-        //Post post = new Post(dto.Title, dto.Body, dto.Url, dto.Image, dto.Author);
+        User user = await _userRepository.GetUserByIdAsync(dto.AuthorId);
+        Post post = new Post(dto.Title, dto.Body, dto.Url, dto.Image, user);
         Post created = await _postRepository.CreateNewPostAsync(post);
         //PostDto createdDto = new PostDto(created.PostId, created.Title, created.Body, created.Url, created.Image, created.Author, created.DateCreated);
         
