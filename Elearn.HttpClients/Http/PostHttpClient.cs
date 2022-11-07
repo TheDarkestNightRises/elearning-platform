@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Elearn.HttpClients.Service;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
@@ -15,14 +16,20 @@ public class PostHttpClient : IPostService
     {
         this.client = client;
     }
-    public async Task CreateAsync(PostCreationDto dto)
+    public async Task<PostDto> CreateAsync(PostCreationDto dto)
     {
         HttpResponseMessage response = await client.PostAsJsonAsync("/posts",dto);
+        string content = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
-            string content = await response.Content.ReadAsStringAsync();
+            
             throw new Exception(content);
         }
+        PostDto postDto = JsonSerializer.Deserialize<PostDto>(content, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return postDto;
     }
 
     public async Task<List<Post>> GetPostsAsync()

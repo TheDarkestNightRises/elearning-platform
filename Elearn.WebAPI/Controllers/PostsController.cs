@@ -22,7 +22,7 @@ public class PostsController : ControllerBase
     {
         try
         {
-            Post created = await postLogic.CreateAsync(PostExtensions.AsBaseFromCreation(dto));
+            Post created = await postLogic.CreateAsync(dto);
             PostDto createdDto = PostExtensions.AsDto(created);
             return Created($"/posts/{createdDto.Url}", createdDto);// ???
         }
