@@ -1,14 +1,23 @@
 @using Elearn.Shared.Models
-<div class="card my-2">
-                <div class="card-body">
-                    <h5 class="card-title">@Post.Title</h5>
-                    <p class="card-text">
-                        <span class="text-muted">@Post.DateCreated </span>
-                    </p>
-                    <a href="/posts/@Post.Url" class="btn btn-primary">Read more...</a>
-                </div>
-            </div>
+@inject NavigationManager navMgr
+
+<MudCard>
+    <MudCardMedia Image="images/door.jpg" Height="200" />
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@Post.Title</MudText>
+        <MudText Typo="Typo.body2">@Post.Author</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="GoToUrl">Learn More</MudButton>
+    </MudCardActions>
+</MudCard>
 @code {
     [Parameter]
     public Post Post { get; set; }
+
+    private void GoToUrl()
+    {
+        navMgr.NavigateTo(Post.Url);
+    }
+
 }

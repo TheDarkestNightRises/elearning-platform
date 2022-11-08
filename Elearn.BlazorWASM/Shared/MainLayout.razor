@@ -8,6 +8,12 @@
         @Body
     </article>
 </main>
-<MudThemeProvider/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+
+@code {
+    private MudTheme _theme = new();
+    private bool _isDarkMode = true;
+
+}
