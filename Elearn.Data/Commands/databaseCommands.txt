@@ -9,7 +9,7 @@ EF CORE:
 dotnet ef migrations add Initial
 
 #5.Update the database
-dotnet ef migrations update
+dotnet ef database update
 
 NOTE: If you have on creating sql errorsdelete the migrations and database(if it is on a dev env) 
 

@@ -11,6 +11,8 @@ public class PostCreationDto
     public string Image { get; set; }
     public int AuthorId{ get; set; }
 
+    public DateTime Date { get; set; } = DateTime.Now;
+
     public PostCreationDto(string title, string body, string url, string image, int authorId)
     {
         Title = title;
@@ -19,6 +21,11 @@ public class PostCreationDto
         Image = image;
         AuthorId = authorId;
     }
+
+    public PostCreationDto()
+    {
+    }
+
 
     public override string ToString()
     {
