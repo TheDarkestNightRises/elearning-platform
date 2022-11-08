@@ -1,6 +1,36 @@
-﻿<MudAppBar Style="@($"background:{Colors.Shades.Transparent};")" Color="Color.Dark" Fixed="false" Dense="true">
-    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
-    <MudSpacer />
-    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" />
+﻿@inject NavigationManager navMgr
 
-</MudAppBar>
+<MudToolBar>
+    <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" Class="mr-5" OnClick="GoHome"/>
+    <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
+    <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
+    <MudSpacer/>
+    <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToLogin"/>
+    <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
+    <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
+    <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
+</MudToolBar>
+
+@code {
+
+    private void GoToAddAPost()
+    {
+        navMgr.NavigateTo("/Create");
+    }
+
+    private void GoToLogin()
+    {
+        navMgr.NavigateTo("/LoginTest");
+    }
+
+    private void GoToRegister()
+    {
+        navMgr.NavigateTo("/Register");
+    }
+
+    private void GoHome()
+    {
+        navMgr.NavigateTo("/");
+    }
+
+}
