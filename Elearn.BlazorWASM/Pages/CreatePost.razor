@@ -65,7 +65,7 @@
         {
             try
             {
-                PostCreationDto dto = new PostCreationDto(postTitle, postBody, url, "img", 1);
+                PostCreationDto dto = new PostCreationDto(postTitle, postBody, url, "img", "trmo");
                 PostDto postDto = await postService.CreateAsync(dto);
                 navMgr.NavigateTo($"/posts/{postDto.Url}");
                 
