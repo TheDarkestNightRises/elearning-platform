@@ -1,107 +1,120 @@
 @page "/Create"
 @inject IPostService PostService
+@inject IAuthService authService
 @inject NavigationManager NavMgr 
 @using Blazored.TextEditor
 @using Elearn.HttpClients.Service
 @using Elearn.Shared.Dtos
 @using Elearn.Shared.Models
 @using Microsoft.AspNetCore.Components
+@using System.Security.Claims
 
-
-<h3>Create a New Educational Post</h3>
-
-<EditForm Model="@newPost" OnValidSubmit="CreateNewPost">
-    <DataAnnotationsValidator/>
-    <div class="form-group">
-        <label for="title">Title</label>
-        <InputText id="title" @bind-Value="newPost.Title" class="form-control"/>
-        <ValidationMessage For="@(() => newPost.Title)"/>
-    </div>
-    <div class="form-group">
-        <label for="url">Url</label>
-        <InputText id="url" @bind-Value="newPost.Url" class="form-control"/>
-        <ValidationMessage For="@(() => newPost.Url)"/>
-    </div>
-    <div class="form-control-file">
-        <label for="image">Image</label>
-        <InputFile OnChange="OnFileChange"></InputFile>
-    </div>
-    <div class="form-group">
-        <label for="date">Date</label>
-        <InputDate id="date" @bind-Value="newPost.Date" class="form-control"/>
-    </div>
-    <button type="submit" class="btn btn-primary">Create</button>
-    <div class="col-md-8">
-
+<AuthorizeView>
+    <NotAuthorized>
+        <h3>Please log in to create a post</h3>
+    </NotAuthorized>
+    <Authorized Context="Auth">
+        <h3>Create a New Educational Post</h3>
+        <EditForm Model="@newPost" OnValidSubmit="CreateNewPost">
+            <DataAnnotationsValidator/>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <InputText id="title" @bind-Value="newPost.Title" class="form-control"/>
+                <ValidationMessage For="@(() => newPost.Title)"/>
+            </div>
+            <div class="form-group">
+                <label for="url">Url</label>
+                <InputText id="url" @bind-Value="newPost.Url" class="form-control"/>
+                <ValidationMessage For="@(() => newPost.Url)"/>
+            </div>
+            <div class="form-control-file">
+                <label for="image">Image</label>
+                <InputFile OnChange="OnFileChange"></InputFile>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <InputDate id="date" @bind-Value="newPost.Date" class="form-control"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+            <div class="col-md-8">
+        
+                <div class="card">
+                    <div class="card-header">
+                        Html Text Editor
+                    </div>
+                    <div class="card-body mb-5" style="height:200px;">
+                        <!-- Text editor -->
+                        <BlazoredTextEditor @ref=QuillHtml Placeholder="write somthing...">
+        
+                            <ToolbarContent>
+                                <select class="ql-header">
+                                    <option selected=""></option>
+                                    <option value="1"></option>
+                                    <option value="2"></option>
+                                    <option value="3"></option>
+                                    <option value="4"></option>
+                                    <option value="5"></option>
+                                </select>
+                                <span class="ql-formats">
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-underline"></button>
+                                    <button class="ql-strike"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <select class="ql-color"></select>
+                                    <select class="ql-background"></select>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-list" value="ordered"></button>
+                                    <button class="ql-list" value="bullet"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-link"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-video"></button>
+                                </span>
+        
+                            </ToolbarContent>
+        
+                        </BlazoredTextEditor>
+        
+                    </div>
+                </div>
+            </div>
+            <ValidationSummary/>
+        </EditForm>
+        <!-- Preview card -->
         <div class="card">
             <div class="card-header">
-                Html Text Editor
+                the preview Of html editor
             </div>
-            <div class="card-body mb-5" style="height:200px;">
-                <!-- Text editor -->
-                <BlazoredTextEditor @ref=QuillHtml Placeholder="write somthing...">
-
-                    <ToolbarContent>
-                        <select class="ql-header">
-                            <option selected=""></option>
-                            <option value="1"></option>
-                            <option value="2"></option>
-                            <option value="3"></option>
-                            <option value="4"></option>
-                            <option value="5"></option>
-                        </select>
-                        <span class="ql-formats">
-                            <button class="ql-bold"></button>
-                            <button class="ql-italic"></button>
-                            <button class="ql-underline"></button>
-                            <button class="ql-strike"></button>
-                        </span>
-                        <span class="ql-formats">
-                            <select class="ql-color"></select>
-                            <select class="ql-background"></select>
-                        </span>
-                        <span class="ql-formats">
-                            <button class="ql-list" value="ordered"></button>
-                            <button class="ql-list" value="bullet"></button>
-                        </span>
-                        <span class="ql-formats">
-                            <button class="ql-link"></button>
-                        </span>
-                        <span class="ql-formats">
-                            <button class="ql-video"></button>
-                        </span>
-
-                    </ToolbarContent>
-
-                </BlazoredTextEditor>
-
+            <div class="card-body">
+                @preview
             </div>
         </div>
-    </div>
-    <ValidationSummary/>
-</EditForm>
-<!-- Preview card -->
-<div class="card">
-    <div class="card-header">
-        the preview Of html editor
-    </div>
-    <div class="card-body">
-        @preview
-    </div>
-</div>
-<div class="card-footer">
-    <button type="button" class="btn btn-success" @onclick=@(async () => await ShowPreviewOfBody())>Show OutPut</button>
-</div>
-
+        <div class="card-footer">
+            <button type="button" class="btn btn-success" @onclick=@(async () => await ShowPreviewOfBody())>Show OutPut</button>
+        </div>
+    </Authorized>
+</AuthorizeView>
 
 @code {
     private BlazoredTextEditor QuillHtml;
     private MarkupString preview;
     private PostCreationDto newPost = new();
+    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    private string? name;
+    private IEnumerable<Claim>? userClaims;
+    private bool isLoggedIn;
 
     async Task CreateNewPost()
     {
         newPost.Body = await QuillHtml.GetHTML();
+        newPost.Username = name;
         var createdPost = await PostService.CreateAsync(newPost);
         NavMgr.NavigateTo($"/posts/{newPost.Url}");
         
@@ -125,6 +138,16 @@
         newPost.Image = imageData;
     }
 
-
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        
+        if (!isLoggedIn) return;
+        
+        userClaims = user.Claims;
+        name = user.Identity!.Name!;
+    }
 
 }
