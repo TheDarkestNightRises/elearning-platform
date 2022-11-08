@@ -1,7 +1,7 @@
 using System.Text;
 using Elearn.Application.Logic;
 using Elearn.Application.LogicInterfaces;
-using Elearn.Application.RepositoryInterfaces;
+using Elearn.Application.RepositoryContracts;
 using Elearn.Data.Data;
 using Elearn.Data.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

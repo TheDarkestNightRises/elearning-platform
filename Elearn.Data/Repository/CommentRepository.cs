@@ -1,4 +1,4 @@
-﻿using Elearn.Application.RepositoryInterfaces;
+﻿using Elearn.Application.RepositoryContracts;
 using Elearn.Data.Data;
 using Elearn.Shared.Models;
 using Microsoft.EntityFrameworkCore;
