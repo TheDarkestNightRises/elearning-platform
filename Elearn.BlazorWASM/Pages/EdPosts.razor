@@ -18,15 +18,21 @@ else
     }
     else
     {
-        @foreach (var post in _posts)
-        {
-            <PostCard Post="@post"></PostCard>
-        }
+        <MudGrid Spacing="@spacing" Justify="Justify.FlexStart">
+            @foreach (var post in _posts)
+            {
+                <MudItem xs="6" sm="3">
+                    <PostCard Post="@post"></PostCard>
+                </MudItem>
+            }
+        </MudGrid>
     }
 }
 
 
 @code {
+    public int spacing { get; set; } = 2;
+
     private List<Post>? _posts;
 
     protected override async Task OnInitializedAsync()
