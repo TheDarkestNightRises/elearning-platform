@@ -1,0 +1,68 @@
+@page "/Register"
+@using Microsoft.AspNetCore.Components
+@using Elearn.Shared.Dtos
+@using Elearn.Shared.Enum
+@using Elearn.HttpClients.Service
+@inject IAuthService authService
+
+
+<EditForm Model="@newUser" OnValidSubmit="CreateNewUserAsync">
+    <DataAnnotationsValidator/>
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <InputText id="username" @bind-Value="newUser.Username" class="form-control"/>
+        <ValidationMessage For="@(() => newUser.Username)"/>
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <InputText id="password" @bind-Value="newUser.Password" class="form-control"/>
+        <ValidationMessage For="@(() => newUser.Password)"/>
+    </div>
+    <div class="form-group">
+        <label for="repeatPassword">Repeat Password:</label>
+        <InputText id="repeatPassword" @bind-Value="@repeatPassword" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <InputText id="email" @bind-Value="newUser.Email" class="form-control"/>
+        <ValidationMessage For="@(() => newUser.Email)"/>
+    </div>
+      <div class="form-group">
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="newUser.Name" class="form-control"/>
+            <ValidationMessage For="@(() => newUser.Name)"/>
+        </div>
+    
+    <div class="form-group ">
+        <InputSelect @bind-Value="newUser.Role">
+            <option>Choose role</option>
+            @foreach (var role in Enum.GetValues(typeof(RoleEnum)))
+            {
+                <option value="@role">@role</option>
+            }
+        </InputSelect>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Register</button>
+    
+   <ValidationSummary/>
+    </EditForm> 
+
+
+@code {
+    public UserCreationDto newUser = new();
+    public string repeatPassword;
+    
+    
+    private async Task  CreateNewUserAsync()
+    {
+        if (newUser.Role.Equals(RoleEnum.Student.ToString()))
+            newUser.SecurityLevel = 2;
+        if (newUser.Role.Equals(RoleEnum.Teacher.ToString()))
+            newUser.SecurityLevel = 4;
+     if(repeatPassword.Equals(newUser.Password))
+         await authService.RegisterAsync(newUser);
+
+    }
+
+}
