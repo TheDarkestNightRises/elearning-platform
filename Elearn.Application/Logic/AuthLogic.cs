@@ -55,7 +55,7 @@ public class AuthLogic : IAuthLogic
         {
             throw new ValidationException("Name cannot be null");
         }
-        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role);
+        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role, dto.SecurityLevel);
         User created = await _userRepository.CreateNewUserAsync(user);
         return created;
     }

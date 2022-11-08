@@ -12,6 +12,8 @@ public class UserCreationDto
     
     public string Role { get; set; }
     
+    public int SecurityLevel { get; set; }
+    
     public UserCreationDto(string username, string password, string email, string name, string role)
     {
         Username = username;
