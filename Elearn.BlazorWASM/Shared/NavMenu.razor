@@ -1,62 +1,9 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Elearn.BlazorWASM</a>
-        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
-</div>
+﻿<MudAppBar Style="@($"background:{Colors.Shades.Transparent};")" Color="Color.Dark" Fixed="false" Dense="true">
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-    </nav>
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
 
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="/Login" Match="NavLinkMatch.All">
-                <span class="oi oi-plus" aria-hidden="true"></span> Login
-            </NavLink>
-        </div>
-    </nav>
-    
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="/Register" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Register
-            </NavLink>
-        </div>
-    </nav>
+    <MudSpacer />
 
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="/Create" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Create post
-            </NavLink>
-        </div>
-    </nav>
-    
-        <nav class="flex-column">
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="/MustBeLoggedInToView" Match="NavLinkMatch.All">
-                    <span class="oi oi-plus" aria-hidden="true"></span> MustBeLoggedInToView
-                </NavLink>
-            </div>
-        </nav>
-</div>
+    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" />
 
-@code {
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
-
-}
+</MudAppBar>
