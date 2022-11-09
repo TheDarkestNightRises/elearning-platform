@@ -1,22 +1,26 @@
 <h1 class="">We provide quality education<br/> for all people</h1>
-<MudCarousel Class="mud-width-full" Style="height:600px;" ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
+<MudCarousel Class="mud-width-full" Style="height:450px;" ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
 
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
 
         <div class="d-flex" style="height:100%">
-
-            <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Uncategorized.ChessPawn" Size="@Size.Large"/>
-
+            <MudImage Class="card-img" Src="/img/brooke-cagle-g1Kr4Ozfoac-unsplash.jpg" ObjectFit="ObjectFit.Contain"></MudImage>
         </div>
-
+        <div class="carousel-caption">
+                <MudText Color="Color.Default">Help other students by answering questions</MudText>
+                <MudText Color="Color.Default">You can help</MudText>
+        </div>
     </MudCarouselItem>
 
     <MudCarouselItem Transition="transition" Color="@Color.Secondary">
 
         <div class="d-flex" style="height:100%">
 
-            <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.Apple" Size="@Size.Large"/>
-
+            <MudImage Class="card-img" Src="/img/jaredd-craig-HH4WBGNyltc-unsplash.jpg" ObjectFit="ObjectFit.Contain"></MudImage>
+            <div class="carousel-caption">
+                <MudText Color="Color.Default">Study more and you will become a profesional</MudText>
+                <MudText Color="Color.Default">Improve yourself</MudText>
+            </div>
         </div>
 
     </MudCarouselItem>
@@ -25,13 +29,17 @@
 
         <div class="d-flex" style="height:100%">
 
-            <MudIcon Class="mx-auto my-auto" Icon="@Icons.Custom.Brands.Calculator" Color="@Color.Primary" Size="@Size.Large"/>
-
+            <MudImage Class="card-img" Src="/img/rohit-tandon-9wg5jCEPBsw-unsplash.jpg" ObjectFit="ObjectFit.Contain"></MudImage>
+            <div class="carousel-caption">
+                <MudText Color="Color.Default">Look for posts with diferent categories</MudText>
+                <MudText Color="Color.Default">Try to learn more</MudText>
+            </div>
         </div>
 
     </MudCarouselItem>
 
 </MudCarousel>
+
 @code {
 
     private bool arrows = true;

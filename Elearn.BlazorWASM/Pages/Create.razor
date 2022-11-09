@@ -117,7 +117,6 @@
         newPost.Username = name;
         var createdPost = await PostService.CreateAsync(newPost);
         NavMgr.NavigateTo($"/posts/{newPost.Url}");
-        
     }
 
     private async Task ShowPreviewOfBody()
@@ -131,7 +130,7 @@
     async Task OnFileChange(InputFileChangeEventArgs e)
     {
         var format = "image/png";
-        var resizedImage = await e.File.RequestImageFileAsync(format, 300, 300);
+        var resizedImage = await e.File.RequestImageFileAsync(format, 500, 500);
         var buffer = new byte[resizedImage.Size];
         await resizedImage.OpenReadStream().ReadAsync(buffer);
         var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
