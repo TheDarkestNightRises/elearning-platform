@@ -2,7 +2,7 @@
 @using Elearn.Shared.Models
 @inject IPostService PostService
 @inject ICommentService CommentService
-@using Elearn.BlazorWASM.Pages.Components
+@using Elearn.BlazorWASM.Pages.UIComponents
 @using Elearn.HttpClients.Service
  
 
@@ -17,7 +17,7 @@ else
 }
 
 <CreateComment CurrentPost= "@currentPost"></CreateComment>
-
+<div>Comments:</div>
 @if (Comments == null)
 {
     <span>Comments Loading...</span>

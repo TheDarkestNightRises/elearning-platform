@@ -1,5 +1,5 @@
 ﻿using Elearn.Application.LogicInterfaces;
-using Elearn.Application.RepositoryInterfaces;
+using Elearn.Application.RepositoryContracts;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 

@@ -1,5 +1,5 @@
 ﻿using Elearn.Application.LogicInterfaces;
-using Elearn.Application.RepositoryInterfaces;
+using Elearn.Application.RepositoryContracts;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
@@ -22,7 +22,7 @@ public class PostLogic : IPostLogic
         //TODO: validate user when login part done
         //TODO: validate unique url
         //ValidateCreationDto(dto);
-        User user = await _userRepository.GetUserByIdAsync(dto.AuthorId);
+        User user = await _userRepository.GetUserByNameAsync(dto.Username);
         Post post = new Post(dto.Title, dto.Body, dto.Url, dto.Image, user);
         Post created = await _postRepository.CreateNewPostAsync(post);
         //PostDto createdDto = new PostDto(created.PostId, created.Title, created.Body, created.Url, created.Image, created.Author, created.DateCreated);

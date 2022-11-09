@@ -1,5 +1,7 @@
 @page "/LoginTest"
 @using Elearn.HttpClients.Service
+@using Elearn.Shared.Models
+@using System.Security.Claims
 @inject IAuthService authService
 @inject NavigationManager navMgr
 <h3>LoginTest</h3>
@@ -40,10 +42,10 @@
     private string userName;
     private string password;
     private string errorLabel;
-
     private async Task LoginAsync()
     {
         errorLabel = "";
+        
         try
         {
             await authService.LoginAsync(userName, password);

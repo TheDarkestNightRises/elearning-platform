@@ -30,7 +30,7 @@ public static class PostExtensions
                 Title = post.Title,
                 Body = post.Body,
                 DateCreated = post.DateCreated,
-                Author = post.Author
+                Username = post.Author.Username
             });
         return products;                
     }
@@ -44,7 +44,7 @@ public static class PostExtensions
             Title = postDto.Title,
             Body = postDto.Body,
             DateCreated = postDto.DateCreated,
-            Author = postDto.Author
+            
         };
     }
     public static Post AsBaseFromCreation(this PostCreationDto postDto) 

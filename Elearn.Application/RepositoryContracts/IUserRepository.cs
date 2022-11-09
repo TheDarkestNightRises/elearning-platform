@@ -1,6 +1,6 @@
 using Elearn.Shared.Models;
 
-namespace Elearn.Application.RepositoryInterfaces;
+namespace Elearn.Application.RepositoryContracts;
 
 public interface IUserRepository
 {

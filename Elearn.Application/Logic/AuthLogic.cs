@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Elearn.Application.LogicInterfaces;
-using Elearn.Application.RepositoryInterfaces;
+using Elearn.Application.RepositoryContracts;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
@@ -55,7 +55,7 @@ public class AuthLogic : IAuthLogic
         {
             throw new ValidationException("Name cannot be null");
         }
-        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role);
+        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role, dto.SecurityLevel);
         User created = await _userRepository.CreateNewUserAsync(user);
         return created;
     }

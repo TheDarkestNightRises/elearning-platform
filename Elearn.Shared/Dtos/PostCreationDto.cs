@@ -9,16 +9,23 @@ public class PostCreationDto
     public string Body{ get; set; }
     public string Url{ get; set; }
     public string Image { get; set; }
-    public int AuthorId{ get; set; }
+    public string Username{ get; set; }
 
-    public PostCreationDto(string title, string body, string url, string image, int authorId)
+    public DateTime Date { get; set; } = DateTime.Now;
+
+    public PostCreationDto(string title, string body, string url, string image, string username)
     {
         Title = title;
         Body = body;
         Url = url;
         Image = image;
-        AuthorId = authorId;
+        Username = username;
     }
+
+    public PostCreationDto()
+    {
+    }
+
 
     public override string ToString()
     {

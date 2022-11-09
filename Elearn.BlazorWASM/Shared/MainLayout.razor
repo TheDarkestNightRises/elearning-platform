@@ -1,21 +1,19 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="LoginTest" >Register</a>
-             <a href="LoginTest">Login</a>
-        </div>
+<NavMenu/>
+<main>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-    <MudThemeProvider/>
-    <MudDialogProvider/>
-    <MudSnackbarProvider/>
-</div>
+    <article class="content px-4">
+        @Body
+    </article>
+</main>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+
+@code {
+    private MudTheme _theme = new();
+    private bool _isDarkMode = true;
+
+}
