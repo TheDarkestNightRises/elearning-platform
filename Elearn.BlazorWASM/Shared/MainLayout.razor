@@ -3,14 +3,13 @@
 
 <NavMenu/>
 <main>
-
-    <article class="content px-4">
+    <article class="content">
         @Body
     </article>
 </main>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
-<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme"/>
 
 @code {
     private MudTheme _theme = new();

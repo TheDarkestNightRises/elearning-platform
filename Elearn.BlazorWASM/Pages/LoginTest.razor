@@ -2,53 +2,57 @@
 @using Elearn.HttpClients.Service
 @using Elearn.Shared.Models
 @using System.Security.Claims
+@using Elearn.Shared.Dtos
 @inject IAuthService authService
 @inject NavigationManager navMgr
-<h3>LoginTest</h3>
 
-<AuthorizeView>
+
+<style>
+    body {
+    background-image: url("img/pawel-nolbert-4u2U8EO9OzY-unsplash.jpg");
+    }
+</style>
+
+<AuthorizeView Context="authContext">
     <NotAuthorized>
-        <div class="card">
-            <h3>Please login</h3>
-            <div class="field">
-                <label>User name:</label>
-                <input type="text" @bind="userName"/>
-            </div>
-            <div class="field">
-                <label style="text-align: center">Password:</label>
-                <input type="password" @bind="password"/>
-            </div>
-            @if (!string.IsNullOrEmpty(errorLabel))
-            {
-                <div class="field">
-                    <label style="color: red">
-                        @errorLabel
-                    </label>
-                </div>
-            }
-            <div class="field">
-                <button class="loginbtn" @onclick="LoginAsync">Log in</button>
-            </div>
+        <div class="page-background-class">
+            <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
+                <MudText Align="Align.Center" Typo="Typo.h3" Class="mt-1 my-9"> Login </MudText>
+                <EditForm Model="@_userLoginDto" OnValidSubmit="LoginAsync" Context="formContext">
+                    <DataAnnotationsValidator/>
+                    <div class="form-group">
+                        <MudTextField @bind-Value="_userLoginDto.Username" Label="Username" Variant="Variant.Text" Class="mt-5"></MudTextField>
+                        <ValidationMessage For="@(() => _userLoginDto.Username)"/>
+                    </div>
+                    <div class="form-group">
+                        <MudTextField @bind-Value="_userLoginDto.Password" Label="Standard" Variant="Variant.Text" Class="mt-5"></MudTextField>
+                        <ValidationMessage For="@(() => _userLoginDto.Password)"/>
+                    </div>
+                    <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary" ButtonType="ButtonType.Submit" Class="mt-10">Login</MudButton>
+                    <ValidationSummary/>
+                </EditForm>
+            </MudCard>
         </div>
     </NotAuthorized>
     <Authorized>
-        <div class="card">
-            <h3>Hello, @context.User.Identity.Name</h3>
-        </div>
+        <MudCard>
+            <MudText> Hello, @authContext.User.Identity.Name</MudText>
+        </MudCard>
     </Authorized>
 </AuthorizeView>
 
+
 @code {
-    private string userName;
-    private string password;
     private string errorLabel;
+    private UserLoginDto _userLoginDto = new();
+
     private async Task LoginAsync()
     {
         errorLabel = "";
-        
+
         try
         {
-            await authService.LoginAsync(userName, password);
+            await authService.LoginAsync(_userLoginDto.Username, _userLoginDto.Password);
         }
         catch (Exception e)
         {

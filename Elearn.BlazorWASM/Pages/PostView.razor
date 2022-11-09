@@ -4,7 +4,7 @@
 @inject ICommentService CommentService
 @using Elearn.BlazorWASM.Pages.UIComponents
 @using Elearn.HttpClients.Service
- 
+
 
 @if (currentPost == null)
 {
@@ -12,11 +12,14 @@
 }
 else
 {
-    <h3>@currentPost.Title</h3>
-    @((MarkupString)currentPost.Body)
+    <MudText Align="Align.Center" Typo="Typo.h3" Class="mt-1 my-9"> @currentPost.Title </MudText>
+    <MudImage Class="card-img" Src="@currentPost.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
+    <MudCard Class="mx-auto pa-6 mt-12">
+        @((MarkupString)currentPost.Body)
+    </MudCard>
 }
 
-<CreateComment CurrentPost= "@currentPost"></CreateComment>
+<CreateComment CurrentPost="@currentPost"></CreateComment>
 <div>Comments:</div>
 @if (Comments == null)
 {
@@ -29,7 +32,7 @@ else
 
 @foreach (var comment in Comments)
 {
-    <CommentBody Text= "@comment.Text"></CommentBody>
+    <CommentBody Text="@comment.Text"></CommentBody>
 }
 
 
