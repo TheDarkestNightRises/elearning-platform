@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.BlazorWASM", "Elearn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.Shared", "Elearn.Shared\Elearn.Shared.csproj", "{47406828-3160-41BE-BC73-95C9AF4246E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.Clients", "Elearn.Clients\Elearn.Clients.csproj", "{17915CC1-41DA-4A02-8822-BE3B172EA8F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{47406828-3160-41BE-BC73-95C9AF4246E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47406828-3160-41BE-BC73-95C9AF4246E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47406828-3160-41BE-BC73-95C9AF4246E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17915CC1-41DA-4A02-8822-BE3B172EA8F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17915CC1-41DA-4A02-8822-BE3B172EA8F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17915CC1-41DA-4A02-8822-BE3B172EA8F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17915CC1-41DA-4A02-8822-BE3B172EA8F4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
