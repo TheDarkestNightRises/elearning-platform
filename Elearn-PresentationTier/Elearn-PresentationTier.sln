@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorWASM", "BlazorWASM\BlazorWASM.csproj", "{C204A991-54D2-462C-9FCA-A41D5983A622}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elearn.BlazorWASM", "Elearn.BlazorWASM\Elearn.BlazorWASM.csproj", "{037BE4BC-DB50-4AC0-AD8B-D67800DCFD1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C204A991-54D2-462C-9FCA-A41D5983A622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C204A991-54D2-462C-9FCA-A41D5983A622}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C204A991-54D2-462C-9FCA-A41D5983A622}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C204A991-54D2-462C-9FCA-A41D5983A622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{037BE4BC-DB50-4AC0-AD8B-D67800DCFD1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{037BE4BC-DB50-4AC0-AD8B-D67800DCFD1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{037BE4BC-DB50-4AC0-AD8B-D67800DCFD1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{037BE4BC-DB50-4AC0-AD8B-D67800DCFD1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
