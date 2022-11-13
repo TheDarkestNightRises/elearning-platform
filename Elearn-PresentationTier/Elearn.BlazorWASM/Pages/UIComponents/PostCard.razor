@@ -1,0 +1,26 @@
+@using Elearn.Shared.Models
+@inject NavigationManager navMgr
+
+<MudCard>
+    <MudImage Class="card-img" Src="@Post.Image" ObjectFit="ObjectFit.Contain"></MudImage>
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@Post.Title</MudText>
+        <MudText Typo="Typo.body2">@Post.Author</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="GoToUrl">Learn More</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+@code {
+
+    [Parameter]
+    public Post Post { get; set; }
+
+    private void GoToUrl()
+    {
+        navMgr.NavigateTo($"/posts/{Post.Url}");
+    }
+
+}

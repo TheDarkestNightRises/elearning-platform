@@ -1,17 +1,21 @@
 ﻿@inherits LayoutComponentBase
+@using Elearn.BlazorWASM.Pages.UIComponents
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+<NavMenu/>
+<main>
+    <article class="content">
+        @Body
+    </article>
+</main>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<Footer></Footer>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme"/>
+
+@code {
+    private MudTheme _theme = new();
+    private bool _isDarkMode = true;
+
+}

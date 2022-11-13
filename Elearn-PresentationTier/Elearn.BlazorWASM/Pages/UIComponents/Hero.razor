@@ -1,0 +1,51 @@
+<h1 class="">We provide quality education<br/> for all people</h1>
+<MudCarousel Class="mud-width-full" Style="height:450px;" ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
+
+    <MudCarouselItem Transition="transition" Color="@Color.Primary">
+
+        <div class="d-flex" style="height:100%">
+            <MudImage Class="card-img" Src="/img/brooke-cagle-g1Kr4Ozfoac-unsplash.jpg" ObjectFit="ObjectFit.Contain"></MudImage>
+        </div>
+        <div class="carousel-caption">
+                <MudText Color="Color.Default">Help other students by answering questions</MudText>
+                <MudText Color="Color.Default">You can help</MudText>
+        </div>
+    </MudCarouselItem>
+
+    <MudCarouselItem Transition="transition" Color="@Color.Secondary">
+
+        <div class="d-flex" style="height:100%">
+
+            <MudImage Class="card-img" Src="/img/jaredd-craig-HH4WBGNyltc-unsplash.jpg" ObjectFit="ObjectFit.Contain"></MudImage>
+            <div class="carousel-caption">
+                <MudText Color="Color.Default">Study more and you will become a profesional</MudText>
+                <MudText Color="Color.Default">Improve yourself</MudText>
+            </div>
+        </div>
+
+    </MudCarouselItem>
+
+    <MudCarouselItem Transition="transition">
+
+        <div class="d-flex" style="height:100%">
+
+            <MudImage Class="card-img" Src="/img/rohit-tandon-9wg5jCEPBsw-unsplash.jpg" ObjectFit="ObjectFit.Contain"></MudImage>
+            <div class="carousel-caption">
+                <MudText Color="Color.Default">Look for posts with diferent categories</MudText>
+                <MudText Color="Color.Default">Try to learn more</MudText>
+            </div>
+        </div>
+
+    </MudCarouselItem>
+
+</MudCarousel>
+
+@code {
+
+    private bool arrows = true;
+    private bool bullets = true;
+    private bool enableSwipeGesture = true;
+    private bool autocycle = true;
+    private Transition transition = Transition.Slide;
+
+}

@@ -8,12 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Blazored.TextEditor" Version="1.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="7.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.9" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.9" PrivateAssets="all" />
+        <PackageReference Include="MudBlazor" Version="6.0.18" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\sample-data" />
+      <ProjectReference Include="..\Elearn.Clients\Elearn.Clients.csproj" />
+      <ProjectReference Include="..\Elearn.Shared\Elearn.Shared.csproj" />
     </ItemGroup>
 
 </Project>

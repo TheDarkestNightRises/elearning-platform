@@ -1,0 +1,42 @@
+@using Elearn.BlazorWASM
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Models
+@inject IPostService PostService
+@using Elearn.BlazorWASM.Pages.UIComponents
+
+<h2>Latest educational posts<br/> Here ! </h2>
+
+@if (_posts == null)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+}
+else
+{
+    @if (_posts.Count == 0)
+    {
+        <span> No posts </span>
+    }
+    else
+    {
+        <MudGrid Justify="Justify.SpaceBetween">
+            @foreach (var post in _posts)
+            {
+                <MudItem xs="3">
+                    <PostCard Post="@post"></PostCard>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+}
+
+
+@code {
+
+    private List<Post>? _posts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _posts = await PostService.GetPostsAsync();
+    }
+
+}

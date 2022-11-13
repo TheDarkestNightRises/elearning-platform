@@ -7,8 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Http" />
-      <Folder Include="Services" />
+      <ProjectReference Include="..\Elearn.Shared\Elearn.Shared.csproj" />
     </ItemGroup>
 
 </Project>
