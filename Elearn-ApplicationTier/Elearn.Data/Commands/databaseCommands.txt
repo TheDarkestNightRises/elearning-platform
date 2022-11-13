@@ -1,0 +1,16 @@
+EF CORE:
+#1.Install ef core by using the nuget 
+
+#2.Instal ef core global and tools
+
+#3.Create domain objects
+
+#4.Make a migration 
+dotnet ef migrations add Initial
+
+#5.Update the database
+dotnet ef database update
+
+NOTE: If you have on creating sql errorsdelete the migrations and database(if it is on a dev env) 
+
+#6 Everytime you update the entities use step 4 and 5
