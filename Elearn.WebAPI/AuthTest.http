@@ -1,9 +1,0 @@
-// log in as Troels
-POST https://localhost:7219/auth/login
-Content-Type: application/json
-
-{ "Username" : "trmo", "Password" : "onetwo3FOUR" }
-
-###
-
-GET https://localhost:7271/test/authorized
