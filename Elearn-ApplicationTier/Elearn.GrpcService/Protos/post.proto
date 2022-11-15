@@ -1,6 +1,6 @@
 syntax = "proto3"; // Use the latest proto syntax
 
-option csharp_namespace = "GrpcServer"; //Namespace for our proto
+option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
 
 service Post {
   rpc GetPost (PostLookupModel) returns (PostModel);
