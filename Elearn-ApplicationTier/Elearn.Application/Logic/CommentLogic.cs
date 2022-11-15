@@ -1,5 +1,5 @@
 ﻿using Elearn.Application.LogicInterfaces;
-using Elearn.Application.RepositoryContracts;
+using Elearn.Application.ServiceContracts;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
@@ -8,18 +8,18 @@ namespace Elearn.Application.Logic;
 
 public class CommentLogic : ICommentLogic
 {
-    private readonly IPostRepository postRepository;
-    private readonly ICommentRepository commentRepository;
+    private readonly IPostService postService;
+    private readonly ICommentService commentService;
 
-    public CommentLogic(IPostRepository postRepository, ICommentRepository commentRepository)
+    public CommentLogic(IPostService postService, ICommentService commentService)
     {
-        this.postRepository = postRepository;
-        this.commentRepository = commentRepository;
+        this.postService = postService;
+        this.commentService = commentService;
     }
 
     public async Task<Comment> CreateAsync(CommentCreationDto dto)
     { 
-        Post? post = await postRepository.GetByIdAsync(dto.PostId);
+        Post? post = await postService.GetByIdAsync(dto.PostId);
         // if (post == null)
         // {
         //     throw new Exception($"Post was not found.");
@@ -32,7 +32,7 @@ public class CommentLogic : ICommentLogic
         // }
         ValidateComment(dto);
         Comment comment = new Comment(1,post,dto.Text);
-        Comment created = await commentRepository.CreateAsync(comment);
+        Comment created = await commentService.CreateAsync(comment);
         return created;
     }
     
@@ -49,7 +49,7 @@ public class CommentLogic : ICommentLogic
 
     public IQueryable<Comment> GetAllCommentsByPostUrlAsync(string url)
     {
-        return commentRepository.GetAllCommentsByPostUrlAsync(url);
+        return commentService.GetAllCommentsByPostUrlAsync(url);
     }
 
     private void ValidateComment(CommentCreationDto dto)

@@ -1,8 +1,8 @@
 ﻿using Elearn.Shared.Models;
 
-namespace Elearn.Application.RepositoryContracts;
+namespace Elearn.Application.ServiceContracts;
 
-public interface IPostRepository
+public interface IPostService
 {
     Task<List<Post>> GetAllPostsAsync();
     Task<Post?> GetPostAsync(string url);
