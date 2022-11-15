@@ -1,6 +1,8 @@
 syntax = "proto3"; // Use the latest proto syntax
 
+option java_multiple_files = true;
 option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
+option java_package = "via.dk.elearn.protobuf";
 
 service Post {
   rpc GetPost (PostLookupModel) returns (PostModel);
