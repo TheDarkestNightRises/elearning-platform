@@ -11,7 +11,7 @@ public class CommentDto
     
     public Post post{ get; set; }
     
-    public String Text { get; set; }
+    public string Text { get; set; }
     
     public DateTime DateCreated { get; set; } 
 

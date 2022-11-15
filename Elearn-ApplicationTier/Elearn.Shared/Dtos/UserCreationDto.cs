@@ -29,6 +29,6 @@ public class UserCreationDto
     
     public override string ToString()
     {
-        return  $"{Name}";
+        return  $"{Username}{Password}{Email}{Name}{Role}{SecurityLevel}";
     }
 }

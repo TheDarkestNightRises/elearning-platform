@@ -4,6 +4,7 @@
 @using Elearn.Shared.Enum
 @using Elearn.HttpClients.Service
 @using System.Text.RegularExpressions
+@using System.Security.AccessControl
 @inject IAuthService authService
 
 
@@ -12,8 +13,7 @@
     <MudGrid Class="d-flex justify-center align-center" Elevation="0">
         <MudItem xs="12" sm="7">
             <MudPaper Class="pa-4">
-                <MudForm>
-                    <h3>
+                <h3>
                         <MudInputLabel Class="d-flex align-center justify-center ">Registration</MudInputLabel>
                     </h3>
                     <MudTextField T="string" Label="Username" Required="true" @bind-Value="newUser.Username" InputType="InputType.Text"
@@ -32,37 +32,22 @@
                                   For="@(() => newUser.Username)" RequiredError="Name of user is required!">
                     </MudTextField>
 
-                    @* <MudSelect T="string" Label="Role" Required="true" RequiredError="Account type is required!" Margin="Margin.Dense" Variant="Variant.Filled"> *@
-                    @*     <MudSelectItem @bind-Value="newUser.Role"/> *@
-                    @* </MudSelect> *@
-                    <MudSelect T="string" Class="d-flex align-center" @bind-Value="newUser.Role" Label="Choose Role" Required="true">
-
-                        @foreach (var role in Enum.GetValues(typeof(RoleEnum)))
+                 
+                    <MudSelect @bind-Value="newUser.Role" Label="Select role" HelperText="Enum"  AdornmentColor="Color.Secondary">
+                        @foreach (var item in Enum.GetValues(typeof(RoleEnum)))
                         {
-                            <MudSelectItem Value="newUser.Role">@RoleEnum.Student</MudSelectItem>
-                            <MudSelectItem Value="newUser.Role">@RoleEnum.Teacher</MudSelectItem>
+                            <MudSelectItem Value="@item.ToString()">@item</MudSelectItem>
                         }
-
                     </MudSelect>
 
                     <MudCardActions Class="d-flex justify-center">
                         <MudButton Class="mx-2" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" >Create Account</MudButton>
                     </MudCardActions>
-                </MudForm>
             </MudPaper>
         </MudItem>
         
     </MudGrid>
 
-    @* <div class="form-group "> *@
-    @*     <InputSelect @bind-Value="newUser.Role"> *@
-    @*         <option>Choose role</option> *@
-    @*         @foreach (var role in Enum.GetValues(typeof(RoleEnum))) *@
-    @*         { *@
-    @*             <option value="@role">@role</option> *@
-    @*         } *@
-    @*     </InputSelect> *@
-    @* </div> *@
 
     <ValidationSummary/>
     </EditForm> 
@@ -83,28 +68,5 @@
          await authService.RegisterAsync(newUser);
 
     }
-@code {
-    bool success;
-    string[] errors = { };
-    MudTextField<string> pwField1;
-    MudForm form;
 
-    private IEnumerable<string> PasswordStrength(string pw)
-    {
-        if (string.IsNullOrWhiteSpace(pw))
-        {
-            yield return "Password is required!";
-            yield break;
-        }
-        if (pw.Length < 8)
-            yield return "Password must be at least of length 8";
-        if (!Regex.IsMatch(pw, @"[A-Z]"))
-            yield return "Password must contain at least one capital letter";
-        if (!Regex.IsMatch(pw, @"[a-z]"))
-            yield return "Password must contain at least one lowercase letter";
-        if (!Regex.IsMatch(pw, @"[0-9]"))
-            yield return "Password must contain at least one digit";
-    }
-
-}
 }
