@@ -1,9 +1,8 @@
 using System.Text;
 using Elearn.Application.Logic;
 using Elearn.Application.LogicInterfaces;
-using Elearn.Application.RepositoryContracts;
-using Elearn.Data.Data;
-using Elearn.Data.Repository;
+using Elearn.Application.ServiceContracts;
+using Elearn.GrpcService.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Auth;
@@ -16,11 +15,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DataContext>();
-builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IPostRepository, PostRepository>();
-builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
+builder.Services.AddScoped<IPostService, PostGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<IPostLogic, PostLogic>();
 
@@ -39,7 +35,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 AuthorizationPolicies.AddPolicies(builder.Services);
-
 
 
 var app = builder.Build();
