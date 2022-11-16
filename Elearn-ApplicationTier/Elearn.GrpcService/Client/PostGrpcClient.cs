@@ -1,18 +1,20 @@
 using Elearn.Application.ServiceContracts;
 using ElearnGrpc;
 using Grpc.Net.Client;
+using Grpc.Net.Client.Web;
 using Post = Elearn.Shared.Models.Post;
 
 namespace Elearn.GrpcService.Client;
 
 public class PostGrpcClient : IPostService
 {
-    private GrpcChannel _grpcChannel;
     private ElearnGrpc.Post.PostClient _postClient;
 
     public PostGrpcClient()
     {
-        _grpcChannel = GrpcChannel.ForAddress("https://localhost:8080");
+        var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()));
+        var _grpcChannel =
+            GrpcChannel.ForAddress("https://localhost:8080", new GrpcChannelOptions { HttpClient = httpClient });
         _postClient = new ElearnGrpc.Post.PostClient(_grpcChannel);
     }
 

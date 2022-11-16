@@ -4,6 +4,7 @@ using Elearn.Application.LogicInterfaces;
 using Elearn.Application.ServiceContracts;
 using Elearn.GrpcService.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Auth;
 
@@ -14,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
-
+builder.Services.AddGrpc();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPostService, PostGrpcClient>();
@@ -26,8 +27,6 @@ builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();
 builder.Services.AddGrpcClient<PostGrpcClient>();
 builder.Services.AddGrpcClient<UserGrpcClient>();
-
-
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -45,6 +44,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 AuthorizationPolicies.AddPolicies(builder.Services);
+
 
 
 var app = builder.Build();
