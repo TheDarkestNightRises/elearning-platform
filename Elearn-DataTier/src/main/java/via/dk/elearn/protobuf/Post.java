@@ -3,8 +3,8 @@
 
 package via.dk.elearn.protobuf;
 
-public final class PostOuterClass {
-  private PostOuterClass() {}
+public final class Post {
+  private Post() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -40,11 +40,11 @@ public final class PostOuterClass {
     java.lang.String[] descriptorData = {
       "\n\npost.proto\"\020\n\016NewPostRequest\"\036\n\017PostLo" +
       "okupModel\022\013\n\003url\030\001 \001(\t\"4\n\tPostModel\022\n\n\002i" +
-      "d\030\001 \001(\003\022\014\n\004body\030\002 \001(\t\022\r\n\005title\030\003 \001(\t2\\\n\004" +
-      "Post\022\'\n\007GetPost\022\020.PostLookupModel\032\n.Post" +
-      "Model\022+\n\nGetAllPost\022\017.NewPostRequest\032\n.P" +
-      "ostModel0\001B\'\n\026via.dk.elearn.protobufP\001\252\002" +
-      "\nElearnGrpcb\006proto3"
+      "d\030\001 \001(\003\022\014\n\004body\030\002 \001(\t\022\r\n\005title\030\003 \001(\t2c\n\013" +
+      "PostService\022\'\n\007GetPost\022\020.PostLookupModel" +
+      "\032\n.PostModel\022+\n\nGetAllPost\022\017.NewPostRequ" +
+      "est\032\n.PostModel0\001B\032\n\026via.dk.elearn.proto" +
+      "bufP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

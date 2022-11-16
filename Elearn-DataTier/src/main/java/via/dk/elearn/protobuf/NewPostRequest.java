@@ -71,13 +71,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.dk.elearn.protobuf.PostOuterClass.internal_static_NewPostRequest_descriptor;
+    return via.dk.elearn.protobuf.Post.internal_static_NewPostRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.dk.elearn.protobuf.PostOuterClass.internal_static_NewPostRequest_fieldAccessorTable
+    return via.dk.elearn.protobuf.Post.internal_static_NewPostRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             via.dk.elearn.protobuf.NewPostRequest.class, via.dk.elearn.protobuf.NewPostRequest.Builder.class);
   }
@@ -235,13 +235,13 @@ private static final long serialVersionUID = 0L;
       via.dk.elearn.protobuf.NewPostRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.dk.elearn.protobuf.PostOuterClass.internal_static_NewPostRequest_descriptor;
+      return via.dk.elearn.protobuf.Post.internal_static_NewPostRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.dk.elearn.protobuf.PostOuterClass.internal_static_NewPostRequest_fieldAccessorTable
+      return via.dk.elearn.protobuf.Post.internal_static_NewPostRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               via.dk.elearn.protobuf.NewPostRequest.class, via.dk.elearn.protobuf.NewPostRequest.Builder.class);
     }
@@ -270,7 +270,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.dk.elearn.protobuf.PostOuterClass.internal_static_NewPostRequest_descriptor;
+      return via.dk.elearn.protobuf.Post.internal_static_NewPostRequest_descriptor;
     }
 
     @java.lang.Override

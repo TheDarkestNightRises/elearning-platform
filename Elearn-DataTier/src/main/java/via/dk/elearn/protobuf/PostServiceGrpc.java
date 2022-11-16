@@ -7,11 +7,11 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.39.0)",
     comments = "Source: post.proto")
-public final class PostGrpc {
+public final class PostServiceGrpc {
 
-  private PostGrpc() {}
+  private PostServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "Post";
+  public static final String SERVICE_NAME = "PostService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostLookupModel,
@@ -25,10 +25,10 @@ public final class PostGrpc {
   public static io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostLookupModel,
       via.dk.elearn.protobuf.PostModel> getGetPostMethod() {
     io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostLookupModel, via.dk.elearn.protobuf.PostModel> getGetPostMethod;
-    if ((getGetPostMethod = PostGrpc.getGetPostMethod) == null) {
-      synchronized (PostGrpc.class) {
-        if ((getGetPostMethod = PostGrpc.getGetPostMethod) == null) {
-          PostGrpc.getGetPostMethod = getGetPostMethod =
+    if ((getGetPostMethod = PostServiceGrpc.getGetPostMethod) == null) {
+      synchronized (PostServiceGrpc.class) {
+        if ((getGetPostMethod = PostServiceGrpc.getGetPostMethod) == null) {
+          PostServiceGrpc.getGetPostMethod = getGetPostMethod =
               io.grpc.MethodDescriptor.<via.dk.elearn.protobuf.PostLookupModel, via.dk.elearn.protobuf.PostModel>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetPost"))
@@ -37,7 +37,7 @@ public final class PostGrpc {
                   via.dk.elearn.protobuf.PostLookupModel.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   via.dk.elearn.protobuf.PostModel.getDefaultInstance()))
-              .setSchemaDescriptor(new PostMethodDescriptorSupplier("GetPost"))
+              .setSchemaDescriptor(new PostServiceMethodDescriptorSupplier("GetPost"))
               .build();
         }
       }
@@ -56,10 +56,10 @@ public final class PostGrpc {
   public static io.grpc.MethodDescriptor<via.dk.elearn.protobuf.NewPostRequest,
       via.dk.elearn.protobuf.PostModel> getGetAllPostMethod() {
     io.grpc.MethodDescriptor<via.dk.elearn.protobuf.NewPostRequest, via.dk.elearn.protobuf.PostModel> getGetAllPostMethod;
-    if ((getGetAllPostMethod = PostGrpc.getGetAllPostMethod) == null) {
-      synchronized (PostGrpc.class) {
-        if ((getGetAllPostMethod = PostGrpc.getGetAllPostMethod) == null) {
-          PostGrpc.getGetAllPostMethod = getGetAllPostMethod =
+    if ((getGetAllPostMethod = PostServiceGrpc.getGetAllPostMethod) == null) {
+      synchronized (PostServiceGrpc.class) {
+        if ((getGetAllPostMethod = PostServiceGrpc.getGetAllPostMethod) == null) {
+          PostServiceGrpc.getGetAllPostMethod = getGetAllPostMethod =
               io.grpc.MethodDescriptor.<via.dk.elearn.protobuf.NewPostRequest, via.dk.elearn.protobuf.PostModel>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetAllPost"))
@@ -68,7 +68,7 @@ public final class PostGrpc {
                   via.dk.elearn.protobuf.NewPostRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   via.dk.elearn.protobuf.PostModel.getDefaultInstance()))
-              .setSchemaDescriptor(new PostMethodDescriptorSupplier("GetAllPost"))
+              .setSchemaDescriptor(new PostServiceMethodDescriptorSupplier("GetAllPost"))
               .build();
         }
       }
@@ -79,50 +79,50 @@ public final class PostGrpc {
   /**
    * Creates a new async stub that supports all call types for the service
    */
-  public static PostStub newStub(io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<PostStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<PostStub>() {
+  public static PostServiceStub newStub(io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<PostServiceStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<PostServiceStub>() {
         @java.lang.Override
-        public PostStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new PostStub(channel, callOptions);
+        public PostServiceStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new PostServiceStub(channel, callOptions);
         }
       };
-    return PostStub.newStub(factory, channel);
+    return PostServiceStub.newStub(factory, channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
-  public static PostBlockingStub newBlockingStub(
+  public static PostServiceBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<PostBlockingStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<PostBlockingStub>() {
+    io.grpc.stub.AbstractStub.StubFactory<PostServiceBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<PostServiceBlockingStub>() {
         @java.lang.Override
-        public PostBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new PostBlockingStub(channel, callOptions);
+        public PostServiceBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new PostServiceBlockingStub(channel, callOptions);
         }
       };
-    return PostBlockingStub.newStub(factory, channel);
+    return PostServiceBlockingStub.newStub(factory, channel);
   }
 
   /**
    * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
-  public static PostFutureStub newFutureStub(
+  public static PostServiceFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<PostFutureStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<PostFutureStub>() {
+    io.grpc.stub.AbstractStub.StubFactory<PostServiceFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<PostServiceFutureStub>() {
         @java.lang.Override
-        public PostFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new PostFutureStub(channel, callOptions);
+        public PostServiceFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new PostServiceFutureStub(channel, callOptions);
         }
       };
-    return PostFutureStub.newStub(factory, channel);
+    return PostServiceFutureStub.newStub(factory, channel);
   }
 
   /**
    */
-  public static abstract class PostImplBase implements io.grpc.BindableService {
+  public static abstract class PostServiceImplBase implements io.grpc.BindableService {
 
     /**
      */
@@ -160,16 +160,16 @@ public final class PostGrpc {
 
   /**
    */
-  public static final class PostStub extends io.grpc.stub.AbstractAsyncStub<PostStub> {
-    private PostStub(
+  public static final class PostServiceStub extends io.grpc.stub.AbstractAsyncStub<PostServiceStub> {
+    private PostServiceStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected PostStub build(
+    protected PostServiceStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new PostStub(channel, callOptions);
+      return new PostServiceStub(channel, callOptions);
     }
 
     /**
@@ -191,16 +191,16 @@ public final class PostGrpc {
 
   /**
    */
-  public static final class PostBlockingStub extends io.grpc.stub.AbstractBlockingStub<PostBlockingStub> {
-    private PostBlockingStub(
+  public static final class PostServiceBlockingStub extends io.grpc.stub.AbstractBlockingStub<PostServiceBlockingStub> {
+    private PostServiceBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected PostBlockingStub build(
+    protected PostServiceBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new PostBlockingStub(channel, callOptions);
+      return new PostServiceBlockingStub(channel, callOptions);
     }
 
     /**
@@ -221,16 +221,16 @@ public final class PostGrpc {
 
   /**
    */
-  public static final class PostFutureStub extends io.grpc.stub.AbstractFutureStub<PostFutureStub> {
-    private PostFutureStub(
+  public static final class PostServiceFutureStub extends io.grpc.stub.AbstractFutureStub<PostServiceFutureStub> {
+    private PostServiceFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected PostFutureStub build(
+    protected PostServiceFutureStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new PostFutureStub(channel, callOptions);
+      return new PostServiceFutureStub(channel, callOptions);
     }
 
     /**
@@ -250,10 +250,10 @@ public final class PostGrpc {
       io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
       io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
-    private final PostImplBase serviceImpl;
+    private final PostServiceImplBase serviceImpl;
     private final int methodId;
 
-    MethodHandlers(PostImplBase serviceImpl, int methodId) {
+    MethodHandlers(PostServiceImplBase serviceImpl, int methodId) {
       this.serviceImpl = serviceImpl;
       this.methodId = methodId;
     }
@@ -286,32 +286,32 @@ public final class PostGrpc {
     }
   }
 
-  private static abstract class PostBaseDescriptorSupplier
+  private static abstract class PostServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    PostBaseDescriptorSupplier() {}
+    PostServiceBaseDescriptorSupplier() {}
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return via.dk.elearn.protobuf.PostOuterClass.getDescriptor();
+      return via.dk.elearn.protobuf.Post.getDescriptor();
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("Post");
+      return getFileDescriptor().findServiceByName("PostService");
     }
   }
 
-  private static final class PostFileDescriptorSupplier
-      extends PostBaseDescriptorSupplier {
-    PostFileDescriptorSupplier() {}
+  private static final class PostServiceFileDescriptorSupplier
+      extends PostServiceBaseDescriptorSupplier {
+    PostServiceFileDescriptorSupplier() {}
   }
 
-  private static final class PostMethodDescriptorSupplier
-      extends PostBaseDescriptorSupplier
+  private static final class PostServiceMethodDescriptorSupplier
+      extends PostServiceBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
     private final String methodName;
 
-    PostMethodDescriptorSupplier(String methodName) {
+    PostServiceMethodDescriptorSupplier(String methodName) {
       this.methodName = methodName;
     }
 
@@ -326,11 +326,11 @@ public final class PostGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (PostGrpc.class) {
+      synchronized (PostServiceGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new PostFileDescriptorSupplier())
+              .setSchemaDescriptor(new PostServiceFileDescriptorSupplier())
               .addMethod(getGetPostMethod())
               .addMethod(getGetAllPostMethod())
               .build();
