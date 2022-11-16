@@ -1,5 +1,8 @@
 package via.dk.elearn.service;
 
+import com.google.protobuf.Any;
+import com.google.rpc.ErrorInfo;
+import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +28,18 @@ public class PostServiceImpl extends PostGrpc.PostImplBase {
 
     @Override
     public void getPost(PostLookupModel request, StreamObserver<PostModel> responseObserver) {
-
         List<Lecture> lectures = lectureRepository.findByUrl(request.getUrl());
+        if (lectures.isEmpty()) {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("The lecture is not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("Lecture not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+            return;
+        }
         Lecture lecture = lectures.get(0);
         PostModel postModel = PostModel.newBuilder()
                 .setId(lecture.getId())
