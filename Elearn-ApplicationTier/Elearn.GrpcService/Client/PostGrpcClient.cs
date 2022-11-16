@@ -12,10 +12,7 @@ public class PostGrpcClient : IPostService
 
     public PostGrpcClient()
     {
-        var httpHandler = new HttpClientHandler();
-        httpHandler.ServerCertificateCustomValidationCallback = 
-            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-        _grpcChannel = GrpcChannel.ForAddress("https://localhost:8080", new GrpcChannelOptions { HttpHandler = httpHandler });
+        _grpcChannel = GrpcChannel.ForAddress("https://localhost:8080");
         _postClient = new ElearnGrpc.Post.PostClient(_grpcChannel);
     }
 
