@@ -6,18 +6,16 @@ import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
-import via.dk.elearn.entity.Lecture;
-import via.dk.elearn.protobuf.NewPostRequest;
-import via.dk.elearn.protobuf.PostGrpc;
+import via.dk.elearn.models.Lecture;
 import via.dk.elearn.protobuf.PostLookupModel;
 import via.dk.elearn.protobuf.PostModel;
+import via.dk.elearn.protobuf.PostServiceGrpc;
 import via.dk.elearn.repository.LectureRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @GRpcService
-public class PostServiceImpl extends PostGrpc.PostImplBase {
+public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
 
     private LectureRepository lectureRepository;
 

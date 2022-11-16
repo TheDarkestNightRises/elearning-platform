@@ -9,7 +9,9 @@
 
     <ItemGroup>
         <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+        <PackageReference Include="Grpc.AspNetCore.Web" Version="2.49.0" />
         <PackageReference Include="Grpc.Net.Client" Version="2.49.0" />
+        <PackageReference Include="Grpc.Net.Client.Web" Version="2.49.0" />
         <PackageReference Include="Grpc.Net.ClientFactory" Version="2.49.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />

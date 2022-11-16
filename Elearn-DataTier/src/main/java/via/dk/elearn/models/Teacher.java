@@ -1,4 +1,4 @@
-package via.dk.elearn.entity;
+package via.dk.elearn.models;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

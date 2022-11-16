@@ -46,7 +46,6 @@ builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 AuthorizationPolicies.AddPolicies(builder.Services);
 
 
-
 var app = builder.Build();
 app.UseCors(x => x
     .AllowAnyMethod()
@@ -62,6 +61,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 
+app.UseRouting();
+app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGrpcService<CommentGrpcClient>().EnableGrpcWeb();
+    endpoints.MapGrpcService<PostGrpcClient>().EnableGrpcWeb();
+    endpoints.MapGrpcService<UserGrpcClient>().EnableGrpcWeb();
+
+});
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

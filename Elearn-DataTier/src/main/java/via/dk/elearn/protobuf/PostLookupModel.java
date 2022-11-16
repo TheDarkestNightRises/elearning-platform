@@ -78,13 +78,13 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.dk.elearn.protobuf.PostOuterClass.internal_static_PostLookupModel_descriptor;
+    return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.dk.elearn.protobuf.PostOuterClass.internal_static_PostLookupModel_fieldAccessorTable
+    return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             via.dk.elearn.protobuf.PostLookupModel.class, via.dk.elearn.protobuf.PostLookupModel.Builder.class);
   }
@@ -290,13 +290,13 @@ private static final long serialVersionUID = 0L;
       via.dk.elearn.protobuf.PostLookupModelOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.dk.elearn.protobuf.PostOuterClass.internal_static_PostLookupModel_descriptor;
+      return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.dk.elearn.protobuf.PostOuterClass.internal_static_PostLookupModel_fieldAccessorTable
+      return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               via.dk.elearn.protobuf.PostLookupModel.class, via.dk.elearn.protobuf.PostLookupModel.Builder.class);
     }
@@ -327,7 +327,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.dk.elearn.protobuf.PostOuterClass.internal_static_PostLookupModel_descriptor;
+      return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_descriptor;
     }
 
     @java.lang.Override

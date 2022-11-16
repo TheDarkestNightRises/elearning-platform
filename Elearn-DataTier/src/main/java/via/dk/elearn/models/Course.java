@@ -1,4 +1,4 @@
-package via.dk.elearn.entity;
+package via.dk.elearn.models;
 
 import lombok.Data;
 
@@ -6,11 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class Country {
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true, name = "country_name", length = 100)
-    private String countryName;
+    @Column(name = "course_name", length = 30)
+    private String courseName;
 }

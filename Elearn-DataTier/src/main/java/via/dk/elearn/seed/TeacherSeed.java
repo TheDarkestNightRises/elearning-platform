@@ -3,8 +3,8 @@ package via.dk.elearn.seed;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import via.dk.elearn.entity.Country;
-import via.dk.elearn.entity.Teacher;
+import via.dk.elearn.models.Country;
+import via.dk.elearn.models.Teacher;
 import via.dk.elearn.repository.CountryRepository;
 import via.dk.elearn.repository.TeacherRepository;
 
