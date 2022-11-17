@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Elearn.Application\Elearn.Application.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Google.Protobuf" Version="3.21.9" />
+      <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+      <PackageReference Include="Grpc.Net.Client" Version="2.49.0" />
+      <PackageReference Include="Grpc.Net.Client.Web" Version="2.49.0" />
+      <PackageReference Include="Grpc.Tools" Version="2.50.0">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Protobuf Include="Protos\post.proto" GrpcServices="Client" />
+      
+      <Protobuf Include="Protos\user.proto"  GrpcServices="Client"/>
+    </ItemGroup>
+
+</Project>

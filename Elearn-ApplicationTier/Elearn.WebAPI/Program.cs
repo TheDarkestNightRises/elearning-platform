@@ -1,10 +1,10 @@
 using System.Text;
 using Elearn.Application.Logic;
 using Elearn.Application.LogicInterfaces;
-using Elearn.Application.RepositoryContracts;
-using Elearn.Data.Data;
-using Elearn.Data.Repository;
+using Elearn.Application.ServiceContracts;
+using Elearn.GrpcService.Client;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.IdentityModel.Tokens;
 using Shared.Auth;
 
@@ -14,15 +14,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
+builder.Services.AddGrpc();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<DataContext>();
-builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IPostRepository, PostRepository>();
-builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<IPostService, PostGrpcClient>();
+builder.Services.AddScoped<ICommentService, CommentGrpcClient>();
+builder.Services.AddScoped<IUserService, UserGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<IPostLogic, PostLogic>();
+builder.Services.AddScoped<IAuthLogic, AuthLogic>();
+builder.Services.AddGrpcClient<CommentGrpcClient>();
+builder.Services.AddGrpcClient<PostGrpcClient>();
+builder.Services.AddGrpcClient<UserGrpcClient>();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
