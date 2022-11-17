@@ -22,7 +22,7 @@ public class TeacherSeed implements CommandLineRunner {
         Country country = new Country();
         country.setCountryName("Denmark");
         Country created = countryRepository.save(country);
-        Teacher teacher = new Teacher("user", "gggg@sfus.3w4", "passsdd", "asfaf", "ajsnsa", created, 123l);
+        Teacher teacher = new Teacher("user", "gggg@sfus.3w4", "passsdd", "asfaf", "ajsnsa", created, 123l, "yes","Teacher");
         repo.save(teacher);
     }
 }
