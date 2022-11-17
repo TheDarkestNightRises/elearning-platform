@@ -522,3 +522,4 @@ testem.log
 /typings
 
 Elearn-DataTier/.keystore
+Elearn-DataTier/src/main/java/via/dk/elearn/protobuf
