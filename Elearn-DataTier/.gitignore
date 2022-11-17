@@ -37,4 +37,4 @@ build/
 
 ### PROTOBUF ###
 
-/Elearn-DataTier/src/main/java/via/dk/elearn/protobuf/
+**/src/main/java/via/dk/elearn/protobuf/
