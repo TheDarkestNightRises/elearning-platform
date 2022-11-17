@@ -33,4 +33,8 @@ build/
 .vscode/
 
 ### CERTIFICATE ###
-*.keystore. 
+*.keystore.
+
+### PROTOBUF ###
+
+/Elearn-DataTier/src/main/java/via/dk/elearn/protobuf/
