@@ -3,7 +3,7 @@
 namespace Elearn.Shared.Models;
 public class Post
 {
-    public long Id { get; set; }
+    public int Id { get; set; }
 
     [Required, StringLength(20, ErrorMessage = "Please use only 20 characters")]
     public string Url { get; set; }

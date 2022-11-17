@@ -18,9 +18,6 @@ public class Lecture {
     @Column(name = "description", length = 80)
     private String description;
 
-    @Column(unique = true, name = "url")
-    private String url;
-
     @Lob
     @Column(name = "body")
     private String body;

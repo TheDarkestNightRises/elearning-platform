@@ -1,8 +1,8 @@
 using Elearn.Shared.Models;
 
-namespace Elearn.Application.ServiceContracts;
+namespace Elearn.Application.RepositoryContracts;
 
-public interface IUserService
+public interface IUserRepository
 {
     Task<User?> GetUserByNameAsync(string name);
     Task<User> CreateNewUserAsync(User user);

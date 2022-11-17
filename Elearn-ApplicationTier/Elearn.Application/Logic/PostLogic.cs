@@ -1,5 +1,5 @@
 ﻿using Elearn.Application.LogicInterfaces;
-using Elearn.Application.ServiceContracts;
+using Elearn.Application.RepositoryContracts;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
@@ -8,13 +8,13 @@ namespace Elearn.Application.Logic;
 
 public class PostLogic : IPostLogic
 {
-    private readonly IPostService _postService;
-    private readonly IUserService _userService;
+    private readonly IPostRepository _postRepository;
+    private readonly IUserRepository _userRepository;
 
-    public PostLogic(IPostService postService, IUserService userService)
+    public PostLogic(IPostRepository postRepository, IUserRepository userRepository)
     {
-        _postService = postService;
-        _userService = userService;
+        this._postRepository = postRepository;
+        this._userRepository = userRepository;
     }
 
     public async Task<Post> CreateAsync(PostCreationDto dto)
@@ -22,9 +22,9 @@ public class PostLogic : IPostLogic
         //TODO: validate user when login part done
         //TODO: validate unique url
         //ValidateCreationDto(dto);
-        User user = await _userService.GetUserByNameAsync(dto.Username);
+        User user = await _userRepository.GetUserByNameAsync(dto.Username);
         Post post = new Post(dto.Title, dto.Body, dto.Url, dto.Image, user);
-        Post created = await _postService.CreateNewPostAsync(post);
+        Post created = await _postRepository.CreateNewPostAsync(post);
         //PostDto createdDto = new PostDto(created.PostId, created.Title, created.Body, created.Url, created.Image, created.Author, created.DateCreated);
         
         return created;
@@ -32,12 +32,12 @@ public class PostLogic : IPostLogic
 
     public async Task<List<Post>> GetAllPostsAsync()
     {
-        return await _postService.GetAllPostsAsync();
+        return await _postRepository.GetAllPostsAsync();
     }
 
     public async Task<Post?> GetPostAsync(string url)
     {
-        return await _postService.GetPostAsync(url);
+        return await _postRepository.GetPostAsync(url);
     }
 
     private void ValidateCreationDto(PostCreationDto dto)

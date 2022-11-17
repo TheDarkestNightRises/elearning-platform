@@ -12,12 +12,8 @@ public class Teacher extends User{
     @Column
     private Long teacher_test_property;
 
-    @Column
-    private String verified;
-
-    public Teacher(String username, String email, String password, String firstName, String lastName, Country country, Long teacher_test_property, String verified, String role) {
-        super(username, email, password, firstName, lastName, country,role);
+    public Teacher(String username, String email, String password, String firstName, String lastName, Country country, Long teacher_test_property) {
+        super(username, email, password, firstName, lastName, country);
         this.teacher_test_property = teacher_test_property;
-        this.verified = verified;
     }
 }

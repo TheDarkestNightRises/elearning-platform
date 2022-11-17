@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Elearn.Application.LogicInterfaces;
-using Elearn.Application.ServiceContracts;
+using Elearn.Application.RepositoryContracts;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
@@ -8,16 +8,16 @@ namespace Elearn.Application.Logic;
 
 public class AuthLogic : IAuthLogic
 {
-    private readonly IUserService _userService;
+    private readonly IUserRepository _userRepository;
 
-    public AuthLogic(IUserService userService)
+    public AuthLogic(IUserRepository userRepository)
     {
-        _userService = userService;
+        _userRepository = userRepository;
     }
 
     public async Task<User> ValidateUserAsync(string username, string password)
     {
-        User? existingUser = await _userService.GetUserByNameAsync(username);
+        User? existingUser = await _userRepository.GetUserByNameAsync(username);
         
         if (existingUser == null)
         {
@@ -56,7 +56,7 @@ public class AuthLogic : IAuthLogic
             throw new ValidationException("Name cannot be null");
         }
         User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role, dto.SecurityLevel);
-        User created = await _userService.CreateNewUserAsync(user);
+        User created = await _userRepository.CreateNewUserAsync(user);
         return created;
     }
 }

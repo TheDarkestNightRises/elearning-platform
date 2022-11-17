@@ -29,9 +29,6 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "role", nullable = false )
-    private String role;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
@@ -40,14 +37,13 @@ public class User {
     @JoinColumn(name = "university_id") /// Nullable??
     private University university;
 
-    public User(String username, String email, String password, String firstName, String lastName, Country country, String role) {
+    public User(String username, String email, String password, String firstName, String lastName, Country country) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
-        this.role = role;
     }
 
 }
