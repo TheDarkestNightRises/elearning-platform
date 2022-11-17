@@ -18,11 +18,6 @@ public class TeacherSeed implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        if (repo.count() > 0) return;
-        Country country = new Country();
-        country.setCountryName("Denmark");
-        Country created = countryRepository.save(country);
-        Teacher teacher = new Teacher("user", "gggg@sfus.3w4", "passsdd", "asfaf", "ajsnsa", created, 123l);
-        repo.save(teacher);
+
     }
 }

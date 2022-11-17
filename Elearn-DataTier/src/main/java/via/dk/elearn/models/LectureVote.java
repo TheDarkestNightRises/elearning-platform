@@ -12,8 +12,8 @@ public class LectureVote {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "teacher_id", nullable = false)
+    private Teacher teacher;
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,5 +21,5 @@ public class LectureVote {
     private Lecture lecture;
 
     @Column(nullable = false)
-    private boolean vote;
+    private boolean upvote;//true = upvote, false = downvote
 }
