@@ -48,7 +48,26 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
 
     @Override
     public void getAllPost(NewPostRequest request, StreamObserver<PostModel> responseObserver) {
-        super.getAllPost(request, responseObserver);
+        List<Lecture> lectures = lectureRepository.findAll();
+        if (lectures.isEmpty()) {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("The lectures are not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("Lectures not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+            return;
+        }
+        for(Lecture lecture : lectures) {
+            PostModel postModel = PostModel.newBuilder()
+                    .setId(lecture.getId())
+                    .setBody(lecture.getBody())
+                    .setTitle(lecture.getTitle()).build();
+            responseObserver.onNext(postModel);
+        }
+        responseObserver.onCompleted();
     }
 
     @Override

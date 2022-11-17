@@ -29,5 +29,14 @@ message PostModel {
   string title = 3;
   string url = 4;
   string image = 5;
-  int64 dateCreated = 6;
+  Date dateCreated = 6;
+}
+
+message Date {
+  int32 year = 1;
+  int32 month = 2;
+  int32 day = 3;
+  int32 hour = 4;
+  int32 minute = 5;
+  int32 second = 6;
 }

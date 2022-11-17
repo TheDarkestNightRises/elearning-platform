@@ -21,6 +21,9 @@ public class Question {
     @Column(name = "body")
     private String body;
 
+    @Column(name = "url")
+    private String url;
+
     //TODO: Does question have course?
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
