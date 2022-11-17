@@ -20,10 +20,15 @@ public final class Post {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_NewPostRequest_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_PostLookupModel_descriptor;
+    internal_static_PostUrl_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_PostLookupModel_fieldAccessorTable;
+      internal_static_PostUrl_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_PostId_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_PostId_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
     internal_static_PostModel_descriptor;
   static final 
@@ -38,13 +43,16 @@ public final class Post {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\npost.proto\"\020\n\016NewPostRequest\"\036\n\017PostLo" +
-      "okupModel\022\013\n\003url\030\001 \001(\t\"4\n\tPostModel\022\n\n\002i" +
-      "d\030\001 \001(\003\022\014\n\004body\030\002 \001(\t\022\r\n\005title\030\003 \001(\t2c\n\013" +
-      "PostService\022\'\n\007GetPost\022\020.PostLookupModel" +
-      "\032\n.PostModel\022+\n\nGetAllPost\022\017.NewPostRequ" +
-      "est\032\n.PostModel0\001B\032\n\026via.dk.elearn.proto" +
-      "bufP\001b\006proto3"
+      "\n\npost.proto\"\020\n\016NewPostRequest\"\026\n\007PostUr" +
+      "l\022\013\n\003url\030\001 \001(\t\"\024\n\006PostId\022\n\n\002id\030\001 \001(\003\"e\n\t" +
+      "PostModel\022\n\n\002id\030\001 \001(\003\022\014\n\004body\030\002 \001(\t\022\r\n\005t" +
+      "itle\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\r\n\005image\030\005 \001(\t\022\023" +
+      "\n\013dateCreated\030\006 \001(\0032\244\001\n\013PostService\022\037\n\007G" +
+      "etPost\022\010.PostUrl\032\n.PostModel\022+\n\nGetAllPo" +
+      "st\022\017.NewPostRequest\032\n.PostModel0\001\022\'\n\rCre" +
+      "ateNewPost\022\n.PostModel\032\n.PostModel\022\036\n\007Ge" +
+      "tById\022\007.PostId\032\n.PostModelB\'\n\026via.dk.ele" +
+      "arn.protobufP\001\252\002\nElearnGrpcb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -56,18 +64,24 @@ public final class Post {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_NewPostRequest_descriptor,
         new java.lang.String[] { });
-    internal_static_PostLookupModel_descriptor =
+    internal_static_PostUrl_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_PostLookupModel_fieldAccessorTable = new
+    internal_static_PostUrl_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_PostLookupModel_descriptor,
+        internal_static_PostUrl_descriptor,
         new java.lang.String[] { "Url", });
-    internal_static_PostModel_descriptor =
+    internal_static_PostId_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_PostId_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_PostId_descriptor,
+        new java.lang.String[] { "Id", });
+    internal_static_PostModel_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_PostModel_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PostModel_descriptor,
-        new java.lang.String[] { "Id", "Body", "Title", });
+        new java.lang.String[] { "Id", "Body", "Title", "Url", "Image", "DateCreated", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

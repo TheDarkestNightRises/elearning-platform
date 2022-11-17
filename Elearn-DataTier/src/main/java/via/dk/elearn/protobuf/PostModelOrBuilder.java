@@ -36,4 +36,34 @@ public interface PostModelOrBuilder extends
    */
   com.google.protobuf.ByteString
       getTitleBytes();
+
+  /**
+   * <code>string url = 4;</code>
+   * @return The url.
+   */
+  java.lang.String getUrl();
+  /**
+   * <code>string url = 4;</code>
+   * @return The bytes for url.
+   */
+  com.google.protobuf.ByteString
+      getUrlBytes();
+
+  /**
+   * <code>string image = 5;</code>
+   * @return The image.
+   */
+  java.lang.String getImage();
+  /**
+   * <code>string image = 5;</code>
+   * @return The bytes for image.
+   */
+  com.google.protobuf.ByteString
+      getImageBytes();
+
+  /**
+   * <code>int64 dateCreated = 6;</code>
+   * @return The dateCreated.
+   */
+  long getDateCreated();
 }

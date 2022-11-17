@@ -25,6 +25,10 @@ public class Lecture {
     @Column(name = "body")
     private String body;
 
+    @Lob
+    @Column(name = "image")
+    private String image;
+
     @Column
     @Temporal(TemporalType.DATE)
     private Date published_date;
@@ -36,4 +40,18 @@ public class Lecture {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacher;
+
+
+
+    public Lecture(String title, String description, String url,String image) {
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.body = body;
+        this.image = image;
+    }
+
+    public Lecture() {
+
+    }
 }

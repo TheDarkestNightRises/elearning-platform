@@ -4,26 +4,25 @@
 package via.dk.elearn.protobuf;
 
 /**
- * Protobuf type {@code PostLookupModel}
+ * Protobuf type {@code PostId}
  */
-public final class PostLookupModel extends
+public final class PostId extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:PostLookupModel)
-    PostLookupModelOrBuilder {
+    // @@protoc_insertion_point(message_implements:PostId)
+    PostIdOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use PostLookupModel.newBuilder() to construct.
-  private PostLookupModel(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use PostId.newBuilder() to construct.
+  private PostId(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private PostLookupModel() {
-    url_ = "";
+  private PostId() {
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new PostLookupModel();
+    return new PostId();
   }
 
   @java.lang.Override
@@ -31,7 +30,7 @@ private static final long serialVersionUID = 0L;
   getUnknownFields() {
     return this.unknownFields;
   }
-  private PostLookupModel(
+  private PostId(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
@@ -49,10 +48,9 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 10: {
-            java.lang.String s = input.readStringRequireUtf8();
+          case 8: {
 
-            url_ = s;
+            id_ = input.readInt64();
             break;
           }
           default: {
@@ -78,53 +76,26 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_descriptor;
+    return via.dk.elearn.protobuf.Post.internal_static_PostId_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_fieldAccessorTable
+    return via.dk.elearn.protobuf.Post.internal_static_PostId_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            via.dk.elearn.protobuf.PostLookupModel.class, via.dk.elearn.protobuf.PostLookupModel.Builder.class);
+            via.dk.elearn.protobuf.PostId.class, via.dk.elearn.protobuf.PostId.Builder.class);
   }
 
-  public static final int URL_FIELD_NUMBER = 1;
-  private volatile java.lang.Object url_;
+  public static final int ID_FIELD_NUMBER = 1;
+  private long id_;
   /**
-   * <code>string url = 1;</code>
-   * @return The url.
+   * <code>int64 id = 1;</code>
+   * @return The id.
    */
   @java.lang.Override
-  public java.lang.String getUrl() {
-    java.lang.Object ref = url_;
-    if (ref instanceof java.lang.String) {
-      return (java.lang.String) ref;
-    } else {
-      com.google.protobuf.ByteString bs = 
-          (com.google.protobuf.ByteString) ref;
-      java.lang.String s = bs.toStringUtf8();
-      url_ = s;
-      return s;
-    }
-  }
-  /**
-   * <code>string url = 1;</code>
-   * @return The bytes for url.
-   */
-  @java.lang.Override
-  public com.google.protobuf.ByteString
-      getUrlBytes() {
-    java.lang.Object ref = url_;
-    if (ref instanceof java.lang.String) {
-      com.google.protobuf.ByteString b = 
-          com.google.protobuf.ByteString.copyFromUtf8(
-              (java.lang.String) ref);
-      url_ = b;
-      return b;
-    } else {
-      return (com.google.protobuf.ByteString) ref;
-    }
+  public long getId() {
+    return id_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -141,8 +112,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(url_)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, url_);
+    if (id_ != 0L) {
+      output.writeInt64(1, id_);
     }
     unknownFields.writeTo(output);
   }
@@ -153,8 +124,9 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(url_)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, url_);
+    if (id_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(1, id_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -166,13 +138,13 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof via.dk.elearn.protobuf.PostLookupModel)) {
+    if (!(obj instanceof via.dk.elearn.protobuf.PostId)) {
       return super.equals(obj);
     }
-    via.dk.elearn.protobuf.PostLookupModel other = (via.dk.elearn.protobuf.PostLookupModel) obj;
+    via.dk.elearn.protobuf.PostId other = (via.dk.elearn.protobuf.PostId) obj;
 
-    if (!getUrl()
-        .equals(other.getUrl())) return false;
+    if (getId()
+        != other.getId()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -184,76 +156,77 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + URL_FIELD_NUMBER;
-    hash = (53 * hash) + getUrl().hashCode();
+    hash = (37 * hash) + ID_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getId());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(
+  public static via.dk.elearn.protobuf.PostId parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(
+  public static via.dk.elearn.protobuf.PostId parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(
+  public static via.dk.elearn.protobuf.PostId parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(
+  public static via.dk.elearn.protobuf.PostId parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(byte[] data)
+  public static via.dk.elearn.protobuf.PostId parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(
+  public static via.dk.elearn.protobuf.PostId parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(java.io.InputStream input)
+  public static via.dk.elearn.protobuf.PostId parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(
+  public static via.dk.elearn.protobuf.PostId parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseDelimitedFrom(java.io.InputStream input)
+  public static via.dk.elearn.protobuf.PostId parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseDelimitedFrom(
+  public static via.dk.elearn.protobuf.PostId parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(
+  public static via.dk.elearn.protobuf.PostId parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static via.dk.elearn.protobuf.PostLookupModel parseFrom(
+  public static via.dk.elearn.protobuf.PostId parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -266,7 +239,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(via.dk.elearn.protobuf.PostLookupModel prototype) {
+  public static Builder newBuilder(via.dk.elearn.protobuf.PostId prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -282,26 +255,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code PostLookupModel}
+   * Protobuf type {@code PostId}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:PostLookupModel)
-      via.dk.elearn.protobuf.PostLookupModelOrBuilder {
+      // @@protoc_insertion_point(builder_implements:PostId)
+      via.dk.elearn.protobuf.PostIdOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_descriptor;
+      return via.dk.elearn.protobuf.Post.internal_static_PostId_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_fieldAccessorTable
+      return via.dk.elearn.protobuf.Post.internal_static_PostId_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              via.dk.elearn.protobuf.PostLookupModel.class, via.dk.elearn.protobuf.PostLookupModel.Builder.class);
+              via.dk.elearn.protobuf.PostId.class, via.dk.elearn.protobuf.PostId.Builder.class);
     }
 
-    // Construct using via.dk.elearn.protobuf.PostLookupModel.newBuilder()
+    // Construct using via.dk.elearn.protobuf.PostId.newBuilder()
     private Builder() {
       maybeForceBuilderInitialization();
     }
@@ -319,7 +292,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      url_ = "";
+      id_ = 0L;
 
       return this;
     }
@@ -327,17 +300,17 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return via.dk.elearn.protobuf.Post.internal_static_PostLookupModel_descriptor;
+      return via.dk.elearn.protobuf.Post.internal_static_PostId_descriptor;
     }
 
     @java.lang.Override
-    public via.dk.elearn.protobuf.PostLookupModel getDefaultInstanceForType() {
-      return via.dk.elearn.protobuf.PostLookupModel.getDefaultInstance();
+    public via.dk.elearn.protobuf.PostId getDefaultInstanceForType() {
+      return via.dk.elearn.protobuf.PostId.getDefaultInstance();
     }
 
     @java.lang.Override
-    public via.dk.elearn.protobuf.PostLookupModel build() {
-      via.dk.elearn.protobuf.PostLookupModel result = buildPartial();
+    public via.dk.elearn.protobuf.PostId build() {
+      via.dk.elearn.protobuf.PostId result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -345,9 +318,9 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public via.dk.elearn.protobuf.PostLookupModel buildPartial() {
-      via.dk.elearn.protobuf.PostLookupModel result = new via.dk.elearn.protobuf.PostLookupModel(this);
-      result.url_ = url_;
+    public via.dk.elearn.protobuf.PostId buildPartial() {
+      via.dk.elearn.protobuf.PostId result = new via.dk.elearn.protobuf.PostId(this);
+      result.id_ = id_;
       onBuilt();
       return result;
     }
@@ -386,19 +359,18 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof via.dk.elearn.protobuf.PostLookupModel) {
-        return mergeFrom((via.dk.elearn.protobuf.PostLookupModel)other);
+      if (other instanceof via.dk.elearn.protobuf.PostId) {
+        return mergeFrom((via.dk.elearn.protobuf.PostId)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(via.dk.elearn.protobuf.PostLookupModel other) {
-      if (other == via.dk.elearn.protobuf.PostLookupModel.getDefaultInstance()) return this;
-      if (!other.getUrl().isEmpty()) {
-        url_ = other.url_;
-        onChanged();
+    public Builder mergeFrom(via.dk.elearn.protobuf.PostId other) {
+      if (other == via.dk.elearn.protobuf.PostId.getDefaultInstance()) return this;
+      if (other.getId() != 0L) {
+        setId(other.getId());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -415,11 +387,11 @@ private static final long serialVersionUID = 0L;
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      via.dk.elearn.protobuf.PostLookupModel parsedMessage = null;
+      via.dk.elearn.protobuf.PostId parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (via.dk.elearn.protobuf.PostLookupModel) e.getUnfinishedMessage();
+        parsedMessage = (via.dk.elearn.protobuf.PostId) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -429,78 +401,33 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private java.lang.Object url_ = "";
+    private long id_ ;
     /**
-     * <code>string url = 1;</code>
-     * @return The url.
+     * <code>int64 id = 1;</code>
+     * @return The id.
      */
-    public java.lang.String getUrl() {
-      java.lang.Object ref = url_;
-      if (!(ref instanceof java.lang.String)) {
-        com.google.protobuf.ByteString bs =
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        url_ = s;
-        return s;
-      } else {
-        return (java.lang.String) ref;
-      }
+    @java.lang.Override
+    public long getId() {
+      return id_;
     }
     /**
-     * <code>string url = 1;</code>
-     * @return The bytes for url.
-     */
-    public com.google.protobuf.ByteString
-        getUrlBytes() {
-      java.lang.Object ref = url_;
-      if (ref instanceof String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        url_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-    /**
-     * <code>string url = 1;</code>
-     * @param value The url to set.
+     * <code>int64 id = 1;</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setUrl(
-        java.lang.String value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  
-      url_ = value;
+    public Builder setId(long value) {
+      
+      id_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string url = 1;</code>
+     * <code>int64 id = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearUrl() {
+    public Builder clearId() {
       
-      url_ = getDefaultInstance().getUrl();
-      onChanged();
-      return this;
-    }
-    /**
-     * <code>string url = 1;</code>
-     * @param value The bytes for url to set.
-     * @return This builder for chaining.
-     */
-    public Builder setUrlBytes(
-        com.google.protobuf.ByteString value) {
-      if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-      
-      url_ = value;
+      id_ = 0L;
       onChanged();
       return this;
     }
@@ -517,41 +444,41 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:PostLookupModel)
+    // @@protoc_insertion_point(builder_scope:PostId)
   }
 
-  // @@protoc_insertion_point(class_scope:PostLookupModel)
-  private static final via.dk.elearn.protobuf.PostLookupModel DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:PostId)
+  private static final via.dk.elearn.protobuf.PostId DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new via.dk.elearn.protobuf.PostLookupModel();
+    DEFAULT_INSTANCE = new via.dk.elearn.protobuf.PostId();
   }
 
-  public static via.dk.elearn.protobuf.PostLookupModel getDefaultInstance() {
+  public static via.dk.elearn.protobuf.PostId getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<PostLookupModel>
-      PARSER = new com.google.protobuf.AbstractParser<PostLookupModel>() {
+  private static final com.google.protobuf.Parser<PostId>
+      PARSER = new com.google.protobuf.AbstractParser<PostId>() {
     @java.lang.Override
-    public PostLookupModel parsePartialFrom(
+    public PostId parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return new PostLookupModel(input, extensionRegistry);
+      return new PostId(input, extensionRegistry);
     }
   };
 
-  public static com.google.protobuf.Parser<PostLookupModel> parser() {
+  public static com.google.protobuf.Parser<PostId> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<PostLookupModel> getParserForType() {
+  public com.google.protobuf.Parser<PostId> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public via.dk.elearn.protobuf.PostLookupModel getDefaultInstanceForType() {
+  public via.dk.elearn.protobuf.PostId getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

@@ -14,27 +14,27 @@ public final class PostServiceGrpc {
   public static final String SERVICE_NAME = "PostService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostLookupModel,
+  private static volatile io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostUrl,
       via.dk.elearn.protobuf.PostModel> getGetPostMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetPost",
-      requestType = via.dk.elearn.protobuf.PostLookupModel.class,
+      requestType = via.dk.elearn.protobuf.PostUrl.class,
       responseType = via.dk.elearn.protobuf.PostModel.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostLookupModel,
+  public static io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostUrl,
       via.dk.elearn.protobuf.PostModel> getGetPostMethod() {
-    io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostLookupModel, via.dk.elearn.protobuf.PostModel> getGetPostMethod;
+    io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostUrl, via.dk.elearn.protobuf.PostModel> getGetPostMethod;
     if ((getGetPostMethod = PostServiceGrpc.getGetPostMethod) == null) {
       synchronized (PostServiceGrpc.class) {
         if ((getGetPostMethod = PostServiceGrpc.getGetPostMethod) == null) {
           PostServiceGrpc.getGetPostMethod = getGetPostMethod =
-              io.grpc.MethodDescriptor.<via.dk.elearn.protobuf.PostLookupModel, via.dk.elearn.protobuf.PostModel>newBuilder()
+              io.grpc.MethodDescriptor.<via.dk.elearn.protobuf.PostUrl, via.dk.elearn.protobuf.PostModel>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetPost"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  via.dk.elearn.protobuf.PostLookupModel.getDefaultInstance()))
+                  via.dk.elearn.protobuf.PostUrl.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   via.dk.elearn.protobuf.PostModel.getDefaultInstance()))
               .setSchemaDescriptor(new PostServiceMethodDescriptorSupplier("GetPost"))
@@ -74,6 +74,68 @@ public final class PostServiceGrpc {
       }
     }
     return getGetAllPostMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostModel,
+      via.dk.elearn.protobuf.PostModel> getCreateNewPostMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "CreateNewPost",
+      requestType = via.dk.elearn.protobuf.PostModel.class,
+      responseType = via.dk.elearn.protobuf.PostModel.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostModel,
+      via.dk.elearn.protobuf.PostModel> getCreateNewPostMethod() {
+    io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostModel, via.dk.elearn.protobuf.PostModel> getCreateNewPostMethod;
+    if ((getCreateNewPostMethod = PostServiceGrpc.getCreateNewPostMethod) == null) {
+      synchronized (PostServiceGrpc.class) {
+        if ((getCreateNewPostMethod = PostServiceGrpc.getCreateNewPostMethod) == null) {
+          PostServiceGrpc.getCreateNewPostMethod = getCreateNewPostMethod =
+              io.grpc.MethodDescriptor.<via.dk.elearn.protobuf.PostModel, via.dk.elearn.protobuf.PostModel>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CreateNewPost"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  via.dk.elearn.protobuf.PostModel.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  via.dk.elearn.protobuf.PostModel.getDefaultInstance()))
+              .setSchemaDescriptor(new PostServiceMethodDescriptorSupplier("CreateNewPost"))
+              .build();
+        }
+      }
+    }
+    return getCreateNewPostMethod;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostId,
+      via.dk.elearn.protobuf.PostModel> getGetByIdMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "GetById",
+      requestType = via.dk.elearn.protobuf.PostId.class,
+      responseType = via.dk.elearn.protobuf.PostModel.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostId,
+      via.dk.elearn.protobuf.PostModel> getGetByIdMethod() {
+    io.grpc.MethodDescriptor<via.dk.elearn.protobuf.PostId, via.dk.elearn.protobuf.PostModel> getGetByIdMethod;
+    if ((getGetByIdMethod = PostServiceGrpc.getGetByIdMethod) == null) {
+      synchronized (PostServiceGrpc.class) {
+        if ((getGetByIdMethod = PostServiceGrpc.getGetByIdMethod) == null) {
+          PostServiceGrpc.getGetByIdMethod = getGetByIdMethod =
+              io.grpc.MethodDescriptor.<via.dk.elearn.protobuf.PostId, via.dk.elearn.protobuf.PostModel>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetById"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  via.dk.elearn.protobuf.PostId.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  via.dk.elearn.protobuf.PostModel.getDefaultInstance()))
+              .setSchemaDescriptor(new PostServiceMethodDescriptorSupplier("GetById"))
+              .build();
+        }
+      }
+    }
+    return getGetByIdMethod;
   }
 
   /**
@@ -126,7 +188,7 @@ public final class PostServiceGrpc {
 
     /**
      */
-    public void getPost(via.dk.elearn.protobuf.PostLookupModel request,
+    public void getPost(via.dk.elearn.protobuf.PostUrl request,
         io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetPostMethod(), responseObserver);
     }
@@ -138,13 +200,27 @@ public final class PostServiceGrpc {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetAllPostMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void createNewPost(via.dk.elearn.protobuf.PostModel request,
+        io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCreateNewPostMethod(), responseObserver);
+    }
+
+    /**
+     */
+    public void getById(via.dk.elearn.protobuf.PostId request,
+        io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetByIdMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getGetPostMethod(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                via.dk.elearn.protobuf.PostLookupModel,
+                via.dk.elearn.protobuf.PostUrl,
                 via.dk.elearn.protobuf.PostModel>(
                   this, METHODID_GET_POST)))
           .addMethod(
@@ -154,6 +230,20 @@ public final class PostServiceGrpc {
                 via.dk.elearn.protobuf.NewPostRequest,
                 via.dk.elearn.protobuf.PostModel>(
                   this, METHODID_GET_ALL_POST)))
+          .addMethod(
+            getCreateNewPostMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                via.dk.elearn.protobuf.PostModel,
+                via.dk.elearn.protobuf.PostModel>(
+                  this, METHODID_CREATE_NEW_POST)))
+          .addMethod(
+            getGetByIdMethod(),
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
+              new MethodHandlers<
+                via.dk.elearn.protobuf.PostId,
+                via.dk.elearn.protobuf.PostModel>(
+                  this, METHODID_GET_BY_ID)))
           .build();
     }
   }
@@ -174,7 +264,7 @@ public final class PostServiceGrpc {
 
     /**
      */
-    public void getPost(via.dk.elearn.protobuf.PostLookupModel request,
+    public void getPost(via.dk.elearn.protobuf.PostUrl request,
         io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetPostMethod(), getCallOptions()), request, responseObserver);
@@ -186,6 +276,22 @@ public final class PostServiceGrpc {
         io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getGetAllPostMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void createNewPost(via.dk.elearn.protobuf.PostModel request,
+        io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getCreateNewPostMethod(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void getById(via.dk.elearn.protobuf.PostId request,
+        io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getGetByIdMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
@@ -205,7 +311,7 @@ public final class PostServiceGrpc {
 
     /**
      */
-    public via.dk.elearn.protobuf.PostModel getPost(via.dk.elearn.protobuf.PostLookupModel request) {
+    public via.dk.elearn.protobuf.PostModel getPost(via.dk.elearn.protobuf.PostUrl request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetPostMethod(), getCallOptions(), request);
     }
@@ -216,6 +322,20 @@ public final class PostServiceGrpc {
         via.dk.elearn.protobuf.NewPostRequest request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getGetAllPostMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public via.dk.elearn.protobuf.PostModel createNewPost(via.dk.elearn.protobuf.PostModel request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getCreateNewPostMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public via.dk.elearn.protobuf.PostModel getById(via.dk.elearn.protobuf.PostId request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getGetByIdMethod(), getCallOptions(), request);
     }
   }
 
@@ -236,14 +356,32 @@ public final class PostServiceGrpc {
     /**
      */
     public com.google.common.util.concurrent.ListenableFuture<via.dk.elearn.protobuf.PostModel> getPost(
-        via.dk.elearn.protobuf.PostLookupModel request) {
+        via.dk.elearn.protobuf.PostUrl request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetPostMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<via.dk.elearn.protobuf.PostModel> createNewPost(
+        via.dk.elearn.protobuf.PostModel request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getCreateNewPostMethod(), getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<via.dk.elearn.protobuf.PostModel> getById(
+        via.dk.elearn.protobuf.PostId request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getGetByIdMethod(), getCallOptions()), request);
     }
   }
 
   private static final int METHODID_GET_POST = 0;
   private static final int METHODID_GET_ALL_POST = 1;
+  private static final int METHODID_CREATE_NEW_POST = 2;
+  private static final int METHODID_GET_BY_ID = 3;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -263,11 +401,19 @@ public final class PostServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_POST:
-          serviceImpl.getPost((via.dk.elearn.protobuf.PostLookupModel) request,
+          serviceImpl.getPost((via.dk.elearn.protobuf.PostUrl) request,
               (io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel>) responseObserver);
           break;
         case METHODID_GET_ALL_POST:
           serviceImpl.getAllPost((via.dk.elearn.protobuf.NewPostRequest) request,
+              (io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel>) responseObserver);
+          break;
+        case METHODID_CREATE_NEW_POST:
+          serviceImpl.createNewPost((via.dk.elearn.protobuf.PostModel) request,
+              (io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel>) responseObserver);
+          break;
+        case METHODID_GET_BY_ID:
+          serviceImpl.getById((via.dk.elearn.protobuf.PostId) request,
               (io.grpc.stub.StreamObserver<via.dk.elearn.protobuf.PostModel>) responseObserver);
           break;
         default:
@@ -333,6 +479,8 @@ public final class PostServiceGrpc {
               .setSchemaDescriptor(new PostServiceFileDescriptorSupplier())
               .addMethod(getGetPostMethod())
               .addMethod(getGetAllPostMethod())
+              .addMethod(getCreateNewPostMethod())
+              .addMethod(getGetByIdMethod())
               .build();
         }
       }

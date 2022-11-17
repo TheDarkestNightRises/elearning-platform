@@ -3,8 +3,8 @@
 
 package via.dk.elearn.protobuf;
 
-public interface PostLookupModelOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:PostLookupModel)
+public interface PostUrlOrBuilder extends
+    // @@protoc_insertion_point(interface_extends:PostUrl)
     com.google.protobuf.MessageOrBuilder {
 
   /**

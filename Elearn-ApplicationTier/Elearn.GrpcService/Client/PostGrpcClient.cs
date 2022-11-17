@@ -1,4 +1,5 @@
 using Elearn.Application.ServiceContracts;
+using Elearn.GrpcService.Extensions;
 using Elearn.Shared.Models;
 using ElearnGrpc;
 using Grpc.Core;
@@ -13,42 +14,43 @@ public class PostGrpcClient : IPostService
 
     public PostGrpcClient()
     {
-        // var httpHandler = new HttpClientHandler();
-        // httpHandler.ServerCertificateCustomValidationCallback =
-        //     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-
-        // var httpClient = new HttpClient(new GrpcWebHandler(GrpcWebMode.GrpcWeb, new HttpClientHandler()));
-
         var _grpcChannel =
             new Channel("localhost:8843", ChannelCredentials.Insecure);
         _postClient = new PostService.PostServiceClient(_grpcChannel);
     }
 
-    public Task<List<Post>> GetAllPostsAsync()
+    public async Task<List<Post>> GetAllPostsAsync()
     {
-        throw new NotImplementedException();
+        List<Post> posts = new List<Post>();
+        using (var call = _postClient.GetAllPost(new NewPostRequest()))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentPost = call.ResponseStream.Current;
+                posts.Add(currentPost.AsBase());
+            }
+        }
+        return posts;
     }
 
     public async Task<Post?> GetPostAsync(string url)
     {
-        var postRequested = new PostLookupModel { Url = url };
-        var postFromGrpc = _postClient.GetPost(postRequested);
-        Post post = new Post
-        {
-            Id = postFromGrpc.Id,
-            Body = postFromGrpc.Body,
-            Title = postFromGrpc.Title
-        };
-        return post;
+        var postRequested = new PostUrl { Url = url };
+        var postFromGrpc = await _postClient.GetPostAsync(postRequested);
+        return postFromGrpc.AsBase();
     }
 
-    public Task<Post> CreateNewPostAsync(Post post)
+    public async Task<Post> CreateNewPostAsync(Post post)
     {
-        throw new NotImplementedException();
+        var postModel = post.AsGrpcModel();
+        var createdPostFromGrpc = await _postClient.CreateNewPostAsync(postModel);
+        return createdPostFromGrpc.AsBase();
     }
-
-    public Task<Post?> GetByIdAsync(int dtoPostId)
+    
+    public async Task<Post?> GetByIdAsync(int dtoPostId)
     {
-        throw new NotImplementedException();
+        var postRequested = new PostId { Id = dtoPostId };
+        var postFromGrpc = await _postClient.GetByIdAsync(postRequested);
+        return postFromGrpc.AsBase();    
     }
 }
