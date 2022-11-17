@@ -18,6 +18,8 @@ private static final long serialVersionUID = 0L;
   private PostModel() {
     body_ = "";
     title_ = "";
+    url_ = "";
+    image_ = "";
   }
 
   @java.lang.Override
@@ -65,6 +67,23 @@ private static final long serialVersionUID = 0L;
             java.lang.String s = input.readStringRequireUtf8();
 
             title_ = s;
+            break;
+          }
+          case 34: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            url_ = s;
+            break;
+          }
+          case 42: {
+            java.lang.String s = input.readStringRequireUtf8();
+
+            image_ = s;
+            break;
+          }
+          case 48: {
+
+            dateCreated_ = input.readInt64();
             break;
           }
           default: {
@@ -188,6 +207,93 @@ private static final long serialVersionUID = 0L;
     }
   }
 
+  public static final int URL_FIELD_NUMBER = 4;
+  private volatile java.lang.Object url_;
+  /**
+   * <code>string url = 4;</code>
+   * @return The url.
+   */
+  @java.lang.Override
+  public java.lang.String getUrl() {
+    java.lang.Object ref = url_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      url_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string url = 4;</code>
+   * @return The bytes for url.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getUrlBytes() {
+    java.lang.Object ref = url_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      url_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int IMAGE_FIELD_NUMBER = 5;
+  private volatile java.lang.Object image_;
+  /**
+   * <code>string image = 5;</code>
+   * @return The image.
+   */
+  @java.lang.Override
+  public java.lang.String getImage() {
+    java.lang.Object ref = image_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      image_ = s;
+      return s;
+    }
+  }
+  /**
+   * <code>string image = 5;</code>
+   * @return The bytes for image.
+   */
+  @java.lang.Override
+  public com.google.protobuf.ByteString
+      getImageBytes() {
+    java.lang.Object ref = image_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      image_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
+  }
+
+  public static final int DATECREATED_FIELD_NUMBER = 6;
+  private long dateCreated_;
+  /**
+   * <code>int64 dateCreated = 6;</code>
+   * @return The dateCreated.
+   */
+  @java.lang.Override
+  public long getDateCreated() {
+    return dateCreated_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -211,6 +317,15 @@ private static final long serialVersionUID = 0L;
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(title_)) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 3, title_);
     }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(url_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 4, url_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(image_)) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 5, image_);
+    }
+    if (dateCreated_ != 0L) {
+      output.writeInt64(6, dateCreated_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -229,6 +344,16 @@ private static final long serialVersionUID = 0L;
     }
     if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(title_)) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, title_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(url_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, url_);
+    }
+    if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(image_)) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, image_);
+    }
+    if (dateCreated_ != 0L) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt64Size(6, dateCreated_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -251,6 +376,12 @@ private static final long serialVersionUID = 0L;
         .equals(other.getBody())) return false;
     if (!getTitle()
         .equals(other.getTitle())) return false;
+    if (!getUrl()
+        .equals(other.getUrl())) return false;
+    if (!getImage()
+        .equals(other.getImage())) return false;
+    if (getDateCreated()
+        != other.getDateCreated()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -269,6 +400,13 @@ private static final long serialVersionUID = 0L;
     hash = (53 * hash) + getBody().hashCode();
     hash = (37 * hash) + TITLE_FIELD_NUMBER;
     hash = (53 * hash) + getTitle().hashCode();
+    hash = (37 * hash) + URL_FIELD_NUMBER;
+    hash = (53 * hash) + getUrl().hashCode();
+    hash = (37 * hash) + IMAGE_FIELD_NUMBER;
+    hash = (53 * hash) + getImage().hashCode();
+    hash = (37 * hash) + DATECREATED_FIELD_NUMBER;
+    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+        getDateCreated());
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -408,6 +546,12 @@ private static final long serialVersionUID = 0L;
 
       title_ = "";
 
+      url_ = "";
+
+      image_ = "";
+
+      dateCreated_ = 0L;
+
       return this;
     }
 
@@ -437,6 +581,9 @@ private static final long serialVersionUID = 0L;
       result.id_ = id_;
       result.body_ = body_;
       result.title_ = title_;
+      result.url_ = url_;
+      result.image_ = image_;
+      result.dateCreated_ = dateCreated_;
       onBuilt();
       return result;
     }
@@ -495,6 +642,17 @@ private static final long serialVersionUID = 0L;
       if (!other.getTitle().isEmpty()) {
         title_ = other.title_;
         onChanged();
+      }
+      if (!other.getUrl().isEmpty()) {
+        url_ = other.url_;
+        onChanged();
+      }
+      if (!other.getImage().isEmpty()) {
+        image_ = other.image_;
+        onChanged();
+      }
+      if (other.getDateCreated() != 0L) {
+        setDateCreated(other.getDateCreated());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -704,6 +862,189 @@ private static final long serialVersionUID = 0L;
   checkByteStringIsUtf8(value);
       
       title_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object url_ = "";
+    /**
+     * <code>string url = 4;</code>
+     * @return The url.
+     */
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        url_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string url = 4;</code>
+     * @return The bytes for url.
+     */
+    public com.google.protobuf.ByteString
+        getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        url_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string url = 4;</code>
+     * @param value The url to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUrl(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      url_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string url = 4;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearUrl() {
+      
+      url_ = getDefaultInstance().getUrl();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string url = 4;</code>
+     * @param value The bytes for url to set.
+     * @return This builder for chaining.
+     */
+    public Builder setUrlBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      url_ = value;
+      onChanged();
+      return this;
+    }
+
+    private java.lang.Object image_ = "";
+    /**
+     * <code>string image = 5;</code>
+     * @return The image.
+     */
+    public java.lang.String getImage() {
+      java.lang.Object ref = image_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        image_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
+    }
+    /**
+     * <code>string image = 5;</code>
+     * @return The bytes for image.
+     */
+    public com.google.protobuf.ByteString
+        getImageBytes() {
+      java.lang.Object ref = image_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        image_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <code>string image = 5;</code>
+     * @param value The image to set.
+     * @return This builder for chaining.
+     */
+    public Builder setImage(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
+      image_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string image = 5;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearImage() {
+      
+      image_ = getDefaultInstance().getImage();
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>string image = 5;</code>
+     * @param value The bytes for image to set.
+     * @return This builder for chaining.
+     */
+    public Builder setImageBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      image_ = value;
+      onChanged();
+      return this;
+    }
+
+    private long dateCreated_ ;
+    /**
+     * <code>int64 dateCreated = 6;</code>
+     * @return The dateCreated.
+     */
+    @java.lang.Override
+    public long getDateCreated() {
+      return dateCreated_;
+    }
+    /**
+     * <code>int64 dateCreated = 6;</code>
+     * @param value The dateCreated to set.
+     * @return This builder for chaining.
+     */
+    public Builder setDateCreated(long value) {
+      
+      dateCreated_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int64 dateCreated = 6;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearDateCreated() {
+      
+      dateCreated_ = 0L;
       onChanged();
       return this;
     }

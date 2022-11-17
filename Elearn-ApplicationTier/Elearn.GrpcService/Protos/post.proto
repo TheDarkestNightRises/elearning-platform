@@ -1,23 +1,32 @@
 syntax = "proto3"; // Use the latest proto syntax
 
+
 option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
 option java_package = "via.dk.elearn.protobuf";
 
 service PostService {
-  rpc GetPost (PostLookupModel) returns (PostModel);
+  rpc GetPost (PostUrl) returns (PostModel);
   rpc GetAllPost (NewPostRequest) returns (stream PostModel);
+  rpc CreateNewPost (PostModel) returns (PostModel);
+  rpc GetById (PostId) returns (PostModel);
 }
 
 message NewPostRequest {
-
 }
 
-message PostLookupModel {
+message PostUrl {
   string url = 1;
+}
+
+message PostId {
+  int64 id = 1;
 }
 
 message PostModel {
   int64 id = 1;
   string body = 2;
   string title = 3;
+  string url = 4;
+  string image = 5;
+  int64 dateCreated = 6;
 }
