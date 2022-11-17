@@ -5,18 +5,30 @@ option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
 option java_package = "via.dk.elearn.protobuf";
 
 service User {
-  rpc GetUserById (UserLookupModel) returns (stream UserModel);
+  rpc GetUserByName (Username) returns (stream UserModel);
   rpc CreateNewUser (UserLookupModel) returns (UserModel);
-}
-message UserModel {
-  string username = 1;
-  string password =2;
-  string firstName = 3;
-  string lastName = 4;
-  string country = 5;
-  string role = 6;
+  rpc GetUserByID(UserId) returns(stream UserModel);
 }
 
+message UserModel {
+  int64 id = 1;
+  string username = 2;
+  string email = 3;
+  string password =4;
+  string firstName = 5;
+  string lastName = 6;
+  string country = 7;
+  string university = 8;
+  string role = 9;
+  string user_photo = 10;
+}
+
+message UserId{
+  int64 id = 1;
+}
 message UserLookupModel{
   int64  id =1;
+}
+message Username {
+  string userName = 1;
 }
