@@ -35,6 +35,4 @@ build/
 ### CERTIFICATE ###
 *.keystore.
 
-### PROTOBUF ###
 
-**/src/main/java/via/dk/elearn/protobuf/
