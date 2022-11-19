@@ -41,7 +41,9 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
         PostModel postModel = PostModel.newBuilder()
                 .setId(lecture.getId())
                 .setBody(lecture.getBody())
-                .setTitle(lecture.getTitle()).build();
+                .setTitle(lecture.getTitle())
+                .setUrl(lecture.getUrl())
+                .build();
         responseObserver.onNext(postModel);
         responseObserver.onCompleted();
     }
@@ -64,7 +66,9 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
             PostModel postModel = PostModel.newBuilder()
                     .setId(lecture.getId())
                     .setBody(lecture.getBody())
-                    .setTitle(lecture.getTitle()).build();
+                    .setTitle(lecture.getTitle())
+                    .setUrl(lecture.getUrl())
+                    .build();
             responseObserver.onNext(postModel);
         }
         responseObserver.onCompleted();

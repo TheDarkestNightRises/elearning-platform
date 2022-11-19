@@ -9,6 +9,8 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 public class Teacher extends User{
-    @Column
-    private Long teacher_test_property;
+
+    public Teacher(String username, String email, String name, String password, String role, int security_level) {
+        super(username, email, name, password, role, security_level);
+    }
 }
