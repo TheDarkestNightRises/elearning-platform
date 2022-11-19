@@ -23,9 +23,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Protobuf Include="Protos\post.proto" GrpcServices="Client" ProtoRoot="Protos\" />
+      <Protobuf Include="Protos\rpc_post.proto" GrpcServices="Client" ProtoRoot="Protos\" />
       
-      <Protobuf Include="Protos\user.proto" GrpcServices="Client" ProtoRoot="Protos\" />
+      <Protobuf Include="Protos\rpc_user.proto" GrpcServices="Client" ProtoRoot="Protos\" />
     </ItemGroup>
 
 </Project>

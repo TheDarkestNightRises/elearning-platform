@@ -2,7 +2,7 @@
 
 public class User
 {
-    public int UserId { get; set; }
+    public long Id { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
@@ -24,6 +24,6 @@ public class User
     
     public override string ToString()
     {
-        return $"{UserId} {Name}";
+        return $"{Id} {Name}";
     }
 }

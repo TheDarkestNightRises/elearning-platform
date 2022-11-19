@@ -1,11 +1,11 @@
-syntax = "proto3"; // Use the latest proto syntax
+﻿syntax = "proto3"; // Use the latest proto syntax
 
 option java_multiple_files = true;
 option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
 option java_package = "via.dk.elearn.protobuf";
 
 service UserService {
-  rpc GetUserByName (Username) returns (UserModel);
+  rpc GetUserByName (UserName) returns (UserModel);
   rpc CreateNewUser (UserModel) returns (UserModel);
   rpc GetUserByID(UserId) returns (UserModel);
 }
@@ -15,15 +15,13 @@ message UserModel {
   string username = 2;
   string email = 3;
   string password =4;
-  string firstName = 5;
-  string lastName = 6;
-  string role = 7;
+  string role = 5;
 }
 
 message UserId{
   int64 id = 1;
 }
 
-message Username {
-  string userName = 1;
+message UserName {
+  string name = 1;
 }

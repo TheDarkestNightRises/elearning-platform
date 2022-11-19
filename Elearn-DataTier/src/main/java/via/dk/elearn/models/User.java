@@ -22,12 +22,12 @@ public class User {
 
     @Column(name = "password", nullable = false)
     private String password;
-
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+//
+//    @Column(name = "first_name", nullable = false)
+//    private String firstName;
+//
+//    @Column(name = "last_name", nullable = false)
+//    private String lastName;
 
     @Column(name = "role",nullable = false)
     private String role;
@@ -44,13 +44,10 @@ public class User {
     private University university;
 
 
-    public User(String username, String email, String password, String firstName, String lastName, String role) {
+    public User(String username, String email, String password, String role) {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-      //  this.country = country;
         this.role = role;
         this.user_photo = user_photo;
     }
