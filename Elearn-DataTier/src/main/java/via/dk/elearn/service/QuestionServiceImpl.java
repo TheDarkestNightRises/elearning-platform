@@ -29,9 +29,9 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
         if (questions.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The user is not found")
+                    .setMessage("The question is not found")
                     .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("User not found")
+                            .setReason("question not found")
                             .build()))
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
@@ -54,33 +54,34 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
                     .setMessage("The questions are not found")
                     .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lectures not found")
+                            .setReason("Questions not found")
                             .build()))
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-            return;
+            responseObserver.onCompleted();
+        } else {
+            for (Question question : questions) {
+                QuestionModel questionModel = QuestionModel.newBuilder()
+                        .setId(question.getId())
+                        .setBody(question.getBody())
+                        .setTitle(question.getTitle()).build();
+                responseObserver.onNext(questionModel);
+            }
+            responseObserver.onCompleted();
         }
-        for (Question question : questions) {
-            QuestionModel questionModel = QuestionModel.newBuilder()
-                    .setId(question.getId())
-                    .setBody(question.getBody())
-                    .setTitle(question.getTitle()).build();
-            responseObserver.onNext(questionModel);
-        }
-        responseObserver.onCompleted();
     }
 
-        @Override
-        public void createNewQuestion (QuestionModel request, StreamObserver < QuestionModel > responseObserver){
-//            Question question = new Question(request.getTitle(), request.getUrl(),request.getBody());
-//            Question queestion = questionRepository.save(question);
-//            PostModel question = PostModel.newBuilder()
-//                    .setId(questionFromDb.getId())
-//                    .setBody(questionFromDb.getBody())
-//                    .setTitle(questionFromDb.getTitle())
-//                    .setUrl(questionFromDb.getUrl())
-//                    .build();
-//            responseObserver.onNext(questionModel);
-//            responseObserver.onCompleted();
-        }
+    @Override
+    public void createNewQuestion(QuestionModel request, StreamObserver<QuestionModel> responseObserver) {
+        Question question = new Question(request.getTitle(), request.getUrl(), request.getBody());
+        Question questionFromDB = questionRepository.save(question);
+        QuestionModel questionGrpcModel = QuestionModel.newBuilder()
+                .setId(questionFromDB.getId())
+                .setBody(questionFromDB.getBody())
+                .setTitle(questionFromDB.getTitle())
+                .setUrl(questionFromDB.getUrl())
+                .build();
+        responseObserver.onNext(questionGrpcModel);
+        responseObserver.onCompleted();
     }
+}
