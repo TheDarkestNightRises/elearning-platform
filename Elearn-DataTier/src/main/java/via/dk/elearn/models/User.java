@@ -20,6 +20,9 @@ public class User {
     @Column(unique = true, name = "email", nullable = false)
     private String email;
 
+    @Column(unique = true, name = "name", nullable = false)
+    private String name;
+
     @Column(name = "password", nullable = false)
     private String password;
 //
@@ -33,7 +36,7 @@ public class User {
     private String role;
 
     @Column(name = "security_level",nullable = false)
-    private String security_level;
+    private int security_level;
 //
 //    @Column(name = "user_photo")
 //    private String user_photo;
@@ -47,9 +50,10 @@ public class User {
 //    private University university;
 
 
-    public User(String username, String email, String password, String role, String security_level) {
+    public User(String username, String email, String name, String password, String role, int security_level) {
         this.username = username;
         this.email = email;
+        this.name = name;
         this.password = password;
         this.role = role;
         this.security_level = security_level;

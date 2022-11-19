@@ -13,16 +13,17 @@ public class UserCreationDto
     public string Role { get; set; }
     
     public int SecurityLevel { get; set; }
-    
-    public UserCreationDto(string username, string password, string email, string name, string role)
+
+    public UserCreationDto(string username, string password, string email, string name, string role, int securityLevel)
     {
         Username = username;
         Password = password;
         Email = email;
         Name = name;
         Role = role;
+        SecurityLevel = securityLevel;
     }
-    
+
     public UserCreationDto()
     {
     }

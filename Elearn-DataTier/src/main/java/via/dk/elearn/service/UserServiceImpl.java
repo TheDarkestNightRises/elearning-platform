@@ -24,7 +24,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
         public void getUserByName(via.dk.elearn.protobuf.UserName request, StreamObserver<UserModel> responseObserver) {
-        List<via.dk.elearn.models.User> users = userRepository.findByUsername(request.getName());
+        List<User> users = userRepository.findByUsername(request.getName());
         if (users.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
@@ -41,8 +41,10 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
                 .setId(user.getId())
                 .setUsername(user.getUsername())
                 .setEmail(user.getEmail())
+                .setName(user.getName())
                 .setPassword(user.getPassword())
                 .setRole(user.getRole())
+                .setSecurityLevel(user.getSecurity_level())
                 .build();
         responseObserver.onNext(userModel);
         responseObserver.onCompleted();    }
@@ -51,14 +53,16 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     public void createNewUser(UserModel request, StreamObserver<UserModel> responseObserver) {
-        User user = new User(request.getUsername(), request.getEmail(), request.getPassword(), request.getRole(),request.getSecurityLevel());
+        User user = new User(request.getUsername(), request.getEmail(),request.getName(), request.getPassword(), request.getRole(),request.getSecurityLevel());
         User userFromDb = userRepository.save(user);
         UserModel userModel = UserModel.newBuilder()
                 .setId(userFromDb.getId())
                 .setUsername(user.getUsername())
                 .setEmail(user.getEmail())
+                .setName(user.getName())
                 .setPassword(user.getPassword())
                 .setRole(user.getRole())
+                .setSecurityLevel(user.getSecurity_level())
                 .build();
         responseObserver.onNext(userModel);
         responseObserver.onCompleted();
@@ -80,13 +84,15 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
         }
         else
         {
-            User user1 = user.get();
+            User userFound = user.get();
             UserModel userModel = UserModel.newBuilder()
-                    .setId(user1.getId())
-                    .setUsername(user1.getUsername())
-                    .setPassword(user1.getPassword())
-                    .setRole(user1.getRole())
-                    .setEmail(user1.getEmail())
+                    .setId(userFound.getId())
+                    .setUsername(userFound.getUsername())
+                    .setName(userFound.getName())
+                    .setPassword(userFound.getPassword())
+                    .setRole(userFound.getRole())
+                    .setEmail(userFound.getEmail())
+                    .setSecurityLevel(userFound.getSecurity_level())
                     .build();
             responseObserver.onNext(userModel);
             responseObserver.onCompleted();
