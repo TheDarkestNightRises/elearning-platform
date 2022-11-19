@@ -30,6 +30,16 @@ public class Question {
     private Course course;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
+
+    public Question(String body, String title, String url) {
+        this.body = body;
+        this.title = title;
+        this.url = url;
+    }
+
+    public Question() {
+
+    }
 }
