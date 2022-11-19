@@ -32,26 +32,26 @@ public class User {
     @Column(name = "role",nullable = false)
     private String role;
 
-    @Column(name = "user_photo")
-    private String user_photo;
+    @Column(name = "security_level",nullable = false)
+    private String security_level;
+//
+//    @Column(name = "user_photo")
+//    private String user_photo;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "country_id")
+//    private Country country;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "university_id") /// Nullable??
+//    private University university;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id")
-    private Country country;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "university_id") /// Nullable??
-    private University university;
-
-
-    public User(String username, String email, String password, String role) {
+    public User(String username, String email, String password, String role, String security_level) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.user_photo = user_photo;
+        this.security_level = security_level;
     }
-
-
-
 }

@@ -16,6 +16,7 @@ message UserModel {
   string email = 3;
   string password =4;
   string role = 5;
+  string securityLevel = 6;
 }
 
 message UserId{
