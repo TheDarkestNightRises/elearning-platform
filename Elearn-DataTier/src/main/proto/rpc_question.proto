@@ -1,0 +1,30 @@
+syntax = "proto3";
+//TODO: create,get by url,mark right answer,getallquestion
+
+option java_multiple_files = true;
+option java_package = "via.dk.elearn.protobuf";
+
+service QuestionService {
+  rpc GetQuestion (QuestionUrl) returns (QuestionModel);
+  rpc GetAllQuestion (NewQuestionRequest) returns (stream QuestionModel);
+  rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
+}
+
+
+message NewQuestionRequest {
+
+}
+
+
+message QuestionUrl {
+  string url = 1;
+}
+
+message QuestionModel {
+  int64 id = 1;
+  string title = 2;
+  string body = 3;
+  string url = 4;
+  string dateCreated = 5;
+  int64 correctAnswer = 6;
+}

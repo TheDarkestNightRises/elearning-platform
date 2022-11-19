@@ -10,7 +10,7 @@ namespace Elearn.GrpcService.Client;
 
 public class PostGrpcClient : IPostService
 {
-    private ElearnGrpc.PostService.PostServiceClient _postClient;
+    private PostService.PostServiceClient _postClient;
 
     public PostGrpcClient()
     {

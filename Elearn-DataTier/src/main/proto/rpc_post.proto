@@ -29,7 +29,6 @@ message PostModel {
   string title = 3;
   string url = 4;
   string image = 5;
-  Date dateCreated = 6;
 }
 
 message Date {

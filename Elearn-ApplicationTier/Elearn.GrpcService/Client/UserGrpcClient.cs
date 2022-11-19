@@ -1,27 +1,40 @@
 ﻿using Elearn.Application.ServiceContracts;
+using Elearn.GrpcService.Extensions;
 using Elearn.Shared.Models;
+using ElearnGrpc;
+using Grpc.Core;
 using Grpc.Net.Client;
 
 namespace Elearn.GrpcService.Client;
 
 public class UserGrpcClient : IUserService
 {
-    private GrpcChannel _grpcChannel;
-    
-    
-    public Task<User?> GetUserByNameAsync(string name)
-    {
-        throw new NotImplementedException();
+    private UserService.UserServiceClient _userClient;
 
+    public UserGrpcClient()
+    {
+        var _grpcChannel =
+            new Channel("localhost:8843", ChannelCredentials.Insecure);
+        _userClient = new UserService.UserServiceClient(_grpcChannel);
+    }
+    public async Task<User?> GetUserByNameAsync(string name)
+    {
+        var userRequested = new UserName { Name = name };
+        var userFromGrpc = await _userClient.GetUserByNameAsync(userRequested);
+        return userFromGrpc.AsBase();
     }
 
-    public Task<User> CreateNewUserAsync(User user)
+    public async Task<User> CreateNewUserAsync(User user)
     {
-        throw new NotImplementedException();
+        var userModel = user.AsGrpcModel();
+        var createdPostFromGrpc = await _userClient.CreateNewUserAsync(userModel);
+        return createdPostFromGrpc.AsBase();
     }
 
-    public Task<User?> GetUserByIdAsync(int id)
+    public async Task<User?> GetUserByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var userRequested = new UserId { Id = id };
+        var userFromGrpc = await _userClient.GetUserByIDAsync(userRequested);
+        return userFromGrpc.AsBase();
     }
 }
