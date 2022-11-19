@@ -6,7 +6,7 @@ public class User
     public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } //THE NAME IS MISSING
     public string Role { get; set; }
     public int SecurityLevel { get; set; }
     public User(string username, string password, string email, string name, string role, int securityLevel)
@@ -24,6 +24,6 @@ public class User
     
     public override string ToString()
     {
-        return $"{Id} {Name}";
+        return $"{Id} {Name} ";
     }
 }

@@ -27,8 +27,8 @@ public class UserGrpcClient : IUserService
     public async Task<User> CreateNewUserAsync(User user)
     {
         var userModel = user.AsGrpcModel();
-        var createdPostFromGrpc = await _userClient.CreateNewUserAsync(userModel);
-        return createdPostFromGrpc.AsBase();
+        var createdUserFromGrpc = await _userClient.CreateNewUserAsync(userModel);
+        return createdUserFromGrpc.AsBase();
     }
 
     public async Task<User?> GetUserByIdAsync(int id)
