@@ -10,5 +10,4 @@ public interface IQuestionService
 
     Task<Question> CreateNewQuestionAsync(Question question);
 
-    Task<Question?> GetQuestionByIdAsync(int id);
 }
