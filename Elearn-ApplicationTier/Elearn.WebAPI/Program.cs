@@ -3,6 +3,7 @@ using Elearn.Application.Logic;
 using Elearn.Application.LogicInterfaces;
 using Elearn.Application.ServiceContracts;
 using Elearn.GrpcService.Client;
+using Elearn.Shared.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.IdentityModel.Tokens;
@@ -21,12 +22,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IPostService, PostGrpcClient>();
 builder.Services.AddScoped<ICommentService, CommentGrpcClient>();
 builder.Services.AddScoped<IUserService, UserGrpcClient>();
+builder.Services.AddScoped<IQuestionService, QuestionGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<IPostLogic, PostLogic>();
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
+builder.Services.AddScoped<IQuestionLogic,QuestionLogic>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();
 builder.Services.AddGrpcClient<PostGrpcClient>();
 builder.Services.AddGrpcClient<UserGrpcClient>();
+builder.Services.AddGrpcClient<QuestionGrpcClient>();
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -42,7 +46,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
-builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 AuthorizationPolicies.AddPolicies(builder.Services);
 
 
@@ -68,6 +71,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapGrpcService<CommentGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<PostGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<UserGrpcClient>().EnableGrpcWeb();
+    endpoints.MapGrpcService<QuestionGrpcClient>().EnableGrpcWeb();
 
 });
 app.UseHttpsRedirection();
