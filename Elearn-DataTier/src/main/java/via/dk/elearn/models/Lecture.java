@@ -38,20 +38,21 @@ public class Lecture {
     private Course course;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
 
 
-    public Lecture(String title, String description, String url,String image) {
-        this.title = title;
-        this.description = description;
-        this.url = url;
-        this.body = body;
-        this.image = image;
-    }
+
 
     public Lecture() {
 
+    }
+
+    public Lecture(String title, String url, String image, String body) {
+        this.title = title;
+        this.url = url;
+        this.image = image;
+        this.body = body;
     }
 }
