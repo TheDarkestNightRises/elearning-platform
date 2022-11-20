@@ -1,9 +1,8 @@
 syntax = "proto3"; // Use the latest proto syntax
 
 
-option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
-option java_multiple_files = true;
-option java_package = "via.dk.elearn.protobuf";
+option csharp_namespace = "ElearnGrpc"; 
+
 
 service CommentService {
 
@@ -17,31 +16,6 @@ message NewCommentRequest {
 message CommentModel {
   int64 id = 1;
   string body = 2;
-  Date date = 3;
 }
 
-message Date {
-  int32 year = 1;
-  int32 month = 2;
-  int32 day = 3;
-  int32 hour = 4;
-  int32 minute = 5;
-  int32 second = 6;
-}
-message UserModel {
-  int64 id = 1;
-  string username = 2;
-  string email = 3;
-  string password =4;
-  string firstName = 5;
-  string lastName = 6;
-  string role = 7;
-}
-message LectureModel {
-  int64 id = 1;
-  string body = 2;
-  string title = 3;
-  string url = 4;
-  string image = 5;
-  Date dateCreated = 6;
-}
+

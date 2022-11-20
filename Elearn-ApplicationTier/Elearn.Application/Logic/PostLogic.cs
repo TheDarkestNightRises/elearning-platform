@@ -23,7 +23,11 @@ public class PostLogic : IPostLogic
         //TODO: validate unique url
         //ValidateCreationDto(dto);
         User user = await _userService.GetUserByNameAsync(dto.Username);
-        Post post = new Post(dto.Title, dto.Body, dto.Url, dto.Image, user);
+        if (user is null)
+        {
+            throw new Exception("User not found in database");
+        }
+        Post post = new Post(dto.Title, dto.Body, dto.Url, dto.Image,user);
         Post created = await _postService.CreateNewPostAsync(post);
         //PostDto createdDto = new PostDto(created.PostId, created.Title, created.Body, created.Url, created.Image, created.Author, created.DateCreated);
         
