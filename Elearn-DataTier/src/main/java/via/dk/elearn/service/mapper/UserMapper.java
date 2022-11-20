@@ -16,4 +16,16 @@ public class UserMapper {
                 .build();
     }
 
+    public static User convertGrpcModelToUser(UserModel userModel) {
+        return User.builder()
+                .username(userModel.getUsername())
+                .email(userModel.getEmail())
+                .name(userModel.getName())
+                .password(userModel.getPassword())
+                .role(userModel.getRole())
+                .security_level(userModel.getSecurityLevel())
+                .build();
+    }
+
+
 }

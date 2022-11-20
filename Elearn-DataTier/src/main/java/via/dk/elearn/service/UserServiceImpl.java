@@ -46,7 +46,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     public void createNewUser(UserModel request, StreamObserver<UserModel> responseObserver) {
-        User user = new User(request.getUsername(), request.getEmail(),request.getName(), request.getPassword(), request.getRole(),request.getSecurityLevel());
+        User user = UserMapper.convertGrpcModelToUser(request);
         User userFromDb = userRepository.save(user);
         UserModel userModel = UserMapper.convertUserToGrpcModel(userFromDb);
         responseObserver.onNext(userModel);
