@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import via.dk.elearn.models.Lecture;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.LectureRepository;
+import via.dk.elearn.service.mapper.LectureMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,12 +39,7 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
             return;
         }
         Lecture lecture = lectures.get(0);
-        PostModel postModel = PostModel.newBuilder()
-                .setId(lecture.getId())
-                .setBody(lecture.getBody())
-                .setTitle(lecture.getTitle())
-                .setUrl(lecture.getUrl())
-                .build();
+        PostModel postModel = LectureMapper.convertLectureToGrpcModel(lecture);
         responseObserver.onNext(postModel);
         responseObserver.onCompleted();
     }
@@ -63,12 +59,7 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
             return;
         }
         for(Lecture lecture : lectures) {
-            PostModel postModel = PostModel.newBuilder()
-                    .setId(lecture.getId())
-                    .setBody(lecture.getBody())
-                    .setTitle(lecture.getTitle())
-                    .setUrl(lecture.getUrl())
-                    .build();
+            PostModel postModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(postModel);
         }
         responseObserver.onCompleted();
@@ -78,13 +69,7 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
     public void createNewPost(PostModel request, StreamObserver<PostModel> responseObserver) {
         Lecture lecture = new Lecture(request.getTitle(), request.getUrl(), request.getImage(),request.getBody());
         Lecture lectureFromDb = lectureRepository.save(lecture);
-        PostModel postModel = PostModel.newBuilder()
-                .setId(lectureFromDb.getId())
-                .setBody(lectureFromDb.getBody())
-                .setTitle(lectureFromDb.getTitle())
-                .setImage(lectureFromDb.getImage())
-                .setUrl(lectureFromDb.getUrl())
-                .build();
+        PostModel postModel = LectureMapper.convertLectureToGrpcModel(lectureFromDb);
         responseObserver.onNext(postModel);
         responseObserver.onCompleted();
     }
@@ -104,13 +89,7 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
         }
         else {
             Lecture lecture = lectures.get();
-            PostModel postModel = PostModel.newBuilder()
-                    .setId(lecture.getId())
-                    .setBody(lecture.getBody())
-                    .setTitle(lecture.getTitle())
-                    .setImage(lecture.getImage())
-                    .setUrl(lecture.getUrl())
-                    .build();
+            PostModel postModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(postModel);
             responseObserver.onCompleted();
         }

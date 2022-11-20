@@ -1,5 +1,6 @@
 package via.dk.elearn.models;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
+@Builder
 @NoArgsConstructor
 public class User {
     @Id
@@ -49,6 +51,15 @@ public class User {
 //    @JoinColumn(name = "university_id") /// Nullable??
 //    private University university;
 
+    public User(Long id, String username, String email, String name, String password, String role, int security_level) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+        this.security_level = security_level;
+    }
 
     public User(String username, String email, String name, String password, String role, int security_level) {
         this.username = username;
@@ -58,4 +69,6 @@ public class User {
         this.role = role;
         this.security_level = security_level;
     }
+
+
 }

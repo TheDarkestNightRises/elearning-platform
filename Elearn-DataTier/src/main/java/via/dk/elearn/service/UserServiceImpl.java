@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import via.dk.elearn.models.User;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.UserRepository;
+import via.dk.elearn.service.mapper.UserMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,15 +38,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
             return;
         }
         User user = users.get(0);
-        UserModel userModel = UserModel.newBuilder()
-                .setId(user.getId())
-                .setUsername(user.getUsername())
-                .setEmail(user.getEmail())
-                .setName(user.getName())
-                .setPassword(user.getPassword())
-                .setRole(user.getRole())
-                .setSecurityLevel(user.getSecurity_level())
-                .build();
+        UserModel userModel = UserMapper.convertUserToGrpcModel(user);
         responseObserver.onNext(userModel);
         responseObserver.onCompleted();    }
 
@@ -53,17 +46,9 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     public void createNewUser(UserModel request, StreamObserver<UserModel> responseObserver) {
-        User user = new User(request.getUsername(), request.getEmail(),request.getName(), request.getPassword(), request.getRole(),request.getSecurityLevel());
+        User user = UserMapper.convertGrpcModelToUser(request);
         User userFromDb = userRepository.save(user);
-        UserModel userModel = UserModel.newBuilder()
-                .setId(userFromDb.getId())
-                .setUsername(user.getUsername())
-                .setEmail(user.getEmail())
-                .setName(user.getName())
-                .setPassword(user.getPassword())
-                .setRole(user.getRole())
-                .setSecurityLevel(user.getSecurity_level())
-                .build();
+        UserModel userModel = UserMapper.convertUserToGrpcModel(userFromDb);
         responseObserver.onNext(userModel);
         responseObserver.onCompleted();
     }
@@ -85,15 +70,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
         else
         {
             User userFound = user.get();
-            UserModel userModel = UserModel.newBuilder()
-                    .setId(userFound.getId())
-                    .setUsername(userFound.getUsername())
-                    .setName(userFound.getName())
-                    .setPassword(userFound.getPassword())
-                    .setRole(userFound.getRole())
-                    .setEmail(userFound.getEmail())
-                    .setSecurityLevel(userFound.getSecurity_level())
-                    .build();
+            UserModel userModel = UserMapper.convertUserToGrpcModel(userFound);
             responseObserver.onNext(userModel);
             responseObserver.onCompleted();
         }
