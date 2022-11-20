@@ -15,7 +15,7 @@ public static class GrpcPostExtension
             Url = post.Url,
             Image = post.Image,
             Title = post.Title,
-            Body = post.Body
+            Body = post.Body,
         };
     }
 

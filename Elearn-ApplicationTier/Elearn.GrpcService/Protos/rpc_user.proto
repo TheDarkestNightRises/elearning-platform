@@ -1,8 +1,6 @@
 ﻿syntax = "proto3"; // Use the latest proto syntax
 
-option java_multiple_files = true;
-option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
-option java_package = "via.dk.elearn.protobuf";
+option csharp_namespace = "ElearnGrpc";
 
 service UserService {
   rpc GetUserByName (UserName) returns (UserModel);
