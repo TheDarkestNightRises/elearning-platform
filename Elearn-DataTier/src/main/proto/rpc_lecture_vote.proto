@@ -1,0 +1,29 @@
+syntax = "proto3"; // Use the latest proto syntax
+
+option java_multiple_files = true;
+option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
+option java_package = "via.dk.elearn.protobuf";
+
+import "rpc_post.proto";
+import "rpc_user.proto";
+
+service LectureVoteService {
+  rpc VoteLecture (VoteModel) returns (VoteModel);
+  rpc GetLectureVotesCount(PostId) returns (VoteCounter);
+  rpc GetVote(VoteId) returns (VoteModel);
+}
+message VoteModel{
+  UserModel user = 1;
+  PostModel post = 2;
+  bool upvote = 3;
+}
+
+message VoteCounter{
+  PostModel post = 1;
+  int32 upvoteCount = 2;
+  int32 downvoteCount = 3;
+}
+message VoteId{
+  UserModel user = 1;
+  PostModel post = 2;
+}
