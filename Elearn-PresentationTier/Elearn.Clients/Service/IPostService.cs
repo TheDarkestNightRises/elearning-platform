@@ -10,4 +10,5 @@ public interface IPostService
     Task<PostDto> CreateAsync(PostCreationDto dto);
     Task<List<Post>> GetPostsAsync();
     Task<Post?> GetPostByUrlAsync(string url);
+    Task<Post?> GetAllPostsByUsername(string? username);
 }

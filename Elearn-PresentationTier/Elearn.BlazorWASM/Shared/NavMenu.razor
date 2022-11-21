@@ -5,7 +5,9 @@
     <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
     <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
     <MudSpacer/>
-    <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToLogin"/>
+    <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GotoProfile"/>
+        <MudButton Variant="Variant.Text" OnClick="GotoProfile">Profile </MudButton>
+    <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="GoToLogin"/>
     <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
     <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
     <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
@@ -31,6 +33,11 @@
     private void GoHome()
     {
         navMgr.NavigateTo("/");
+    }
+
+    private void GotoProfile()
+    {
+        navMgr.NavigateTo("/Profile");
     }
 
 }

@@ -9,6 +9,8 @@ public class User
     public string Name { get; set; }
     public string Role { get; set; }
     public int SecurityLevel { get; set; }
+   
+
     public User(string username, string password, string email, string name, string role, int securityLevel)
     {
         Username = username;

@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Elearn.Shared\Elearn.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MudBlazor" Version="6.0.18" />
+    </ItemGroup>
+
 </Project>

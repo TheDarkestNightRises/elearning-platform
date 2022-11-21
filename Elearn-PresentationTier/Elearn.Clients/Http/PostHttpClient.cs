@@ -47,4 +47,18 @@ public class PostHttpClient : IPostService
         }
         return await response.Content.ReadFromJsonAsync<Post>();
     }
+
+    public async Task<Post?> GetAllPostsByUsername(string? username)
+    {
+        HttpResponseMessage response = await client.GetAsync( $"/allPosts/{username}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+        return await response.Content.ReadFromJsonAsync<Post>();
+    }
+
+
+ 
 }

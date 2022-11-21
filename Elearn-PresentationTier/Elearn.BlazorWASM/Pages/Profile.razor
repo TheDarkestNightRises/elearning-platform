@@ -1,0 +1,133 @@
+﻿@page "/Profile"
+@using Elearn.Shared.Models
+@using Microsoft.AspNetCore.Components
+@using Elearn.Shared.Dtos
+@using Elearn.HttpClients.Service
+@inject IPostService _postService 
+@inject IAuthService _userService;
+
+<div class="container emp-profile">
+<form method="post">
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+            <AuthorizeView>
+                <Authorized>
+                    @if (context.User.Identity!.Name!.Equals(User.Username)) {
+                        <div class="col-md-2">
+                            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        </div>
+                    }
+                </Authorized>
+            </AuthorizeView>
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>User name </label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>@User.Username</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>@User.Name</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>@User.Email</p>
+                    </div>
+                </div>
+                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Role</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@User.Role</p>
+                                    </div>
+                                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Total active posts :</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p> @_totalNumberOfPosts</p>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+            <br/>
+
+            <hr/>
+            <br/>
+            <br/>
+            <div class="allPosts">
+                @if (_postsToShow == null) {
+                    <LoadingComponent message=" posts. Please wait.."></LoadingComponent>
+                }
+                else {
+                    <PostList postToShow="_postsToShow"/>
+                }
+
+            </div>
+        </div>
+    </form>
+</div>
+@if (!(string.IsNullOrEmpty(_errorLabel))) {
+    <Modal>
+        <p> @_errorLabel</p>
+        <button @onclick="Proceed"> Okay</button>
+    </Modal>
+}
+
+
+
+@code {
+    [Parameter]
+    public UserDto User { get; set; }
+
+    private Post? _postsToShow;
+    private int _totalNumberOfPosts;
+    private string? _errorLabel;
+    private bool _showBlockModal;
+
+    private Block _block;
+    private object _navigationManager;
+
+
+    protected override async Task OnInitializedAsync() {
+        try {
+            await GetAllPostsByUsername();
+        }
+        catch (Exception e) {
+            _errorLabel = e.Message;
+            Console.WriteLine(e.Message);
+        }
+    }
+
+
+  
+
+    private async Task GetAllPostsByUsername() {
+        _postsToShow = await _postService.GetAllPostsByUsername(User.Username);
+    }
+
+    private void Proceed() {
+        _errorLabel = string.Empty;
+    }
+
+
+
+}
