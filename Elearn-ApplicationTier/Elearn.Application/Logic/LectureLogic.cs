@@ -17,37 +17,35 @@ public class LectureLogic : ILectureLogic
         _userService = userService;
     }
 
-    public async Task<Post> CreateAsync(PostCreationDto dto)
+    public async Task<Lecture> CreateAsync(Lecture lecture)
     {
         //TODO: validate user when login part done
         //TODO: validate unique url
         //ValidateCreationDto(dto);
-        User user = await _userService.GetUserByNameAsync(dto.Username);
+        User? user = await _userService.GetUserByNameAsync(lecture.Author.Username);
         if (user is null)
         {
             throw new Exception("User not found in database");
         }
-        Post post = new Post(dto.Title, dto.Body, dto.Url, dto.Image,user);
-        Post created = await _postService.CreateNewPostAsync(post);
-        //PostDto createdDto = new PostDto(created.PostId, created.Title, created.Body, created.Url, created.Image, created.Author, created.DateCreated);
-        
+        Lecture lectureAppended = new Lecture(lecture.Title, lecture.Body, lecture.Url, lecture.Image,user);
+        Lecture created = await _postService.CreateNewPostAsync(lectureAppended);
         return created;
     }
 
-    public async Task<List<Post>> GetAllPostsAsync()
+    public async Task<List<Lecture>> GetAllLecturesAsync()
     {
         return await _postService.GetAllPostsAsync();
     }
 
-    public async Task<Post?> GetPostAsync(string url)
+    public async Task<Lecture?> GetLectureAsync(string url)
     {
         return await _postService.GetPostAsync(url);
     }
 
-    private void ValidateCreationDto(PostCreationDto dto)
+    private void ValidateCreation(Lecture lecture)
     {
-        if (string.IsNullOrEmpty(dto.Title)) throw new Exception("Title cannot be empty.");
-        if (string.IsNullOrEmpty(dto.Body)) throw new Exception("Post body cannot be empty.");
-        if (string.IsNullOrEmpty(dto.Url)) throw new Exception("Url cannot be empty.");
+        if (string.IsNullOrEmpty(lecture.Title)) throw new Exception("Title cannot be empty.");
+        if (string.IsNullOrEmpty(lecture.Body)) throw new Exception("Post body cannot be empty.");
+        if (string.IsNullOrEmpty(lecture.Url)) throw new Exception("Url cannot be empty.");
     }
 }

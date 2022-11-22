@@ -22,7 +22,8 @@ public class LecturesController : ControllerBase
     {
         try
         {
-            Lecture created = await _lectureLogic.CreateAsync(dto);
+            Lecture lecture = dto.AsBaseFromCreation();
+            Lecture created = await _lectureLogic.CreateAsync(lecture);
             LectureDto createdDto = created.AsDto();
             return Created($"/lectures/{createdDto.Url}", createdDto);// ???
         }

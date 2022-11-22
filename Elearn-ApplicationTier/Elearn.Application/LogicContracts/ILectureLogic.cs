@@ -5,7 +5,7 @@ namespace Elearn.Application.LogicInterfaces;
 
 public interface ILectureLogic
 {
-    Task<Lecture> CreateAsync(LectureCreationDto post);
+    Task<Lecture> CreateAsync(Lecture lecture);
     Task<List<Lecture>> GetAllLecturesAsync();
     Task<Lecture?> GetLectureAsync(string url);
 }
