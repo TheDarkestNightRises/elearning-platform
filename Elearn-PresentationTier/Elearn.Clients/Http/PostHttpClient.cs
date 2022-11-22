@@ -5,7 +5,7 @@ using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
 
-namespace Elearn.HttpClients.Http;
+namespace Elearn.Clients.Http;
 
 public class PostHttpClient : IPostService
 {
