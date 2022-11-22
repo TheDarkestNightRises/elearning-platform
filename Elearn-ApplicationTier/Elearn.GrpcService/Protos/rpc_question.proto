@@ -1,9 +1,7 @@
 syntax = "proto3";
-//TODO: create,get by url,mark right answer,getallquestion
 
 option csharp_namespace = "ElearnGrpc";
-option java_multiple_files = true;
-option java_package = "via.dk.elearn.protobuf";
+
 
 service QuestionService {
   rpc GetQuestion (QuestionUrl) returns (QuestionModel);

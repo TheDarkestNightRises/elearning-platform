@@ -43,6 +43,9 @@ public class PostGrpcClient : IPostService
     public async Task<Post> CreateNewPostAsync(Post post)
     {
         var postModel = post.AsGrpcModel();
+        //Append user to post
+        var userModel = post.Author.AsGrpcModel();
+        postModel.User = userModel;
         var createdPostFromGrpc = await _postClient.CreateNewPostAsync(postModel);
         return createdPostFromGrpc.AsBase();
     }

@@ -1,5 +1,7 @@
 syntax = "proto3"; // Use the latest proto syntax
 
+import "rpc_user.proto";
+import "rpc_date.proto";
 
 option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
 option java_multiple_files = true;
@@ -29,13 +31,7 @@ message PostModel {
   string title = 3;
   string url = 4;
   string image = 5;
+  UserModel user = 6;
+  DateModel date = 7;
 }
 
-message Date {
-  int32 year = 1;
-  int32 month = 2;
-  int32 day = 3;
-  int32 hour = 4;
-  int32 minute = 5;
-  int32 second = 6;
-}
