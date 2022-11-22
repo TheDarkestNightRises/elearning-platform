@@ -15,4 +15,14 @@ public class LectureMapper {
                 .setUrl(lecture.getUrl())
                 .build();
     }
+    public static Lecture convertGrpcModelToLecture(PostModel postModel)
+    {
+        return Lecture.builder()
+                .id(postModel.getId())
+                .title(postModel.getTitle())
+                .body(postModel.getBody())
+                .image(postModel.getImage())
+                .url(postModel.getUrl())
+                .build();
+    }
 }

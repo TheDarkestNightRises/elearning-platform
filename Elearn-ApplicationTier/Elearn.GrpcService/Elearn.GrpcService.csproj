@@ -28,6 +28,7 @@
         <Protobuf Include="Protos\rpc_question.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <Protobuf Include="Protos\rpc_date.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <Protobuf Include="Protos\rpc_comment.proto" GrpcServices="Client" ProtoRoot="Protos\" />
+        <Protobuf Include="Protos\rpc_lecture_vote.proto" GrpcServices="Client" ProtoRoot="Protos\" />
     </ItemGroup>
 
 </Project>
