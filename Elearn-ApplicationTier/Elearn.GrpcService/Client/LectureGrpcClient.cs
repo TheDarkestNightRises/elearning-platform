@@ -8,11 +8,11 @@ using Grpc.Net.Client.Web;
 
 namespace Elearn.GrpcService.Client;
 
-public class PostGrpcClient : IPostService
+public class LectureGrpcClient : ILectureService
 {
     private PostService.PostServiceClient _postClient;
 
-    public PostGrpcClient()
+    public LectureGrpcClient()
     {
         var _grpcChannel =
             new Channel("localhost:8843", ChannelCredentials.Insecure);

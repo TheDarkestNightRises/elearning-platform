@@ -8,12 +8,12 @@ namespace Elearn.Application.Logic;
 
 public class LectureLogic : ILectureLogic
 {
-    private readonly IPostService _postService;
+    private readonly ILectureService _lectureService;
     private readonly IUserService _userService;
 
-    public LectureLogic(IPostService postService, IUserService userService)
+    public LectureLogic(ILectureService lectureService, IUserService userService)
     {
-        _postService = postService;
+        _lectureService = lectureService;
         _userService = userService;
     }
 
@@ -28,18 +28,18 @@ public class LectureLogic : ILectureLogic
             throw new Exception("User not found in database");
         }
         Lecture lectureAppended = new Lecture(lecture.Title, lecture.Body, lecture.Url, lecture.Image,user);
-        Lecture created = await _postService.CreateNewPostAsync(lectureAppended);
+        Lecture created = await _lectureService.CreateNewPostAsync(lectureAppended);
         return created;
     }
 
     public async Task<List<Lecture>> GetAllLecturesAsync()
     {
-        return await _postService.GetAllPostsAsync();
+        return await _lectureService.GetAllPostsAsync();
     }
 
     public async Task<Lecture?> GetLectureAsync(string url)
     {
-        return await _postService.GetPostAsync(url);
+        return await _lectureService.GetPostAsync(url);
     }
 
     private void ValidateCreation(Lecture lecture)

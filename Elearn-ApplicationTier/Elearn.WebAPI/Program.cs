@@ -19,7 +19,7 @@ AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport
 builder.Services.AddGrpc();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IPostService, PostGrpcClient>();
+builder.Services.AddScoped<ILectureService, LectureGrpcClient>();
 builder.Services.AddScoped<ICommentService, CommentGrpcClient>();
 builder.Services.AddScoped<IUserService, UserGrpcClient>();
 builder.Services.AddScoped<IQuestionService, QuestionGrpcClient>();
@@ -28,7 +28,7 @@ builder.Services.AddScoped<ILectureLogic, LectureLogic>();
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 builder.Services.AddScoped<IQuestionLogic,QuestionLogic>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();
-builder.Services.AddGrpcClient<PostGrpcClient>();
+builder.Services.AddGrpcClient<LectureGrpcClient>();
 builder.Services.AddGrpcClient<UserGrpcClient>();
 builder.Services.AddGrpcClient<QuestionGrpcClient>();
 
@@ -69,7 +69,7 @@ app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGrpcService<CommentGrpcClient>().EnableGrpcWeb();
-    endpoints.MapGrpcService<PostGrpcClient>().EnableGrpcWeb();
+    endpoints.MapGrpcService<LectureGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<UserGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<QuestionGrpcClient>().EnableGrpcWeb();
 
