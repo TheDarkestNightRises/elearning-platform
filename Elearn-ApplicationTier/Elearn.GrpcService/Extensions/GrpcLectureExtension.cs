@@ -1,13 +1,11 @@
 ﻿// using Elearn.Shared.Dtos;
 // using Elearn.Shared.Models;
-// using ElearnGrpc;
-// using Google.Protobuf.WellKnownTypes;
 //
 // namespace Elearn.GrpcService.Extensions;
 //
-// public static class GrpcPostExtension
+// public static class GrpcLectureExtension
 // {
-//     public static Lecutr AsGrpcModel(this Lecture lecture)
+//     public static LectureModel AsGrpcModel(this Lecture lecture)
 //     {
 //         return new PostModel
 //         {

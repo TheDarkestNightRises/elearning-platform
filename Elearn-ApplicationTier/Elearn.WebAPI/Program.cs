@@ -69,7 +69,7 @@ app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGrpcService<CommentGrpcClient>().EnableGrpcWeb();
-    endpoints.MapGrpcService<LectureGrpcClient>().EnableGrpcWeb();
+    // endpoints.MapGrpcService<LectureGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<UserGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<QuestionGrpcClient>().EnableGrpcWeb();
 
