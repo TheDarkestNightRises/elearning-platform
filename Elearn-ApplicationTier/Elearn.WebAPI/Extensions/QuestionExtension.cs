@@ -14,7 +14,6 @@ public static class QuestionExtension
             Title = question.Title,
             Body = question.Body,
             CorrectAnswerId = question.CorrectAnswerId,
-            AuthorName = question.Author.Name,
         };
     }
 

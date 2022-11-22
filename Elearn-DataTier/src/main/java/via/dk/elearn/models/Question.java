@@ -44,4 +44,18 @@ public class Question {
     public Question() {
 
     }
+
+    public String toString() {
+        return "Question: " + title + " " + body + " " + url;
+    }
+
+    public Question(Long id, String title, String description, String body, String url, Course course, User user) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.body = body;
+        this.url = url;
+        this.course = course;
+        this.user = user;
+    }
 }
