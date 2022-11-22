@@ -19,7 +19,7 @@ public class CommentLogic : ICommentLogic
 
     public async Task<Comment> CreateAsync(CommentCreationDto dto)
     { 
-        Post? post = await _lectureService.GetByIdAsync(dto.PostId);
+        Lecture? lecture = await _lectureService.GetByIdAsync(dto.PostId);
         // if (post == null)
         // {
         //     throw new Exception($"Post was not found.");
@@ -31,7 +31,7 @@ public class CommentLogic : ICommentLogic
         //     throw new Exception($"Current user was not found.");
         // }
         ValidateComment(dto);
-        Comment comment = new Comment(1,post,dto.Text);
+        Comment comment = new Comment(1,lecture,dto.Text);
         Comment created = await commentService.CreateAsync(comment);
         return created;
     }

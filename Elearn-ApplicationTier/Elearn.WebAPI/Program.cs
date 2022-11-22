@@ -19,7 +19,7 @@ AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport
 builder.Services.AddGrpc();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ILectureService, LectureGrpcClient>();
+// builder.Services.AddScoped<ILectureService, LectureGrpcClient>();
 builder.Services.AddScoped<ICommentService, CommentGrpcClient>();
 builder.Services.AddScoped<IUserService, UserGrpcClient>();
 builder.Services.AddScoped<IQuestionService, QuestionGrpcClient>();
@@ -28,7 +28,7 @@ builder.Services.AddScoped<ILectureLogic, LectureLogic>();
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 builder.Services.AddScoped<IQuestionLogic,QuestionLogic>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();
-builder.Services.AddGrpcClient<LectureGrpcClient>();
+// builder.Services.AddGrpcClient<LectureGrpcClient>();
 builder.Services.AddGrpcClient<UserGrpcClient>();
 builder.Services.AddGrpcClient<QuestionGrpcClient>();
 
