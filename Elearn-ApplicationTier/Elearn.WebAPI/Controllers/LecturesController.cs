@@ -7,24 +7,24 @@ using Shared.Extensions;
 
 namespace Elearn.WebAPI.Controllers;
 [ApiController]
-[Route("posts")]
-public class PostsController : ControllerBase
+[Route("[controller]")]
+public class LecturesController : ControllerBase
 {
-    private readonly IPostLogic postLogic;
+    private readonly ILectureLogic _lectureLogic;
 
-    public PostsController(IPostLogic postLogic)
+    public LecturesController(ILectureLogic lectureLogic)
     {
-        this.postLogic = postLogic;
+        this._lectureLogic = lectureLogic;
     }
     
     [HttpPost]
-    public async Task<ActionResult<PostDto>> CreateAsync([FromBody] PostCreationDto dto)
+    public async Task<ActionResult<LectureDto>> CreateAsync([FromBody] LectureCreationDto dto)
     {
         try
         {
-            Post created = await postLogic.CreateAsync(dto);
+            Lecture created = await _lectureLogic.CreateAsync(dto);
             PostDto createdDto = PostExtensions.AsDto(created);
-            return Created($"/posts/{createdDto.Url}", createdDto);// ???
+            return Created($"/lectures/{createdDto.Url}", createdDto);// ???
         }
         catch (Exception e)
         {
@@ -34,11 +34,11 @@ public class PostsController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<List<Post>>> GetAllPostsAsync()
+    public async Task<ActionResult<List<LectureDto>>> GetAllLecturesAsync()
     {
         try
         {
-            var posts = await postLogic.GetAllPostsAsync();
+            var posts = await _lectureLogic.GetAllLecturesAsync();
             return Ok(posts);
         }
         catch (Exception e)
@@ -50,16 +50,16 @@ public class PostsController : ControllerBase
     }
 
     [HttpGet("{url}")]
-    public async Task<ActionResult<Post>> GetBlogPostAsync(string url)
+    public async Task<ActionResult<LectureDto>> GetLectureAsync(string url)
     {
         try
         {
-            var post = await postLogic.GetPostAsync(url);
-            if (post is null)
+            var lecture = await _lectureLogic.GetLectureAsync(url);
+            if (lecture is null)
             {
-                return NotFound("This post does not exist");
+                return NotFound("This lecture does not exist");
             }
-            return Ok(post);
+            return Ok(lecture);
         }
         catch (Exception e)
         {

@@ -24,7 +24,7 @@ builder.Services.AddScoped<ICommentService, CommentGrpcClient>();
 builder.Services.AddScoped<IUserService, UserGrpcClient>();
 builder.Services.AddScoped<IQuestionService, QuestionGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
-builder.Services.AddScoped<IPostLogic, PostLogic>();
+builder.Services.AddScoped<ILectureLogic, LectureLogic>();
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 builder.Services.AddScoped<IQuestionLogic,QuestionLogic>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();

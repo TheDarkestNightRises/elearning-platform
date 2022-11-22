@@ -6,12 +6,12 @@ using Elearn.Shared.Models;
 
 namespace Elearn.Application.Logic;
 
-public class PostLogic : IPostLogic
+public class LectureLogic : ILectureLogic
 {
     private readonly IPostService _postService;
     private readonly IUserService _userService;
 
-    public PostLogic(IPostService postService, IUserService userService)
+    public LectureLogic(IPostService postService, IUserService userService)
     {
         _postService = postService;
         _userService = userService;
