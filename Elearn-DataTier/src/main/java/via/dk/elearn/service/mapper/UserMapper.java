@@ -18,6 +18,7 @@ public class UserMapper {
 
     public static User convertGrpcModelToUser(UserModel userModel) {
         return User.builder()
+                .id(userModel.getId())
                 .username(userModel.getUsername())
                 .email(userModel.getEmail())
                 .name(userModel.getName())

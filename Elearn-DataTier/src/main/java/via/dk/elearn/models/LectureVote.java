@@ -1,11 +1,17 @@
 package via.dk.elearn.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @IdClass(LectureVoteId.class)
 public class LectureVote {
 

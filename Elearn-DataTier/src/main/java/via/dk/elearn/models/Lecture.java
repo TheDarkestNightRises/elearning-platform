@@ -1,5 +1,7 @@
 package via.dk.elearn.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,6 +9,8 @@ import java.util.Date;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
 public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
