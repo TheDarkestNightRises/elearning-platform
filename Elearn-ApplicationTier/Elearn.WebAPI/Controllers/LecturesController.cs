@@ -23,7 +23,7 @@ public class LecturesController : ControllerBase
         try
         {
             Lecture created = await _lectureLogic.CreateAsync(dto);
-            PostDto createdDto = PostExtensions.AsDto(created);
+            LectureDto createdDto = created.AsDto();
             return Created($"/lectures/{createdDto.Url}", createdDto);// ???
         }
         catch (Exception e)
@@ -38,8 +38,8 @@ public class LecturesController : ControllerBase
     {
         try
         {
-            var posts = await _lectureLogic.GetAllLecturesAsync();
-            return Ok(posts);
+            var lectures = await _lectureLogic.GetAllLecturesAsync();
+            return Ok(lectures.AsDtos());
         }
         catch (Exception e)
         {
@@ -59,7 +59,7 @@ public class LecturesController : ControllerBase
             {
                 return NotFound("This lecture does not exist");
             }
-            return Ok(lecture);
+            return Ok(lecture.AsDto());
         }
         catch (Exception e)
         {

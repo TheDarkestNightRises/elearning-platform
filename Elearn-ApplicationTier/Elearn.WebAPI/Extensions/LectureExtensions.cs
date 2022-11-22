@@ -19,7 +19,7 @@ public static class PostExtensions
         };
     }
 
-    public static IEnumerable<LectureDto> AsDto(this IEnumerable<Lecture> lectures)
+    public static IEnumerable<LectureDto> AsDtos(this IEnumerable<Lecture> lectures)
     {
         var lecturesDtos = (from lecture in lectures 
             select new LectureDto 
