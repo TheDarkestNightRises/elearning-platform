@@ -19,9 +19,9 @@ public class LectureGrpcClient : ILectureService
         _postClient = new PostService.PostServiceClient(_grpcChannel);
     }
 
-    public async Task<List<Post>> GetAllPostsAsync()
+    public async Task<List<Lecture>> GetAllPostsAsync()
     {
-        List<Post> posts = new List<Post>();
+        List<Lecture> posts = new List<Lecture>();
         using (var call = _postClient.GetAllPost(new NewPostRequest()))
         {
             while (await call.ResponseStream.MoveNext())
@@ -33,14 +33,14 @@ public class LectureGrpcClient : ILectureService
         return posts;
     }
 
-    public async Task<Post?> GetPostAsync(string url)
+    public async Task<Lecture?> GetPostAsync(string url)
     {
         var postRequested = new PostUrl { Url = url };
         var postFromGrpc = await _postClient.GetPostAsync(postRequested);
         return postFromGrpc.AsBase();
     }
 
-    public async Task<Post> CreateNewPostAsync(Post post)
+    public async Task<Lecture> CreateNewPostAsync(Lecture lecture)
     {
         var postModel = post.AsGrpcModel();
         //Append user to post
@@ -50,7 +50,7 @@ public class LectureGrpcClient : ILectureService
         return createdPostFromGrpc.AsBase();
     }
     
-    public async Task<Post?> GetByIdAsync(int dtoPostId)
+    public async Task<Lecture?> GetByIdAsync(int id)
     {
         var postRequested = new PostId { Id = dtoPostId };
         var postFromGrpc = await _postClient.GetByIdAsync(postRequested);
