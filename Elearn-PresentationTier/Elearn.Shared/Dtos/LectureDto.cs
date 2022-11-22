@@ -2,7 +2,7 @@
 
 namespace Elearn.Shared.Dtos;
 
-public class PostDto
+public class LectureDto
 {
     public int Id { get; set; }
     public string Title{ get; set; }
@@ -12,11 +12,11 @@ public class PostDto
     public string Username{ get; set; }
     public DateTime DateCreated { get; set; }
 
-    public PostDto()
+    public LectureDto()
     {
         
     }
-    public PostDto(int id, string title, string body, string url, string image, string username, DateTime dateCreated)
+    public LectureDto(int id, string title, string body, string url, string image, string username, DateTime dateCreated)
     {
         Id = id;
         Title = title;

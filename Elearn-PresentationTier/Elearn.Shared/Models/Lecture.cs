@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 namespace Elearn.Shared.Models;
-public class Post
+public class Lecture
 {
     public int Id { get; set; }
 
@@ -16,7 +16,7 @@ public class Post
     public DateTime DateCreated { get; set; } = DateTime.Now;
     public User Author { get; set; }
 
-    public Post(string title, string body, string url, string image, User author)
+    public Lecture(string title, string body, string url, string image, User author)
     {
         Url = url;
         Image = image;
@@ -25,7 +25,7 @@ public class Post
         Author = author;
     }
 
-    public Post(int id, string title, string body, string url, string image, User author)
+    public Lecture(int id, string title, string body, string url, string image, User author)
     {
         Id = id;
         Url = url;
@@ -35,7 +35,7 @@ public class Post
         Author = author;
     }
 
-    public Post()
+    public Lecture()
     {
         
     }

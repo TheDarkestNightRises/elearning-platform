@@ -30,7 +30,7 @@
     private string? name;
     
     [Parameter]
-    public Post CurrentPost { get; set; }
+    public Lecture CurrentLecture { get; set; }
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
     private IEnumerable<Claim>? userClaims;
@@ -56,7 +56,7 @@
         
         try
         {
-            await CommentService.Create(new CommentCreationDto(1, CurrentPost.Id, bodyText));
+            await CommentService.Create(new CommentCreationDto(1, CurrentLecture.Id, bodyText));
             bodyText = "";
         }
         catch (Exception e)

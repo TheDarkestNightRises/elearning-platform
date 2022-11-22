@@ -1,5 +1,5 @@
-@page "/Create"
-@inject IPostService PostService
+@page "/create-lecture"
+@inject ILectureService LectureService
 @inject IAuthService authService
 @inject NavigationManager NavMgr 
 @using Blazored.TextEditor
@@ -15,17 +15,17 @@
     </NotAuthorized>
     <Authorized Context="Auth">
         <h3>Create a New Educational Post</h3>
-        <EditForm Model="@newPost" OnValidSubmit="CreateNewPost">
+        <EditForm Model="@_newLecture" OnValidSubmit="CreateNewPost">
             <DataAnnotationsValidator/>
             <div class="form-group">
                 <label for="title">Title</label>
-                <InputText id="title" @bind-Value="newPost.Title" class="form-control"/>
-                <ValidationMessage For="@(() => newPost.Title)"/>
+                <InputText id="title" @bind-Value="_newLecture.Title" class="form-control"/>
+                <ValidationMessage For="@(() => _newLecture.Title)"/>
             </div>
             <div class="form-group">
                 <label for="url">Url</label>
-                <InputText id="url" @bind-Value="newPost.Url" class="form-control"/>
-                <ValidationMessage For="@(() => newPost.Url)"/>
+                <InputText id="url" @bind-Value="_newLecture.Url" class="form-control"/>
+                <ValidationMessage For="@(() => _newLecture.Url)"/>
             </div>
             <div class="form-control-file">
                 <label for="image">Image</label>
@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="date">Date</label>
-                <InputDate id="date" @bind-Value="newPost.Date" class="form-control"/>
+                <InputDate id="date" @bind-Value="_newLecture.Date" class="form-control"/>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
             <div class="col-md-8">
@@ -103,7 +103,7 @@
 @code {
     private BlazoredTextEditor QuillHtml;
     private MarkupString preview;
-    private PostCreationDto newPost = new();
+    private LectureCreationDto _newLecture = new();
     
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
@@ -113,10 +113,10 @@
 
     async Task CreateNewPost()
     {
-        newPost.Body = await QuillHtml.GetHTML();
-        newPost.Username = name;
-        var createdPost = await PostService.CreateAsync(newPost);
-        NavMgr.NavigateTo($"/posts/{newPost.Url}");
+        _newLecture.Body = await QuillHtml.GetHTML();
+        _newLecture.Username = name;
+        var createdPost = await LectureService.CreateAsync(_newLecture);
+        NavMgr.NavigateTo($"/posts/{_newLecture.Url}");
     }
 
     private async Task ShowPreviewOfBody()
@@ -134,7 +134,7 @@
         var buffer = new byte[resizedImage.Size];
         await resizedImage.OpenReadStream().ReadAsync(buffer);
         var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-        newPost.Image = imageData;
+        _newLecture.Image = imageData;
     }
 
     protected override async Task OnInitializedAsync()

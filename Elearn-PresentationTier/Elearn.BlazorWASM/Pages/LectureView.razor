@@ -1,9 +1,9 @@
-@page "/posts/{url}"
+@page "/lectures/{url}"
 @using Elearn.Shared.Models
-@inject IPostService PostService
-@inject ICommentService CommentService
+@inject ILectureService LectureService
 @using Elearn.BlazorWASM.Pages.UIComponents
 @using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
 
 
 @if (currentPost == null)
@@ -20,33 +20,18 @@ else
 }
 
 <CreateComment CurrentPost="@currentPost"></CreateComment>
-<div>Comments:</div>
-@if (Comments == null)
-{
-    <span>Comments Loading...</span>
-}
-@if (Comments.Count == 0)
-{
-    <span> No comments </span>
-}
-
-@foreach (var comment in Comments)
-{
-    <CommentBody Text="@comment.Text"></CommentBody>
-}
+<Comments Url="@Url"></Comments>
 
 
 @code {
-    private Post? currentPost;
-    private List<Comment> Comments = new();
+    private LectureDto? currentPost;
 
     [Parameter]
     public String Url { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        currentPost = await PostService.GetPostByUrlAsync(Url);
-        Comments = await CommentService.GetCommentsByPostUrlAsync(Url);
+        currentPost = await LectureService.GetLectureByUrlAsync(Url);
     }
 
 }
