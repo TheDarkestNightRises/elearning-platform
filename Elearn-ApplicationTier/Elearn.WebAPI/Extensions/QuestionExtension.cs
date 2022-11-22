@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
@@ -19,14 +20,18 @@ public static class QuestionExtension
 
     public static IEnumerable<QuestionDto> AsDtos(this IEnumerable<Question> questions)
     {
+        foreach(Question question in questions)
+        {
+            Console.WriteLine(question);
+        }
+        
         var questionsResult = from question in questions
             select new QuestionDto
             {
                 Url = question.Url,
                 Title = question.Title,
                 Body = question.Body,
-                CorrectAnswerId = question.CorrectAnswerId,
-                AuthorName = question.Author.Name,
+                CreationDate = question.CreationDate,
             };
         return questionsResult;
     }

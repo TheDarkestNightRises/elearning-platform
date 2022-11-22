@@ -36,4 +36,9 @@ public class Question
     public Question()
     {
     }
+    
+    public override string ToString()
+    {
+        return $"Id: {Id}, Title: {Title}, Body: {Body}, Url: {Url}, CreationDate: {CreationDate}, CorrectAnswerId: {CorrectAnswerId}, Author: {Author}";
+    }
 }

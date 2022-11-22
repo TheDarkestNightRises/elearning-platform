@@ -10,7 +10,6 @@
         </CardHeaderContent>
     </MudCardHeader>
     <MudCardContent>
-        <MudText Typo="Typo.body2">@QuestionDto.AuthorName</MudText>
         <MudText Typo="Typo.body2">@QuestionDto.CreationDate</MudText>
     </MudCardContent>
     <MudCardActions>
@@ -26,7 +25,7 @@
 
     private void GoToUrl()
     {
-        navMgr.NavigateTo($"/posts/{QuestionDto.Url}");
+        navMgr.NavigateTo($"/questions/{QuestionDto.Url}");
     }
 
 }

@@ -11,6 +11,7 @@ import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Question;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.QuestionRepository;
+import via.dk.elearn.service.mapper.QuestionMapper;
 
 import java.util.List;
 
@@ -38,10 +39,7 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
             return;
         }
         Question question = questions.get(0);
-        QuestionModel questionModel = QuestionModel.newBuilder()
-                .setId(question.getId())
-                .setBody(question.getBody())
-                .setTitle(question.getTitle()).build();
+        QuestionModel questionModel = QuestionMapper.convertLectureToGrpcModel(question);
         responseObserver.onNext(questionModel);
         responseObserver.onCompleted();
     }
@@ -61,10 +59,7 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
             responseObserver.onCompleted();
         } else {
             for (Question question : questions) {
-                QuestionModel questionModel = QuestionModel.newBuilder()
-                        .setId(question.getId())
-                        .setBody(question.getBody())
-                        .setTitle(question.getTitle()).build();
+                QuestionModel questionModel = QuestionMapper.convertLectureToGrpcModel(question);
                 responseObserver.onNext(questionModel);
             }
             responseObserver.onCompleted();
@@ -73,14 +68,9 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
 
     @Override
     public void createNewQuestion(QuestionModel request, StreamObserver<QuestionModel> responseObserver) {
-        Question question = new Question(request.getTitle(), request.getUrl(), request.getBody());
+        Question question = QuestionMapper.convertGrpcModelToLecture(request);
         Question questionFromDB = questionRepository.save(question);
-        QuestionModel questionGrpcModel = QuestionModel.newBuilder()
-                .setId(questionFromDB.getId())
-                .setBody(questionFromDB.getBody())
-                .setTitle(questionFromDB.getTitle())
-                .setUrl(questionFromDB.getUrl())
-                .build();
+        QuestionModel questionGrpcModel = QuestionMapper.convertLectureToGrpcModel(questionFromDB);
         responseObserver.onNext(questionGrpcModel);
         responseObserver.onCompleted();
     }

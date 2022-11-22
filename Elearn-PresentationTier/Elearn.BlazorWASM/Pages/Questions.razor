@@ -25,9 +25,13 @@ else
         }
     }
 }
-
+@if (!string.IsNullOrEmpty(message))
+{
+    <MudText Text="@message" Color="Color.Error" />
+}
 
 @code {
+    private string message = "";
     private IEnumerable<QuestionDto>? _questions;
     
     protected override async Task OnInitializedAsync()

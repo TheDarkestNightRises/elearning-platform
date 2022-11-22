@@ -1,11 +1,13 @@
 package via.dk.elearn.models;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Data
+@Builder
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
