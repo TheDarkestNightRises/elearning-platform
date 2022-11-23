@@ -9,7 +9,7 @@ option csharp_namespace = "ElearnGrpc";
 service LectureService {
   rpc GetLecture (LectureUrl) returns (LectureModel);
   rpc GetAllLectures (NewLectureRequest) returns (stream LectureModel);
-  rpc CreateNewPost (LectureModel) returns (LectureModel);
+  rpc CreateNewLecture (LectureModel) returns (LectureModel);
   rpc GetLectureById (LectureId) returns (LectureModel);
 }
 

@@ -10,7 +10,7 @@ option java_package = "via.dk.elearn.protobuf";
 service LectureService {
   rpc GetLecture (LectureUrl) returns (LectureModel);
   rpc GetAllLectures (NewLectureRequest) returns (stream LectureModel);
-  rpc CreateNewPost (LectureModel) returns (LectureModel);
+  rpc CreateNewLecture (LectureModel) returns (LectureModel);
   rpc GetLectureById (LectureId) returns (LectureModel);
 }
 

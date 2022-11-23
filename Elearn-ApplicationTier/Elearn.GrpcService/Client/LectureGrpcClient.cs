@@ -46,7 +46,7 @@ public class LectureGrpcClient : ILectureService
         //Append user to post
         var userModel = lecture.Author.AsGrpcModel();
         postModel.User = userModel;
-        var createdPostFromGrpc = await _lectureClient.CreateNewPostAsync(postModel);
+        var createdPostFromGrpc = await _lectureClient.CreateNewLectureAsync(postModel);
         return createdPostFromGrpc.AsBase();
     }
     
