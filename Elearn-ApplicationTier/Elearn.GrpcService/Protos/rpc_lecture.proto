@@ -1,0 +1,36 @@
+syntax = "proto3"; // Use the latest proto syntax
+
+import "rpc_user.proto";
+import "rpc_date.proto";
+
+option csharp_namespace = "ElearnGrpc";
+
+
+service LectureService {
+  rpc GetLecture (LectureUrl) returns (LectureModel);
+  rpc GetAllLectures (NewLectureRequest) returns (stream LectureModel);
+  rpc CreateNewLecture (LectureModel) returns (LectureModel);
+  rpc GetLectureById (LectureId) returns (LectureModel);
+}
+
+message NewLectureRequest {
+}
+
+message LectureUrl {
+  string url = 1;
+}
+
+message LectureId {
+  int64 id = 1;
+}
+
+message LectureModel {
+  int64 id = 1;
+  string body = 2;
+  string title = 3;
+  string url = 4;
+  string image = 5;
+  UserModel user = 6;
+  DateModel date = 7;
+}
+

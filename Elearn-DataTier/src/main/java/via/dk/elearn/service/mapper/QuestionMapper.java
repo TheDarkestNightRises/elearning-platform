@@ -2,7 +2,7 @@ package via.dk.elearn.service.mapper;
 
 import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Question;
-import via.dk.elearn.protobuf.PostModel;
+
 import via.dk.elearn.protobuf.QuestionModel;
 
 import javax.persistence.Convert;
@@ -16,6 +16,7 @@ public class QuestionMapper {
                 .setUrl(question.getUrl())
                 .build();
     }
+
     public static Question convertGrpcModelToLecture(QuestionModel questionModel) {
         return Question.builder()
                 .body(questionModel.getBody())

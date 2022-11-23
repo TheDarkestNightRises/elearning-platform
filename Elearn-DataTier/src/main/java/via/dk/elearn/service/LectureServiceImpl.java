@@ -15,17 +15,17 @@ import java.util.List;
 import java.util.Optional;
 
 @GRpcService
-public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
+public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBase {
 
     private LectureRepository lectureRepository;
 
     @Autowired
-    public PostServiceImpl(LectureRepository lectureRepository) {
+    public LectureServiceImpl(LectureRepository lectureRepository) {
         this.lectureRepository = lectureRepository;
     }
 
     @Override
-    public void getPost(PostUrl request, StreamObserver<PostModel> responseObserver) {
+    public void getLecture(LectureUrl request, StreamObserver<LectureModel> responseObserver) {
         List<Lecture> lectures = lectureRepository.findByUrl(request.getUrl());
         if (lectures.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
@@ -39,13 +39,13 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
             return;
         }
         Lecture lecture = lectures.get(0);
-        PostModel postModel = LectureMapper.convertLectureToGrpcModel(lecture);
-        responseObserver.onNext(postModel);
+        LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
+        responseObserver.onNext(lectureModel);
         responseObserver.onCompleted();
     }
 
     @Override
-    public void getAllPost(NewPostRequest request, StreamObserver<PostModel> responseObserver) {
+    public void getAllLectures(NewLectureRequest request, StreamObserver<LectureModel> responseObserver) {
         List<Lecture> lectures = lectureRepository.findAll();
         if (lectures.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
@@ -59,23 +59,25 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
             return;
         }
         for(Lecture lecture : lectures) {
-            PostModel postModel = LectureMapper.convertLectureToGrpcModel(lecture);
-            responseObserver.onNext(postModel);
+            LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
+            responseObserver.onNext(lectureModel);
         }
         responseObserver.onCompleted();
     }
 
     @Override
-    public void createNewPost(PostModel request, StreamObserver<PostModel> responseObserver) {
+    public void createNewLecture(LectureModel request, StreamObserver<LectureModel> responseObserver) {
         Lecture lecture = new Lecture(request.getTitle(), request.getUrl(), request.getImage(),request.getBody());
         Lecture lectureFromDb = lectureRepository.save(lecture);
-        PostModel postModel = LectureMapper.convertLectureToGrpcModel(lectureFromDb);
-        responseObserver.onNext(postModel);
+        LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lectureFromDb);
+        responseObserver.onNext(lectureModel);
         responseObserver.onCompleted();
     }
 
+
+
     @Override
-    public void getById(PostId request, StreamObserver<PostModel> responseObserver) {
+    public void getLectureById(LectureId request, StreamObserver<LectureModel> responseObserver) {
         Optional<Lecture> lectures = lectureRepository.findById(request.getId());
         if (lectures.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
@@ -89,8 +91,8 @@ public class PostServiceImpl extends PostServiceGrpc.PostServiceImplBase {
         }
         else {
             Lecture lecture = lectures.get();
-            PostModel postModel = LectureMapper.convertLectureToGrpcModel(lecture);
-            responseObserver.onNext(postModel);
+            LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
+            responseObserver.onNext(lectureModel);
             responseObserver.onCompleted();
         }
     }

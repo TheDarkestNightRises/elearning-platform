@@ -3,7 +3,7 @@ using Elearn.Shared.Models;
 
 namespace Elearn.Shared.Dtos;
 
-public class PostCreationDto
+public class LectureCreationDto
 {
     public string Title{ get; set; }
     public string Body{ get; set; }
@@ -13,7 +13,7 @@ public class PostCreationDto
 
     public DateTime Date { get; set; } = DateTime.Now;
 
-    public PostCreationDto(string title, string body, string url, string image, string username)
+    public LectureCreationDto(string title, string body, string url, string image, string username)
     {
         Title = title;
         Body = body;
@@ -22,7 +22,7 @@ public class PostCreationDto
         Username = username;
     }
 
-    public PostCreationDto()
+    public LectureCreationDto()
     {
     }
 

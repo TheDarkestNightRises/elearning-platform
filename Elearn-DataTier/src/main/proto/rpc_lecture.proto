@@ -3,29 +3,29 @@ syntax = "proto3"; // Use the latest proto syntax
 import "rpc_user.proto";
 import "rpc_date.proto";
 
-option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
 option java_multiple_files = true;
 option java_package = "via.dk.elearn.protobuf";
 
-service PostService {
-  rpc GetPost (PostUrl) returns (PostModel);
-  rpc GetAllPost (NewPostRequest) returns (stream PostModel);
-  rpc CreateNewPost (PostModel) returns (PostModel);
-  rpc GetById (PostId) returns (PostModel);
+
+service LectureService {
+  rpc GetLecture (LectureUrl) returns (LectureModel);
+  rpc GetAllLectures (NewLectureRequest) returns (stream LectureModel);
+  rpc CreateNewLecture (LectureModel) returns (LectureModel);
+  rpc GetLectureById (LectureId) returns (LectureModel);
 }
 
-message NewPostRequest {
+message NewLectureRequest {
 }
 
-message PostUrl {
+message LectureUrl {
   string url = 1;
 }
 
-message PostId {
+message LectureId {
   int64 id = 1;
 }
 
-message PostModel {
+message LectureModel {
   int64 id = 1;
   string body = 2;
   string title = 3;

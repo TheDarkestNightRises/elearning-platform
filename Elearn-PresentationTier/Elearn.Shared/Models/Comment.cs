@@ -9,7 +9,7 @@ public class Comment
     //Actual user needed
     public int AuthorId{ get; set; }
     
-    public Post Post{ get; set; }
+    public Lecture Lecture{ get; set; }
     
     
     [Required, StringLength(150, ErrorMessage = "150 Characters MAX")]
@@ -17,10 +17,10 @@ public class Comment
     
     public DateTime DateCreated { get; set; } = DateTime.Now;
 
-    public Comment(int authorId, Post post, string text)
+    public Comment(int authorId, Lecture lecture, string text)
     {
         AuthorId = authorId;
-        Post = post;
+        Lecture = lecture;
         Text = text;
     }
 
@@ -30,7 +30,7 @@ public class Comment
     }
     public override string ToString()
     {
-        return $"{CommentId} {AuthorId} {Post} {Text} {DateCreated}";
+        return $"{CommentId} {AuthorId} {Lecture} {Text} {DateCreated}";
     }
     
  

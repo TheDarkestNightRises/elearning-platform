@@ -1,0 +1,31 @@
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@using Elearn.Shared.Models
+@inject ICommentService CommentService
+
+<div>Comments:</div>
+@if (_commentsDto == null)
+{
+    <span>Comments Loading...</span>
+}
+@if (_commentsDto.Count == 0)
+{
+    <span> No comments </span>
+}
+
+@foreach (var comment in _commentsDto)
+{
+    <CommentBody Text="@comment.Text"></CommentBody>
+}
+
+@code {
+    [Parameter]
+    public string Url { get; set; }
+    private List<CommentDto> _commentsDto = new();
+
+    protected override async Task OnInitializedAsync()
+    { 
+        _commentsDto = await CommentService.GetCommentsByPostUrlAsync(Url);
+    }
+
+}

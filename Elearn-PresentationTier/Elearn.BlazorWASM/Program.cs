@@ -12,7 +12,7 @@ using Shared.Auth;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
-builder.Services.AddScoped<IPostService, PostHttpClient>();
+builder.Services.AddScoped<ILectureService, LectureHttpClient>();
 builder.Services.AddScoped<ICommentService, CommentHttpClient>();
 builder.Services.AddScoped<IAuthService, JwtHttpClient>();
 builder.Services.AddScoped<IQuestionService, QuestionHttpClient>();

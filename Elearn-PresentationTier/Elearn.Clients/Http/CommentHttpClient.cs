@@ -31,9 +31,10 @@ public class CommentHttpClient : ICommentService
         return comment;
     }
 
-    public async Task<List<Comment>> GetCommentsByPostUrlAsync(string url)
+    public async Task<List<CommentDto>> GetCommentsByPostUrlAsync(string url)
     {
-        return await client.GetFromJsonAsync<List<Comment>>($"/comments/{url}");
+        //Todo: Refactor this so it fits with dtos
+        return await client.GetFromJsonAsync<List<CommentDto>>($"/comments/{url}");
     }
     
 }

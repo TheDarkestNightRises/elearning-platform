@@ -1,28 +1,29 @@
 @using Elearn.BlazorWASM
 @using Elearn.HttpClients.Service
 @using Elearn.Shared.Models
-@inject IPostService PostService
+@inject ILectureService LectureService
 @using Elearn.BlazorWASM.Pages.UIComponents
+@using Elearn.Shared.Dtos
 
 <h2>Latest educational posts<br/> Here ! </h2>
 
-@if (_posts == null)
+@if (_lectureDtos == null)
 {
     <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
 }
 else
 {
-    @if (_posts.Count == 0)
+    @if (_lectureDtos.Count == 0)
     {
-        <span> No posts </span>
+        <span> No lectures </span>
     }
     else
     {
         <MudGrid Justify="Justify.SpaceBetween">
-            @foreach (var post in _posts)
+            @foreach (var post in _lectureDtos)
             {
                 <MudItem xs="3">
-                    <PostCard Post="@post"></PostCard>
+                    <LectureCard Lecture="@post"></LectureCard>
                 </MudItem>
             }
         </MudGrid>
@@ -32,11 +33,11 @@ else
 
 @code {
 
-    private List<Post>? _posts;
+    private List<LectureDto>? _lectureDtos;
 
     protected override async Task OnInitializedAsync()
     {
-        _posts = await PostService.GetPostsAsync();
+        _lectureDtos = await LectureService.GetLecturesAsync();
     }
 
 }

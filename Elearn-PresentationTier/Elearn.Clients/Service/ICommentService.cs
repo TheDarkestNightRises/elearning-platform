@@ -8,5 +8,5 @@ public interface ICommentService
     Task<Comment> Create(CommentCreationDto dto);
 
 
-    Task<List<Comment>> GetCommentsByPostUrlAsync(string url);
+    Task<List<CommentDto>> GetCommentsByPostUrlAsync(string url);
 }
