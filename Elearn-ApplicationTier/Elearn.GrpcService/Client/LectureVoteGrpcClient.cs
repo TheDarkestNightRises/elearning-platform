@@ -22,34 +22,34 @@ public class LectureVoteGrpcClient : ILectureVoteService
     public async Task<LectureVote> CreateLectureVoteAsync(LectureVote lectureVote)
     {
         VoteModel model = new VoteModel();
-        model.Post = GrpcPostExtension.AsGrpcModel(lectureVote.Post);
+        model.Lecture = GrpcLectureExtension.AsGrpcModel(lectureVote.Lecture);
         model.User = GrpcUserExtension.AsGrpcModel(lectureVote.User);
         model.Upvote = lectureVote.Upvote;
         VoteModel createdVoteModel = await _lectureVoteGrpcClient.VoteLectureAsync(model);
         User userFromResponse = GrpcUserExtension.AsBase(createdVoteModel.User);
-        Post postFromResponse = GrpcPostExtension.AsBase(createdVoteModel.Post);
-        LectureVote createdLectureVote = new LectureVote(userFromResponse, postFromResponse, createdVoteModel.Upvote);
+        Lecture lectureFromResponse = GrpcLectureExtension.AsBase(createdVoteModel.Lecture);
+        LectureVote createdLectureVote = new LectureVote(userFromResponse, lectureFromResponse, createdVoteModel.Upvote);
         return createdLectureVote;
     }
 
-    public async Task<LectureVoteCounter> GetLectureVotesCountAsync(Post post)
+    public async Task<LectureVoteCounter> GetLectureVotesCountAsync(Lecture lecture)
     {
-        PostModel postModel = GrpcPostExtension.AsGrpcModel(post);
-        VoteCounter voteCounter = await _lectureVoteGrpcClient.GetLectureVotesCountAsync(postModel);
-        Post postFromResponse = GrpcPostExtension.AsBase(voteCounter.Post);
-        LectureVoteCounter lectureVoteCounter = new LectureVoteCounter(postFromResponse, voteCounter.UpvoteCount, voteCounter.DownvoteCount);
+        LectureModel lectureModel = GrpcLectureExtension.AsGrpcModel(lecture);
+        VoteCounter voteCounter = await _lectureVoteGrpcClient.GetLectureVotesCountAsync(lectureModel);
+        Lecture lectureFromResponse = GrpcLectureExtension.AsBase(voteCounter.Lecture);
+        LectureVoteCounter lectureVoteCounter = new LectureVoteCounter(lectureFromResponse, voteCounter.UpvoteCount, voteCounter.DownvoteCount);
         return lectureVoteCounter;
     }
 
-    public async Task<LectureVote> GetLectureVotebyIdAsync(User user, Post post)
+    public async Task<LectureVote> GetLectureVotebyIdAsync(User user, Lecture lecture)
     {
         VoteId model = new VoteId();
-        model.Post = GrpcPostExtension.AsGrpcModel(post);
+        model.Lecture = GrpcLectureExtension.AsGrpcModel(lecture);
         model.User = GrpcUserExtension.AsGrpcModel(user);
         VoteModel createdVoteModel = await _lectureVoteGrpcClient.GetVoteByIdAsync(model);
         User userFromResponse = GrpcUserExtension.AsBase(createdVoteModel.User);
-        Post postFromResponse = GrpcPostExtension.AsBase(createdVoteModel.Post);
-        LectureVote createdLectureVote = new LectureVote(userFromResponse, postFromResponse, createdVoteModel.Upvote);
+        Lecture lectureFromResponse = GrpcLectureExtension.AsBase(createdVoteModel.Lecture);
+        LectureVote createdLectureVote = new LectureVote(userFromResponse, lectureFromResponse, createdVoteModel.Upvote);
         return createdLectureVote;
     }
 }

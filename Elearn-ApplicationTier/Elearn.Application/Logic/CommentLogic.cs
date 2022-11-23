@@ -22,7 +22,7 @@ public class CommentLogic : ICommentLogic
         Lecture? lecture = await _lectureService.GetByIdAsync(dto.PostId);
         // if (post == null)
         // {
-        //     throw new Exception($"Post was not found.");
+        //     throw new Exception($"Lecture was not found.");
         // }
         //
         // User? user = await UserDao.GetByIdAsync(dto.post.authorId);

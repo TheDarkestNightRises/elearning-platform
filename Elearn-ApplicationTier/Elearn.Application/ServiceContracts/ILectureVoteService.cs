@@ -5,6 +5,6 @@ namespace Elearn.Application.ServiceContracts;
 public interface ILectureVoteService
 {
     public Task<LectureVote> CreateLectureVoteAsync(LectureVote lectureVote);
-    public Task<LectureVoteCounter> GetLectureVotesCountAsync(Post post);
-    public Task<LectureVote> GetLectureVotebyIdAsync(User user, Post post);
+    public Task<LectureVoteCounter> GetLectureVotesCountAsync(Lecture post);
+    public Task<LectureVote> GetLectureVotebyIdAsync(User user, Lecture post);
 }

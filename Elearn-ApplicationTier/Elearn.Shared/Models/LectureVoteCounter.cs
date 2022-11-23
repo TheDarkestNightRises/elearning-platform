@@ -2,13 +2,13 @@
 
 public class LectureVoteCounter
 {
-    public Post Post { set; get; }
+    public Lecture Lecture { set; get; }
     public long upvoteCount{ set; get; }
     public long downvoteCount{ set; get; }
 
-    public LectureVoteCounter(Post post, long upvoteCount, long downvoteCount)
+    public LectureVoteCounter(Lecture lecture, long upvoteCount, long downvoteCount)
     {
-        Post = post;
+        Lecture = lecture;
         this.upvoteCount = upvoteCount;
         this.downvoteCount = downvoteCount;
     }

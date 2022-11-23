@@ -15,7 +15,7 @@ public class LectureMapper {
                 .setUrl(lecture.getUrl())
                 .build();
     }
-    public static Lecture convertGrpcModelToLecture(PostModel postModel)
+    public static Lecture convertGrpcModelToLecture(LectureModel postModel)
     {
         return Lecture.builder()
                 .id(postModel.getId())

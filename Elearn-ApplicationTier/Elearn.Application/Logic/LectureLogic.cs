@@ -45,7 +45,7 @@ public class LectureLogic : ILectureLogic
     private void ValidateCreation(Lecture lecture)
     {
         if (string.IsNullOrEmpty(lecture.Title)) throw new Exception("Title cannot be empty.");
-        if (string.IsNullOrEmpty(lecture.Body)) throw new Exception("Post body cannot be empty.");
+        if (string.IsNullOrEmpty(lecture.Body)) throw new Exception("Lecture body cannot be empty.");
         if (string.IsNullOrEmpty(lecture.Url)) throw new Exception("Url cannot be empty.");
     }
 }

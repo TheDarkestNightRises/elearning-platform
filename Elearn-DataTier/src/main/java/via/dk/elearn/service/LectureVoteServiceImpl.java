@@ -68,7 +68,7 @@ public class LectureVoteServiceImpl extends LectureVoteServiceGrpc.LectureVoteSe
     }
 
     @Override
-    public void getLectureVotesCount(PostModel request, StreamObserver<VoteCounter> responseObserver) {
+    public void getLectureVotesCount(LectureModel request, StreamObserver<VoteCounter> responseObserver) {
         try
         {
             Lecture lecture = LectureMapper.convertGrpcModelToLecture(request);
