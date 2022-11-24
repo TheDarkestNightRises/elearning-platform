@@ -38,7 +38,7 @@ public class UserGrpcClient : IUserService
         return userFromGrpc.AsBase();
     }
 
-    public async Task<User> ChangePasswordAsync(User updated)
+    public async Task<User> UpdateUserAsync(User updated)
     {
         var updatedModel = updated.AsGrpcModel();
         var updatedUserFromGrpc = await _userClient.UpdateUserAsync(updatedModel);

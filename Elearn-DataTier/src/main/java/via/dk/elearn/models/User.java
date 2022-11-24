@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
+
 @Builder
 @NoArgsConstructor
 public class User {
@@ -70,5 +71,16 @@ public class User {
         this.security_level = security_level;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", security_level=" + security_level +
+                '}';
+    }
 }

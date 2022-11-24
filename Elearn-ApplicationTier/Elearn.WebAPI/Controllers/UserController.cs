@@ -1,4 +1,5 @@
 ﻿using Elearn.Application.LogicInterfaces;
+using Elearn.Shared.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elearn.WebAPI.Controllers;
@@ -14,12 +15,12 @@ public class UserController:ControllerBase
         this.userLogic = userLogic;
     }
     
-    [HttpPatch("{id:int}")]
-    public async Task<ActionResult> ChangePasswordAsync([FromBody] long id, [FromBody] string password)
+    [HttpPatch]
+    public async Task<ActionResult> UpdateUserAsync([FromBody] UpdateUserDto dto)
     {
         try
         {
-            await userLogic.ChangePasswordAsync(id,password);
+            await userLogic.UpdateUserAsync(dto);
             return Ok();
         }
         catch (Exception e)

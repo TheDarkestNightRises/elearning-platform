@@ -1,6 +1,9 @@
-﻿namespace Elearn.Application.LogicInterfaces;
+﻿using Elearn.Shared.Dtos;
+using Elearn.Shared.Models;
+
+namespace Elearn.Application.LogicInterfaces;
 
 public interface IUserLogic
 {
-    Task ChangePasswordAsync(long id, string password);
+    Task<User> UpdateUserAsync(UpdateUserDto dto);
 }
