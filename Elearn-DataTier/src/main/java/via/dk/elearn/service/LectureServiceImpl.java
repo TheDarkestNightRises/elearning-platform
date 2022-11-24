@@ -67,7 +67,7 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
 
     @Override
     public void createNewLecture(LectureModel request, StreamObserver<LectureModel> responseObserver) {
-        Lecture lecture = new Lecture(request.getTitle(), request.getUrl(), request.getImage(),request.getBody());
+        Lecture lecture = LectureMapper.convertGrpcModelToLecture(request);
         Lecture lectureFromDb = lectureRepository.save(lecture);
         LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lectureFromDb);
         responseObserver.onNext(lectureModel);

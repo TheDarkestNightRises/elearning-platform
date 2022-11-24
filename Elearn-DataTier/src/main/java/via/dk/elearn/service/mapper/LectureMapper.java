@@ -15,14 +15,15 @@ public class LectureMapper {
                 .setUrl(lecture.getUrl())
                 .build();
     }
-    public static Lecture convertGrpcModelToLecture(LectureModel postModel)
+    public static Lecture convertGrpcModelToLecture(LectureModel lectureModel)
     {
         return Lecture.builder()
-                .id(postModel.getId())
-                .title(postModel.getTitle())
-                .body(postModel.getBody())
-                .image(postModel.getImage())
-                .url(postModel.getUrl())
+                .id(lectureModel.getId())
+                .title(lectureModel.getTitle())
+                .body(lectureModel.getBody())
+                .image(lectureModel.getImage())
+                .url(lectureModel.getUrl())
+                .teacher(TeacherMapper.convertGrpcModelToTeacher(lectureModel.getTeacher()))
                 .build();
     }
 }

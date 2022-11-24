@@ -2,6 +2,7 @@ syntax = "proto3"; // Use the latest proto syntax
 
 import "rpc_user.proto";
 import "rpc_date.proto";
+import "rpc_teacher.proto";
 
 option java_multiple_files = true;
 option java_package = "via.dk.elearn.protobuf";
@@ -31,7 +32,7 @@ message LectureModel {
   string title = 3;
   string url = 4;
   string image = 5;
-  UserModel user = 6;
+  TeacherModel teacher = 6;
   DateModel date = 7;
 }
 
