@@ -54,6 +54,15 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     }
 
     @Override
+    public void updateUser(UserModel request, StreamObserver<UserModel> responseObserver) {
+        User updatedUser = UserMapper.convertGrpcModelToUser(request);
+        userRepository.save(updatedUser);
+        UserModel userModel = UserMapper.convertUserToGrpcModel(updatedUser);
+        responseObserver.onNext(userModel);
+        responseObserver.onCompleted();
+    }
+
+    @Override
     public void getUserByID(UserId request, StreamObserver<UserModel> responseObserver) {
         Optional<User> user = userRepository.findById(request.getId());
         if(user.isEmpty())

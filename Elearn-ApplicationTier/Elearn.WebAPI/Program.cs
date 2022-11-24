@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ILectureService, LectureGrpcClient>();
 builder.Services.AddScoped<ICommentService, CommentGrpcClient>();
 builder.Services.AddScoped<IUserService, UserGrpcClient>();
+builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<IQuestionService, QuestionGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<ILectureLogic, LectureLogic>();
