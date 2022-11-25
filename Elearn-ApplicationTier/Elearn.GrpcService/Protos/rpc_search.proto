@@ -1,10 +1,10 @@
 syntax = "proto3";
+
 import "rpc_lecture.proto";
 import "rpc_user.proto";
 import "rpc_question.proto";
 
 option csharp_namespace = "ElearnGrpc";
-
 
 service SearchService {
   rpc SearchLectures (SearchLecturesRequest) returns (stream LectureModel);

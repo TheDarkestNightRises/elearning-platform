@@ -5,12 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Shared.Extensions;
 
 namespace Elearn.WebAPI.Controllers;
+
 [ApiController]
 [Route("[controller]")]
 public class SearchController : ControllerBase
 {
     private readonly ISearchLogic _searchLogic;
-    
+
     public SearchController(ISearchLogic searchLogic)
     {
         _searchLogic = searchLogic;
@@ -31,8 +32,8 @@ public class SearchController : ControllerBase
         }
         
     }*/
-    
-    [ HttpGet("/question/{title}")]
+
+    [HttpGet, Route("question/{title}")]
     public async Task<ActionResult<List<QuestionDto>>> SearchQuestions(string title)
     {
         try
@@ -46,8 +47,8 @@ public class SearchController : ControllerBase
             return BadRequest(e.Message);
         }
     }
-    
-    [ HttpGet("/lecture/{title}")]
+
+    [HttpGet, Route("lecture/{title}")]
     public async Task<ActionResult<List<LectureDto>>> SearchLecture(string title)
     {
         try

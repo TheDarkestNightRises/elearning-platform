@@ -93,5 +93,6 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
             QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
             responseObserver.onNext(questionModel);
         }
+        responseObserver.onCompleted();
     }
 }
