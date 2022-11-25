@@ -19,8 +19,9 @@ public class TeacherGrpcClient : ITeacherService
     
     public async Task<Teacher?> GetTeacherByUsernameAsync(string username)
     {
-        var teacherRequested = new UserName { Name = username };
+        var teacherRequested = new UserName { Username = username };
         var teacherFromGrpc = await _userClient.getTeacherByUsernameAsync(teacherRequested);
         return teacherFromGrpc.AsBase();
     }
+
 }
