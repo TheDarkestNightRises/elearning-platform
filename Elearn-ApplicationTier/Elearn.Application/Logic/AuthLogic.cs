@@ -17,7 +17,7 @@ public class AuthLogic : IAuthLogic
 
     public async Task<User> ValidateUserAsync(string username, string password)
     {
-        User? existingUser = await _userService.GetUserByNameAsync(username);
+        User? existingUser = await _userService.GetUserByUsernameAsync(username);
         
         if (existingUser == null)
         {

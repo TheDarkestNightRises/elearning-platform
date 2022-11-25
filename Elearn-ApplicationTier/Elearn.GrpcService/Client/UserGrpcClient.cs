@@ -17,12 +17,15 @@ public class UserGrpcClient : IUserService
             new Channel("localhost:8843", ChannelCredentials.Insecure);
         _userClient = new UserService.UserServiceClient(_grpcChannel);
     }
+    
     public async Task<User?> GetUserByNameAsync(string name)
     {
-        var userRequested = new UserName { Name = name };
+        var userRequested = new Name { Name_ = name};
         var userFromGrpc = await _userClient.GetUserByNameAsync(userRequested);
         return userFromGrpc.AsBase();
     }
+
+   
 
     public async Task<User> CreateNewUserAsync(User user)
     {
@@ -43,5 +46,12 @@ public class UserGrpcClient : IUserService
         var updatedModel = updated.AsGrpcModel();
         var updatedUserFromGrpc = await _userClient.UpdateUserAsync(updatedModel);
         return updatedUserFromGrpc.AsBase();
+    }
+    
+    public async Task<User?> GetUserByUsernameAsync(string username)
+    {
+        var userRequested = new UserName {  Username = username };
+        var userFromGrpc = await _userClient.GetUserByUsernameAsync(userRequested);
+        return userFromGrpc.AsBase();
     }
 }
