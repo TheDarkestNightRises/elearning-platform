@@ -10,4 +10,5 @@ public interface ILectureService
     Task<LectureDto> CreateAsync(LectureCreationDto dto);
     Task<List<LectureDto>> GetLecturesAsync();
     Task<LectureDto?> GetLectureByUrlAsync(string url);
+    Task<LectureDto?> GetLectureByUserIdAsync(int userId);
 }

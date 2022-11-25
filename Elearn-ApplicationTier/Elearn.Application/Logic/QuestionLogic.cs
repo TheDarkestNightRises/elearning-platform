@@ -42,4 +42,9 @@ public class QuestionLogic : IQuestionLogic
         if (questions is null) throw new Exception("Questions Not Found");
         return questions;
     }
+
+    public Task<List<Question>> GetQuestionByUserIdAsync(int userId)
+    {
+        throw new NotImplementedException();
+    }
 }

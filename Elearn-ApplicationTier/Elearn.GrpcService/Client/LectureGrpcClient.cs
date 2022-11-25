@@ -58,4 +58,14 @@ public class LectureGrpcClient : ILectureService
         var lectureGrpcModel = await _lectureClient.GetLectureByIdAsync(lectureRequested);
         return lectureGrpcModel.AsBase();    
     }
+
+    public Task<List<Lecture>> GetLectureByUserIdAsync(int userId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(int userId)
+    {
+        throw new NotImplementedException();
+    }
 }

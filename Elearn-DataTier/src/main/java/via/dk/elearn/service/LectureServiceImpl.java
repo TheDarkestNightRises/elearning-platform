@@ -103,4 +103,44 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
             responseObserver.onCompleted();
         }
     }
+
+    @Override
+    public void getLectureByUserId(LectureUserId request, StreamObserver<LectureModel> responseObserver) {
+        List<Lecture> lectures = lectureRepository.getUserLecturesById(request.getUserId());
+        if (lectures.isEmpty()) {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("The lectures are not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("Lectures not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+        }
+        else {
+            Lecture lecture = lectures.get(0);
+            LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
+            responseObserver.onNext(lectureModel);
+            responseObserver.onCompleted();
+        }    }
+
+    @Override
+    public void getUpvotedLectureByUserId(LectureUserId request, StreamObserver<LectureModel> responseObserver) {
+        List<Lecture> lectures = lectureRepository.findUpvotedLecturesOfUser(request.getUserId());
+        if (lectures.isEmpty()) {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("The lecture is not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("Lecture not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+        }
+        else {
+            Lecture lecture = lectures.get(0);
+            LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
+            responseObserver.onNext(lectureModel);
+            responseObserver.onCompleted();
+        }    }
 }

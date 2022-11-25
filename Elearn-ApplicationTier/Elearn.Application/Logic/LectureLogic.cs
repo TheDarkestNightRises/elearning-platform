@@ -46,6 +46,20 @@ public class LectureLogic : ILectureLogic
         return await _lectureService.GetPostAsync(url);
     }
 
+    public async Task<List<Lecture>> GetLectureByUserIdAsync(int userId)
+    {
+        User? user = await _userService.GetUserByIdAsync(userId);
+        return await _lectureService.GetLectureByUserIdAsync(userId);
+
+    }
+
+    public async Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(int userId)
+    {
+        User? user = await _userService.GetUserByIdAsync(userId);
+        return await _lectureService.GetLectureByUserIdAsync(userId);
+
+    }
+
     private void ValidateCreation(Lecture lecture)
     {
         if (string.IsNullOrEmpty(lecture.Title)) throw new Exception("Title cannot be empty.");

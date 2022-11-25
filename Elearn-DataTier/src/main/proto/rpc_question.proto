@@ -1,4 +1,5 @@
 syntax = "proto3";
+import "rpc_user.proto";
 
 option java_multiple_files = true;
 option java_package = "via.dk.elearn.protobuf";
@@ -7,6 +8,7 @@ service QuestionService {
   rpc GetQuestion (QuestionUrl) returns (QuestionModel);
   rpc GetAllQuestion (NewQuestionRequest) returns (stream QuestionModel);
   rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
+  rpc GetQuestionsByUserId(QuestionUserId) returns (QuestionModel);
 }
 
 
@@ -14,7 +16,10 @@ message NewQuestionRequest {
 
 }
 
+message QuestionUserId{
+  UserId userId=1;
 
+}
 message QuestionUrl {
   string url = 1;
 }
