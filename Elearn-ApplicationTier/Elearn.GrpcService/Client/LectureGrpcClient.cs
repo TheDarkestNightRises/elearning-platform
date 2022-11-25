@@ -44,10 +44,12 @@ public class LectureGrpcClient : ILectureService
     {
         var postModel = lecture.AsGrpcModel();
         //Append user to post
-        var userModel = lecture.Author.AsGrpcModel();
-        postModel.User = userModel;
+        //var teacherModel = lecture.Author.AsGrpcModel();
+        //postModel.Teacher = teacherModel;
         var createdPostFromGrpc = await _lectureClient.CreateNewLectureAsync(postModel);
-        return createdPostFromGrpc.AsBase();
+        Lecture createdLecture = createdPostFromGrpc.AsBase();
+        //createdLecture.Author = createdPostFromGrpc.Teacher.AsBase();
+        return createdLecture;
     }
     
     public async Task<Lecture?> GetByIdAsync(int id)

@@ -7,9 +7,11 @@ import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.dk.elearn.models.Lecture;
+import via.dk.elearn.models.Teacher;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.LectureRepository;
 import via.dk.elearn.service.mapper.LectureMapper;
+import via.dk.elearn.service.mapper.TeacherMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -68,8 +70,13 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
     @Override
     public void createNewLecture(LectureModel request, StreamObserver<LectureModel> responseObserver) {
         Lecture lecture = LectureMapper.convertGrpcModelToLecture(request);
+        //Teacher teacher = TeacherMapper.convertGrpcModelToTeacher(request.getTeacher());
+        //lecture.setTeacher(teacher);
+
         Lecture lectureFromDb = lectureRepository.save(lecture);
+        //lectureFromDb.setTeacher(teacher);
         LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lectureFromDb);
+        //LectureModel lectureModel1 = LectureModel.newBuilder(lectureModel).setTeacher(request.getTeacher()).build();
         responseObserver.onNext(lectureModel);
         responseObserver.onCompleted();
     }

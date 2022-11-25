@@ -15,6 +15,8 @@ public static class GrpcLectureExtension
             Image = lecture.Image,
             Title = lecture.Title,
             Body = lecture.Body,
+            Teacher = GrpcTeacherExtension.AsGrpcModel(lecture.Author),
+            Date = GrpcDateExtension.AsGrpcModel(lecture.DateCreated)
         };
     }
 
@@ -26,7 +28,9 @@ public static class GrpcLectureExtension
             Url = lectureModel.Url,
             Image = lectureModel.Image,
             Title = lectureModel.Title,
-            Body = lectureModel.Body
+            Body = lectureModel.Body,
+            Author = GrpcTeacherExtension.AsBase(lectureModel.Teacher),
+            DateCreated = GrpcDateExtension.AsBase(lectureModel.Date)
         };
     }
 }
