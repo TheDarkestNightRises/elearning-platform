@@ -1,13 +1,11 @@
 package via.dk.elearn.service;
 
 import com.google.protobuf.Any;
-import com.google.rpc.Code;
 import com.google.rpc.ErrorInfo;
 import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
-import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Question;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.QuestionRepository;
@@ -39,7 +37,7 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
             return;
         }
         Question question = questions.get(0);
-        QuestionModel questionModel = QuestionMapper.convertLectureToGrpcModel(question);
+        QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
         responseObserver.onNext(questionModel);
         responseObserver.onCompleted();
     }
@@ -59,7 +57,7 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
             responseObserver.onCompleted();
         } else {
             for (Question question : questions) {
-                QuestionModel questionModel = QuestionMapper.convertLectureToGrpcModel(question);
+                QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
                 responseObserver.onNext(questionModel);
             }
             responseObserver.onCompleted();
@@ -68,9 +66,9 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
 
     @Override
     public void createNewQuestion(QuestionModel request, StreamObserver<QuestionModel> responseObserver) {
-        Question question = QuestionMapper.convertGrpcModelToLecture(request);
+        Question question = QuestionMapper.convertGrpcModelToQuestion(request);
         Question questionFromDB = questionRepository.save(question);
-        QuestionModel questionGrpcModel = QuestionMapper.convertLectureToGrpcModel(questionFromDB);
+        QuestionModel questionGrpcModel = QuestionMapper.convertQuestionToGrpcModel(questionFromDB);
         responseObserver.onNext(questionGrpcModel);
         responseObserver.onCompleted();
     }

@@ -11,4 +11,6 @@ import java.util.List;
 public interface QuestionRepository extends JpaRepository<Question,Long> {
     @Query(value = "SELECT * FROM question q WHERE q.url = :url", nativeQuery = true)
     List<Question> findByUrl(String url);
+
+    List<Question> findByTitleContaining(String title);
 }
