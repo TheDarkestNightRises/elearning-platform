@@ -75,7 +75,7 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
 
     @Override
     public void getQuestionsByUserId(QuestionUserId request, StreamObserver<QuestionModel> responseObserver) {
-        List<Question> questions = questionRepository.getQustionByUserId(request.getUserId());
+        List<Question> questions = questionRepository.getQuestionByUserId(request.getUserId());
         if (questions.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
@@ -88,7 +88,7 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
             responseObserver.onCompleted();
         } else {
             for (Question question : questions) {
-                QuestionModel questionModel = QuestionMapper.convertLectureToGrpcModel(question);
+                QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
                 responseObserver.onNext(questionModel);
             }
             responseObserver.onCompleted();

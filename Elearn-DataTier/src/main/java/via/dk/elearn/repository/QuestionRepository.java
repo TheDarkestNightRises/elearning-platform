@@ -13,4 +13,6 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
     List<Question> findByUrl(String url);
 
     List<Question> findByTitleContaining(String title);
+
+    List<Question> getQuestionByUserId(long userId);
 }
