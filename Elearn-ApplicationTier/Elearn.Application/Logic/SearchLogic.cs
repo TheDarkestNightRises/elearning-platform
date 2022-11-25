@@ -1,29 +1,45 @@
 using Elearn.Application.LogicInterfaces;
+using Elearn.Application.ServiceContracts;
 using Elearn.Shared.Models;
 
 namespace Elearn.Application.Logic;
 
 public class SearchLogic : ISearchLogic
 {
-    private ISearchLogic _searchLogic;
-    
-    public SearchLogic(ISearchLogic searchLogic)
+    private readonly ISearchService _searchService;
+
+    public SearchLogic(ISearchService searchService)
     {
-        _searchLogic = searchLogic;
-    }
-    
-    public Task<List<User>> SearchUsersAsync(string username)
-    {
-        throw new NotImplementedException();
+        _searchService = searchService;
     }
 
-    public Task<List<Lecture>> SearchLecturesAsync(string title)
+    public async Task<List<User>> SearchUsersAsync(string username)
     {
-        throw new NotImplementedException();
+        var users = await _searchService.SearchUsersAsync(username);
+        if (users.Count == 0)
+        {
+            throw new Exception("No users found");
+        }
+        return users;
     }
 
-    public Task<List<Question>> SearchQuestionsAsync(string title)
+    public async Task<List<Lecture>> SearchLecturesAsync(string title)
     {
-        throw new NotImplementedException();
+        var lectures = await _searchService.SearchLecturesAsync(title);
+        if (lectures.Count == 0)
+        {
+            throw new Exception("No lectures found");
+        }
+        return lectures;
+    }
+
+    public async Task<List<Question>> SearchQuestionsAsync(string title)
+    {
+        var questions = await _searchService.SearchQuestionsAsync(title);
+        if (questions.Count == 0)
+        {
+            throw new Exception("No questions found");
+        }
+        return questions;
     }
 }
