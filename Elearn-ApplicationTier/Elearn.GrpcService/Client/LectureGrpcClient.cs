@@ -64,6 +64,20 @@ public class LectureGrpcClient : ILectureService
         throw new NotImplementedException();
     }
 
+    // public async Task<List<Lecture>> GetLectureByUserIdAsync(long userId)
+    // {
+    //     List<Lecture> lectures = new List<Lecture>();
+    //     var request = new UserId { Id = userId };
+    //     using (var call = _lectureClient.GetLectureById(request)
+    //     {
+    //         while (await call.ResponseStream.MoveNext())
+    //         {
+    //             var currentLecture = call.ResponseStream.Current;
+    //             lectures.Add(currentLecture.AsBase());
+    //         }
+    //     }
+    //     return lectures;    }
+
     public Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(int userId)
     {
         throw new NotImplementedException();
