@@ -1,0 +1,54 @@
+﻿@using Elearn.Shared.Dtos
+@using Elearn.Shared.Models
+@using Elearn.HttpClients.Service
+@using System.Security.Claims
+
+
+<@inject IAuthService _userService; 
+ 
+ 
+ @if (_user == null) {
+     <LoadingComponent message="Loading user details. Please wait..."/>
+ }
+ else {
+     <Profile User="_user"></Profile>
+ }
+ @if (!(string.IsNullOrEmpty(_errorLabel))) {
+     <Modal>
+         <p> @_errorLabel</p>
+         <button @onclick="Proceed"> Okay</button>
+     </Modal>
+ }
+ 
+ 
+ 
+ @code {
+ 
+     [Parameter]
+     public string Username { get; set; }
+ 
+     private string _errorLabel;
+ 
+     private ClaimsPrincipal _user;
+ 
+     protected override async Task OnInitializedAsync() {
+         try {
+             _user = await GetUser();
+         }
+         catch (Exception e) {
+             _errorLabel = e.Message;
+         }
+     }
+ 
+ 
+     private async Task<ClaimsPrincipal> GetUser() {
+         return await _userService.GetAuthAsync();
+     }
+ 
+ 
+     private void Proceed() {
+         _errorLabel = string.Empty;
+     }
+
+     
+ }

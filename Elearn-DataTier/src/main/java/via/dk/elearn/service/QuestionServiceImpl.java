@@ -72,4 +72,25 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
         responseObserver.onNext(questionGrpcModel);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void getQuestionsByUserId(QuestionUserId request, StreamObserver<QuestionModel> responseObserver) {
+        List<Question> questions = questionRepository.getQuestionByUserId(request.getUserId());
+        if (questions.isEmpty()) {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("The questions are not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("Questions not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+            responseObserver.onCompleted();
+        } else {
+            for (Question question : questions) {
+                QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
+                responseObserver.onNext(questionModel);
+            }
+            responseObserver.onCompleted();
+        }    }
 }

@@ -1,0 +1,149 @@
+﻿@page "/Profile"
+@using Elearn.Shared.Models
+@using Microsoft.AspNetCore.Components
+@using Elearn.Shared.Dtos
+@using Elearn.HttpClients.Service
+@inject ILectureService _lectureService 
+@inject IAuthService _userService;
+
+<div class="container emp-profile">
+<form method="post">
+        <div class="row">
+            <div class="col-md-6">
+            </div>
+            <AuthorizeView>
+                <Authorized>
+                    @if (context.User.Identity!.Name!.Equals(User.Username)) {
+                        <div class="col-md-2">
+                            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        </div>
+                    }
+                </Authorized>
+            </AuthorizeView>
+            
+            
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+        
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>User name </label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>@User.Username</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>@User.Name</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Email</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>@User.Email</p>
+                    </div>
+                </div>
+                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Role</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>@User.Role</p>
+                                    </div>
+                                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Total active lectures :</label>
+                    </div>
+                </div>
+            </div>
+
+        @* <MudGrid> *@
+        @*     <MudItem xs="12" sm="7"> *@
+        @*         <MudCard> *@
+        @*             <MudCardContent> *@
+        @*                 <MudList> *@
+        @*                      *@
+        @*                 </MudList> *@
+        @*             </MudCardContent> *@
+        @*              *@
+        @*         </MudCard> *@
+        @*     </MudItem> *@
+        @*     <MudItem xs="12" sm="5"> *@
+        @*         <MudPaper Class="pa-4 mud-height-full"> *@
+        @*            <MudImage ></MudImage> *@
+        @*         </MudPaper> *@
+        @*     </MudItem> *@
+        @* </MudGrid> *@
+        <br/>
+            <br/>
+
+            <hr/>
+            <br/>
+            <br/>
+            <div class="allLectures">
+                @if (_lectureToShow == null) {
+                    <LoadingComponent message=" Lectures. Please wait.."></LoadingComponent>
+                }
+                else {
+                    <LectureList lectureToShow="_lecturesToShow"/>
+                }
+
+            </div>
+        </div>
+    </form>
+</div>
+@if (!(string.IsNullOrEmpty(_errorLabel))) {
+    <Modal>
+        <p> @_errorLabel</p>
+        <button @onclick="Proceed"> Okay</button>
+    </Modal>
+}
+
+
+
+@code {
+    [Parameter]
+    public UserDto User { get; set; }
+
+    private LectureDto? _lectureToShow;
+    private int _totalNumberOfLectures;
+    private string? _errorLabel;
+    private bool _showBlockModal;
+
+    private Block _block;
+    private object _navigationManager;
+
+
+    protected override async Task OnInitializedAsync() {
+        try {
+            await GetLecuresByUserId();
+        }
+        catch (Exception e) {
+            _errorLabel = e.Message;
+            Console.WriteLine(e.Message);
+        }
+    }
+
+
+  
+
+    private async Task GetLecuresByUserId() {
+        _lectureToShow = await _lectureService.GetLectureByUserIdAsync(User.UserId);
+    }
+
+    private void Proceed() {
+        _errorLabel = string.Empty;
+    }
+
+
+
+}

@@ -11,28 +11,33 @@ import java.util.Date;
 
 @Component
 public class DbSeed implements CommandLineRunner {
+    private CommentRepository commentRepository;
+    private CountryRepository countryRepository;
+
+    private CourseRepository courseRepository;
+    private LectureRepository lectureRepository;
+    private LectureVoteRepository lectureVoteRepository;
+    private ModeratorRepository moderatorRepository;
+    private QuestionRepository questionRepository;
+    private StudentRepository studentRepository;
+    private TeacherRepository teacherRepository;
+    private UniversityRepository universityRepository;
+    private UserRepository userRepository;
+
     @Autowired
-    CommentRepository commentRepository;
-    @Autowired
-    CountryRepository countryRepository;
-    @Autowired
-    CourseRepository courseRepository;
-    @Autowired
-    LectureRepository lectureRepository;
-    @Autowired
-    LectureVoteRepository lectureVoteRepository;
-    @Autowired
-    ModeratorRepository moderatorRepository;
-    @Autowired
-    QuestionRepository questionRepository;
-    @Autowired
-    StudentRepository studentRepository;
-    @Autowired
-    TeacherRepository teacherRepository;
-    @Autowired
-    UniversityRepository universityRepository;
-    @Autowired
-    UserRepository userRepository;
+    public DbSeed(CommentRepository commentRepository, CountryRepository countryRepository, CourseRepository courseRepository, LectureRepository lectureRepository, LectureVoteRepository lectureVoteRepository, ModeratorRepository moderatorRepository, QuestionRepository questionRepository, StudentRepository studentRepository, TeacherRepository teacherRepository, UniversityRepository universityRepository, UserRepository userRepository) {
+        this.commentRepository = commentRepository;
+        this.countryRepository = countryRepository;
+        this.courseRepository = courseRepository;
+        this.lectureRepository = lectureRepository;
+        this.lectureVoteRepository = lectureVoteRepository;
+        this.moderatorRepository = moderatorRepository;
+        this.questionRepository = questionRepository;
+        this.studentRepository = studentRepository;
+        this.teacherRepository = teacherRepository;
+        this.universityRepository = universityRepository;
+        this.userRepository = userRepository;
+    }
 
     @Override
     public void run(String... args) throws Exception {

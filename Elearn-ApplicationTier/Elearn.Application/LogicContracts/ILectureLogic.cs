@@ -8,4 +8,6 @@ public interface ILectureLogic
     Task<Lecture> CreateAsync(Lecture lecture);
     Task<List<Lecture>> GetAllLecturesAsync();
     Task<Lecture?> GetLectureAsync(string url);
+    Task<List<Lecture>> GetLectureByUserIdAsync(int userId);
+    Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(int userId);
 }
