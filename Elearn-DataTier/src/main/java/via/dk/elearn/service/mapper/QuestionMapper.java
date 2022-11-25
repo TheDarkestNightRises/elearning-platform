@@ -1,14 +1,11 @@
 package via.dk.elearn.service.mapper;
 
-import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Question;
 
 import via.dk.elearn.protobuf.QuestionModel;
 
-import javax.persistence.Convert;
-
 public class QuestionMapper {
-    public static QuestionModel convertLectureToGrpcModel(Question question) {
+    public static QuestionModel convertQuestionToGrpcModel(Question question) {
         return QuestionModel.newBuilder()
                 .setId(question.getId())
                 .setBody(question.getBody())
@@ -17,7 +14,7 @@ public class QuestionMapper {
                 .build();
     }
 
-    public static Question convertGrpcModelToLecture(QuestionModel questionModel) {
+    public static Question convertGrpcModelToQuestion(QuestionModel questionModel) {
         return Question.builder()
                 .body(questionModel.getBody())
                 .title(questionModel.getTitle())
