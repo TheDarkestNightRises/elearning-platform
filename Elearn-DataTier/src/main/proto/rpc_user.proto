@@ -7,6 +7,7 @@ service UserService {
   rpc GetUserByName (UserName) returns (UserModel);
   rpc CreateNewUser (UserModel) returns (UserModel);
   rpc GetUserByID(UserId) returns (UserModel);
+  rpc UpdateUser(UserModel) returns (UserModel);
 }
 
 message UserModel {

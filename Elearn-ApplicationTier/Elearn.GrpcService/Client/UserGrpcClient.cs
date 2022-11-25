@@ -37,4 +37,11 @@ public class UserGrpcClient : IUserService
         var userFromGrpc = await _userClient.GetUserByIDAsync(userRequested);
         return userFromGrpc.AsBase();
     }
+
+    public async Task<User> UpdateUserAsync(User updated)
+    {
+        var updatedModel = updated.AsGrpcModel();
+        var updatedUserFromGrpc = await _userClient.UpdateUserAsync(updatedModel);
+        return updatedUserFromGrpc.AsBase();
+    }
 }
