@@ -29,21 +29,21 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     @Override
         public void getUserByName(via.dk.elearn.protobuf.UserName request, StreamObserver<UserModel> responseObserver) {
 
-        User user = userRepository.findByName(request.getName());
+        Optional<User> user = userRepository.findFirstByName(request.getName());
 
-//        if (user.equals(null)) {
-//            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-//                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-//                    .setMessage("The user is not found")
-//                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-//                            .setReason("User not found")
-//                            .build()))
-//                    .build();
-//            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-//            return;
-//        }
+        if (user.isEmpty()) {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("The user is not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("User not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+            return;
+        }
 
-        UserModel userModel = UserMapper.convertUserToGrpcModel(user);
+        UserModel userModel = UserMapper.convertUserToGrpcModel(user.get());
         responseObserver.onNext(userModel);
         responseObserver.onCompleted();    }
 

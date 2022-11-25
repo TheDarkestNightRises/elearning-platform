@@ -7,9 +7,10 @@ import org.springframework.stereotype.Repository;
 import via.dk.elearn.models.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository  extends JpaRepository<User,Long> {
-    User findByName(String username);
+    Optional<User> findFirstByName(String username);
 
 }
