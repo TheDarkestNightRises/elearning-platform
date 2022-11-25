@@ -3,14 +3,14 @@ package via.dk.elearn.models;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
 @Data
 @Inheritance(strategy = InheritanceType.JOINED)
-
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 public class User {
     @Id

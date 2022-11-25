@@ -24,6 +24,7 @@ builder.Services.AddScoped<ICommentService, CommentGrpcClient>();
 builder.Services.AddScoped<IUserService, UserGrpcClient>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<IQuestionService, QuestionGrpcClient>();
+builder.Services.AddScoped<ITeacherService, TeacherGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<ILectureLogic, LectureLogic>();
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
@@ -32,6 +33,7 @@ builder.Services.AddGrpcClient<CommentGrpcClient>();
 builder.Services.AddGrpcClient<LectureGrpcClient>();
 builder.Services.AddGrpcClient<UserGrpcClient>();
 builder.Services.AddGrpcClient<QuestionGrpcClient>();
+builder.Services.AddGrpcClient<TeacherGrpcClient>();
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -76,6 +78,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapGrpcService<LectureGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<UserGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<QuestionGrpcClient>().EnableGrpcWeb();
+    endpoints.MapGrpcService<TeacherGrpcClient>().EnableGrpcWeb();
 
 });
 app.UseHttpsRedirection();

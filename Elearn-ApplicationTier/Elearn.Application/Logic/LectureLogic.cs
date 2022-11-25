@@ -10,11 +10,13 @@ public class LectureLogic : ILectureLogic
 {
     private readonly ILectureService _lectureService;
     private readonly IUserService _userService;
+    private readonly ITeacherService _teacherService;
 
-    public LectureLogic(ILectureService lectureService, IUserService userService)
+    public LectureLogic(ILectureService lectureService, IUserService userService, ITeacherService teacherService)
     {
         _lectureService = lectureService;
         _userService = userService;
+        _teacherService = teacherService;
     }
 
     public async Task<Lecture> CreateAsync(Lecture lecture)
@@ -22,12 +24,14 @@ public class LectureLogic : ILectureLogic
         //TODO: validate user when login part done
         //TODO: validate unique url
         //ValidateCreationDto(dto);
-        User? user = await _userService.GetUserByNameAsync(lecture.Author.Username);
-        if (user is null)
+       
+        Teacher teacher = await _teacherService.GetTeacherByUsernameAsync(lecture.Author.Username);
+        
+        if (teacher is null)
         {
-            throw new Exception("User not found in database");
+            throw new Exception("Teacher not found in database");
         }
-        Lecture lectureAppended = new Lecture(lecture.Title, lecture.Body, lecture.Url, lecture.Image,user);
+        Lecture lectureAppended = new Lecture(lecture.Title, lecture.Body, lecture.Url, lecture.Image, teacher);
         Lecture created = await _lectureService.CreateNewPostAsync(lectureAppended);
         return created;
     }

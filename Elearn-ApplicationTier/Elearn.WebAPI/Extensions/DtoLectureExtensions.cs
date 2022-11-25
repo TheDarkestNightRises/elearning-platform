@@ -15,7 +15,8 @@ public static class PostExtensions
             Image = lecture.Image,
             Title = lecture.Title,
             Body = lecture.Body,
-            DateCreated = lecture.DateCreated
+            DateCreated = lecture.DateCreated,
+            Username = lecture.Author != null ? lecture.Author.Username : String.Empty
         };
     }
 
@@ -30,14 +31,14 @@ public static class PostExtensions
                 Title = lecture.Title,
                 Body = lecture.Body,
                 DateCreated = lecture.DateCreated,
-                Username = lecture.Author.Username
+                Username = lecture.Author != null ? lecture.Author.Username : String.Empty
             });
         return lecturesDtos;                
     }
     
     public static Lecture AsBase(this LectureDto lectureDto) 
     {
-        return new Lecture
+        Lecture lecture = new Lecture
         {
             Id = lectureDto.Id,
             Url = lectureDto.Url,
@@ -47,17 +48,23 @@ public static class PostExtensions
             DateCreated = lectureDto.DateCreated,
             
         };
+        lecture.Author = new Teacher();
+        lecture.Author.Username = lectureDto.Username;
+        return lecture;
     }
     
     public static Lecture AsBaseFromCreation(this LectureCreationDto lectureDto) 
     {
-        return new Lecture
+        Lecture lecture = new Lecture
         {
             Url = lectureDto.Url,
             Image = lectureDto.Image,
             Title = lectureDto.Title,
-            Body = lectureDto.Body,
-            //Author = postDto.Author
+            Body = lectureDto.Body
+            
         };
+        lecture.Author = new Teacher();
+        lecture.Author.Username = lectureDto.Username;
+        return lecture;
     }
 }

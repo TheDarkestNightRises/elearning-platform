@@ -62,7 +62,7 @@ public class DbSeed implements CommandLineRunner {
         lecture1.setTitle("Lesson 1");
         lecture1.setBody("Lorem ipsum random text that I just wrote why is this taking so long");
         lecture1.setDescription("Java is a cool language");
-        lecture1.setPublished_date(new Date(12,12,2012));
+        lecture1.setPublished_date(LocalDate.of(2020, 12, 12));
         lecture1.setImage("placeholder string");
         lecture1.setCourse(createdCourse1);
         lecture1.setTeacher(createdTeacher1);

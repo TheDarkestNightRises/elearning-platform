@@ -14,9 +14,9 @@ public class Lecture
     public string Body { get; set; }
     
     public DateTime DateCreated { get; set; } = DateTime.Now;
-    public User Author { get; set; }
+    public Teacher Author { get; set; }
 
-    public Lecture(string title, string body, string url, string image, User author)
+    public Lecture(string title, string body, string url, string image, Teacher author)
     {
         Url = url;
         Image = image;
@@ -25,7 +25,7 @@ public class Lecture
         Author = author;
     }
 
-    public Lecture(int id, string title, string body, string url, string image, User author)
+    public Lecture(int id, string title, string body, string url, string image, Teacher author)
     {
         Id = id;
         Url = url;
