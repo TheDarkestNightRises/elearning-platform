@@ -2,12 +2,10 @@
 @using Elearn.Shared.Models
 @using Elearn.HttpClients.Service
 @using System.Security.Claims
+@inject IAuthService _userService;
 
 
-<@inject IAuthService _userService; 
- 
- 
- @if (_user == null) {
+@if (_user == null) {
      <LoadingComponent message="Loading user details. Please wait..."/>
  }
  else {
@@ -19,18 +17,18 @@
          <button @onclick="Proceed"> Okay</button>
      </Modal>
  }
- 
- 
- 
+
+
+
  @code {
- 
+
      [Parameter]
      public string Username { get; set; }
- 
+
      private string _errorLabel;
- 
+
      private ClaimsPrincipal _user;
- 
+
      protected override async Task OnInitializedAsync() {
          try {
              _user = await GetUser();
@@ -39,16 +37,16 @@
              _errorLabel = e.Message;
          }
      }
- 
- 
+
+
      private async Task<ClaimsPrincipal> GetUser() {
          return await _userService.GetAuthAsync();
      }
- 
- 
+
+
      private void Proceed() {
          _errorLabel = string.Empty;
      }
 
-     
+
  }
