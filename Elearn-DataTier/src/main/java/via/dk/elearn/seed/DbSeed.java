@@ -57,6 +57,10 @@ public class DbSeed implements CommandLineRunner {
         Teacher teacher1 = new Teacher("oriana","email","Oriana Cinimo Amadeo","ihatenes","teacher",3);
         Teacher createdTeacher1 = teacherRepository.save(teacher1);
 
+        //add students
+        Student student = new Student("Dexter","email2","Dexter Morgan","bloodanalyst","student",1);
+        Student createdStudent = studentRepository.save(student);
+
         //add courses
         Course course1 = new Course();
         course1.setCourseName("Java Basics");
@@ -73,5 +77,14 @@ public class DbSeed implements CommandLineRunner {
         lecture1.setTeacher(createdTeacher1);
         lecture1.setUrl("url");
         Lecture createdlecture1 = lectureRepository.save(lecture1);
+
+        //add questions
+        Question question = new Question();
+        question.setTitle("How to run npm with vite?");
+        question.setBody("I tried to use vite but I dont know how to run the project");
+        question.setUrl("npm-doenst-work");
+        question.setDescription("Please help");
+        question.setUser(createdStudent);
+        Question createdQuestion = questionRepository.save(question);
     }
 }
