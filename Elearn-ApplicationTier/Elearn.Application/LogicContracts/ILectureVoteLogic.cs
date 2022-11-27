@@ -6,5 +6,5 @@ public interface ILectureVoteLogic
 {
     public Task<LectureVote> CreateLectureVoteAsync(LectureVote lectureVote);
     public Task<LectureVoteCounter> GetLectureVotesCountAsync(Lecture post);
-    public Task<LectureVote> GetLectureVotebyIdAsync(User user, Lecture post);
+    public Task<LectureVote> GetLectureVotebyIdAsync(string username, string url);
 }
