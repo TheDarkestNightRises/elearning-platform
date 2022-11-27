@@ -26,10 +26,12 @@ builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<ISearchService, SearchGrpcClient>();
 builder.Services.AddScoped<IQuestionService, QuestionGrpcClient>();
 builder.Services.AddScoped<ITeacherService, TeacherGrpcClient>();
+builder.Services.AddScoped<ILectureVoteService, LectureVoteGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<ILectureLogic, LectureLogic>();
 builder.Services.AddScoped<ISearchLogic, SearchLogic>();
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
+builder.Services.AddScoped<ILectureVoteLogic, LectureVoteLogic>();
 builder.Services.AddScoped<IQuestionLogic,QuestionLogic>();
 builder.Services.AddGrpcClient<SearchGrpcClient>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();
@@ -37,7 +39,7 @@ builder.Services.AddGrpcClient<LectureGrpcClient>();
 builder.Services.AddGrpcClient<UserGrpcClient>();
 builder.Services.AddGrpcClient<QuestionGrpcClient>();
 builder.Services.AddGrpcClient<TeacherGrpcClient>();
-
+builder.Services.AddGrpcClient<LectureVoteGrpcClient>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

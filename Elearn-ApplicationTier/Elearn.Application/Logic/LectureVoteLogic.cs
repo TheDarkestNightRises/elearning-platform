@@ -51,17 +51,14 @@ public class LectureVoteLogic : ILectureVoteLogic
         return await _lectureVoteService.GetLectureVotesCountAsync(post);
     }
 
-    public async Task<LectureVote> GetLectureVotebyIdAsync(User user, Lecture post)
+    public async Task<LectureVote> GetLectureVotebyIdAsync(string username, string url)
     {
-        Lecture? requestedLecture = await _lectureService.GetPostAsync(post.Url);
-        User? requestedUser = await _userService.GetUserByUsernameAsync(user.Username);
+        Lecture? requestedLecture = await _lectureService.GetPostAsync(url);
+        User? requestedUser = await _userService.GetUserByUsernameAsync(username);
         if (requestedLecture is null || requestedUser is null)
         {
             throw new Exception("Invalid request: user or lecture not found");
         }
-        
-        LectureVote lectureVote = await _lectureVoteService.GetLectureVotebyIdAsync(user, post);
-
         return await _lectureVoteService.GetLectureVotebyIdAsync(requestedUser, requestedLecture);
     }
 }
