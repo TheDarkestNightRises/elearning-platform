@@ -12,4 +12,8 @@ public class LectureVoteDto
         LectureUrl = lectureUrl;
         Upvote = upvote;
     }
+
+    public LectureVoteDto()
+    {
+    }
 }
