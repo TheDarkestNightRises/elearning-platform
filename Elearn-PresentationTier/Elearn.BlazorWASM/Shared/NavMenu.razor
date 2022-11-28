@@ -11,6 +11,8 @@
     <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
     <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
     <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
+    <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToAccountSettings"/>
+        <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">Account Settings </MudButton>
 </MudToolBar>
 
 @code {
@@ -38,6 +40,11 @@
     private void GoToProfile()
     {
         navMgr.NavigateTo("/Profile");
+    }
+    
+    private void GoToAccountSettings()
+    {
+        navMgr.NavigateTo("/ManageAccount");
     }
 }
 

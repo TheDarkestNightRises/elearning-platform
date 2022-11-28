@@ -30,4 +30,14 @@ public class UserLogic : IUserLogic
          await _userService.UpdateUserAsync(updated);
          return updated;
     }
+
+    public async Task<User?> GetUserByUsernameAsync(string username)
+    {
+        User? user = await _userService.GetUserByUsernameAsync(username);
+        if (user == null)
+        {
+            throw new Exception($"User with name {username} was not found.");
+        }
+        return user;
+    }
 }

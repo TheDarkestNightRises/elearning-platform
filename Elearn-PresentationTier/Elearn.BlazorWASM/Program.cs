@@ -15,6 +15,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped<ILectureService, LectureHttpClient>();
 builder.Services.AddScoped<ICommentService, CommentHttpClient>();
 builder.Services.AddScoped<IAuthService, JwtHttpClient>();
+builder.Services.AddScoped<IUserService, UserHttpClient>();
 builder.Services.AddScoped<IQuestionService, QuestionHttpClient>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 AuthorizationPolicies.AddPolicies(builder.Services);
