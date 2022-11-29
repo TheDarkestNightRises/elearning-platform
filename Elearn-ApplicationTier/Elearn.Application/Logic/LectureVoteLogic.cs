@@ -59,6 +59,12 @@ public class LectureVoteLogic : ILectureVoteLogic
         {
             throw new Exception("Invalid request: user or lecture not found");
         }
-        return await _lectureVoteService.GetLectureVotebyIdAsync(requestedUser, requestedLecture);
+        LectureVote lectureVote = await _lectureVoteService.GetLectureVotebyIdAsync(requestedUser, requestedLecture);
+        if (lectureVote.Lecture is null || lectureVote.User is null)
+        {
+            lectureVote.Upvote = null;
+        }
+
+        return lectureVote;
     }
 }
