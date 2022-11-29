@@ -1,3 +1,4 @@
+using System.Net.Http.Json;
 using System.Text.Json;
 using Elearn.HttpClients.Service;
 using Elearn.Shared.Dtos;
@@ -44,5 +45,16 @@ public class QuestionHttpClient : IQuestionService
             PropertyNameCaseInsensitive = true
         })!;
         return _questionDto;
+    }
+
+    public async Task<List<QuestionDto?>> GetQuestionByUserIdAsync(long userId)
+    {
+        HttpResponseMessage response = await client.GetAsync($"/upvote-lecture/{userId}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+        return await response.Content.ReadFromJsonAsync<List<QuestionDto?>>();
     }
 }
