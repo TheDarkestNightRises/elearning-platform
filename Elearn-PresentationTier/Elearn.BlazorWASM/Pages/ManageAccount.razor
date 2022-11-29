@@ -14,13 +14,12 @@
 
         <div class="page-background-class align-center justify-center">
              <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
-                <h3 class=" d-flex justify-center">Hello, @CurrentUser.Name</h3>
-                <DataAnnotationsValidator/>
-                <div class="form-group d-flex justify-center">
-                    <label>Current email : @CurrentUser.Email</label>
-                </div>
-                <ValidationSummary/>
-                <MudCardActions Class="d-flex justify-center">
+                <h3 class=" d-flex justify-center">Hello, @CurrentUser?.Name</h3>
+               
+                 <div class="form-group d-flex justify-center">
+                     <label>Current email : @CurrentUser?.Email</label>
+                 </div>
+                 <MudCardActions Class="d-flex justify-center">
                     <MudButton Class="mx-2" OnClick="() => OpenChangePassword()" Variant="Variant.Filled" Color="Color.Success">Change Password</MudButton>
                 </MudCardActions>
                 <MudCardActions Class="d-flex justify-center">
@@ -63,7 +62,6 @@
         if (!isLoggedIn) return;
         userClaims = user.Claims;
         username = user.Identity!.Name;
-        Console.WriteLine(username);
         CurrentUser = await _UserService.GetUserByUsernameAsync(username);
         
     }

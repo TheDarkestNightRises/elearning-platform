@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 using Elearn.HttpClients.Service;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
@@ -16,7 +17,7 @@ public class UserHttpClient : IUserService
     
   
 
-    public async Task<User> GetUserByUsernameAsync(string username)
+    public async Task<User> GetUserByUsernameAsync(string? username)
     {
         HttpResponseMessage response = await client.GetAsync($"user/{username}");
         string result = await response.Content.ReadAsStringAsync();
@@ -31,13 +32,21 @@ public class UserHttpClient : IUserService
         return user;
     }
 
-    public async Task UpdateUserAsync(UpdateUserDto updateUser)
+    public async Task UpdateUserAsync(UpdateUserDto dto)
     {
-        HttpResponseMessage response = await client.GetAsync($"/user");
+        Console.WriteLine(dto);
+        string dtoAsJson = JsonSerializer.Serialize(dto);
+        StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
+        
+        HttpResponseMessage response = await client.PatchAsync("/user", body);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception(result);
         }
+        
+        
+
+        
     }
 }
