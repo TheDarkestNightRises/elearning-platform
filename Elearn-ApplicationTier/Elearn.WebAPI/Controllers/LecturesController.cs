@@ -1,6 +1,7 @@
 ﻿using Elearn.Application.LogicInterfaces;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
+using ElearnGrpc;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Extensions;
 
@@ -50,7 +51,7 @@ public class LecturesController : ControllerBase
    
     }
 
-    [HttpGet("{url}")]
+    [HttpGet("/get-lecture/{url}")]
     public async Task<ActionResult<LectureDto>> GetLectureAsync(string url)
     {
         try
@@ -68,4 +69,38 @@ public class LecturesController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpGet("/user-lecture/{userId}")]
+    public async Task<ActionResult<List<LectureDto>>> GetLectureByUserIdAsync(long userId)
+    {
+        try
+        {   
+            
+            var lectures = await _lectureLogic.GetLectureByUserIdAsync(userId);
+            return Ok(lectures.AsDtos());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
+        }
+   
+    }
+    
+    [HttpGet("/upvote-lecture/{userId}")]
+    public async Task<ActionResult<List<LectureDto>>> GetUpvotedLectureByUserIdAsync(long userId)
+    {
+        try
+        {
+            var lectures = await _lectureLogic.GetUpvotedLectureByUserIdAsync( userId);
+            return Ok(lectures.AsDtos());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
+        }
+   
+    }
+
 }

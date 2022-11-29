@@ -8,7 +8,7 @@ service QuestionService {
   rpc GetQuestion (QuestionUrl) returns (QuestionModel);
   rpc GetAllQuestion (NewQuestionRequest) returns (stream QuestionModel);
   rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
-  rpc GetQuestionsByUserId(QuestionUserId) returns (QuestionModel);
+  rpc GetQuestionsByUserId(QuestionUserId) returns (stream QuestionModel);
 }
 
 
@@ -17,7 +17,7 @@ message NewQuestionRequest {
 }
 
 message QuestionUserId{
-  UserId userId=1;
+  int64 userId=1;
 
 }
 message QuestionUrl {

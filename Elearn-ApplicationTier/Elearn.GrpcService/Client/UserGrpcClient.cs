@@ -31,7 +31,7 @@ public class UserGrpcClient : IUserService
         return createdUserFromGrpc.AsBase();
     }
 
-    public async Task<User?> GetUserByIdAsync(int id)
+    public async Task<User?> GetUserByIdAsync(long id)
     {
         var userRequested = new UserId { Id = id };
         var userFromGrpc = await _userClient.GetUserByIDAsync(userRequested);

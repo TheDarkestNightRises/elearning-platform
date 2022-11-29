@@ -106,13 +106,13 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
 
     @Override
     public void getLectureByUserId(LectureUserId request, StreamObserver<LectureModel> responseObserver) {
-        List<Lecture> lectures = lectureRepository.getUserLecturesById(request.getUserId());
+        List<Lecture> lectures = lectureRepository.findUserLecturesById(request.getUserId());
         if (lectures.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lectures are not found")
+                    .setMessage("The lecture is not found")
                     .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lectures not found")
+                            .setReason("Lecture not found")
                             .build()))
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
@@ -122,7 +122,7 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
             LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(lectureModel);
             responseObserver.onCompleted();
-        }    }
+        }   }
 
     @Override
     public void getUpvotedLectureByUserId(LectureUserId request, StreamObserver<LectureModel> responseObserver) {

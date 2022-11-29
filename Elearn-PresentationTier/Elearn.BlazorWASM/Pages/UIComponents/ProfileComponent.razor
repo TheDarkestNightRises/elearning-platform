@@ -4,15 +4,13 @@
 @using System.Security.Claims
 
 
-<@inject IAuthService _userService; 
+@inject IAuthService _userService; 
  
  
  @if (_user == null) {
      <LoadingComponent message="Loading user details. Please wait..."/>
  }
- else {
-     <Profile User="_user"></Profile>
- }
+
  @if (!(string.IsNullOrEmpty(_errorLabel))) {
      <Modal>
          <p> @_errorLabel</p>

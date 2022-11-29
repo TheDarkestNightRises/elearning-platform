@@ -13,8 +13,8 @@ service LectureService {
   rpc GetAllLectures (NewLectureRequest) returns (stream LectureModel);
   rpc CreateNewLecture (LectureModel) returns (LectureModel);
   rpc GetLectureById (LectureId) returns (LectureModel);
-  rpc GetLectureByUserId(LectureUserId) returns (LectureModel);
-  rpc GetUpvotedLectureByUserId(LectureUserId) returns(LectureModel);
+  rpc GetLectureByUserId(LectureUserId) returns (stream LectureModel);
+  rpc GetUpvotedLectureByUserId(LectureUserId) returns(stream LectureModel);
 }
 
 message NewLectureRequest {
