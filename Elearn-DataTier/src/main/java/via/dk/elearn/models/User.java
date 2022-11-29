@@ -48,9 +48,9 @@ public class User {
 //    @JoinColumn(name = "country_id")
 //    private Country country;
 //
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "university_id") /// Nullable??
-//    private University university;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "university_id") /// Nullable??
+    private University university;
 
     public User(Long id, String username, String email, String name, String password, String role, int security_level) {
         this.id = id;
@@ -69,6 +69,16 @@ public class User {
         this.password = password;
         this.role = role;
         this.security_level = security_level;
+    }
+
+    public User(String username, String email, String name, String password, String role, int security_level, University university) {
+        this.username = username;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.role = role;
+        this.security_level = security_level;
+        this.university = university;
     }
 
     @Override
