@@ -8,6 +8,7 @@ import via.dk.elearn.repository.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class DbSeed implements CommandLineRunner {
@@ -53,9 +54,30 @@ public class DbSeed implements CommandLineRunner {
         country1.setCountryName("Denmark");
         Country createdCountry1 = countryRepository.save(country1);
 
+        //add Universities
+        University university1 = new University("VIA University College");
+        University createdUniversity1 = universityRepository.save(university1);
+
+        University university2 = new University("Aarhus University");
+        University createdUniversity2 = universityRepository.save(university2);
+
+        University university3 = new University("Aalborg University");
+        University createdUniversity3 = universityRepository.save(university3);
+
+        University university4 = new University("Dania Academy");
+        University createdUniversity4 = universityRepository.save(university4);
+
+        University university5 = new University("Copenhagen University College");
+        University createdUniversity5 = universityRepository.save(university5);
+
         //add teachers
-        Teacher teacher1 = new Teacher("oriana","email","Oriana Cinimo Amadeo","ihatenes","teacher",3);
+        Teacher teacher1 = new Teacher("oriana","email","Oriana Cinimo Amadeo","ihatenes","teacher",3, createdUniversity1);
         Teacher createdTeacher1 = teacherRepository.save(teacher1);
+
+        Teacher teacher2 = new Teacher("cosmin","email3","Cosmin Teodoru","password","teacher",3, createdUniversity2);
+        Teacher createdTeacher2 = teacherRepository.save(teacher2);
+
+
 
         //add students
         Student student = new Student("Dexter","email2","Dexter Morgan","bloodanalyst","student",1);
@@ -67,16 +89,14 @@ public class DbSeed implements CommandLineRunner {
         Course createdCourse1 = courseRepository.save(course1);
 
         //add lectures
-        Lecture lecture1 = new Lecture();
-        lecture1.setTitle("Lesson 1");
-        lecture1.setBody("Lorem ipsum random text that I just wrote why is this taking so long");
-        lecture1.setDescription("Java is a cool language");
-        lecture1.setPublished_date(LocalDate.of(2020, 12, 12));
-        lecture1.setImage("placeholder string");
-        lecture1.setCourse(createdCourse1);
-        lecture1.setTeacher(createdTeacher1);
-        lecture1.setUrl("url");
+        Lecture lecture1 = new Lecture("Lesson 1", "Java is a cool language", "url", "Lorem ipsum random text that I just wrote why is this taking so long", "placeholder string", LocalDate.of(2020, 12, 12), createdCourse1, createdTeacher1);
         Lecture createdlecture1 = lectureRepository.save(lecture1);
+
+        Lecture lecture2 = new Lecture("Lesson 2", "Java is a cool language", "url2", "Lorem ipsum random text that I just wrote why is this taking so long", "placeholder string", LocalDate.of(2020, 12, 12), createdCourse1, createdTeacher1);
+        Lecture createdlecture2 = lectureRepository.save(lecture2);
+
+        Lecture lecture3 = new Lecture("Lesson 3", "Java is a cool language", "url3", "Lorem ipsum random text that I just wrote why is this taking so long", "placeholder string", LocalDate.of(2020, 12, 12), createdCourse1, createdTeacher2);
+        Lecture createdlecture3 = lectureRepository.save(lecture3);
 
         //add questions
         Question question = new Question();
@@ -86,5 +106,12 @@ public class DbSeed implements CommandLineRunner {
         question.setDescription("Please help");
         question.setUser(createdStudent);
         Question createdQuestion = questionRepository.save(question);
+
+        List<Lecture> lectures = lectureRepository.findAllByTeacher_University(createdUniversity2);
+
+        for(int i = 0; i < lectures.size(); i++){
+            System.out.println(lectures.get(i).getTitle());
+        }
+
     }
 }
