@@ -19,8 +19,8 @@ public static class GrpcLectureVoteExtension
     {
         return new LectureVote
         {
-           User = voteModel.User.AsBase(),
-           Lecture = voteModel.Lecture.AsBase(),
+           User = voteModel.User is null ? null : voteModel.User.AsBase(),
+           Lecture = voteModel.Lecture is null ? null : voteModel.Lecture.AsBase(),
            Upvote = voteModel.Upvote
         };
     }
