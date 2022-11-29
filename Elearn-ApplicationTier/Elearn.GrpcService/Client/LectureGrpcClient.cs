@@ -30,6 +30,7 @@ public class LectureGrpcClient : ILectureService
                 lectures.Add(currentLecture.AsBase());
             }
         }
+
         return lectures;
     }
 
@@ -51,35 +52,48 @@ public class LectureGrpcClient : ILectureService
         //createdLecture.Author = createdPostFromGrpc.Teacher.AsBase();
         return createdLecture;
     }
-    
+
     public async Task<Lecture?> GetByIdAsync(int id)
     {
         var lectureRequested = new LectureId { Id = id };
         var lectureGrpcModel = await _lectureClient.GetLectureByIdAsync(lectureRequested);
-        return lectureGrpcModel.AsBase();    
+        return lectureGrpcModel.AsBase();
     }
 
-    public Task<List<Lecture>> GetLectureByUserIdAsync(int userId)
+    public async Task<List<Lecture>> GetLectureByUserIdAsync(long userId)
     {
-        throw new NotImplementedException();
-    }
+        List<Lecture> lectures = new List<Lecture>();
+        var request = new LectureUserId() { UserId = userId };
+        using (var call = _lectureClient.GetLectureByUserId(new LectureUserId(request)))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentLecture = call.ResponseStream.Current;
+                lectures.Add(currentLecture.AsBase());
+            }
+        }
 
-    // public async Task<List<Lecture>> GetLectureByUserIdAsync(long userId)
-    // {
-    //     List<Lecture> lectures = new List<Lecture>();
-    //     var request = new UserId { Id = userId };
-    //     using (var call = _lectureClient.GetLectureById(request)
-    //     {
-    //         while (await call.ResponseStream.MoveNext())
-    //         {
-    //             var currentLecture = call.ResponseStream.Current;
-    //             lectures.Add(currentLecture.AsBase());
-    //         }
-    //     }
-    //     return lectures;    }
+        return lectures;    }
 
-    public Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(int userId)
+
+    public async Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(long userId)
     {
-        throw new NotImplementedException();
-    }
+        List<Lecture> lectures = new List<Lecture>();
+        var request = new LectureUserId() { UserId = userId };
+        using (var call = _lectureClient.GetUpvotedLectureByUserId(new LectureUserId(request)))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentLecture = call.ResponseStream.Current;
+                lectures.Add(currentLecture.AsBase());
+            }
+        }
+
+        return lectures;     }
+
+   
+
 }
+
+
+   

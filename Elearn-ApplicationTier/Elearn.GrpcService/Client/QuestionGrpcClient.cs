@@ -44,9 +44,20 @@ public class QuestionGrpcClient : IQuestionService
         throw new NotImplementedException();
     }
 
-    public Task<List<Question>> GetQuestionByUserIdAsync(int userId)
+    public async Task<List<Question>> GetQuestionByUserIdAsync(int userId)
     {
-        throw new NotImplementedException();
+        List<Question> questions = new List<Question>();
+               var request = new QuestionUserId() { UserId = userId };
+               using (var call = _questionClient.GetQuestionsByUserId(new QuestionUserId(request)))
+               {
+                   while (await call.ResponseStream.MoveNext())
+                   {
+                       var currentQuestion = call.ResponseStream.Current;
+                       questions.Add(currentQuestion.AsBase());
+                   }
+               }
+       
+               return questions; 
     }
 }
 

@@ -8,8 +8,8 @@ public interface ILectureService
     Task<Lecture?> GetPostAsync(string url);
     Task<Lecture> CreateNewPostAsync(Lecture lecture);
     Task<Lecture?> GetByIdAsync(int id);
-    Task<List<Lecture>> GetLectureByUserIdAsync(int userId);
-    Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(int userId);
+    Task<List<Lecture>> GetLectureByUserIdAsync(long userId);
+    Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(long userId);
 
 
 }

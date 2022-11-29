@@ -17,7 +17,7 @@ public interface LectureRepository  extends JpaRepository<Lecture,Long> {
 
     List<Lecture> findByTitleContaining(String title);
 
-    @Query(value = "SELECT * FROM lecture l WHERE l.id IN (SELECT lecture_id WHERE user_id = :userId)", nativeQuery = true)
-    List<Lecture> getUserLecturesById(long userId);
+   // @Query(value = "SELECT * FROM lecture l WHERE l.id IN (SELECT lecture_id WHERE user_id = :userId)", nativeQuery = true)
+    List<Lecture> findUserLecturesById(long userId);
 }
 
