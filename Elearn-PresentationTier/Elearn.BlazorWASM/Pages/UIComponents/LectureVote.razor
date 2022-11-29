@@ -1,0 +1,150 @@
+﻿@using System.Security.Claims
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@inject ILectureVoteService _lectureVoteService
+@inject ILectureService _lectureService
+
+<div>
+    <div>
+        <MudToggleIconButton Toggled="@upvoteToggle" ToggledChanged="OnUpvoteToggledChanged"
+                             Icon="@Icons.Filled.ArrowDropUp" Color="@Color.Default" Title="Upvote"
+                             Size="Size.Large"
+                             ToggledSize="Size.Large"
+                             ToggledIcon="@Icons.Filled.ArrowDropUp" ToggledColor="@Color.Success" ToggledTitle="Upvoted"/>
+        <span>@upvotes</span>
+    </div>
+    <div>
+        <MudToggleIconButton Toggled="@downvoteToggle" ToggledChanged="OnDownvoteToggledChanged"
+                             Icon="@Icons.Filled.ArrowDropDown" Color="@Color.Default" Title="Downvote"
+                             Size="Size.Large"
+                             ToggledSize="Size.Large"
+                             ToggledIcon="@Icons.Filled.ArrowDropDown" ToggledColor="@Color.Error" ToggledTitle="Downvoted"/>
+        <span>@downvotes</span>
+    </div>
+</div>
+
+@code {
+
+    [Parameter]
+    public string url { get; set; }
+    
+
+    private LectureDto? currentPost;
+
+    //logged in user
+    private string? currentUsername;
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    private IEnumerable<Claim>? userClaims;
+    private bool isLoggedIn;
+
+    //icon fields
+    private long upvotes;
+    private long downvotes;
+    private bool upvoteToggle;
+    private bool downvoteToggle;
+
+    protected override async Task OnInitializedAsync()
+    {
+    //logged in user
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+
+        if (!isLoggedIn) return;
+
+        userClaims = user.Claims;
+        currentUsername = user.Identity!.Name!;
+
+        currentPost = await _lectureService.GetLectureByUrlAsync(url);
+
+
+    //get current vote
+        LectureVoteDto lectureVoteDto = await _lectureVoteService.GetByIdAsync(currentUsername, currentPost.Url);
+        if (lectureVoteDto.Upvote == true)
+        {
+            upvoteToggle = true;
+            downvoteToggle = false;
+        }
+        else if (lectureVoteDto.Upvote == false)
+        {
+            upvoteToggle = false;
+            downvoteToggle = true;
+        }
+        else
+        {
+            upvoteToggle = false;
+            downvoteToggle = false;
+        }
+        await UpdateVoteCount();
+    }
+
+    public async Task OnUpvoteToggledChanged(bool newVal)
+    {
+        if (!isLoggedIn || newVal == false)
+            return;
+        LectureVoteDto vote = new LectureVoteDto(currentUsername, currentPost.Url, true);
+        LectureVoteDto createdVote = await _lectureVoteService.CreateAsync(vote);
+        if (createdVote.Upvote == true)
+        {
+            upvoteToggle = true;
+            downvoteToggle = false;
+            //Console.WriteLine("Downvoted");
+        }
+        
+        await UpdateVoteCount();
+    //await UpdateCurrentVote();
+    }
+    
+    public async Task OnDownvoteToggledChanged(bool newVal)
+    {
+        
+        if (!isLoggedIn || newVal == false)
+            return;
+        LectureVoteDto vote = new LectureVoteDto(currentUsername, currentPost.Url, false);
+               LectureVoteDto createdVote = await _lectureVoteService.CreateAsync(vote);
+        if (createdVote.Upvote == false)
+        {
+            upvoteToggle = false;
+            downvoteToggle = true;
+            Console.WriteLine("Downvoted");
+        }
+        
+        await UpdateVoteCount();
+        //await UpdateCurrentVote();
+    }
+
+    public async Task UpdateVoteCount()
+    {
+        LectureVoteCounterDto lectureVoteCounterDto = await _lectureVoteService.GetVoteCounter(currentPost.Url);
+        upvotes = lectureVoteCounterDto.UpvoteCount;
+        downvotes = lectureVoteCounterDto.DownvoteCount;
+        Console.WriteLine(lectureVoteCounterDto.DownvoteCount);
+        
+    }
+
+    public async Task<bool> UpdateCurrentVote()
+    {
+    //get current vote
+        LectureVoteDto lectureVoteDto = await _lectureVoteService.GetByIdAsync(currentUsername, currentPost.Url);
+        if (lectureVoteDto.Upvote == true)
+        {
+            upvoteToggle = true;
+            downvoteToggle = false;
+        }
+        else if (lectureVoteDto.Upvote == false)
+        {
+            upvoteToggle = false;
+            downvoteToggle = true;
+        }
+        else
+        {
+            upvoteToggle = false;
+            downvoteToggle = false;
+        }
+        return true;
+    }
+
+}

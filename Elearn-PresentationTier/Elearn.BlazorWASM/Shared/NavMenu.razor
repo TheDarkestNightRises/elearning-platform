@@ -4,6 +4,7 @@
     <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" Class="mr-5" OnClick="GoHome"/>
     <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
     <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
+    <MudButton Variant="Variant.Text" OnClick="GoToLectures">Lectures</MudButton>
     <MudSpacer/>
     <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
         <MudButton Variant="Variant.Text" OnClick="GoToProfile">Profile </MudButton>
@@ -11,13 +12,15 @@
     <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
     <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
     <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
+    <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToAccountSettings"/>
+        <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">Account Settings </MudButton>
 </MudToolBar>
 
 @code {
 
     private void GoToAddAPost()
     {
-        navMgr.NavigateTo("/Create");
+        navMgr.NavigateTo("/Create-lecture");
     }
 
     private void GoToLogin()
@@ -38,6 +41,15 @@
     private void GoToProfile()
     {
         navMgr.NavigateTo("/Profile");
+    }
+    
+    private void GoToAccountSettings()
+    {
+        navMgr.NavigateTo("/ManageAccount");
+    }
+    private void GoToLectures()
+    {
+        navMgr.NavigateTo("/Lectures");
     }
 }
 

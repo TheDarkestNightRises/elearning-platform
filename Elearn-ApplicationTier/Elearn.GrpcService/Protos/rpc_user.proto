@@ -3,7 +3,8 @@
 option csharp_namespace = "ElearnGrpc";
 
 service UserService {
-  rpc GetUserByName (UserName) returns (UserModel);
+  rpc GetUserByName (Name) returns (UserModel);
+  rpc GetUserByUsername (UserName) returns (UserModel);
   rpc CreateNewUser (UserModel) returns (UserModel);
   rpc GetUserByID(UserId) returns (UserModel);
   rpc UpdateUser(UserModel) returns (UserModel);
@@ -23,6 +24,10 @@ message UserId{
   int64 id = 1;
 }
 
-message UserName {
+message Name {
   string name = 1;
+}
+
+message UserName {
+  string username = 1;
 }

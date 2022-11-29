@@ -21,14 +21,15 @@ public class LectureVoteGrpcClient : ILectureVoteService
 
     public async Task<LectureVote> CreateLectureVoteAsync(LectureVote lectureVote)
     {
-        VoteModel model = new VoteModel();
-        model.Lecture = GrpcLectureExtension.AsGrpcModel(lectureVote.Lecture);
-        model.User = GrpcUserExtension.AsGrpcModel(lectureVote.User);
-        model.Upvote = lectureVote.Upvote;
+        VoteModel model = lectureVote.AsGrpcModel();
+        // model.Lecture = GrpcLectureExtension.AsGrpcModel(lectureVote.Lecture);
+        // model.User = GrpcUserExtension.AsGrpcModel(lectureVote.User);
+        // model.Upvote = lectureVote.Upvote;
         VoteModel createdVoteModel = await _lectureVoteGrpcClient.VoteLectureAsync(model);
-        User userFromResponse = GrpcUserExtension.AsBase(createdVoteModel.User);
-        Lecture lectureFromResponse = GrpcLectureExtension.AsBase(createdVoteModel.Lecture);
-        LectureVote createdLectureVote = new LectureVote(userFromResponse, lectureFromResponse, createdVoteModel.Upvote);
+        // User userFromResponse = GrpcUserExtension.AsBase(createdVoteModel.User);
+        // Lecture lectureFromResponse = GrpcLectureExtension.AsBase(createdVoteModel.Lecture);
+        // LectureVote createdLectureVote = new LectureVote(userFromResponse, lectureFromResponse, createdVoteModel.Upvote);
+        LectureVote createdLectureVote = createdVoteModel.AsBase();
         return createdLectureVote;
     }
 
@@ -47,9 +48,10 @@ public class LectureVoteGrpcClient : ILectureVoteService
         model.Lecture = GrpcLectureExtension.AsGrpcModel(lecture);
         model.User = GrpcUserExtension.AsGrpcModel(user);
         VoteModel createdVoteModel = await _lectureVoteGrpcClient.GetVoteByIdAsync(model);
-        User userFromResponse = GrpcUserExtension.AsBase(createdVoteModel.User);
-        Lecture lectureFromResponse = GrpcLectureExtension.AsBase(createdVoteModel.Lecture);
-        LectureVote createdLectureVote = new LectureVote(userFromResponse, lectureFromResponse, createdVoteModel.Upvote);
+        // User userFromResponse = GrpcUserExtension.AsBase(createdVoteModel.User);
+        // Lecture lectureFromResponse = GrpcLectureExtension.AsBase(createdVoteModel.Lecture);
+        // LectureVote createdLectureVote = new LectureVote(userFromResponse, lectureFromResponse, createdVoteModel.Upvote);
+        LectureVote createdLectureVote = createdVoteModel.AsBase();
         return createdLectureVote;
     }
 }

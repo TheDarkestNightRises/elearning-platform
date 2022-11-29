@@ -30,11 +30,11 @@ public class TeacherServiceImpl extends TeacherServiceGrpc.TeacherServiceImplBas
 
     @Override
     public void getTeacherByUsername(UserName request, StreamObserver<TeacherModel> responseObserver) {
-        List<Teacher> teachers = teacherRepository.findByUsername(request.getName());
+        List<Teacher> teachers = teacherRepository.findByUsername(request.getUsername());
         if (teachers.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The user is not found")
+                    .setMessage("The teacher is not found")
                     .addDetails(Any.pack(ErrorInfo.newBuilder()
                             .setReason("User not found")
                             .build()))

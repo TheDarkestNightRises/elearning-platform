@@ -1,5 +1,6 @@
 ﻿using Elearn.Application.LogicInterfaces;
 using Elearn.Shared.Dtos;
+using Elearn.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elearn.WebAPI.Controllers;
@@ -22,6 +23,21 @@ public class UserController:ControllerBase
         {
             await userLogic.UpdateUserAsync(dto);
             return Ok();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet("{username}")]
+    public async Task<ActionResult<User>> GetUserAsync(string username)
+    {
+        try
+        {
+            var user = await userLogic.GetUserByUsernameAsync(username);
+            return Ok(user);
         }
         catch (Exception e)
         {

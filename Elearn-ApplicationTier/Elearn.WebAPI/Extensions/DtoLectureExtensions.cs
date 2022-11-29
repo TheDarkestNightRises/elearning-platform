@@ -4,7 +4,7 @@ using Elearn.Shared.Models;
 
 namespace Shared.Extensions;
 
-public static class PostExtensions
+public static class LectureExtensions
 {
     public static LectureDto AsDto(this Lecture lecture) 
     {

@@ -1,0 +1,85 @@
+﻿@page "/ChangeEmail"
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Models
+@using Microsoft.AspNetCore.Components
+@using System.Security.Claims
+@using Elearn.Shared.Dtos
+@inject IUserService _UserService
+
+
+<AuthorizeView>
+    <NotAuthorized>
+        <h3>Please log in to manage your account</h3>
+    </NotAuthorized>
+    <Authorized Context="Auth">
+
+        <EditForm Model="@Dto" OnValidSubmit="ChangeUserEmail">
+            <DataAnnotationsValidator/>
+            <MudGrid Class="d-flex justify-center align-center" Elevation="0">
+                <MudItem xs="12" sm="7">
+                    <MudPaper Class="pa-4">
+                        <h3>
+                            <MudInputLabel Class="d-flex align-center justify-center ">Change Email</MudInputLabel>
+                        </h3>
+                        <MudTextField T="string" Label="Old email" Required="true" @bind-Value="@oldEmail" InputType="InputType.Email"
+                                      For="@(() => oldEmail)" RequiredError="Old password field is required!">
+                        </MudTextField>
+                        <MudTextField T="string" Label="New email" Required="true" @bind-Value="@Dto.Email" InputType="InputType.Email"
+                                      For="@(() => Dto.Email)" RequiredError="New Email field is required!">
+                        </MudTextField>
+                       
+                        
+                        <MudCardActions Class="d-flex justify-center">
+                            <MudButton Class="mx-2" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success">Email</MudButton>
+                        </MudCardActions>
+                    </MudPaper>
+                </MudItem>
+
+            </MudGrid>
+
+
+            <ValidationSummary/>
+        </EditForm>
+
+    </Authorized>
+
+</AuthorizeView>
+
+@code {
+    
+    public UpdateUserDto Dto = new();
+    public string oldEmail;
+    private string? username;
+    public User? CurrentUser;
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    private IEnumerable<Claim>? userClaims;
+    private bool isLoggedIn;
+    
+    
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        
+        if (!isLoggedIn) return;
+
+        userClaims = user.Claims;
+        username = user.Identity!.Name!;
+        
+        CurrentUser = await _UserService.GetUserByUsernameAsync(username);
+        Dto.Password  = CurrentUser.Password; 
+        Dto.Name = CurrentUser.Name;
+    }
+    
+    private async Task ChangeUserEmail()
+    {
+        
+        if ( oldEmail.Equals(CurrentUser?.Email))
+            await _UserService.UpdateUserAsync(Dto);
+        
+    }
+
+}

@@ -14,5 +14,11 @@ public class LectureVoteMapper {
                 .setUser(UserMapper.convertUserToGrpcModel(lectureVote.getUser()))
                 .setUpvote(lectureVote.isUpvote()).build();
     }
-
+    public static LectureVote convertGrpcModelToLectureVote(VoteModel voteModel){
+        return LectureVote.builder()
+                .lecture(LectureMapper.convertGrpcModelToLecture(voteModel.getPost()))
+                .user(UserMapper.convertGrpcModelToUser(voteModel.getUser()))
+                .upvote(voteModel.getUpvote())
+                .build();
+    }
 }

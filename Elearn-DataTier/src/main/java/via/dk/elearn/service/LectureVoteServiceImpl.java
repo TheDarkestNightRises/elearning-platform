@@ -38,18 +38,20 @@ public class LectureVoteServiceImpl extends LectureVoteServiceGrpc.LectureVoteSe
     @Override
     public void voteLecture(VoteModel request, StreamObserver<VoteModel> responseObserver) {
         try {
-            User user = UserMapper.convertGrpcModelToUser(request.getUser());
-            Lecture lecture = LectureMapper.convertGrpcModelToLecture(request.getPost());
-            boolean upvote = request.getUpvote();
+//            User user = UserMapper.convertGrpcModelToUser(request.getUser());
+//            Lecture lecture = LectureMapper.convertGrpcModelToLecture(request.getPost());
+//            boolean upvote = request.getUpvote();
+//
+//            LectureVote lectureVote = new LectureVote(user, lecture, upvote);
+//
+//            LectureVote lectureVoteFromDB = lectureVoteRepository.save(lectureVote);
+//
+//            lectureVote.setUser(user);
+//            lectureVote.setLecture(lecture);
+            LectureVote lectureVote = LectureVoteMapper.convertGrpcModelToLectureVote(request);
+            LectureVote createdLectureVote = lectureVoteRepository.save(lectureVote);
 
-            LectureVote lectureVote = new LectureVote(user, lecture, upvote);
-
-            LectureVote lectureVoteFromDB = lectureVoteRepository.save(lectureVote);
-
-            lectureVote.setUser(user);
-            lectureVote.setLecture(lecture);
-
-            responseObserver.onNext(LectureVoteMapper.convertLectureVoteToGrpcModel(lectureVote));
+            responseObserver.onNext(LectureVoteMapper.convertLectureVoteToGrpcModel(createdLectureVote));
 
             responseObserver.onCompleted();
         }catch (Exception e)
@@ -106,7 +108,8 @@ public class LectureVoteServiceImpl extends LectureVoteServiceGrpc.LectureVoteSe
             {
                 responseObserver.onNext(VoteModel.newBuilder().build());
             }
-            else {
+            else
+            {
                 LectureVote lectureVote = lectureVoteFromDB.get();
                 lectureVote.setUser(user);
                 lectureVote.setLecture(lecture);
