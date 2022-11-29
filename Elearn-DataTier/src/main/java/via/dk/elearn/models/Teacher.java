@@ -1,19 +1,21 @@
 package via.dk.elearn.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
 @Data
 @NoArgsConstructor
+@SuperBuilder
 public class Teacher extends User{
-    @Column
-    private Long teacher_test_property;
 
-    public Teacher(String username, String email, String password, String firstName, String lastName, Country country, Long teacher_test_property) {
-        super(username, email, password, firstName, lastName, country);
-        this.teacher_test_property = teacher_test_property;
+    public Teacher(String username, String email, String name, String password, String role, int security_level) {
+        super(username, email, name, password, role, security_level);
     }
+
 }

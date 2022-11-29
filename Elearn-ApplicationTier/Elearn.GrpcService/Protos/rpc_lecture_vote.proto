@@ -1,0 +1,27 @@
+syntax = "proto3"; // Use the latest proto syntax
+
+option csharp_namespace = "ElearnGrpc"; //Namespace for our proto
+
+import "rpc_lecture.proto";
+import "rpc_user.proto";
+
+service LectureVoteService {
+  rpc VoteLecture (VoteModel) returns (VoteModel);
+  rpc GetLectureVotesCount(LectureModel) returns (VoteCounter);
+  rpc GetVoteById(VoteId) returns (VoteModel);
+}
+message VoteModel{
+  UserModel user = 1;
+  LectureModel lecture = 2;
+  bool upvote = 3;
+}
+
+message VoteCounter{
+  LectureModel lecture = 1;
+  int64 upvoteCount = 2;
+  int64 downvoteCount = 3;
+}
+message VoteId{
+  UserModel user = 1;
+  LectureModel lecture = 2;
+}

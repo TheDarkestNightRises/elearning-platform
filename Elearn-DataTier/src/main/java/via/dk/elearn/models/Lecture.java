@@ -1,12 +1,17 @@
 package via.dk.elearn.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Data
+@Builder
+@AllArgsConstructor
 public class Lecture {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,28 +35,29 @@ public class Lecture {
     private String image;
 
     @Column
-    @Temporal(TemporalType.DATE)
-    private Date published_date;
+
+    private LocalDate published_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_id", nullable = false)
+    @JoinColumn(name = "course_id")
     private Course course;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
 
 
-    public Lecture(String title, String description, String url,String image) {
-        this.title = title;
-        this.description = description;
-        this.url = url;
-        this.body = body;
-        this.image = image;
-    }
+
 
     public Lecture() {
 
+    }
+
+    public Lecture(String title, String url, String image, String body) {
+        this.title = title;
+        this.url = url;
+        this.image = image;
+        this.body = body;
     }
 }

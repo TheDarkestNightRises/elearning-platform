@@ -3,6 +3,7 @@ using Elearn.Application.Logic;
 using Elearn.Application.LogicInterfaces;
 using Elearn.Application.ServiceContracts;
 using Elearn.GrpcService.Client;
+using Elearn.Shared.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.IdentityModel.Tokens;
@@ -18,16 +19,27 @@ AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport
 builder.Services.AddGrpc();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IPostService, PostGrpcClient>();
+builder.Services.AddScoped<ILectureService, LectureGrpcClient>();
 builder.Services.AddScoped<ICommentService, CommentGrpcClient>();
 builder.Services.AddScoped<IUserService, UserGrpcClient>();
+builder.Services.AddScoped<IUserLogic, UserLogic>();
+builder.Services.AddScoped<ISearchService, SearchGrpcClient>();
+builder.Services.AddScoped<IQuestionService, QuestionGrpcClient>();
+builder.Services.AddScoped<ITeacherService, TeacherGrpcClient>();
+builder.Services.AddScoped<ILectureVoteService, LectureVoteGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
-builder.Services.AddScoped<IPostLogic, PostLogic>();
+builder.Services.AddScoped<ILectureLogic, LectureLogic>();
+builder.Services.AddScoped<ISearchLogic, SearchLogic>();
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
+builder.Services.AddScoped<ILectureVoteLogic, LectureVoteLogic>();
+builder.Services.AddScoped<IQuestionLogic,QuestionLogic>();
+builder.Services.AddGrpcClient<SearchGrpcClient>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();
-builder.Services.AddGrpcClient<PostGrpcClient>();
+builder.Services.AddGrpcClient<LectureGrpcClient>();
 builder.Services.AddGrpcClient<UserGrpcClient>();
-
+builder.Services.AddGrpcClient<QuestionGrpcClient>();
+builder.Services.AddGrpcClient<TeacherGrpcClient>();
+builder.Services.AddGrpcClient<LectureVoteGrpcClient>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -42,7 +54,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
-builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 AuthorizationPolicies.AddPolicies(builder.Services);
 
 
@@ -62,17 +73,20 @@ if (app.Environment.IsDevelopment())
 app.UseAuthentication();
 
 app.UseRouting();
+
+app.UseAuthorization();
+
 app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapGrpcService<CommentGrpcClient>().EnableGrpcWeb();
-    endpoints.MapGrpcService<PostGrpcClient>().EnableGrpcWeb();
+    endpoints.MapGrpcService<LectureGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<UserGrpcClient>().EnableGrpcWeb();
-
+    endpoints.MapGrpcService<QuestionGrpcClient>().EnableGrpcWeb();
+    endpoints.MapGrpcService<TeacherGrpcClient>().EnableGrpcWeb();
+    endpoints.MapGrpcService<SearchGrpcClient>().EnableGrpcWeb();
 });
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

@@ -9,23 +9,23 @@ public class CommentDto
     //Actual user needed
     public int AuthorId{ get; set; }
     
-    public Post post{ get; set; }
+    public Lecture Lecture{ get; set; }
     
     public String Text { get; set; }
     
     public DateTime DateCreated { get; set; } 
 
-    public CommentDto(int AuthorId, Post post, string Text, DateTime dateCreated)
+    public CommentDto(int AuthorId, Lecture lecture, string Text, DateTime dateCreated)
     {
         this.AuthorId = AuthorId;
-        this.post = post;
+        this.Lecture = lecture;
         this.Text = Text;
         DateCreated = dateCreated;
     }
     
     public override string ToString()
     {
-        return $"{Id} {AuthorId} {post} {Text} {DateCreated}";
+        return $"{Id} {AuthorId} {Lecture} {Text} {DateCreated}";
     }
 
 }

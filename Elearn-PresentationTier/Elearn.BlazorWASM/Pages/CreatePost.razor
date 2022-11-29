@@ -1,7 +1,7 @@
 @page "/CreatePost"
 @using Elearn.Shared.Dtos
 @using Elearn.HttpClients.Service
-@inject IPostService postService
+@inject ILectureService LectureService
 @inject NavigationManager navMgr
 <h3>CreatePost</h3>
 <div class="form-group field">
@@ -65,9 +65,9 @@
         {
             try
             {
-                PostCreationDto dto = new PostCreationDto(postTitle, postBody, url, "img", "trmo");
-                PostDto postDto = await postService.CreateAsync(dto);
-                navMgr.NavigateTo($"/posts/{postDto.Url}");
+                LectureCreationDto dto = new LectureCreationDto(postTitle, postBody, url, "img", "trmo");
+                LectureDto lectureDto = await LectureService.CreateAsync(dto);
+                navMgr.NavigateTo($"/posts/{lectureDto.Url}");
                 
             }
             catch (Exception e)

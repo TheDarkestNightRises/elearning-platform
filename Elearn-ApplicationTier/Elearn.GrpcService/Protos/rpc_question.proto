@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "rpc_user.proto";
+
+option csharp_namespace = "ElearnGrpc";
+
+
+service QuestionService {
+  rpc GetQuestion (QuestionUrl) returns (QuestionModel);
+  rpc GetAllQuestion (NewQuestionRequest) returns (stream QuestionModel);
+  rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
+  rpc GetQuestionsByUserId(QuestionUserId) returns (stream QuestionModel);
+}
+
+
+message NewQuestionRequest {
+
+}
+
+message QuestionUserId{
+  int64 userId=1;
+
+}
+message QuestionUrl {
+  string url = 1;
+}
+
+message QuestionModel {
+  int64 id = 1;
+  string title = 2;
+  string body = 3;
+  string url = 4;
+  string dateCreated = 5;
+  int64 correctAnswer = 6;
+}

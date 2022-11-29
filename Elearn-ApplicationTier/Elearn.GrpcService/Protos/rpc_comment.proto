@@ -1,0 +1,21 @@
+syntax = "proto3"; // Use the latest proto syntax
+
+
+option csharp_namespace = "ElearnGrpc"; 
+
+
+service CommentService {
+
+  rpc GetAllComments (NewCommentRequest) returns (stream CommentModel);
+  rpc CreateNewComment (CommentModel) returns (CommentModel);
+}
+
+message NewCommentRequest {
+}
+
+message CommentModel {
+  int64 id = 1;
+  string body = 2;
+}
+
+

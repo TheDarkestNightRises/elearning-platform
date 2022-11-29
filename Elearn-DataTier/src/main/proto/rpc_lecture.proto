@@ -1,0 +1,43 @@
+syntax = "proto3"; // Use the latest proto syntax
+
+import "rpc_user.proto";
+import "rpc_date.proto";
+import "rpc_teacher.proto";
+
+option java_multiple_files = true;
+option java_package = "via.dk.elearn.protobuf";
+
+
+service LectureService {
+  rpc GetLecture (LectureUrl) returns (LectureModel);
+  rpc GetAllLectures (NewLectureRequest) returns (stream LectureModel);
+  rpc CreateNewLecture (LectureModel) returns (LectureModel);
+  rpc GetLectureById (LectureId) returns (LectureModel);
+  rpc GetLectureByUserId(LectureUserId) returns (stream LectureModel);
+  rpc GetUpvotedLectureByUserId(LectureUserId) returns(stream LectureModel);
+}
+
+message NewLectureRequest {
+}
+message LectureUserId{
+  int64 userId=1;
+}
+
+message LectureUrl {
+  string url = 1;
+}
+
+message LectureId {
+  int64 id = 1;
+}
+
+message LectureModel {
+  int64 id = 1;
+  string body = 2;
+  string title = 3;
+  string url = 4;
+  string image = 5;
+  TeacherModel teacher = 6;
+  DateModel date = 7;
+}
+
