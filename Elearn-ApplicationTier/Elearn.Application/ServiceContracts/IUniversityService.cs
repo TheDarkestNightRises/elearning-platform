@@ -6,4 +6,5 @@ public interface IUniversityService
 {
     Task<List<Lecture>> GetAllLecturesByUniversity(University university);
     Task<List<University>> GetAllUniversities();
+    Task<University> GetUniversityById(long id);
 }

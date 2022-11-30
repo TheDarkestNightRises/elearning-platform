@@ -1,4 +1,5 @@
 ﻿using Elearn.Shared.Models;
+using ElearnGrpc;
 
 namespace Elearn.GrpcService.Extensions;
 

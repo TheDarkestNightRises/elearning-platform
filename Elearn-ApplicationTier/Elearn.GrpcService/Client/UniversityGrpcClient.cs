@@ -1,6 +1,7 @@
 ﻿using Elearn.Application.ServiceContracts;
 using Elearn.GrpcService.Extensions;
 using Elearn.Shared.Models;
+using ElearnGrpc;
 using Grpc.Core;
 
 namespace Elearn.GrpcService.Client;
@@ -42,5 +43,12 @@ public class UniversityGrpcClient : IUniversityService
             }
         }
         return universities;
+    }
+
+    public async Task<University> GetUniversityById(long id)
+    {
+        var universityId = new UniversityId() { Id = id };
+        var universityGrpcModel = await _universityClient.GetUniversityByIdAsync(universityId);
+        return universityGrpcModel.AsBase();
     }
 }

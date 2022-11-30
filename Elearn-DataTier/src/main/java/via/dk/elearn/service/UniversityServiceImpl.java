@@ -8,16 +8,16 @@ import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.University;
-import via.dk.elearn.protobuf.LectureModel;
-import via.dk.elearn.protobuf.UniversityModel;
-import via.dk.elearn.protobuf.UniversityRequest;
-import via.dk.elearn.protobuf.UniversityServiceGrpc;
+import via.dk.elearn.models.User;
+import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.LectureRepository;
 import via.dk.elearn.repository.UniversityRepository;
 import via.dk.elearn.service.mapper.LectureMapper;
 import via.dk.elearn.service.mapper.UniversityMapper;
+import via.dk.elearn.service.mapper.UserMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @GRpcService
 public class UniversityServiceImpl extends UniversityServiceGrpc.UniversityServiceImplBase {
@@ -69,5 +69,28 @@ public class UniversityServiceImpl extends UniversityServiceGrpc.UniversityServi
             responseObserver.onNext(universityModel);
         }
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public void getUniversityById(UniversityId request, StreamObserver<UniversityModel> responseObserver) {
+        Optional<University> university = universityRepository.findById(request.getId());
+        if(university.isEmpty())
+        {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("The requested user was not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("User not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+        }
+        else
+        {
+            University universityFound = university.get();
+            UniversityModel universityModel = UniversityMapper.convertUniversityToGrpcModel(universityFound);
+            responseObserver.onNext(universityModel);
+            responseObserver.onCompleted();
+        }
     }
 }
