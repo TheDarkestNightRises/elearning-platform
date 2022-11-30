@@ -31,6 +31,7 @@
         <Protobuf Include="Protos\rpc_lecture_vote.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <Protobuf Include="Protos\rpc_teacher.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <Protobuf Include="Protos\rpc_search.proto" GrpcServices="Client" ProtoRoot="Protos\" />
+        <Protobuf Include="Protos\rpc_university.proto" GrpcServices="Client" ProtoRoot="Protos\" />
     </ItemGroup>
 
 </Project>

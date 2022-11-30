@@ -1,6 +1,5 @@
 syntax = "proto3"; // Use the latest proto syntax
 
-import "rpc_user.proto";
 import "rpc_date.proto";
 import "rpc_teacher.proto";
 

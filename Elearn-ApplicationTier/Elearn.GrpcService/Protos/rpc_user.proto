@@ -1,6 +1,7 @@
 ﻿syntax = "proto3"; // Use the latest proto syntax
 
 option csharp_namespace = "ElearnGrpc";
+import "rpc_university.proto";
 
 service UserService {
   rpc GetUserByName (Name) returns (UserModel);
@@ -18,6 +19,7 @@ message UserModel {
   string password =5;
   string role = 6;
   int32 securityLevel = 7;
+  UniversityModel university = 8;
 }
 
 message UserId{

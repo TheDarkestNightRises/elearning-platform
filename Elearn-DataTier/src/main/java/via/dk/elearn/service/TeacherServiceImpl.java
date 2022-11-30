@@ -8,10 +8,7 @@ import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.dk.elearn.models.Teacher;
 import via.dk.elearn.models.User;
-import via.dk.elearn.protobuf.TeacherModel;
-import via.dk.elearn.protobuf.TeacherServiceGrpc;
-import via.dk.elearn.protobuf.UserModel;
-import via.dk.elearn.protobuf.UserName;
+import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.TeacherRepository;
 import via.dk.elearn.service.mapper.TeacherMapper;
 import via.dk.elearn.service.mapper.UserMapper;
@@ -27,9 +24,8 @@ public class TeacherServiceImpl extends TeacherServiceGrpc.TeacherServiceImplBas
     public TeacherServiceImpl(TeacherRepository teacherRepository) {
         this.teacherRepository = teacherRepository;
     }
-
     @Override
-    public void getTeacherByUsername(UserName request, StreamObserver<TeacherModel> responseObserver) {
+    public void getTeacherByUsername(TeacherUsername request, StreamObserver<TeacherModel> responseObserver) {
         List<Teacher> teachers = teacherRepository.findByUsername(request.getUsername());
         if (teachers.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
