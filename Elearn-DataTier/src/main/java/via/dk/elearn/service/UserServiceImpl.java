@@ -6,10 +6,13 @@ import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import via.dk.elearn.models.Teacher;
+import via.dk.elearn.models.University;
 import via.dk.elearn.models.User;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.TeacherRepository;
 import via.dk.elearn.repository.UserRepository;
+import via.dk.elearn.service.mapper.UniversityMapper;
 import via.dk.elearn.service.mapper.UserMapper;
 
 import java.util.List;
@@ -45,7 +48,8 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
 
         UserModel userModel = UserMapper.convertUserToGrpcModel(user.get());
         responseObserver.onNext(userModel);
-        responseObserver.onCompleted();    }
+        responseObserver.onCompleted();
+    }
 
     @Override
     public void getUserByUsername(via.dk.elearn.protobuf.UserName request, StreamObserver<UserModel> responseObserver) {
@@ -73,8 +77,23 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     @Override
     public void createNewUser(UserModel request, StreamObserver<UserModel> responseObserver) {
         User user = UserMapper.convertGrpcModelToUser(request);
-        User userFromDb = userRepository.saveAndFlush(user);
-        UserModel userModel = UserMapper.convertUserToGrpcModel(userFromDb);
+        University university = UniversityMapper.convertGrpcModelToUniversity(request.getUniversity());
+        user.setUniversity(university);
+        UserModel userModel;
+        if(user.getRole().equals("Teacher"))
+        {
+            Teacher teacher = new Teacher(user.getId(), user.getUsername(),user.getEmail(), user.getName(), user.getPassword(), user.getRole(), user.getSecurity_level(), user.getUniversity());
+            Teacher teacherFromDB = teacherRepository.save(teacher);
+            userModel = UserMapper.convertUserToGrpcModel(teacherFromDB);
+        }
+        else
+        {
+            User userFromDb = userRepository.saveAndFlush(user);
+            userModel = UserMapper.convertUserToGrpcModel(userFromDb);
+        }
+        userModel = UserModel.newBuilder(userModel)
+                .setUniversity(request.getUniversity())
+                .build();
         responseObserver.onNext(userModel);
         responseObserver.onCompleted();
     }

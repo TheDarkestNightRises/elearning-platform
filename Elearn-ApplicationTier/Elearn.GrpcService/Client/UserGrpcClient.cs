@@ -30,6 +30,12 @@ public class UserGrpcClient : IUserService
     public async Task<User> CreateNewUserAsync(User user)
     {
         var userModel = user.AsGrpcModel();
+        var universityModel = new UniversityModel()
+        {
+            Id = 2L,
+            Name = "VIA University College" 
+        };
+        userModel.University = universityModel;
         var createdUserFromGrpc = await _userClient.CreateNewUserAsync(userModel);
         return createdUserFromGrpc.AsBase();
     }

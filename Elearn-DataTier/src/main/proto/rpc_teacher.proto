@@ -2,10 +2,9 @@ syntax = "proto3"; // Use the latest proto syntax
 
 option java_multiple_files = true;
 option java_package = "via.dk.elearn.protobuf";
-import "rpc_user.proto";
 
 service TeacherService {
-  rpc getTeacherByUsername(UserName) returns (TeacherModel);
+  rpc getTeacherByUsername(TeacherUsername) returns (TeacherModel);
 }
 
 message TeacherModel {
@@ -17,3 +16,7 @@ message TeacherModel {
   string role = 6;
   int32 securityLevel = 7;
 }
+message TeacherUsername {
+  string username = 1;
+}
+
