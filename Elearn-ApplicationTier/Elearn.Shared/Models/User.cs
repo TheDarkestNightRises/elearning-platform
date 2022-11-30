@@ -9,6 +9,20 @@ public class User
     public string Name { get; set; } //THE NAME IS MISSING
     public string Role { get; set; }
     public int SecurityLevel { get; set; }
+    
+    public University? University { get; set; }
+
+    public User(string username, string password, string email, string name, string role, int securityLevel, University? university)
+    {
+        Username = username;
+        Password = password;
+        Email = email;
+        Name = name;
+        Role = role;
+        SecurityLevel = securityLevel;
+        University = university;
+    }
+
     public User(string username, string password, string email, string name, string role, int securityLevel)
     {
         Username = username;

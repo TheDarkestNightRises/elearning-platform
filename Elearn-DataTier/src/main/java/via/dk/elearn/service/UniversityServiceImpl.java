@@ -4,6 +4,7 @@ import com.google.protobuf.Any;
 import com.google.rpc.ErrorInfo;
 import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
+import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.University;
@@ -18,6 +19,7 @@ import via.dk.elearn.service.mapper.UniversityMapper;
 
 import java.util.List;
 
+@GRpcService
 public class UniversityServiceImpl extends UniversityServiceGrpc.UniversityServiceImplBase {
 
     private UniversityRepository universityRepository;
