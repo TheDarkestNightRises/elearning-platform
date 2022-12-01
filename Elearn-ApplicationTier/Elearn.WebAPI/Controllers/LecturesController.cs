@@ -102,5 +102,25 @@ public class LecturesController : ControllerBase
         }
    
     }
+    
+    [HttpGet("/university-lectures/{universityId}")]
+    public async Task<ActionResult<List<LectureDto>>> GetLectureByUniversityAsync(long universityId)
+    {
+        try
+        {
+            University university = new University()
+            {
+                Id = universityId
+            };
+            var lectures = await _lectureLogic.GetLecturesByUniversityAsync(university);
+            return Ok(lectures.AsDtos());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
+        }
+   
+    }
 
 }

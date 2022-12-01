@@ -5,21 +5,21 @@ namespace Elearn.GrpcService.Extensions;
 
 public static class GrpcUniversityExtension
 {
-    public static UniversityModel AsGrpcModel(this University user)
+    public static UniversityModel AsGrpcModel(this University university)
     {
         return new UniversityModel()
         {
-            Id = user.Id,
-            Name = user.Name,
+            Id = university.Id,
+            Name = university.Name,
         };
     }
 
-    public static University AsBase(this UniversityModel userModel)
+    public static University AsBase(this UniversityModel universityModel)
     {
         return new University()
         {
-            Id = userModel.Id,
-            Name = userModel.Name,
+            Id = universityModel.Id,
+            Name = universityModel.Name,
         };
     }
 }

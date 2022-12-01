@@ -4,5 +4,5 @@ namespace Elearn.Application.LogicInterfaces;
 
 public interface IUniversityLogic
 {
-    Task<List<University>> GetAllUniversities();
+    Task<List<University>> GetAllUniversitiesAsync();
 }

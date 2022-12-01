@@ -4,7 +4,7 @@ namespace Elearn.Application.ServiceContracts;
 
 public interface IUniversityService
 {
-    Task<List<Lecture>> GetAllLecturesByUniversity(University university);
-    Task<List<University>> GetAllUniversities();
-    Task<University> GetUniversityById(long id);
+    Task<List<Lecture>> GetAllLecturesByUniversityAsync(University university);
+    Task<List<University>> GetAllUniversitiesAsync();
+    Task<University> GetUniversityByIdAsync(long id);
 }

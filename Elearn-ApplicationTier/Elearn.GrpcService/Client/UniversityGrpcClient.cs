@@ -16,7 +16,7 @@ public class UniversityGrpcClient : IUniversityService
         _universityClient = new UniversityService.UniversityServiceClient(_grpcChannel);
     }
 
-    public async Task<List<Lecture>> GetAllLecturesByUniversity(University university)
+    public async Task<List<Lecture>> GetAllLecturesByUniversityAsync(University university)
     {
         List<Lecture> lectures = new List<Lecture>();
         using (var call = _universityClient.GetLecturesByUniversity(university.AsGrpcModel()))
@@ -31,7 +31,7 @@ public class UniversityGrpcClient : IUniversityService
         return lectures;
     }
 
-    public async Task<List<University>> GetAllUniversities()
+    public async Task<List<University>> GetAllUniversitiesAsync()
     {
         List<University> universities = new List<University>();
         using (var call = _universityClient.GetUniversities(new UniversityRequest()))
@@ -45,7 +45,7 @@ public class UniversityGrpcClient : IUniversityService
         return universities;
     }
 
-    public async Task<University> GetUniversityById(long id)
+    public async Task<University> GetUniversityByIdAsync(long id)
     {
         var universityId = new UniversityId() { Id = id };
         var universityGrpcModel = await _universityClient.GetUniversityByIdAsync(universityId);
