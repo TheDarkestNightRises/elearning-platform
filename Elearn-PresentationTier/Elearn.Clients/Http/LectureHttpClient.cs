@@ -80,4 +80,15 @@ public class LectureHttpClient : ILectureService
         }
         return await response.Content.ReadFromJsonAsync<List<LectureDto?>>();
     }
+
+    public async Task<List<LectureDto?>> GetLecturesByUniversity(long universityId)
+    {
+        HttpResponseMessage response = await client.GetAsync($"/university-lectures/{universityId}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+        return await response.Content.ReadFromJsonAsync<List<LectureDto?>>();
+    }
 }
