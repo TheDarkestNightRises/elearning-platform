@@ -9,13 +9,13 @@ namespace Elearn.Application.Logic;
 public class LectureLogic : ILectureLogic
 {
     private readonly ILectureService _lectureService;
-    private readonly IUserService _userService;
+    private readonly IUniversityService _universityService;
     private readonly ITeacherService _teacherService;
 
-    public LectureLogic(ILectureService lectureService, IUserService userService, ITeacherService teacherService)
+    public LectureLogic(ILectureService lectureService, IUniversityService universityService, ITeacherService teacherService)
     {
         _lectureService = lectureService;
-        _userService = userService;
+        _universityService = universityService;
         _teacherService = teacherService;
     }
 
@@ -56,6 +56,16 @@ public class LectureLogic : ILectureLogic
     {
         return await _lectureService.GetUpvotedLectureByUserIdAsync(userId);
 
+    }
+
+    public async Task<List<Lecture>> GetLecturesByUniversityAsync(University university)
+    {
+        University validUniversity = await _universityService.GetUniversityById(university.Id);
+        if (validUniversity is null)
+        {
+            throw new Exception("University does not exist");
+        }
+        return await _universityService.GetAllLecturesByUniversity(validUniversity);
     }
 
     private void ValidateCreation(Lecture lecture)

@@ -10,4 +10,5 @@ public interface ILectureLogic
     Task<Lecture?> GetLectureAsync(string url);
     Task<List<Lecture>> GetLectureByUserIdAsync(long userId);
     Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(long userId);
+    Task<List<Lecture>> GetLecturesByUniversityAsync(University university);
 }
