@@ -112,6 +112,15 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
         }
 
 
+    @Override
+    public void deleteUser(UserModel request, StreamObserver<Nothing> responseObserver) {
+        Optional<User> findUser = userRepository.findById(request.getId());
+        User userFound = findUser.get();
+        userRepository.delete(userFound);
+
+        responseObserver.onNext(null);
+        responseObserver.onCompleted();
+    }
 
     @Override
     public void getUserByID(UserId request, StreamObserver<UserModel> responseObserver) {

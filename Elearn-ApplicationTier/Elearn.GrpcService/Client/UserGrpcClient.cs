@@ -56,4 +56,10 @@ public class UserGrpcClient : IUserService
         var userFromGrpc = await _userClient.GetUserByUsernameAsync(userRequested);
         return userFromGrpc.AsBase();
     }
+    
+    public  async Task DeleteUserAsync(User user)
+    {
+        var userModel = user.AsGrpcModel();
+        await _userClient.DeleteUserAsync(userModel);
+    }
 }

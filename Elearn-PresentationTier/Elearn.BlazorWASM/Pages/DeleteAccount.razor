@@ -1,40 +1,31 @@
-﻿@page "/ChangeEmail"
-@using Elearn.HttpClients.Service
-@using Elearn.Shared.Models
-@using Microsoft.AspNetCore.Components
-@using System.Security.Claims
+﻿@page "/DeleteAccount"
 @using Elearn.Shared.Dtos
-@using System.ComponentModel.DataAnnotations
+@using Elearn.Shared.Models
+@using System.Security.Claims
+@using Elearn.HttpClients.Service
 @inject IUserService _UserService
 @inject NavigationManager NavMgr 
 
-
 <AuthorizeView>
     <NotAuthorized>
-        <h3>Please log in to change your email</h3>
+        <h3>Please log in to delete your account</h3>
     </NotAuthorized>
     <Authorized Context="Auth">
 
-        <MudForm Model="@Dto" @ref="form" @bind-IsValid="@success" Class="pb-8">
+        <MudForm @ref="form" @bind-IsValid="@success" Class="pb-8">
 
             <MudGrid Class="d-flex justify-center align-center" Elevation="0">
                 <MudItem xs="12" sm="7">
                     <MudPaper Class="pa-4">
                         <h3>
-                            <MudInputLabel Class="d-flex align-center justify-center ">Change Email</MudInputLabel>
+                            <MudInputLabel Class="d-flex align-center justify-center ">Delete account</MudInputLabel>
                         </h3>
                         <MudTextField T="string" Label="Password" @bind-Value="@userPassword" InputType="InputType.Password"
                                       For="@(() => userPassword)" Validation="@(new Func<string, IEnumerable<string>>(WrongPassword))" Required="true" RequiredError="Old password field is required!">
                         </MudTextField>
-
-                        <MudTextField T="string" Label="New email" Required="true" @bind-Value="@Dto.Email" InputType="InputType.Email"
-                                      For="@(() => Dto.Email)" RequiredError="New Email field is required!" Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})">
-                        </MudTextField>
-
-
+                        
                         <MudCardActions Class="d-flex justify-center pt-4">
-                            <MudButton Class="mx-2" OnClick="ChangeUserEmail" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">Change Email</MudButton>
-                            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">Validate</MudButton>
+                            <MudButton Class="mx-2" OnClick="DeleteUserAccount" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">Delete Account</MudButton>
                             <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.Reset())" Class="mx-2">Reset</MudButton>
                         </MudCardActions>
                     </MudPaper>
@@ -49,11 +40,11 @@
 
 </AuthorizeView>
 
+
 @code {
 
     public bool success;
     public MudForm form;
-    public UpdateUserDto Dto = new();
     public string userPassword;
     private string? username;
     public User? CurrentUser;
@@ -77,20 +68,9 @@
         username = user.Identity!.Name!;
 
         CurrentUser = await _UserService.GetUserByUsernameAsync(username);
-        Dto.Password = CurrentUser.Password;
-        Dto.Name = CurrentUser.Name;
     }
 
-    private async Task ChangeUserEmail()
-    {
-        if (userPassword.Equals(CurrentUser?.Password))
-        {
-            await _UserService.UpdateUserAsync(Dto);
-            NavMgr.NavigateTo($"/ManageAccount");
-        }
-    }
-
-
+    
     private IEnumerable<string> WrongPassword(string pw)
     {
         if (!CurrentUser.Password.Equals(pw))
@@ -98,5 +78,13 @@
             yield return "password is wrong!";
         }
     }
-
+    
+    private async Task DeleteUserAccount()
+    {
+        if (userPassword.Equals(CurrentUser?.Password))
+        {
+            await _UserService.DeleteUserAsync(CurrentUser.Username);
+            NavMgr.NavigateTo($"/Register");
+        }
+    }
 }
