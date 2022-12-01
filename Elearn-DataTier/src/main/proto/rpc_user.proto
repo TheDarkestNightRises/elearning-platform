@@ -10,6 +10,7 @@ service UserService {
   rpc CreateNewUser (UserModel) returns (UserModel);
   rpc GetUserByID(UserId) returns (UserModel);
   rpc UpdateUser(UserModel) returns (UserModel);
+  rpc DeleteUser(UserModel) returns(Nothing);
 }
 
 message UserModel {
@@ -34,3 +35,5 @@ message UserName {
 message Name {
   string name = 1;
 }
+
+message Nothing{}

@@ -9,13 +9,12 @@ namespace Elearn.Clients.Http;
 public class UserHttpClient : IUserService
 {
     private readonly HttpClient client;
-    
+
     public UserHttpClient(HttpClient client)
     {
         this.client = client;
     }
-    
-  
+
 
     public async Task<User> GetUserByUsernameAsync(string? username)
     {
@@ -25,6 +24,7 @@ public class UserHttpClient : IUserService
         {
             throw new Exception(result);
         }
+
         User user = JsonSerializer.Deserialize<User>(result, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
@@ -37,16 +37,22 @@ public class UserHttpClient : IUserService
         Console.WriteLine(dto);
         string dtoAsJson = JsonSerializer.Serialize(dto);
         StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
-        
+
         HttpResponseMessage response = await client.PatchAsync("/user", body);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception(result);
         }
-        
-        
+    }
 
-        
+    public async Task DeleteUserAsync(string username)
+    {
+        HttpResponseMessage response = await client.DeleteAsync($"user/{username}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
     }
 }

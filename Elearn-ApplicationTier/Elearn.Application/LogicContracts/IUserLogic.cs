@@ -7,4 +7,5 @@ public interface IUserLogic
 {
     Task<User> UpdateUserAsync(UpdateUserDto dto);
     Task<User?> GetUserByUsernameAsync(string username);
+    Task DeleteUserAsync(string username);
 }

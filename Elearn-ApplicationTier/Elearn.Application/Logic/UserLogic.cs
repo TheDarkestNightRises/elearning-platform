@@ -19,8 +19,7 @@ public class UserLogic : IUserLogic
     public async Task<User> UpdateUserAsync(UpdateUserDto dto)
     {
         User? user = await _userService.GetUserByNameAsync(dto.Name);
-         Console.Write(user);
-         if (user == null)
+        if (user == null)
          {
              throw new Exception($"User with name {dto.Name} was not found.");
          }
@@ -39,5 +38,15 @@ public class UserLogic : IUserLogic
             throw new Exception($"User with name {username} was not found.");
         }
         return user;
+    }
+
+    public async Task DeleteUserAsync(string username)
+    {
+        User? user = await _userService.GetUserByUsernameAsync(username);
+        if (user == null)
+        {
+            throw new Exception($"User with name {username} was not found.");
+        }
+        await _userService.DeleteUserAsync(user);
     }
 }

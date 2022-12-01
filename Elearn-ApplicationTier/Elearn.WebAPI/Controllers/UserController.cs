@@ -45,4 +45,19 @@ public class UserController:ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpDelete("{username}")]
+    public async Task<ActionResult> DeleteAsync([FromRoute] string username)
+    {
+        try
+        {
+            await userLogic.DeleteUserAsync(username);
+            return Ok();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 }
