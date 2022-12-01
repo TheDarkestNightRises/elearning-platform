@@ -64,7 +64,7 @@ public class AuthLogic : IAuthLogic
             throw new ValidationException("University cannot be null");
         }
 
-        University university = await _universityService.GetUniversityById(dto.UniversityId);
+        University university = await _universityService.GetUniversityByIdAsync(dto.UniversityId);
         if (university is null)
         {
             throw new ValidationException("University does not exist");

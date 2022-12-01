@@ -60,12 +60,12 @@ public class LectureLogic : ILectureLogic
 
     public async Task<List<Lecture>> GetLecturesByUniversityAsync(University university)
     {
-        University validUniversity = await _universityService.GetUniversityById(university.Id);
+        University validUniversity = await _universityService.GetUniversityByIdAsync(university.Id);
         if (validUniversity is null)
         {
             throw new Exception("University does not exist");
         }
-        return await _universityService.GetAllLecturesByUniversity(validUniversity);
+        return await _universityService.GetAllLecturesByUniversityAsync(validUniversity);
     }
 
     private void ValidateCreation(Lecture lecture)

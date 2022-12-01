@@ -13,8 +13,8 @@ public class UniversityLogic : IUniversityLogic
         _universityService = universityService;
     }
 
-    public async Task<List<University>> GetAllUniversities()
+    public async Task<List<University>> GetAllUniversitiesAsync()
     {
-        return await _universityService.GetAllUniversities();
+        return await _universityService.GetAllUniversitiesAsync();
     }
 }
