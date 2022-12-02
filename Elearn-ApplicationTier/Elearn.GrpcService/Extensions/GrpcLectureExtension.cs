@@ -4,7 +4,7 @@ using ElearnGrpc;
 
 namespace Elearn.GrpcService.Extensions;
 
-public static class GrpcLectureExtension
+public static class  GrpcLectureExtension
 {
     public static LectureModel AsGrpcModel(this Lecture lecture)
     {
