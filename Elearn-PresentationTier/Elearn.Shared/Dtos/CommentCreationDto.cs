@@ -5,14 +5,14 @@ public class CommentCreationDto
     //Actual user needed
     public String Text { get; set; }
     
-    public int PostId{ get; set; }
+    public int LectureId{ get; set; }
     
     public int UserId{ get; set; }
 
-    public CommentCreationDto(int UserId, int PostId, string Text)
+    public CommentCreationDto(int UserId, int LectureId, string Text)
     {
         this.UserId = UserId;
-        this.PostId = PostId;
+        this.LectureId = LectureId;
         this.Text = Text;
     }
     

@@ -1,19 +1,27 @@
 ﻿@inject NavigationManager navMgr
 
 <MudToolBar>
-    <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" Class="mr-5" OnClick="GoHome"/>
-    <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
-    <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
-    <MudButton Variant="Variant.Text" OnClick="GoToLectures">Lectures</MudButton>
-    <MudSpacer/>
-    <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
-        <MudButton Variant="Variant.Text" OnClick="GoToProfile">Profile </MudButton>
-    <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="GoToLogin"/>
-    <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
-    <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
-    <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
-    <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToAccountSettings"/>
-        <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">Account Settings </MudButton>
+    <AuthorizeView>
+        <Authorized>
+            <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" Class="mr-5" OnClick="GoHome"/>
+            <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
+            <MudButton Variant="Variant.Text" OnClick="GoToLectures">Lectures</MudButton>
+            <MudSpacer/>
+            <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToProfile">Profile </MudButton>
+            <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToAccountSettings"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">Account Settings </MudButton>
+        </Authorized>
+        <NotAuthorized>
+                    <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="GoToLogin"/>
+                    <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
+                    <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
+                    <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
+                         </NotAuthorized>
+         </AuthorizeView>
+   
+ 
 </MudToolBar>
 
 @code {

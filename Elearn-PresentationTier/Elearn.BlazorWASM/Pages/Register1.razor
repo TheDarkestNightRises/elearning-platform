@@ -5,6 +5,7 @@
 @using Elearn.HttpClients.Service
 @using System.Text.RegularExpressions
 @using System.Security.AccessControl
+@using System.ComponentModel.DataAnnotations
 @inject IAuthService authService
 @inject IUniversityService universityService
 
@@ -17,23 +18,25 @@
                 <h3>
                         <MudInputLabel Class="d-flex align-center justify-center ">Registration</MudInputLabel>
                     </h3>
-                    <MudTextField T="string" Label="Username" Required="true" @bind-Value="newUser.Username" InputType="InputType.Text"
-                                  For="@(() => newUser.Username)" RequiredError="User name field is required!">
+                    <MudTextField T="string"  HelperText="Input the Username" Typo="Typo.subtitle2" Label="Username" Required="true" @bind-Value="newUser.Username" InputType="InputType.Text"
+                                  For="@(() => newUser.Username)" RequiredError="User name field is required!"> 
                     </MudTextField>
-                    <MudTextField T="string" Label="Password" Required="true" @bind-Value="newUser.Password" InputType="InputType.Password"
+                    <MudTextField T="string" HelperText="Input the password" Label="Password"  Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true" @bind-Value="newUser.Password" InputType="InputType.Password"
                                   For="@(() => newUser.Password)" RequiredError="Password filed is required!">
                     </MudTextField>
-                    <MudTextField T="string" Label="Repeat Password" Required="true" @bind-Value="@repeatPassword" InputType="InputType.Password"
-                                  For="@(() => @repeatPassword)" RequiredError="Repeat password field is required!">
+                    <MudTextField T="string" HelperText="Repeat the password" Label="Repeat Password" Required="true"  @bind-Value="@repeatPassword" InputType="InputType.Password" 
+                                  For="@(() => @repeatPassword)" RequiredError="Repeat password field is required!" Validation="@(new Func<string, string>(PasswordMatch))">
                     </MudTextField>
-                    <MudTextField T="string" Label="Email" Required="true" @bind-Value="newUser.Email" InputType="InputType.Email"
+                    <MudTextField T="string" HelperText="InputBase the Email" Label="Email" Required="true" @bind-Value="newUser.Email" InputType="InputType.Email"
                                   For="@(() => newUser.Email)" RequiredError="Email is required!">
                     </MudTextField>
-                    <MudTextField T="string" Label="Name" Required="true" @bind-Value="newUser.Name" InputType="InputType.Text"
+                    <MudTextField T="string" Label="Full Name" Required="true" HelperText="Input the user Full Name" @bind-Value="newUser.Name" InputType="InputType.Text"
                                   For="@(() => newUser.Username)" RequiredError="Name of user is required!">
                     </MudTextField>
-                
-                    <MudSelect @bind-Value="newUser.Role" Label="Select role" HelperText="Enum"  AdornmentColor="Color.Secondary">
+
+
+                 
+                    <MudSelect  Required="true" HelperText="SelectColumn the necessary user role" @bind-Value="newUser.Role" Label="Select role"   AdornmentColor="Color.Secondary">
                         @foreach (var item in Enum.GetValues(typeof(RoleEnum)))
                         {
                             <MudSelectItem Value="@item.ToString()">@item</MudSelectItem>
@@ -63,9 +66,15 @@
 @code {
     public UserCreationDto newUser = new();
     public string repeatPassword;
+
     private List<UniversityDto>? _universityDtos = new List<UniversityDto>();
     private UniversityDto? currentunivesity;
     private Func<UniversityDto, string> convertUniversity = ci => ci?.Name;
+
+    public string[] errors = { };
+    MudTextField<string> pwField1;
+
+
     
     private async Task  CreateNewUserAsync()
     {
@@ -88,5 +97,28 @@
     {
         _universityDtos = await universityService.GetAllUniveritiesAsync();
     }
+    private IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+        {
+            yield return "Password is required!";
+            yield break;
+        }
+        if (pw.Length < 8)
+            yield return "Password must be at least of length 8";
+        if (!Regex.IsMatch(pw, @"[A-Z]"))
+            yield return "Password must contain at least one capital letter";
+        if (!Regex.IsMatch(pw, @"[a-z]"))
+            yield return "Password must contain at least one lowercase letter";
+        if (!Regex.IsMatch(pw, @"[0-9]"))
+            yield return "Password must contain at least one digit";
+    }
 
+    private string PasswordMatch(string arg)
+    {
+        if (pwField1.Value != arg)
+            return "Passwords don't match";
+        return null;
+    }
+    
 }

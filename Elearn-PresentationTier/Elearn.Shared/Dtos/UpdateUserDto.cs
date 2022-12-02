@@ -7,6 +7,7 @@ public class UpdateUserDto
     public string Password { get; set; }
     
     public string Email { get; set; }
+    public string Image { get; set; }
 
     public UpdateUserDto(string username, string password, string email)
     {

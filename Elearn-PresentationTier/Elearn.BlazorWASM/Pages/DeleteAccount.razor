@@ -3,7 +3,8 @@
 @using Elearn.Shared.Models
 @using System.Security.Claims
 @using Elearn.HttpClients.Service
-@inject IUserService _UserService
+@inject IUserService UserService
+@inject IAuthService AuthService
 @inject NavigationManager NavMgr 
 
 <AuthorizeView>
@@ -67,7 +68,7 @@
         userClaims = user.Claims;
         username = user.Identity!.Name!;
 
-        CurrentUser = await _UserService.GetUserByUsernameAsync(username);
+        CurrentUser = await UserService.GetUserByUsernameAsync(username);
     }
 
     
@@ -83,7 +84,8 @@
     {
         if (userPassword.Equals(CurrentUser?.Password))
         {
-            await _UserService.DeleteUserAsync(CurrentUser.Username);
+            await UserService.DeleteUserAsync(CurrentUser.Username);
+            await AuthService.LogoutAsync();
             NavMgr.NavigateTo($"/Register");
         }
     }

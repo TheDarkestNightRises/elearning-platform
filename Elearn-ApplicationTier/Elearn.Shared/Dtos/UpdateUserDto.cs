@@ -7,12 +7,14 @@ public class UpdateUserDto
     public string Password { get; set; }
     
     public string Email { get; set; }
+    public string Image { get; set; }
 
-    public UpdateUserDto(string username, string password, string email)
+    public UpdateUserDto(string username, string password, string email, string image)
     {
         Name = username;
         Password = password;
         Email = email;
+        Image = image;
     }
 
     public UpdateUserDto()
@@ -22,6 +24,6 @@ public class UpdateUserDto
     
     public override string ToString()
     {
-        return $"{Email} {Name} ";
+        return $"{Email} {Name} {Image}";
     }
 }

@@ -9,30 +9,31 @@ namespace Elearn.Application.Logic;
 public class CommentLogic : ICommentLogic
 {
     private readonly ILectureService _lectureService;
-    private readonly ICommentService commentService;
+    private readonly ICommentService _commentService;
+    private readonly IUserService _userService;
 
-    public CommentLogic(ILectureService lectureService, ICommentService commentService)
+    public CommentLogic(ILectureService lectureService, ICommentService commentService, IUserService userService)
     {
-        this._lectureService = lectureService;
-        this.commentService = commentService;
+        _lectureService = lectureService;
+        _commentService = commentService;
+        _userService = userService;
     }
 
     public async Task<Comment> CreateAsync(CommentCreationDto dto)
     { 
-        Lecture? lecture = await _lectureService.GetByIdAsync(dto.PostId);
-        // if (post == null)
-        // {
-        //     throw new Exception($"Lecture was not found.");
-        // }
-        //
-        // User? user = await UserDao.GetByIdAsync(dto.post.authorId);
-        // if (post == null)
-        // {
-        //     throw new Exception($"Current user was not found.");
-        // }
+        Lecture? lecture = await _lectureService.GetByIdAsync(dto.LectureId);
+        User? user = await _userService.GetUserByIdAsync(dto.UserId);
+        if (lecture == null)
+        {
+            throw new Exception($"Lecture was not found.");
+        }
+        if (user == null)
+        {
+            throw new Exception($"User was not found.");
+        }
         ValidateComment(dto);
-        Comment comment = new Comment(1,lecture,dto.Text);
-        Comment created = await commentService.CreateAsync(comment);
+        Comment comment = new Comment(user,lecture,dto.Text);
+        Comment created = await _commentService.CreateAsync(comment);
         return created;
     }
     
@@ -49,7 +50,7 @@ public class CommentLogic : ICommentLogic
 
     public IQueryable<Comment> GetAllCommentsByPostUrlAsync(string url)
     {
-        return commentService.GetAllCommentsByPostUrlAsync(url);
+        return _commentService.GetAllCommentsByPostUrlAsync(url);
     }
 
     private void ValidateComment(CommentCreationDto dto)
