@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class LectureVote {
 
     @Id
-    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

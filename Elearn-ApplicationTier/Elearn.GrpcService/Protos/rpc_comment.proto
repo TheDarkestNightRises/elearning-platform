@@ -1,4 +1,7 @@
-syntax = "proto3"; // Use the latest proto syntax
+syntax = "proto3";
+import "rpc_date.proto";
+import "rpc_user.proto";
+import "rpc_lecture.proto";
 
 
 option csharp_namespace = "ElearnGrpc"; 
@@ -15,7 +18,10 @@ message NewCommentRequest {
 
 message CommentModel {
   int64 id = 1;
-  string body = 2;
+  UserModel author = 2;
+  LectureModel lecture = 3;
+  string text = 4;
+  DateModel date = 5;
 }
 
 

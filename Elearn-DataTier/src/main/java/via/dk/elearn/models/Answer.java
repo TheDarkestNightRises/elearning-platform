@@ -24,7 +24,8 @@ public class Answer {
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
