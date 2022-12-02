@@ -57,8 +57,7 @@ public class AuthLogic : IAuthLogic
         {
             throw new ValidationException("Name cannot be null");
         }
-
-        dto.UniversityId = 2;// temporary
+        
         if (dto.UniversityId == 0)
         {
             throw new ValidationException("University cannot be null");

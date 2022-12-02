@@ -16,6 +16,7 @@ public class UserCreationDto
     
     public int SecurityLevel { get; set; }
     
+    public long UniversityId { get; set; }
     public UserCreationDto(string username, string password, string email, string name, string role)
     {
         Username = username;
@@ -25,6 +26,16 @@ public class UserCreationDto
         Role = role;
     }
     
+    public UserCreationDto(string username, string password, string email, string name, string role, int securityLevel, long universityId)
+    {
+        Username = username;
+        Password = password;
+        Email = email;
+        Name = name;
+        Role = role;
+        SecurityLevel = securityLevel;
+        UniversityId = universityId;
+    }
     public UserCreationDto()
     {
     }

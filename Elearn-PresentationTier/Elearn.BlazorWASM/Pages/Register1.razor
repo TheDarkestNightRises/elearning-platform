@@ -7,6 +7,7 @@
 @using System.Security.AccessControl
 @using System.ComponentModel.DataAnnotations
 @inject IAuthService authService
+@inject IUniversityService universityService
 
 
 <EditForm Model="@newUser" OnValidSubmit="CreateNewUserAsync">
@@ -33,6 +34,7 @@
                                   For="@(() => newUser.Username)" RequiredError="Name of user is required!">
                     </MudTextField>
 
+
                  
                     <MudSelect  Required="true" HelperText="SelectColumn the necessary user role" @bind-Value="newUser.Role" Label="Select role"   AdornmentColor="Color.Secondary">
                         @foreach (var item in Enum.GetValues(typeof(RoleEnum)))
@@ -40,7 +42,14 @@
                             <MudSelectItem Value="@item.ToString()">@item</MudSelectItem>
                         }
                     </MudSelect>
-
+                    
+                    <MudSelect @bind-Value="@currentunivesity" Dense="true" ToStringFunc="@convertUniversity" Label="Select your university" HelperText="University"  AdornmentColor="Color.Secondary">
+                        @foreach (UniversityDto item in _universityDtos)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                
                     <MudCardActions Class="d-flex justify-center">
                         <MudButton Class="mx-2" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" >Create Account</MudButton>
                     </MudCardActions>
@@ -57,8 +66,14 @@
 @code {
     public UserCreationDto newUser = new();
     public string repeatPassword;
+
+    private List<UniversityDto>? _universityDtos = new List<UniversityDto>();
+    private UniversityDto? currentunivesity;
+    private Func<UniversityDto, string> convertUniversity = ci => ci?.Name;
+
     public string[] errors = { };
     MudTextField<string> pwField1;
+
 
     
     private async Task  CreateNewUserAsync()
@@ -67,9 +82,20 @@
             newUser.SecurityLevel = 2;
         if (newUser.Role.Equals(RoleEnum.Teacher.ToString()))
             newUser.SecurityLevel = 4;
-     if(repeatPassword.Equals(newUser.Password))
-         await authService.RegisterAsync(newUser);
 
+        if (currentunivesity is not null) 
+            newUser.UniversityId = currentunivesity.Id;
+        else
+            return; // needs proper validation message
+
+            if(repeatPassword.Equals(newUser.Password)) 
+            await authService.RegisterAsync(newUser);
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _universityDtos = await universityService.GetAllUniveritiesAsync();
     }
     private IEnumerable<string> PasswordStrength(string pw)
     {

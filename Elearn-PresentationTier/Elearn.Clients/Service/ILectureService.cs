@@ -12,5 +12,6 @@ public interface ILectureService
     Task<LectureDto?> GetLectureByUrlAsync(string url);
     Task<List<LectureDto?>> GetLectureByUserIdAsync(long userId);
     Task<List<LectureDto?>> GetUpvotedLectureByUserIdAsync(long userId);
+    Task<List<LectureDto?>> GetLecturesByUniversity(long universityId);
 
 }

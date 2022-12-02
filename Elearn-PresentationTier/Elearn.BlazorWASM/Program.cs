@@ -18,6 +18,7 @@ builder.Services.AddScoped<IAuthService, JwtHttpClient>();
 builder.Services.AddScoped<IUserService, UserHttpClient>();
 builder.Services.AddScoped<IQuestionService, QuestionHttpClient>();
 builder.Services.AddScoped<ILectureVoteService, LectureVoteHttpClient>();
+builder.Services.AddScoped<IUniversityService, UniversityHttpClient>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 AuthorizationPolicies.AddPolicies(builder.Services);
 
