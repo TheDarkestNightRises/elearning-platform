@@ -4,10 +4,10 @@ namespace Elearn.Shared.Models;
 
 public class Comment
 {
-    public int CommentId { get; set; }
+    public long CommentId { get; set; }
     
-    //Actual user needed
-    public int AuthorId{ get; set; }
+ 
+    public User Author{ get; set; }
     
     public Lecture Lecture{ get; set; }
     
@@ -17,20 +17,20 @@ public class Comment
     
     public DateTime DateCreated { get; set; } = DateTime.Now;
 
-    public Comment(int authorId, Lecture lecture, string text)
+    public Comment(User author, Lecture lecture, string text)
     {
-        AuthorId = authorId;
+        Author = author;
         Lecture = lecture;
         Text = text;
     }
 
     public Comment()
     {
-        
     }
+    
     public override string ToString()
     {
-        return $"{CommentId} {AuthorId} {Lecture} {Text} {DateCreated}";
+        return $"{CommentId} {Author} {Lecture} {Text} {DateCreated}";
     }
     
  

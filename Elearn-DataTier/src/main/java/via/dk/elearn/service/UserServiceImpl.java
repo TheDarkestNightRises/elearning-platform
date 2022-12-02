@@ -10,6 +10,7 @@ import via.dk.elearn.models.Teacher;
 import via.dk.elearn.models.University;
 import via.dk.elearn.models.User;
 import via.dk.elearn.protobuf.*;
+import via.dk.elearn.repository.LectureRepository;
 import via.dk.elearn.repository.TeacherRepository;
 import via.dk.elearn.repository.UserRepository;
 import via.dk.elearn.service.mapper.UniversityMapper;
@@ -23,10 +24,13 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
 
     private UserRepository userRepository;
     private TeacherRepository teacherRepository;
+
+    private LectureRepository lectureRepository;
     @Autowired
-    public UserServiceImpl(UserRepository userRepository,TeacherRepository teacherRepository) {
+    public UserServiceImpl(UserRepository userRepository,TeacherRepository teacherRepository,LectureRepository lectureRepository) {
         this.userRepository = userRepository;
         this.teacherRepository = teacherRepository;
+        this.lectureRepository = lectureRepository;
     }
 
     @Override
@@ -117,7 +121,6 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
         Optional<User> findUser = userRepository.findById(request.getId());
         User userFound = findUser.get();
         userRepository.delete(userFound);
-
         responseObserver.onNext(null);
         responseObserver.onCompleted();
     }

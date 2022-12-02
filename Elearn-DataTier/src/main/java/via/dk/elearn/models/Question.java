@@ -31,7 +31,7 @@ public class Question {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

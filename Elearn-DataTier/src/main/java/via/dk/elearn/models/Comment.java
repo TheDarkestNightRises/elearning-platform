@@ -1,34 +1,44 @@
 package via.dk.elearn.models;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "comment")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "body", length = 200)
-    private String body;
+    @Column(name = "text", length = 200)
+    private String text;
 
     @Column
-    @Temporal(TemporalType.DATE)
-    private Date published_date;
+    private LocalDate published_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lecture_id")
     private Lecture lecture;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id")
-    private Question question;
-
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+
+
+    public Comment(String text, LocalDate published_date, Lecture lecture, User user) {
+        this.text = text;
+        this.published_date = published_date;
+        this.lecture = lecture;
+        this.user = user;
+    }
 }
