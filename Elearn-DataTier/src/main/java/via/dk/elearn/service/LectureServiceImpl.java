@@ -10,6 +10,7 @@ import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Teacher;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.LectureRepository;
+import via.dk.elearn.repository.TeacherRepository;
 import via.dk.elearn.service.mapper.LectureMapper;
 import via.dk.elearn.service.mapper.TeacherMapper;
 
@@ -20,11 +21,14 @@ import java.util.Optional;
 public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBase {
 
     private LectureRepository lectureRepository;
+    private TeacherRepository teacherRepository;
 
     @Autowired
-    public LectureServiceImpl(LectureRepository lectureRepository) {
+    public LectureServiceImpl(LectureRepository lectureRepository, TeacherRepository teacherRepository) {
         this.lectureRepository = lectureRepository;
+        this.teacherRepository = teacherRepository;
     }
+
 
     @Override
     public void getLecture(LectureUrl request, StreamObserver<LectureModel> responseObserver) {
@@ -60,7 +64,7 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
             return;
         }
-        for(Lecture lecture : lectures) {
+        for (Lecture lecture : lectures) {
             LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(lectureModel);
         }
@@ -82,7 +86,6 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
     }
 
 
-
     @Override
     public void getLectureById(LectureId request, StreamObserver<LectureModel> responseObserver) {
         Optional<Lecture> lectures = lectureRepository.findById(request.getId());
@@ -95,8 +98,7 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
                             .build()))
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-        }
-        else {
+        } else {
             Lecture lecture = lectures.get();
             LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(lectureModel);
@@ -106,7 +108,8 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
 
     @Override
     public void getLectureByUserId(LectureUserId request, StreamObserver<LectureModel> responseObserver) {
-        List<Lecture> lectures = lectureRepository.findUserLecturesById(request.getUserId());
+        Optional<Teacher> teacher = teacherRepository.findById(request.getUserId());
+        List<Lecture> lectures = lectureRepository.findAllByTeacher(teacher.get());
         if (lectures.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
@@ -116,13 +119,15 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
                             .build()))
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-        }
-        else {
-            Lecture lecture = lectures.get(0);
-            LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
-            responseObserver.onNext(lectureModel);
+        } else {
+
+            for (Lecture lecture : lectures) {
+                LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
+                responseObserver.onNext(lectureModel);
+            }
             responseObserver.onCompleted();
-        }   }
+        }
+    }
 
     @Override
     public void getUpvotedLectureByUserId(LectureUserId request, StreamObserver<LectureModel> responseObserver) {
@@ -136,11 +141,12 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
                             .build()))
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-        }
-        else {
-            Lecture lecture = lectures.get(0);
-            LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
-            responseObserver.onNext(lectureModel);
+        } else {
+            for(Lecture lecture : lectures) {
+                LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
+                responseObserver.onNext(lectureModel);
+            }
             responseObserver.onCompleted();
-        }    }
+        }
+    }
 }

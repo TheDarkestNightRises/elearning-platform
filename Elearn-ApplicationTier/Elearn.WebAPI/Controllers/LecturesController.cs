@@ -26,7 +26,7 @@ public class LecturesController : ControllerBase
             Lecture lecture = dto.AsBaseFromCreation();
             Lecture created = await _lectureLogic.CreateAsync(lecture);
             LectureDto createdDto = created.AsDto();
-            return Created($"/lectures/{createdDto.Url}", createdDto);// ???
+            return Created($"/Lectures/{createdDto.Url}", createdDto);// ???
         }
         catch (Exception e)
         {
@@ -51,7 +51,7 @@ public class LecturesController : ControllerBase
    
     }
 
-    [HttpGet("/get-lecture/{url}")]
+    [HttpGet("{url}")]
     public async Task<ActionResult<LectureDto>> GetLectureAsync(string url)
     {
         try
@@ -70,13 +70,13 @@ public class LecturesController : ControllerBase
         }
     }
     
-    [HttpGet("/user-lecture/{userId}")]
-    public async Task<ActionResult<List<LectureDto>>> GetLectureByUserIdAsync(long userId)
+    [HttpGet, Route("/Teachers/{teacherId}/lectures")]
+    public async Task<ActionResult<List<LectureDto>>> GetLectureByUserIdAsync(long teacherId)
     {
         try
         {   
             
-            var lectures = await _lectureLogic.GetLectureByUserIdAsync(userId);
+            var lectures = await _lectureLogic.GetLectureByUserIdAsync(teacherId);
             return Ok(lectures.AsDtos());
         }
         catch (Exception e)
@@ -87,7 +87,7 @@ public class LecturesController : ControllerBase
    
     }
     
-    [HttpGet("/upvote-lecture/{userId}")]
+    [HttpGet, Route("/Users/{userId}/history")]
     public async Task<ActionResult<List<LectureDto>>> GetUpvotedLectureByUserIdAsync(long userId)
     {
         try
@@ -103,7 +103,7 @@ public class LecturesController : ControllerBase
    
     }
     
-    [HttpGet("/university-lectures/{universityId}")]
+    [HttpGet, Route("/Universities/{universityId}/lectures")]
     public async Task<ActionResult<List<LectureDto>>> GetLectureByUniversityAsync(long universityId)
     {
         try

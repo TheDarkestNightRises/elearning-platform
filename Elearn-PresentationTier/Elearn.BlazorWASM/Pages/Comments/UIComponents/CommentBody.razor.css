@@ -1,0 +1,33 @@
+﻿.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    text-align: center;
+    margin-top: 5px;
+    border-radius: 15px;
+    background-color: #3C4048;
+    padding-right: 5px;
+    font-size: 12pt;
+    color: #e3e2e2;
+    display: inline-block;
+
+}
+
+.flex-container {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: inline-flex;
+    justify-content: center;
+    text-align: left;
+}
+
+.comment-content{
+    margin-left:5px;
+    color: #e3e2e2;
+}
+
+
+
+
+
+

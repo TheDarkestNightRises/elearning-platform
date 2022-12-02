@@ -15,7 +15,7 @@ public class LectureVoteHttpClient : ILectureVoteService
     }
     public async Task<LectureVoteDto> CreateAsync(LectureVoteDto dto)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/LectureVote",dto);
+        HttpResponseMessage response = await client.PostAsJsonAsync("/LectureVotes",dto);
         string content = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -31,7 +31,7 @@ public class LectureVoteHttpClient : ILectureVoteService
 
     public async Task<LectureVoteDto> GetByIdAsync(string username, string url)
     {
-        HttpResponseMessage response = await client.GetAsync($"/LectureVote/?username={username}&url={url}");
+        HttpResponseMessage response = await client.GetAsync($"/LectureVotes/?username={username}&url={url}");
         if (!response.IsSuccessStatusCode)
         {
             string content = await response.Content.ReadAsStringAsync();
@@ -42,7 +42,7 @@ public class LectureVoteHttpClient : ILectureVoteService
 
     public async Task<LectureVoteCounterDto> GetVoteCounter(string url)
     {
-        HttpResponseMessage response = await client.GetAsync($"/LectureVote/{url}");
+        HttpResponseMessage response = await client.GetAsync($"/LectureVotes/{url}");
         if (!response.IsSuccessStatusCode)
         {
             string content = await response.Content.ReadAsStringAsync();

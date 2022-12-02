@@ -1,0 +1,76 @@
+@using Elearn.BlazorWASM
+@using Elearn.HttpClients.Service
+@inject ILectureService LectureService
+@inject IUniversityService UniversityService
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@using Elearn.Shared.Dtos
+
+<h2>Latest lectures<br/> Here ! </h2>
+
+@if (_lectureDtos == null)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+}
+else
+{
+    <MudSelect @bind-Value="@currentunivesity" Dense="true" ToStringFunc="@convertUniversity" Label="University" Variant="Variant.Outlined " Clearable="true">
+        @foreach (UniversityDto item in _universityDtos)
+        {
+            <MudSelectItem Value="@item" />
+        }
+    </MudSelect>
+    <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Search" Color="Color.Info" OnClick="GetLecturesByCurrentUniversity">Search</MudButton>
+    @if (_lectureDtos.Count == 0)
+    {
+        <span> No lectures found</span>
+    }
+    else
+    {
+        <MudGrid Justify="Justify.FlexStart">
+            @foreach (var post in _lectureDtos)
+            {
+                <MudItem xs="3">
+                    <LectureCard Lecture="@post"></LectureCard>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+}
+
+
+@code {
+
+    private List<LectureDto>? _lectureDtos;
+    private List<UniversityDto>? _universityDtos;
+    private UniversityDto? currentunivesity;
+    private Func<UniversityDto, string> convertUniversity = ci => ci?.Name;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _lectureDtos = await LectureService.GetLecturesAsync();
+        _universityDtos = await UniversityService.GetAllUniveritiesAsync();
+    }
+
+    public async Task GetLecturesByCurrentUniversity()
+    {
+        try
+        {
+            if (currentunivesity is not null)
+            {
+                _lectureDtos = await LectureService.GetLecturesByUniversity(currentunivesity.Id);
+            }
+            else
+            {
+                _lectureDtos = await LectureService.GetLecturesAsync();
+            }
+        }
+        catch (Exception e)
+        {
+            _lectureDtos = new List<LectureDto>();
+        }
+        
+        
+        Console.WriteLine("On change activated");
+    }
+
+}

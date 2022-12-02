@@ -5,7 +5,7 @@ namespace Elearn.HttpClients.Service;
 
 public interface IUserService
 {
-    Task<User> GetUserByUsernameAsync(string? username);
+    Task<UserDto> GetUserByUsernameAsync(string? username);
     
     Task UpdateUserAsync(UpdateUserDto dto);
 
