@@ -16,20 +16,20 @@ public class UserHttpClient : IUserService
     }
 
 
-    public async Task<User> GetUserByUsernameAsync(string? username)
+    public async Task<UserDto> GetUserByUsernameAsync(string? username)
     {
-        HttpResponseMessage response = await client.GetAsync($"user/{username}");
+        HttpResponseMessage response = await client.GetAsync($"Users/{username}");
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception(result);
         }
 
-        User user = JsonSerializer.Deserialize<User>(result, new JsonSerializerOptions
+        UserDto userDto = JsonSerializer.Deserialize<UserDto>(result, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         })!;
-        return user;
+        return userDto;
     }
 
     public async Task UpdateUserAsync(UpdateUserDto dto)
@@ -38,7 +38,7 @@ public class UserHttpClient : IUserService
         string dtoAsJson = JsonSerializer.Serialize(dto);
         StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
 
-        HttpResponseMessage response = await client.PatchAsync("/user", body);
+        HttpResponseMessage response = await client.PatchAsync("/Users", body);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -48,7 +48,7 @@ public class UserHttpClient : IUserService
 
     public async Task DeleteUserAsync(string username)
     {
-        HttpResponseMessage response = await client.DeleteAsync($"user/{username}");
+        HttpResponseMessage response = await client.DeleteAsync($"Users/{username}");
         if (!response.IsSuccessStatusCode)
         {
             string content = await response.Content.ReadAsStringAsync();

@@ -15,16 +15,16 @@ public class CommentHttpClient : ICommentService
         this.client = client;
     }
 
-    public async Task<Comment> Create(CommentCreationDto dto)
+    public async Task<CommentDto> Create(CommentCreationDto dto)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/comments", dto);
+        HttpResponseMessage response = await client.PostAsJsonAsync("/Comments", dto);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception(result);
         }
 
-        Comment comment = JsonSerializer.Deserialize<Comment>(result, new JsonSerializerOptions
+        CommentDto comment = JsonSerializer.Deserialize<CommentDto>(result, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         })!;
@@ -34,7 +34,7 @@ public class CommentHttpClient : ICommentService
     public async Task<List<CommentDto>> GetCommentsByPostUrlAsync(string url)
     {
         //Todo: Refactor this so it fits with dtos
-        return await client.GetFromJsonAsync<List<CommentDto>>($"/comments/{url}");
+        return await client.GetFromJsonAsync<List<CommentDto>>($"/Comments/{url}");
     }
     
 }

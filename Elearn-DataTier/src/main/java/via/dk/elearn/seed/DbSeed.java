@@ -81,7 +81,7 @@ public class DbSeed implements CommandLineRunner {
 
 
         //add students
-        Student student = new Student("Dexter","email2","Dexter Morgan","bloodanalyst", "placeholder string","student",1);
+        Student student = new Student("Dexter","email2","Dexter Morgan","bloodanalyst", "placeholder string","Student",1, createdUniversity1);
         Student createdStudent = studentRepository.save(student);
 
         //add courses

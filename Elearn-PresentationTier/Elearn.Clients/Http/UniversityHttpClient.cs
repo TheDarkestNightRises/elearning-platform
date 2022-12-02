@@ -14,7 +14,7 @@ public class UniversityHttpClient : IUniversityService
     }
     public async Task<List<UniversityDto>> GetAllUniveritiesAsync()
     {
-        HttpResponseMessage response = await client.GetAsync("/University");
+        HttpResponseMessage response = await client.GetAsync("/Universities");
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {

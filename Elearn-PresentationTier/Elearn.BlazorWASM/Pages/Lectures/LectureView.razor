@@ -1,0 +1,38 @@
+@page "/lectures/{url}"
+@using Elearn.Shared.Models
+@inject ILectureService LectureService
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@using Elearn.BlazorWASM.Pages.Comments.UIComponents
+
+
+@if (currentLecture == null)
+{
+    <span>Getting the blog post...</span>
+}
+else
+{
+    <MudText Align="Align.Center" Typo="Typo.h3" Class="mt-1 my-9"> @currentLecture.Title </MudText>
+    <MudImage Class="card-img" Src="@currentLecture.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
+    <MudCard Class="mx-auto pa-6 mt-12">
+        @((MarkupString)currentLecture.Body)
+    </MudCard>
+}
+<LectureVote url="@currentLecture.Url"></LectureVote>
+<CreateComment CurrentLecture="@currentLecture"></CreateComment>
+<Comments Url="@Url"></Comments>
+
+
+@code {
+    private LectureDto? currentLecture;
+
+    [Parameter]
+    public String Url { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentLecture = await LectureService.GetLectureByUrlAsync(Url);
+    }
+
+}

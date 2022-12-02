@@ -13,6 +13,7 @@ public class TeacherMapper {
                 .setEmail(user.getEmail())
                 .setName(user.getName())
                 .setPassword(user.getPassword())
+                .setImage(user.getImage())
                 .setRole(user.getRole())
                 .setSecurityLevel(user.getSecurity_level())
                 .build();
@@ -25,6 +26,7 @@ public class TeacherMapper {
                 .email(userModel.getEmail())
                 .name(userModel.getName())
                 .password(userModel.getPassword())
+                .image(userModel.getImage())
                 .role(userModel.getRole())
                 .security_level(userModel.getSecurityLevel())
                 .build();

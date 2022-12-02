@@ -18,7 +18,7 @@ public class QuestionHttpClient : IQuestionService
     
     public async Task<IEnumerable<QuestionDto>> GetAllQuestionsAsync()
     {
-        HttpResponseMessage response = await client.GetAsync("questions");
+        HttpResponseMessage response = await client.GetAsync("Questions");
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -34,7 +34,7 @@ public class QuestionHttpClient : IQuestionService
 
     public async Task<QuestionDto> GetQuestionByUrlAsync(string url)
     {
-        HttpResponseMessage response = await client.GetAsync($"questions/{url}");
+        HttpResponseMessage response = await client.GetAsync($"Questions/{url}");
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -49,7 +49,7 @@ public class QuestionHttpClient : IQuestionService
 
     public async Task<List<QuestionDto?>> GetQuestionByUserIdAsync(long userId)
     {
-        HttpResponseMessage response = await client.GetAsync($"/upvote-lecture/{userId}");
+        HttpResponseMessage response = await client.GetAsync($"/Users/{userId}/questions");
         if (!response.IsSuccessStatusCode)
         {
             string content = await response.Content.ReadAsStringAsync();

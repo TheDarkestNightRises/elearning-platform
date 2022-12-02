@@ -86,7 +86,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
         UserModel userModel;
         if(user.getRole().equals("Teacher"))
         {
-            Teacher teacher = new Teacher(user.getId(), user.getUsername(),user.getEmail(), user.getName(), user.getPassword(), user.getRole(), user.getSecurity_level(), user.getUniversity());
+            Teacher teacher = new Teacher(user.getUsername(),user.getEmail(), user.getName(), user.getPassword(), user.getImage(), user.getRole(), user.getSecurity_level(), user.getUniversity());
             Teacher teacherFromDB = teacherRepository.save(teacher);
             userModel = UserMapper.convertUserToGrpcModel(teacherFromDB);
         }
@@ -95,11 +95,11 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
             User userFromDb = userRepository.saveAndFlush(user);
             userModel = UserMapper.convertUserToGrpcModel(userFromDb);
         }
-        userModel = UserModel.newBuilder(userModel)
-                .setUniversity(request.getUniversity())
-                .build();
-        responseObserver.onNext(userModel);
-        responseObserver.onCompleted();
+//        userModel = UserModel.newBuilder(userModel)
+//                .setUniversity(request.getUniversity())
+//                .build();
+//        responseObserver.onNext(userModel);
+//        responseObserver.onCompleted();
     }
 
     @Override
