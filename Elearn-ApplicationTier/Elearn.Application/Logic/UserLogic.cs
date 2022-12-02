@@ -26,6 +26,7 @@ public class UserLogic : IUserLogic
          var updated = user;
          updated.Password = dto.Password;
          updated.Email = dto.Email;
+         updated.Image = dto.Image;
          await _userService.UpdateUserAsync(updated);
          return updated;
     }

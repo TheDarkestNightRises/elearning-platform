@@ -9,16 +9,17 @@ public class UserCreationDto
     public string Email { get; set; }
     
     public string Name { get; set; }
-    
+    public string Image { get; set; }
     public string Role { get; set; }
     
     public int SecurityLevel { get; set; }
     
     public long UniversityId { get; set; }
 
-    public UserCreationDto(string username, string password, string email, string name, string role, int securityLevel)
+    public UserCreationDto(string username, string image,string password, string email, string name, string role, int securityLevel)
     {
         Username = username;
+        Image = image;
         Password = password;
         Email = email;
         Name = name;

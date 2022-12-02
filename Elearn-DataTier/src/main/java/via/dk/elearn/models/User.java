@@ -1,7 +1,7 @@
 package via.dk.elearn.models;
 
+
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -30,6 +30,10 @@ public class User {
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Lob
+    @Column(name = "image")
+    private String image;
 //
 //    @Column(name = "first_name", nullable = false)
 //    private String firstName;
@@ -54,14 +58,27 @@ public class User {
     @JoinColumn(name = "university_id") /// Nullable??
     private University university;
 
-    public User(Long id, String username, String email, String name, String password, String role, int security_level) {
+    public User(Long id, String username, String email, String name, String password, String image, String role, int security_level, University university) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.name = name;
         this.password = password;
+        this.image = image;
         this.role = role;
         this.security_level = security_level;
+        this.university = university;
+    }
+
+    public User(String username, String email, String name, String password, String image, String role, int security_level, University university) {
+        this.username = username;
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.image = image;
+        this.role = role;
+        this.security_level = security_level;
+        this.university = university;
     }
 
     public User(String username, String email, String name, String password, String role, int security_level) {
@@ -73,15 +90,7 @@ public class User {
         this.security_level = security_level;
     }
 
-    public User(String username, String email, String name, String password, String role, int security_level, University university) {
-        this.username = username;
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.role = role;
-        this.security_level = security_level;
-        this.university = university;
-    }
+
 
     @Override
     public String toString() {
