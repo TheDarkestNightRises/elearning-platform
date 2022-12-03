@@ -18,6 +18,7 @@ public class DeleteOwnQuestionLogic
 
     public async Task<DeleteOwnQuestion>CreaateAsync(Question question)
     {
+
         throw new NotImplementedException();
     }
 }

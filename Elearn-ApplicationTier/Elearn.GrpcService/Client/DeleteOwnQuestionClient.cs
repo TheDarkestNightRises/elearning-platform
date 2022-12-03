@@ -16,22 +16,26 @@ public class DeleteOwnQuestionClient : IDeleteOwnQuestionLogic
         throw new NotImplementedException();
     }
 
-    public Task<DeleteOwnQuestion> DeleteOwnQuestionAsync(DeleteOwnQuestion deleteOwnQuestion)
+    public async Task<DeleteOwnQuestion> DeleteOwnQuestionAsync(DeleteOwnQuestion deleteOwnQuestion)
+
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<Question>> DeleteOwnQuestionAsync(List<DeleteOwnQuestion> deleteOwnQuestion)
+    public async Task<List<Question>> DeleteOwnQuestionAsync(List<DeleteOwnQuestion> deleteOwnQuestion)
+
     {
         throw new NotImplementedException();
     }
 
-    public Task<Question?> DeleteOwnQuestionAsync(int questionId)
+    public async Task<Question?> DeleteOwnQuestionAsync(int questionId)
+
     {
         throw new NotImplementedException();
     }
 
-    public Task<Question?> DeleteOwnQuestion(DeleteOwnQuestionDto deleteOwnQuestionDto)
+    public async Task<Question?> DeleteOwnQuestion(DeleteOwnQuestionDto deleteOwnQuestionDto)
+
     {
         throw new NotImplementedException();
     }
