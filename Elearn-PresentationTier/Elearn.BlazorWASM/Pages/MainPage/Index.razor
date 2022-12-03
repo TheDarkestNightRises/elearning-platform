@@ -1,7 +1,10 @@
 ﻿@page "/"
+@inject IStringLocalizer<App> Localizer
+
 @using Elearn.BlazorWASM.Pages.MainPage.UIComponents
 @using Elearn.BlazorWASM.Pages.Lectures.UIComponents
 
+<h1>@Localizer["welcome"]</h1>
 <PageTitle> Educational App </PageTitle>
 <Hero></Hero>
 <Lectures></Lectures>
