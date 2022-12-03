@@ -10,7 +10,5 @@ public interface ILectureService
     Task<Lecture?> GetByIdAsync(int id);
     Task<List<Lecture>> GetLectureByUserIdAsync(long userId);
     Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(long userId);
-
-
     Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize);
 }

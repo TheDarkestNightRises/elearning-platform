@@ -1,19 +1,15 @@
 syntax = "proto3";
 import "rpc_user.proto";
+import "rpc_pagination.proto";
 
 option csharp_namespace = "ElearnGrpc";
 
 
 service QuestionService {
   rpc GetQuestion (QuestionUrl) returns (QuestionModel);
-  rpc GetAllQuestion (NewQuestionRequest) returns (stream QuestionModel);
+  rpc GetAllQuestion (PaginationModel) returns (stream QuestionModel);
   rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
   rpc GetQuestionsByUserId(QuestionUserId) returns (stream QuestionModel);
-}
-
-
-message NewQuestionRequest {
-
 }
 
 message QuestionUserId{

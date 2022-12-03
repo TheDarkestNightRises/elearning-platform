@@ -47,7 +47,7 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
     }
 
     @Override
-    public void getAllQuestion(Pagination request, StreamObserver<QuestionModel> responseObserver) {
+    public void getAllQuestion(PaginationModel request, StreamObserver<QuestionModel> responseObserver) {
         Pageable sortedByDate =
                 PageRequest.of(request.getPageNumber(), request.getPageSize(), Sort.by("date").descending());
         Page<Question> questions = questionRepository.findAll(sortedByDate);
