@@ -47,4 +47,11 @@ public class QuestionLogic : IQuestionLogic
     {
         throw new NotImplementedException();
     }
+
+    public async Task<List<Question>> GetQuestionsAsync(int pageNumber, int pageSize)
+    {
+        var questions = await _questionService.GetAllQuestionsAsync(pageNumber,pageSize);
+        if (questions is null) throw new Exception($"Lectures not found for {pageNumber} , {pageSize}");
+        return questions;
+    }
 }

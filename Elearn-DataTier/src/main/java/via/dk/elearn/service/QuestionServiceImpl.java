@@ -6,6 +6,10 @@ import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import via.dk.elearn.models.Question;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.QuestionRepository;
@@ -43,27 +47,17 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
     }
 
     @Override
-    public void getAllQuestion(NewQuestionRequest request, StreamObserver<QuestionModel> responseObserver) {
-        List<Question> questions = questionRepository.findAll();
-        if (questions.isEmpty()) {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The questions are not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Questions not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-            responseObserver.onCompleted();
-        } else {
-            for (Question question : questions) {
-                QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
-                responseObserver.onNext(questionModel);
-            }
-            responseObserver.onCompleted();
+    public void getAllQuestion(PaginationModel request, StreamObserver<QuestionModel> responseObserver) {
+        Pageable sortedByDate =
+                PageRequest.of(request.getPageNumber(), request.getPageSize());
+        Page<Question> questions = questionRepository.findAll(sortedByDate);
+        for (Question question : questions) {
+            QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
+            responseObserver.onNext(questionModel);
         }
+        responseObserver.onCompleted();
     }
-
+    
     @Override
     public void createNewQuestion(QuestionModel request, StreamObserver<QuestionModel> responseObserver) {
         Question question = QuestionMapper.convertGrpcModelToQuestion(request);
@@ -92,5 +86,6 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
                 responseObserver.onNext(questionModel);
             }
             responseObserver.onCompleted();
-        }    }
+        }
+    }
 }

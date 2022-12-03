@@ -8,6 +8,10 @@ using Elearn.HttpClients.Service;
 using Microsoft.AspNetCore.Components.Authorization;
 using MudBlazor.Services;
 using Shared.Auth;
+using Microsoft.JSInterop;
+using System.Globalization;
+using Blazored.LocalStorage;
+using Elearn.BlazorWASM.Localization;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -20,10 +24,11 @@ builder.Services.AddScoped<IQuestionService, QuestionHttpClient>();
 builder.Services.AddScoped<ILectureVoteService, LectureVoteHttpClient>();
 builder.Services.AddScoped<IUniversityService, UniversityHttpClient>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 AuthorizationPolicies.AddPolicies(builder.Services);
-
-
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7206") });
+builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddMudServices();
-
-await builder.Build().RunAsync();
+var host = builder.Build();
+await host.SetDefaultCulture();
+await host.RunAsync();

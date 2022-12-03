@@ -19,10 +19,10 @@ public class LectureGrpcClient : ILectureService
         _lectureClient = new LectureService.LectureServiceClient(_grpcChannel);
     }
 
-    public async Task<List<Lecture>> GetAllPostsAsync()
+    public async Task<List<Lecture>> GetAllLecturesAsync()
     {
         List<Lecture> lectures = new List<Lecture>();
-        using (var call = _lectureClient.GetAllLectures(new NewLectureRequest()))
+        using (var call = _lectureClient.GetAllLectures(new PaginationModel()))
         {
             while (await call.ResponseStream.MoveNext())
             {
@@ -111,8 +111,24 @@ public class LectureGrpcClient : ILectureService
 
         return lectures;     }
 
-   
-
+    public async Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize)
+    {
+        List<Lecture> lectures = new List<Lecture>();
+        PaginationModel pagination = new PaginationModel
+        {
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+        };
+        using (var call = _lectureClient.GetAllLectures(pagination))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentLecture = call.ResponseStream.Current;
+                lectures.Add(currentLecture.AsBase());
+            }
+        }
+        return lectures;
+    }
 }
 
 

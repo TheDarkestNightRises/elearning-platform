@@ -17,11 +17,11 @@ public class QuestionGrpcClient : IQuestionService
             new Channel("localhost:8843", ChannelCredentials.Insecure);
         _questionClient = new QuestionService.QuestionServiceClient(_grpcChannel);
     }
-    
+
     public async Task<List<Question>> GetAllQuestionsAsync()
     {
         List<Question> questions = new List<Question>();
-        using (var call = _questionClient.GetAllQuestion(new NewQuestionRequest()))
+        using (var call = _questionClient.GetAllQuestion(new PaginationModel()))
         {
             while (await call.ResponseStream.MoveNext())
             {
@@ -29,6 +29,7 @@ public class QuestionGrpcClient : IQuestionService
                 questions.Add(currentQuestion.AsBase());
             }
         }
+
         return questions;
     }
 
@@ -47,17 +48,36 @@ public class QuestionGrpcClient : IQuestionService
     public async Task<List<Question>> GetQuestionByUserIdAsync(int userId)
     {
         List<Question> questions = new List<Question>();
-               var request = new QuestionUserId() { UserId = userId };
-               using (var call = _questionClient.GetQuestionsByUserId(new QuestionUserId(request)))
-               {
-                   while (await call.ResponseStream.MoveNext())
-                   {
-                       var currentQuestion = call.ResponseStream.Current;
-                       questions.Add(currentQuestion.AsBase());
-                   }
-               }
-       
-               return questions; 
+        var request = new QuestionUserId() { UserId = userId };
+        using (var call = _questionClient.GetQuestionsByUserId(new QuestionUserId(request)))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentQuestion = call.ResponseStream.Current;
+                questions.Add(currentQuestion.AsBase());
+            }
+        }
+
+        return questions;
+    }
+
+    public async Task<List<Question>> GetAllQuestionsAsync(int pageNumber, int pageSize)
+    {
+        List<Question> questions = new List<Question>();
+        PaginationModel pagination = new PaginationModel
+        {
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+        };
+        using (var call = _questionClient.GetAllQuestion(pagination))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentQuestion = call.ResponseStream.Current;
+                questions.Add(currentQuestion.AsBase());
+            }
+        }
+
+        return questions;
     }
 }
-

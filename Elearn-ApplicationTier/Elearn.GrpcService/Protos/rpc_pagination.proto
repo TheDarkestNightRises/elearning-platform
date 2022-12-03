@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option csharp_namespace = "ElearnGrpc";
+
+message PaginationModel {
+  int32 pageNumber = 1;
+  int32 pageSize = 2;
+}
