@@ -71,12 +71,12 @@ public class LecturesController : ControllerBase
     }
     
     [HttpGet, Route("/Teachers/{teacherId}/lectures")]
-    public async Task<ActionResult<List<LectureDto>>> GetLectureByUserIdAsync(long teacherId)
+    public async Task<ActionResult<List<LectureDto>>> GetLectureByTeacherIdAsync(long teacherId)
     {
         try
         {   
             
-            var lectures = await _lectureLogic.GetLectureByUserIdAsync(teacherId);
+            var lectures = await _lectureLogic.GetLectureByTeacherIdAsync(teacherId);
             return Ok(lectures.AsDtos());
         }
         catch (Exception e)

@@ -46,9 +46,9 @@ public class LectureLogic : ILectureLogic
         return await _lectureService.GetPostAsync(url);
     }
 
-    public async Task<List<Lecture>> GetLectureByUserIdAsync(long userId)
+    public async Task<List<Lecture>> GetLectureByTeacherIdAsync(long userId)
     {
-        return await _lectureService.GetLectureByUserIdAsync(userId);
+        return await _lectureService.GetLectureByTeacherIdAsync(userId);
 
     }
 

@@ -60,6 +60,26 @@ public class LectureGrpcClient : ILectureService
         return lectureGrpcModel.AsBase();
     }
 
+    public async Task<List<Lecture>> GetLectureByTeacherIdAsync(long userId)
+    {
+        List<Lecture> lectures = new List<Lecture>();
+        var request = new LectureUserId() { UserId = userId };
+        using (var call = _lectureClient.GetLectureByUserId(new LectureUserId(request)))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentLecture = call.ResponseStream.Current;
+                lectures.Add(currentLecture.AsBase());
+            }
+        }
+
+        return lectures;     }
+
+    public async Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(long userId)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<Lecture>> GetLectureByUserIdAsync(long userId)
     {
         List<Lecture> lectures = new List<Lecture>();
@@ -76,7 +96,7 @@ public class LectureGrpcClient : ILectureService
         return lectures;    }
 
 
-    public async Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(long userId)
+    public async Task<List<Lecture>> GetUpvotedLectureByTeacherIdAsync(long userId)
     {
         List<Lecture> lectures = new List<Lecture>();
         var request = new LectureUserId() { UserId = userId };
