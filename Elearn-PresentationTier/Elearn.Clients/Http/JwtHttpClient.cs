@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
+using Blazored.LocalStorage;
 using Elearn.HttpClients.Service;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
@@ -10,16 +11,17 @@ namespace Elearn.Clients.Http;
 public class JwtHttpClient : IAuthService
 {
     private readonly HttpClient client;
-
-    public JwtHttpClient(HttpClient client)
-    {
-        this.client = client;
-    }
+    private readonly ILocalStorageService localStorageService;
 
     // this private variable for simple caching
-    public static string? Jwt { get; private set; } = "";
-
+    public static string? Jwt { get; private set; } = null;
     public Action<ClaimsPrincipal> OnAuthStateChanged { get; set; } = null!;
+
+    public JwtHttpClient(HttpClient client, ILocalStorageService localStorageService)
+    {
+        this.localStorageService = localStorageService;
+        this.client = client; 
+    }
 
     public async Task LoginAsync(string username, string password)
     {
@@ -46,6 +48,7 @@ public class JwtHttpClient : IAuthService
         ClaimsPrincipal principal = CreateClaimsPrincipal();
 
         OnAuthStateChanged.Invoke(principal);
+        await localStorageService.SetItemAsync<string>("jwt",Jwt);
     }
 
     private static ClaimsPrincipal CreateClaimsPrincipal()
@@ -63,12 +66,12 @@ public class JwtHttpClient : IAuthService
         return principal;
     }
 
-    public Task LogoutAsync()
+    public async Task LogoutAsync()
     {
         Jwt = null;
         ClaimsPrincipal principal = new();
         OnAuthStateChanged.Invoke(principal);
-        return Task.CompletedTask;
+        await localStorageService.SetItemAsync<string>("jwt", null);
     }
 
     public async Task RegisterAsync(UserCreationDto user)
@@ -84,10 +87,14 @@ public class JwtHttpClient : IAuthService
         }
     }
 
-    public Task<ClaimsPrincipal> GetAuthAsync()
+    public async Task<ClaimsPrincipal> GetAuthAsync()
     {
+        if (Jwt is null)
+        {
+            Jwt = await localStorageService.GetItemAsync<string>("jwt");
+        }
         ClaimsPrincipal principal = CreateClaimsPrincipal();
-        return Task.FromResult(principal);
+        return principal;
     }
 
 
