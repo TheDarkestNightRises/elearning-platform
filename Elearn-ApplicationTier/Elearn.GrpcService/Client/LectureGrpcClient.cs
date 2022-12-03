@@ -19,7 +19,7 @@ public class LectureGrpcClient : ILectureService
         _lectureClient = new LectureService.LectureServiceClient(_grpcChannel);
     }
 
-    public async Task<List<Lecture>> GetAllPostsAsync()
+    public async Task<List<Lecture>> GetAllLecturesAsync()
     {
         List<Lecture> lectures = new List<Lecture>();
         using (var call = _lectureClient.GetAllLectures(new NewLectureRequest()))
@@ -91,8 +91,21 @@ public class LectureGrpcClient : ILectureService
 
         return lectures;     }
 
-   
-
+    public Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize)
+    {
+        throw new NotImplementedException();
+        // List<Lecture> lectures = new List<Lecture>();
+        // using (var call = _lectureClient.GetAllLectures(new NewLectureRequest()))
+        // {
+        //     while (await call.ResponseStream.MoveNext())
+        //     {
+        //         var currentLecture = call.ResponseStream.Current;
+        //         lectures.Add(currentLecture.AsBase());
+        //     }
+        // }
+        //
+        // return lectures;
+    }
 }
 
 

@@ -38,7 +38,7 @@ public class LectureLogic : ILectureLogic
 
     public async Task<List<Lecture>> GetAllLecturesAsync()
     {
-        return await _lectureService.GetAllPostsAsync();
+        return await _lectureService.GetAllLecturesAsync();
     }
 
     public async Task<Lecture?> GetLectureAsync(string url)
@@ -66,6 +66,13 @@ public class LectureLogic : ILectureLogic
             throw new Exception("University does not exist");
         }
         return await _universityService.GetAllLecturesByUniversityAsync(validUniversity);
+    }
+
+    public async Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize)
+    {
+        var lectures = await _lectureService.GetAllLecturesAsync(pageNumber,pageSize);
+        if (lectures is null) throw new Exception($"Lectures not found for {pageNumber} , {pageSize}");
+        return lectures;
     }
 
     private void ValidateCreation(Lecture lecture)

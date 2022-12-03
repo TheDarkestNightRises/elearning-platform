@@ -4,7 +4,7 @@ namespace Elearn.Application.ServiceContracts;
 
 public interface ILectureService
 {
-    Task<List<Lecture>> GetAllPostsAsync();
+    Task<List<Lecture>> GetAllLecturesAsync();
     Task<Lecture?> GetPostAsync(string url);
     Task<Lecture> CreateNewPostAsync(Lecture lecture);
     Task<Lecture?> GetByIdAsync(int id);
@@ -12,4 +12,5 @@ public interface ILectureService
     Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(long userId);
 
 
+    Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize);
 }
