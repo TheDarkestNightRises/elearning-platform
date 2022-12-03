@@ -6,6 +6,10 @@ import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Teacher;
 import via.dk.elearn.protobuf.*;
@@ -52,18 +56,9 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
 
     @Override
     public void getAllLectures(NewLectureRequest request, StreamObserver<LectureModel> responseObserver) {
-        List<Lecture> lectures = lectureRepository.findAll();
-        if (lectures.isEmpty()) {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lectures are not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lectures not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-            return;
-        }
+        Pageable sortedByDate =
+                PageRequest.of(request.getPageNumber(), request.getPageSize(), Sort.by("date").descending());
+        Page<Lecture> lectures = lectureRepository.findAll(sortedByDate);
         for (Lecture lecture : lectures) {
             LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(lectureModel);
