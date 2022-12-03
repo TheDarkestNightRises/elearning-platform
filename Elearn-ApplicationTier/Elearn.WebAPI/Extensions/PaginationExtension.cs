@@ -9,6 +9,6 @@ public static class PaginationExtension
     {
         double quantity = enumerable.Count();
         double pagesSize = Math.Ceiling(quantity / recordsPerPage);
-        httpContext.Response.Headers.Add("pagesQuantity", pagesSize.ToString(CultureInfo.CurrentCulture));
+        httpContext.Response.Headers.Add("pagesSize", pagesSize.ToString(CultureInfo.CurrentCulture));
     }
 }

@@ -8,5 +8,5 @@ public interface IQuestionLogic
     Task<Question> GetQuestionByUrlAsync(string url);
     Task<List<Question>> GetQuestionsAsync();
     Task<List<Question>> GetQuestionByUserIdAsync(int userId);
-
+    Task<List<Question>> GetQuestionsAsync(int pageNumber, int pageSize);
 }
