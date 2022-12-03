@@ -60,7 +60,7 @@ public class LectureHttpClient : ILectureService
         return await response.Content.ReadFromJsonAsync<LectureDto>();
     }
 
-    public async Task<List<LectureDto?>> GetLectureByUserIdAsync(long userId)
+    public async Task<List<LectureDto?>> GetLectureByTeacherIdAsync(long userId)
     {
         HttpResponseMessage response = await client.GetAsync($"/Teachers/{userId}/lectures");
         if (!response.IsSuccessStatusCode)

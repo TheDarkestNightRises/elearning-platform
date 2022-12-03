@@ -233,7 +233,7 @@
 
 
     private async Task GetLecureByUserId() {
-        _lectureToShow = await _lectureService.GetLectureByUserIdAsync(CurrentUser.UserId);
+        _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.UserId);
     }
 
     private async Task GetUpvotedLecureByUserId() {

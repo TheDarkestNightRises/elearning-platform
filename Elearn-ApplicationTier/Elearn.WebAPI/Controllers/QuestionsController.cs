@@ -64,4 +64,20 @@ public class QuestionsController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+
+    [HttpGet, Route("/Users/{userId}/questions")]
+    public async Task<ActionResult<List<QuestionDto>>> GetQuestionByUserIdAsync(long userId)
+    {
+        try
+        {
+
+            var questions = await questionLogic.GetQuestionByUserIdAsync(userId);
+            return Ok(questions.AsDtos());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
+        }
+    }
 }

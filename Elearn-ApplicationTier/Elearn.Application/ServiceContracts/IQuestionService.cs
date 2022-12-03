@@ -9,6 +9,6 @@ public interface IQuestionService
     Task<Question?> GetQuestionByUrlAsync(string url);
 
     Task<Question> CreateNewQuestionAsync(Question question);
-    Task<List<Question>> GetQuestionByUserIdAsync(int userId);
+    Task<List<Question>> GetQuestionByUserIdAsync(long userId);
     Task<List<Question>> GetAllQuestionsAsync(int pageNumber, int pageSize);
 }
