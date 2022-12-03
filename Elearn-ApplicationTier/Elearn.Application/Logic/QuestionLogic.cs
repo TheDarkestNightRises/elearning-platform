@@ -43,9 +43,9 @@ public class QuestionLogic : IQuestionLogic
         return questions;
     }
 
-    public Task<List<Question>> GetQuestionByUserIdAsync(int userId)
+    public async Task<List<Question>> GetQuestionByUserIdAsync(long userId)
     {
-        throw new NotImplementedException();
+        return await _questionService.GetQuestionByUserIdAsync(userId);
     }
 
     public async Task<List<Question>> GetQuestionsAsync(int pageNumber, int pageSize)
