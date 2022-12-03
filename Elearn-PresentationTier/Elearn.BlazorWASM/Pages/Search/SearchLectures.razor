@@ -1,0 +1,40 @@
+@page "/SearchLectures"
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@inject ISearchService SearchService 
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+<h3>SearchLectures</h3>
+
+<MudTextField @bind-Value="searchInput" Label="Search" Variant="Variant.Text"></MudTextField>
+
+<MudButton Color="Color.Primary" Variant="Variant.Outlined" OnClick="@(() => OnSearchAsync())">Search</MudButton>
+
+@if (string.IsNullOrWhiteSpace(searchInput))
+{
+    <p>Search for item</p>
+}
+else
+{
+    @if (_lectures is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        foreach (var lecture in _lectures)
+        {
+            <LectureCard Lecture="@lecture"></LectureCard>
+        }
+    }
+}
+
+@code {
+    private string searchInput;
+    private List<LectureDto> _lectures;
+
+    private async Task OnSearchAsync()
+    {
+        _lectures = await SearchService.SearchLecturesAsync(searchInput);
+    }
+
+}
