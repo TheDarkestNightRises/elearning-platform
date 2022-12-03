@@ -1,0 +1,46 @@
+@using Elearn.BlazorWASM.Localization
+@using Elearn.BlazorWASM.Resources
+@inject NavigationManager Navigation
+@inject ILocalStorageService LocalStorage
+@inject IStringLocalizer<App> Loc
+
+<span>
+    @Loc[nameof(CultureName.Name)]
+    <select @onchange="NewCultureSelectedAsync">
+        @foreach (var culture in LocalizerSettings.SupportedCultureNames)
+        {
+            @if (SelectedCulture != null && culture == SelectedCulture)
+            {
+                <option selected value="@culture.Culture">@culture.Name</option>
+            }
+            else
+            {
+                <option value="@culture.Culture">@culture.Name</option>
+            }
+        }
+    </select>
+</span>
+
+@code
+{
+    CultureName SelectedCulture = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var culture = await LocalStorage.GetItemAsync<string>("culture");
+        if (culture == "")
+            SelectedCulture = LocalizerSettings.NeutralCulture;
+        else
+            SelectedCulture = (from x in LocalizerSettings.SupportedCultureNames
+                               where x.Culture == culture
+                               select x).FirstOrDefault();
+    }
+
+    private async Task NewCultureSelectedAsync(ChangeEventArgs args)
+    {
+        string cultureString = args.Value.ToString();
+        await LocalStorage.SetItemAsync<string>("culture", cultureString);
+        Navigation.NavigateTo(Navigation.Uri, true);
+    }
+
+}
