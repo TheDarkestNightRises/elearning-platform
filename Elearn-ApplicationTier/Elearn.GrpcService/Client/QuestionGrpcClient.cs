@@ -21,7 +21,7 @@ public class QuestionGrpcClient : IQuestionService
     public async Task<List<Question>> GetAllQuestionsAsync()
     {
         List<Question> questions = new List<Question>();
-        using (var call = _questionClient.GetAllQuestion(new Pagination()))
+        using (var call = _questionClient.GetAllQuestion(new PaginationModel()))
         {
             while (await call.ResponseStream.MoveNext())
             {

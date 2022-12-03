@@ -22,7 +22,7 @@ public class LectureGrpcClient : ILectureService
     public async Task<List<Lecture>> GetAllLecturesAsync()
     {
         List<Lecture> lectures = new List<Lecture>();
-        using (var call = _lectureClient.GetAllLectures(new Pagination()))
+        using (var call = _lectureClient.GetAllLectures(new PaginationModel()))
         {
             while (await call.ResponseStream.MoveNext())
             {
@@ -91,15 +91,15 @@ public class LectureGrpcClient : ILectureService
 
         return lectures;     }
 
-    public Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize)
+    public async Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize)
     {
         List<Lecture> lectures = new List<Lecture>();
-        Pagination pagination = new Pagination
+        PaginationModel pagination = new PaginationModel
         {
             PageNumber = pageNumber,
             PageSize = pageSize,
         };
-        using (var call = _lectureClient.GetAllLectures(new Pagination(pageNumber)))
+        using (var call = _lectureClient.GetAllLectures(pagination))
         {
             while (await call.ResponseStream.MoveNext())
             {
@@ -107,7 +107,6 @@ public class LectureGrpcClient : ILectureService
                 lectures.Add(currentLecture.AsBase());
             }
         }
-        
         return lectures;
     }
 }
