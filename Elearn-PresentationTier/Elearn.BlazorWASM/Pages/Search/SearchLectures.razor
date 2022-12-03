@@ -5,11 +5,11 @@
 @using Elearn.BlazorWASM.Pages.Lectures.UIComponents
 <h3>SearchLectures</h3>
 
-<MudTextField @bind-Value="searchInput" Label="Search" Variant="Variant.Text"></MudTextField>
+<MudTextField @bind-Value="_searchInput" Label="Search" Variant="Variant.Text"></MudTextField>
 
 <MudButton Color="Color.Primary" Variant="Variant.Outlined" OnClick="@(() => OnSearchAsync())">Search</MudButton>
 
-@if (string.IsNullOrWhiteSpace(searchInput))
+@if (string.IsNullOrWhiteSpace(_searchInput))
 {
     <p>Search for item</p>
 }
@@ -21,20 +21,28 @@ else
     }
     else
     {
-        foreach (var lecture in _lectures)
+        @if (_lectures.Count == 0)
         {
-            <LectureCard Lecture="@lecture"></LectureCard>
+            <p>No results found</p>
+        }
+        else
+        {
+            @foreach (var lecture in _lectures)
+            {
+                <LectureCard Lecture="@lecture"></LectureCard>
+            }
         }
     }
 }
 
 @code {
-    private string searchInput;
-    private List<LectureDto> _lectures;
+    private string _searchInput = string.Empty;
+    private List<LectureDto>? _lectures;
 
     private async Task OnSearchAsync()
     {
-        _lectures = await SearchService.SearchLecturesAsync(searchInput);
+        _lectures = null;
+        _lectures = await SearchService.SearchLecturesAsync(_searchInput);
     }
 
 }

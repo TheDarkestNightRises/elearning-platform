@@ -12,6 +12,7 @@ using Microsoft.JSInterop;
 using System.Globalization;
 using Blazored.LocalStorage;
 using Elearn.BlazorWASM.Localization;
+using Elearn.BlazorWASM.Pages.Search;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -24,6 +25,7 @@ builder.Services.AddScoped<IQuestionService, QuestionHttpClient>();
 builder.Services.AddScoped<ILectureVoteService, LectureVoteHttpClient>();
 builder.Services.AddScoped<IUniversityService, UniversityHttpClient>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
+builder.Services.AddScoped<ISearchService, SearchHttpClient>();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 AuthorizationPolicies.AddPolicies(builder.Services);
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7206") });
