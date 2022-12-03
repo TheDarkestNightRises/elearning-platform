@@ -55,7 +55,7 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
     }
 
     @Override
-    public void getAllLectures(NewLectureRequest request, StreamObserver<LectureModel> responseObserver) {
+    public void getAllLectures(Pagination request, StreamObserver<LectureModel> responseObserver) {
         Pageable sortedByDate =
                 PageRequest.of(request.getPageNumber(), request.getPageSize(), Sort.by("date").descending());
         Page<Lecture> lectures = lectureRepository.findAll(sortedByDate);
@@ -137,7 +137,7 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
         } else {
-            for(Lecture lecture : lectures) {
+            for (Lecture lecture : lectures) {
                 LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
                 responseObserver.onNext(lectureModel);
             }
