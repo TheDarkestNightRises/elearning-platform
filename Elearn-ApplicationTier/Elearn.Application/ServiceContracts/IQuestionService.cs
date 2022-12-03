@@ -10,5 +10,5 @@ public interface IQuestionService
 
     Task<Question> CreateNewQuestionAsync(Question question);
     Task<List<Question>> GetQuestionByUserIdAsync(int userId);
-
+    Task<List<Question>> GetAllQuestionsAsync(int pageNumber, int pageSize);
 }

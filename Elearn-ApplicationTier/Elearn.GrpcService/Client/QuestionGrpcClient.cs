@@ -60,4 +60,24 @@ public class QuestionGrpcClient : IQuestionService
 
         return questions;
     }
+
+    public async Task<List<Question>> GetAllQuestionsAsync(int pageNumber, int pageSize)
+    {
+        List<Question> questions = new List<Question>();
+        PaginationModel pagination = new PaginationModel
+        {
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+        };
+        using (var call = _questionClient.GetAllQuestion(pagination))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentQuestion = call.ResponseStream.Current;
+                questions.Add(currentQuestion.AsBase());
+            }
+        }
+
+        return questions;
+    }
 }
