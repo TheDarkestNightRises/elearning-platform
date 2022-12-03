@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Data
@@ -37,10 +36,9 @@ public class Lecture {
     private String image;
 
     @Column
+    private LocalDate date;
 
-    private LocalDate published_date;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
     private Course course;
 
@@ -55,13 +53,13 @@ public class Lecture {
         this.body = body;
     }
 
-    public Lecture(String title, String description, String url, String body, String image, LocalDate published_date, Course course, Teacher teacher) {
+    public Lecture(String title, String description, String url, String body, String image, LocalDate date, Course course, Teacher teacher) {
         this.title = title;
         this.description = description;
         this.url = url;
         this.body = body;
         this.image = image;
-        this.published_date = published_date;
+        this.date = date;
         this.course = course;
         this.teacher = teacher;
     }
