@@ -7,7 +7,7 @@ option java_package = "via.dk.elearn.protobuf";
 
 service QuestionService {
   rpc GetQuestion (QuestionUrl) returns (QuestionModel);
-  rpc GetAllQuestion (Pagination) returns (stream QuestionModel);
+  rpc GetAllQuestion (PaginationModel) returns (stream QuestionModel);
   rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
   rpc GetQuestionsByUserId(QuestionUserId) returns (stream QuestionModel);
 }

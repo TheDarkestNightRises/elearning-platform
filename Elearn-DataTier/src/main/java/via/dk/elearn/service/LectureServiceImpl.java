@@ -55,7 +55,7 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
     }
 
     @Override
-    public void getAllLectures(Pagination request, StreamObserver<LectureModel> responseObserver) {
+    public void getAllLectures(PaginationModel request, StreamObserver<LectureModel> responseObserver) {
         Pageable sortedByDate =
                 PageRequest.of(request.getPageNumber(), request.getPageSize(), Sort.by("date").descending());
         Page<Lecture> lectures = lectureRepository.findAll(sortedByDate);
