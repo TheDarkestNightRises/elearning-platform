@@ -4,6 +4,7 @@
 @using Elearn.Shared.Dtos
 @using Elearn.HttpClients.Service
 @using System.Security.Claims
+@using System.Net.Mime
 @inject ILectureService _lectureService
 @inject IQuestionService _questionService
 @inject IUserService _userService
@@ -40,13 +41,20 @@
                  <div class="form-group d-flex justify-center">
                      <label> Role : @CurrentUser?.Role</label>
                  </div>
-                       <MudImage Class="card-img" Src="@CurrentUser.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
-
-                                  
-                 <div class="form-control-file">
-                                 <label for="image">Image</label>
-                                 <InputFile OnChange="OnFileChange"></InputFile>
-                             </div>
+                 
+                 <MudCard>
+                     <MudCardContent>
+                         <MudImage Class="card-img" Src="@Dto.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
+                     </MudCardContent>
+                     <MudCardActions class="form-control-file">
+                           <label for="image">Image</label>
+                         <InputFile OnChange="OnFileChange"></InputFile>
+                     </MudCardActions>
+                     <MudCardActions>
+                         <MudButton Variant="Variant.Filled" Color="Color.Error"  OnClick="@(() => AddImage())">Save</MudButton>
+                     </MudCardActions>
+                 </MudCard>
+                 
 
              </MudCard>
         </div>
@@ -63,6 +71,10 @@
                 else {
                     <LectureList lectureToShow="_lecturesToShow"/>
                 }
+                
+                <hr/>
+            <br/>
+            <br/>
 
             </div>
             <div class="allLectures"><h2>Upvoted Lectures</h2>
@@ -72,7 +84,9 @@
                 else {
                     <LectureList upvotedLectureToShow="_upvotedLectureToShow"/>
                 }
-            
+              <hr/>
+                        <br/>
+                        <br/>
             </div>
               <div class="allQuestions"> <h2>All Questions</h2> 
                                         @if (_questionToShow == null) {
@@ -95,11 +109,13 @@
     private string? username;
     private bool isLoggedIn;
     private List<LectureDto?> _lectureToShow;
+    private LectureDto _lectureToDto;
     private List<LectureDto?> _upvotedLectureToShow;
     private List<QuestionDto?> _questionToShow;
-    private UserCreationDto _newUser = new();
-
+    private bool _hidePosition;
+    private bool _loading;
     public UserDto? CurrentUser;
+    public UpdateUserDto Dto = new();
 
     private void OpenLoginView()
     {
@@ -114,9 +130,11 @@
         if (!isLoggedIn) return;
         userClaims = user.Claims;
         username = user.Identity!.Name;
+        UserCreationDto Dto = new();
         CurrentUser = await _userService.GetUserByUsernameAsync(username);
         try {
-            await GetLecureByUserId();
+        
+            await GetLecureByTeacherId();
             await GetUpvotedLecureByUserId();
             await GetQuestionByUserId();
         }
@@ -130,20 +148,28 @@
     async Task OnFileChange(InputFileChangeEventArgs e)
     {
         var format = "image/png";
-        var resizedImage = await e.File.RequestImageFileAsync(format, 500, 500);
-        var buffer = new byte[resizedImage.Size];
-        await resizedImage.OpenReadStream().ReadAsync(buffer);
-        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-        
-        _newUser.Image = imageData;
-        
+        foreach (var image in e.GetMultipleFiles(int.MaxValue))
+        {
+            var resizedImage = await e.File.RequestImageFileAsync(format, 500, 500);
+            var buffer = new byte[resizedImage.Size];
+            await resizedImage.OpenReadStream().ReadAsync(buffer);
+            var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+            Dto.Image = imageData;
+        }
     }
-   
+    private async Task AddImage()
+    {
+        if (Convert.ToBoolean(Dto.Image))
+        {
+            await _userService.UpdateUserAsync(Dto);
+            NavMgr.NavigateTo($"/ManageAccount");
+        }
+    }
 
 
 
 
-    private async Task GetLecureByUserId() {
+    private async Task GetLecureByTeacherId() {
         _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.UserId);
     }
 

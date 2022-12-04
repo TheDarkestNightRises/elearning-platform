@@ -47,7 +47,7 @@ public class QuestionHttpClient : IQuestionService
         return _questionDto;
     }
 
-    public async Task<List<QuestionDto?>> GetQuestionByUserIdAsync(long userId)
+    public async Task<List<QuestionDto>> GetQuestionByUserIdAsync(long userId)
     {
         HttpResponseMessage response = await client.GetAsync($"/Users/{userId}/questions");
         if (!response.IsSuccessStatusCode)
@@ -55,6 +55,6 @@ public class QuestionHttpClient : IQuestionService
             string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
-        return await response.Content.ReadFromJsonAsync<List<QuestionDto?>>();
+        return await response.Content.ReadFromJsonAsync<List<QuestionDto>>();
     }
 }

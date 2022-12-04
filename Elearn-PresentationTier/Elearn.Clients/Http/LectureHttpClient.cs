@@ -60,7 +60,7 @@ public class LectureHttpClient : ILectureService
         return await response.Content.ReadFromJsonAsync<LectureDto>();
     }
 
-    public async Task<List<LectureDto?>> GetLectureByTeacherIdAsync(long userId)
+    public async Task<List<LectureDto>> GetLectureByTeacherIdAsync(long userId)
     {
         HttpResponseMessage response = await client.GetAsync($"/Teachers/{userId}/lectures");
         if (!response.IsSuccessStatusCode)
@@ -68,9 +68,9 @@ public class LectureHttpClient : ILectureService
             string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
-        return await response.Content.ReadFromJsonAsync<List<LectureDto?>>();    }
+        return await response.Content.ReadFromJsonAsync<List<LectureDto>>();    }
 
-    public async Task<List<LectureDto?>> GetUpvotedLectureByUserIdAsync(long userId)
+    public async Task<List<LectureDto>> GetUpvotedLectureByUserIdAsync(long userId)
     {
         HttpResponseMessage response = await client.GetAsync($"/Users/{userId}/history");
         if (!response.IsSuccessStatusCode)
@@ -78,7 +78,7 @@ public class LectureHttpClient : ILectureService
             string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
-        return await response.Content.ReadFromJsonAsync<List<LectureDto?>>();
+        return await response.Content.ReadFromJsonAsync<List<LectureDto>>();
     }
 
     public async Task<List<LectureDto?>> GetLecturesByUniversity(long universityId)
