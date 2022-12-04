@@ -9,22 +9,22 @@ namespace Elearn.Clients.Http;
 
 public class LectureHttpClient : ILectureService
 {
-    
     private readonly HttpClient client;
 
     public LectureHttpClient(HttpClient client)
     {
         this.client = client;
     }
+
     public async Task<LectureDto> CreateAsync(LectureCreationDto dto)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/Lectures",dto);
+        HttpResponseMessage response = await client.PostAsJsonAsync("/Lectures", dto);
         string content = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
-            
             throw new Exception(content);
         }
+
         LectureDto lectureDto = JsonSerializer.Deserialize<LectureDto>(content, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
@@ -34,8 +34,23 @@ public class LectureHttpClient : ILectureService
 
     public async Task<List<LectureDto>> GetLecturesAsync()
     {
-        
         HttpResponseMessage response = await client.GetAsync("/Lectures");
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        List<LectureDto> lectureDtos = JsonSerializer.Deserialize<List<LectureDto>>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return lectureDtos;
+    }
+
+    public async Task<List<LectureDto>> GetLecturesAsync(int pageNumber, int pageSize)
+    {
+        HttpResponseMessage response = await client.GetAsync($"/Lectures?PageNumber={pageNumber}&PageSize={pageSize}");
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
@@ -57,6 +72,7 @@ public class LectureHttpClient : ILectureService
             string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
+
         return await response.Content.ReadFromJsonAsync<LectureDto>();
     }
 
@@ -68,7 +84,9 @@ public class LectureHttpClient : ILectureService
             string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
-        return await response.Content.ReadFromJsonAsync<List<LectureDto>>();    }
+
+        return await response.Content.ReadFromJsonAsync<List<LectureDto>>();
+    }
 
     public async Task<List<LectureDto>> GetUpvotedLectureByUserIdAsync(long userId)
     {
@@ -78,6 +96,7 @@ public class LectureHttpClient : ILectureService
             string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
+
         return await response.Content.ReadFromJsonAsync<List<LectureDto>>();
     }
 
@@ -89,6 +108,7 @@ public class LectureHttpClient : ILectureService
             string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
+
         return await response.Content.ReadFromJsonAsync<List<LectureDto?>>();
     }
 }

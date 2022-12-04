@@ -1,0 +1,56 @@
+@page "/PaginationLectures"
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@inject ILectureService _lectureService;
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@using System.Diagnostics
+<h3>PaginationLectures</h3>
+
+@if (_lectures is null)
+{
+    <p> Loading..</p>
+}
+else
+{
+    <MudTable
+              Dense="true" Hover="true" @ref="_table" Items="@_lectures">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Posts</MudText>
+            <MudSpacer/>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Id</MudTh>
+            <MudTh>Item Name</MudTh>
+            <MudTh>Is Completed</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Nr">@context.Id</MudTd>
+            <MudTd DataLabel="Sign">@context.Title</MudTd>
+            <MudTd DataLabel="Name">@context.Url</MudTd>
+            <MudTd DataLabel="Position">@context.Username</MudTd>
+            <MudTd DataLabel="Molar mass">@context.DateCreated</MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudPagination SelectedChanged="PageChanged" BoundaryCount="1" MiddleCount="1" Count="22" ></MudPagination>
+        </PagerContent>
+    </MudTable>
+}
+
+
+@code {
+    private List<LectureDto> _lectures;
+    private MudTable<LectureDto> _table = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _lectures = await _lectureService.GetLecturesAsync(0, 1);
+    }
+
+    private async Task PageChanged(int i)
+    {
+        Console.WriteLine(i);
+        _lectures = await _lectureService.GetLecturesAsync(i-1, 1);
+        _table.NavigateTo(i-1);
+    }
+
+}
