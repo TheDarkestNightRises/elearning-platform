@@ -21,11 +21,11 @@
                 <EditForm Model="@_userLoginDto" OnValidSubmit="LoginAsync" Context="formContext">
                     <DataAnnotationsValidator/>
                     <div class="form-group">
-                        <MudTextField @bind-Value="_userLoginDto.Username" Label="Username" Variant="Variant.Text" Class="mt-5"></MudTextField>
+                        <MudTextField Validation="@(new Func<string, string>(UsernameError))" @bind-Value="_userLoginDto.Username" Label="Username" Variant="Variant.Text" Class="mt-5"></MudTextField>
                         <ValidationMessage For="@(() => _userLoginDto.Username)"/>
                     </div>
                     <div class="form-group">
-                        <MudTextField @bind-Value="_userLoginDto.Password" Label="Password" Variant="Variant.Text" Class="mt-5" InputType="InputType.Password"></MudTextField>
+                        <MudTextField Validation="@(new Func<string, string>(PasswordError))" @bind-Value="_userLoginDto.Password" Label="Password" Variant="Variant.Text" Class="mt-5" InputType="InputType.Password"></MudTextField>
                         <ValidationMessage For="@(() => _userLoginDto.Password)"/>
                     </div>
                     <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary" ButtonType="ButtonType.Submit" Class="mt-10">Login</MudButton>
@@ -60,5 +60,20 @@
             errorLabel = $"Error: {e.Message}";
         }
     }
-
+    private string UsernameError(string arg)
+    {
+        if (_userLoginDto.Username is null)
+        {
+            return "You should input your  Username";
+        }
+        return null;
+    }
+    private string PasswordError(string arg)
+    {
+        if (_userLoginDto.Password is null)
+        {
+            return "You should input your Password";
+        }
+        return null;
+    }
 }

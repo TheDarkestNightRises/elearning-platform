@@ -15,44 +15,43 @@
     <MudGrid Class="d-flex justify-center align-center" Elevation="0">
         <MudItem xs="12" sm="7">
             <MudPaper Class="pa-4">
-                <h3>
-                        <MudInputLabel Class="d-flex align-center justify-center ">Registration</MudInputLabel>
-                    </h3>
-                    <MudTextField T="string"  HelperText="Input the Username" Typo="Typo.subtitle2" Label="Username" Required="true" @bind-Value="newUser.Username" InputType="InputType.Text"
+                              <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+
+                    <MudTextField T="string"  Validation="@(new Func<string, string>(UsernameError))"  Typo="Typo.subtitle2" Label="Username" Required="true" @bind-Value="newUser.Username" InputType="InputType.Text"
                                   For="@(() => newUser.Username)" RequiredError="User name field is required!"> 
                     </MudTextField>
-                    <MudTextField T="string" HelperText="Input the password" Label="Password"  Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true" @bind-Value="newUser.Password" InputType="InputType.Password"
+                    <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Label="Password"   Required="true" @bind-Value="newUser.Password" InputType="InputType.Password"
                                   For="@(() => newUser.Password)" RequiredError="Password filed is required!">
                     </MudTextField>
-                    <MudTextField T="string" HelperText="Repeat the password" Label="Repeat Password" Required="true"  @bind-Value="@repeatPassword" InputType="InputType.Password" 
+                    <MudTextField T="string" Required="true" Label="Repeat the password" @bind-Value="@repeatPassword" InputType="InputType.Password" 
                                   For="@(() => @repeatPassword)" RequiredError="Repeat password field is required!" Validation="@(new Func<string, string>(PasswordMatch))">
                     </MudTextField>
-                    <MudTextField T="string" HelperText="InputBase the Email" Label="Email" Required="true" @bind-Value="newUser.Email" InputType="InputType.Email"
-                                  For="@(() => newUser.Email)" RequiredError="Email is required!">
+                    <MudTextField T="string"  Label="Email" Required="true" @bind-Value="newUser.Email" InputType="InputType.Email"
+                              Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})"     For="@(() => newUser.Email)" RequiredError="Email is required!">
                     </MudTextField>
-                    <MudTextField T="string" Label="Full Name" Required="true" HelperText="Input the user Full Name" @bind-Value="newUser.Name" InputType="InputType.Text"
-                                  For="@(() => newUser.Username)" RequiredError="Name of user is required!">
+                    <MudTextField T="string"  Validation="@(new Func<string, string>(NameError))" Label="Full Name" Required="true"  @bind-Value="newUser.Name" InputType="InputType.Text"
+                                  For="@(() => newUser.Name)" RequiredError="Name of user is required!">
                     </MudTextField>
 
 
                  
-                    <MudSelect  Required="true" HelperText="SelectColumn the necessary user role" @bind-Value="newUser.Role" Label="Select role"   AdornmentColor="Color.Secondary">
+                    <MudSelect  Required="true" Validation="@(new Func<string, string>(RoleError))" @bind-Value="newUser.Role" Label="Select role"   AdornmentColor="Color.Secondary">
                         @foreach (var item in Enum.GetValues(typeof(RoleEnum)))
                         {
                             <MudSelectItem Value="@item.ToString()">@item</MudSelectItem>
                         }
                     </MudSelect>
                     
-                    <MudSelect @bind-Value="@currentunivesity" Dense="true" ToStringFunc="@convertUniversity" Label="Select your university" HelperText="University"  AdornmentColor="Color.Secondary">
+                    <MudSelect Validation="@(new Func<string, string>(UniversityNull))" @bind-Value="@currentunivesity" Required="true" Dense="true" ToStringFunc="@convertUniversity" Label="Select your university"  AdornmentColor="Color.Secondary">
                         @foreach (UniversityDto item in _universityDtos)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
-                
-                    <MudCardActions Class="d-flex justify-center">
-                        <MudButton Class="mx-2" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" >Create Account</MudButton>
-                    </MudCardActions>
+                </MudForm>
+                  <MudCardActions Class="d-flex justify-center">
+                      <MudButton Class="mx-2" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Success" OnClick="@(() => form.Validate())">Create Account</MudButton>
+                  </MudCardActions>
             </MudPaper>
         </MudItem>
         
@@ -66,6 +65,8 @@
 @code {
     public UserCreationDto newUser = new();
     public string repeatPassword;
+    bool success;
+    MudForm form;
 
     private List<UniversityDto>? _universityDtos = new List<UniversityDto>();
     private UniversityDto? currentunivesity;
@@ -73,32 +74,33 @@
 
     public string[] errors = { };
     MudTextField<string> pwField1;
+    public UserCreationDto Dto = new();
 
+    public string errorUniversity = "Select one of the universities above";
 
-    
-    private async Task  CreateNewUserAsync()
+    private async Task CreateNewUserAsync()
     {
         if (newUser.Role.Equals(RoleEnum.Student.ToString()))
             newUser.SecurityLevel = 2;
         if (newUser.Role.Equals(RoleEnum.Teacher.ToString()))
             newUser.SecurityLevel = 4;
 
-        if (currentunivesity is not null) 
+        if (currentunivesity is not null)
             newUser.UniversityId = currentunivesity.Id;
-        else
-            return; // needs proper validation message
-
-            if(repeatPassword.Equals(newUser.Password)) 
+        
+        if (repeatPassword.Equals(newUser.Password))
             await authService.RegisterAsync(newUser);
-
+      
     }
+
 
     protected override async Task OnInitializedAsync()
     {
         _universityDtos = await universityService.GetAllUniveritiesAsync();
     }
+  
     private IEnumerable<string> PasswordStrength(string pw)
-    {
+    {     
         if (string.IsNullOrWhiteSpace(pw))
         {
             yield return "Password is required!";
@@ -113,12 +115,43 @@
         if (!Regex.IsMatch(pw, @"[0-9]"))
             yield return "Password must contain at least one digit";
     }
-
     private string PasswordMatch(string arg)
     {
-        if (pwField1.Value != arg)
-            return "Passwords don't match";
+        if (Dto.Password != arg)
+            return "Passwords doesn't match";
         return null;
     }
-    
+
+    private string UniversityNull(string arg)
+    {
+        if (currentunivesity is null)
+        {
+            return "You should choose a university. University cannot be empty";
+        }
+        return null;
+    }
+    private string RoleError(string arg)
+    {
+        if (Dto.Role is null)
+        {
+            return "You should choose a role. Role is required";
+        }
+        return null;
+    }
+    private string NameError(string arg)
+    {
+        if (Dto.Name is null)
+        {
+            return "You should input your Full Name";
+        }
+        return null;
+    }
+    private string UsernameError(string arg)
+    {
+        if (Dto.Username is null)
+        {
+            return "You should input your correct Username";
+        }
+        return null;
+    }
 }
