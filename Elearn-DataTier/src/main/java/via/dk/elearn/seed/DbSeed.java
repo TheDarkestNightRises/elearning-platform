@@ -79,6 +79,8 @@ public class DbSeed implements CommandLineRunner {
         Teacher createdTeacher2 = teacherRepository.save(teacher2);
 
 
+        Moderator moderator = new Moderator("moderator","moderator@via.dk","Admin","Admin","placeholder-string","Moderator",10,createdUniversity1);
+        Moderator createdModerator = moderatorRepository.save(moderator);
 
         //add students
         Student student = new Student("Dexter","email2","Dexter Morgan","bloodanalyst", "placeholder string","Student",1, createdUniversity1);
