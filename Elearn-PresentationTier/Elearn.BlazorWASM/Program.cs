@@ -30,6 +30,8 @@ builder.Services.AddLocalization(options => options.ResourcesPath = "Resources")
 AuthorizationPolicies.AddPolicies(builder.Services);
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7206") });
 builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddMudBlazorResizeListener();
+builder.Services.AddMudBlazorSnackbar();
 builder.Services.AddMudServices();
 var host = builder.Build();
 await host.SetDefaultCulture();
