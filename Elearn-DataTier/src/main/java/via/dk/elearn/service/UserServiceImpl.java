@@ -109,7 +109,8 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
             User userFound = findUser.get();
             userFound.setPassword(request.getPassword());
             userFound.setEmail(request.getEmail());
-            userRepository.save(userFound);
+        userFound.setEmail(request.getImage());
+        userRepository.save(userFound);
             UserModel userModel = UserMapper.convertUserToGrpcModel(userFound);
             responseObserver.onNext(userModel);
             responseObserver.onCompleted();
