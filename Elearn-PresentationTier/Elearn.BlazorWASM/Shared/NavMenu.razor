@@ -6,7 +6,7 @@
             <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" Class="mr-5" OnClick="GoHome"/>
             <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
             <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
-            <MudButton Variant="Variant.Text" OnClick="GoToLectures">Lectures</MudButton>
+            <MudButton Variant="Variant.Text" OnClick="GoToUniversities">Universities</MudButton>
             <MudSpacer/>
             <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
             <MudButton Variant="Variant.Text" OnClick="GoToProfile">Profile </MudButton>
@@ -55,9 +55,9 @@
     {
         navMgr.NavigateTo("/ManageAccount");
     }
-    private void GoToLectures()
+    private void GoToUniversities()
     {
-        navMgr.NavigateTo("/Lectures");
+        navMgr.NavigateTo("/Universities");
     }
 }
 
