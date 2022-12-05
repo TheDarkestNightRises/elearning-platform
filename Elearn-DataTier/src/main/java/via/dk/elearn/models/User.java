@@ -44,6 +44,9 @@ public class User {
     @Column(name = "role",nullable = false)
     private String role;
 
+    @Column(name = "approved", nullable = false)
+    private boolean approved;
+
     @Column(name = "security_level",nullable = false)
     private int security_level;
 //
@@ -59,7 +62,7 @@ public class User {
     private University university;
     
 
-    public User(String username, String email, String name, String password, String image, String role, int security_level, University university) {
+    public User(String username, String email, String name, String password, String image, String role, int security_level, University university, boolean approved) {
         this.username = username;
         this.email = email;
         this.name = name;
@@ -68,17 +71,18 @@ public class User {
         this.role = role;
         this.security_level = security_level;
         this.university = university;
+        this.approved = approved;
     }
 
-    public User(String username, String email, String name, String password, String role, int security_level) {
+    public User(String username, String email, String name, String password, String role, int security_level, boolean approved) {
         this.username = username;
         this.email = email;
         this.name = name;
         this.password = password;
         this.role = role;
         this.security_level = security_level;
+        this.approved = approved;
     }
-
 
 
     @Override
@@ -89,8 +93,13 @@ public class User {
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", image='" + image + '\'' +
                 ", role='" + role + '\'' +
+                ", approved=" + approved +
                 ", security_level=" + security_level +
+                ", university=" + university +
                 '}';
     }
+
+
 }

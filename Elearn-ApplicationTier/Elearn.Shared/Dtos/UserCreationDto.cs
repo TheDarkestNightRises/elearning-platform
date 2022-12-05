@@ -15,8 +15,9 @@ public class UserCreationDto
     public int SecurityLevel { get; set; }
     
     public long UniversityId { get; set; }
+    public bool Approved { get; set; }
 
-    public UserCreationDto(string username, string image,string password, string email, string name, string role, int securityLevel)
+    public UserCreationDto(string username, string image,string password, string email, string name, string role, int securityLevel, bool approved)
     {
         Username = username;
         Image = image;
@@ -25,9 +26,10 @@ public class UserCreationDto
         Name = name;
         Role = role;
         SecurityLevel = securityLevel;
+        Approved = approved;
     }
 
-    public UserCreationDto(string username, string password, string email, string name, string role, int securityLevel, long universityId)
+    public UserCreationDto(string username, string password, string email, string name, string role, int securityLevel, long universityId, bool approved)
     {
         Username = username;
         Password = password;
@@ -36,6 +38,7 @@ public class UserCreationDto
         Role = role;
         SecurityLevel = securityLevel;
         UniversityId = universityId;
+        Approved = approved;
     }
 
     public UserCreationDto()
@@ -44,6 +47,6 @@ public class UserCreationDto
     
     public override string ToString()
     {
-        return  $"{Username}{Password}{Email}{Name}{Role}{SecurityLevel}";
+        return  $"{Username}{Password}{Email}{Name}{Role}{SecurityLevel}{Image}{Approved}";
     }
 }

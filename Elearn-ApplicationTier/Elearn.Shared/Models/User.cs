@@ -11,12 +11,14 @@ public class User
     public string Image { get; set; }
     public int SecurityLevel { get; set; }
     public University? University { get; set; }
+    public bool Approved { get; set; }
 
-    public User(string username, string password, string email, string name, string role, string image, int securityLevel, University? university)
+    public User(string username, string password, string email, string name, string role, string image, int securityLevel, University? university, bool approved)
     {
         Username = username;
         Password = password;
-        Email = email;
+        Approved = approved;
+            Email = email;
         Name = name;
         Role = role;
         Image = image;

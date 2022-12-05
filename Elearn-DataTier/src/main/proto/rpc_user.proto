@@ -11,6 +11,8 @@ service UserService {
   rpc GetUserByID(UserId) returns (UserModel);
   rpc UpdateUser(UserModel) returns (UserModel);
   rpc DeleteUser(UserModel) returns(Nothing);
+  rpc GetAllUsers(UserId) returns (stream UserModel);
+
 }
 
 message UserModel {
@@ -23,7 +25,7 @@ message UserModel {
   string role = 7;
   int32 securityLevel = 8;
   UniversityModel university = 9;
-
+  bool approved = 10;
 }
 
 message UserId{

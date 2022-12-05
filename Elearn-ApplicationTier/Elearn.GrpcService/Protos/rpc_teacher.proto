@@ -15,6 +15,7 @@ message TeacherModel {
   string image = 6;
   string role = 7;
   int32 securityLevel = 8;
+  bool approved = 9;
 }
 
 message TeacherUsername {

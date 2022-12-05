@@ -10,10 +10,15 @@ public class UserDto
     public string Image { get; set; }
 
     public string Role { get; set; }
-    public int SecurityLevel { get; set; }
+
+    public int SecurityLevel
+    {
+        get; set;
+    }
+    public bool Approved { get; set; }
     
     
-    public UserDto(string username, string password, string email, string name, string role, int securityLevel)
+    public UserDto(string username, string password, string email, string name, string role, int securityLevel, bool approved)
     {
         Username = username;
         Password = password;
@@ -21,6 +26,7 @@ public class UserDto
         Name = name;
         Role = role;
         SecurityLevel = securityLevel;
+        Approved = approved;
     }
     public UserDto()
     {
