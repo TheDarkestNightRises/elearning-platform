@@ -14,9 +14,9 @@ public static class GrpcUserExtension
             Name = user.Name,
             Email = user.Email,
             Password = user.Password,
-           Image = user.Image,
+            Image = user.Image,
             Role = user.Role,
-            SecurityLevel = user.SecurityLevel, 
+            SecurityLevel = user.SecurityLevel,
             Approved = user.Approved
         };
     }
@@ -30,7 +30,7 @@ public static class GrpcUserExtension
             Name = userModel.Name,
             Email = userModel.Email,
             Password = userModel.Password,
-           Image = userModel.Image,
+            Image = userModel.Image,
             Role = userModel.Role,
             SecurityLevel = userModel.SecurityLevel,
             Approved = userModel.Approved

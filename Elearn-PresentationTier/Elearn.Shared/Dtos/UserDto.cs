@@ -11,6 +11,7 @@ public class UserDto
 
     public string Role { get; set; }
 
+    public bool Approved { get; set; }
     public int SecurityLevel
     {
         get; set;
