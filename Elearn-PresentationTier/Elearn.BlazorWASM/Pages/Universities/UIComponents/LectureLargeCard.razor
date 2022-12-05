@@ -1,0 +1,38 @@
+﻿@using Elearn.Shared.Dtos
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@inject NavigationManager navMgr
+<MudCard>
+    
+    <MudGrid>
+        <MudItem xs="2">
+            <LectureVote url="@Lecture.Url"/>
+        </MudItem>
+        <MudItem xs="5" >
+            <MudCardContent>
+                <MudText Typo="Typo.h4">@Lecture.Title</MudText>
+                <MudText Typo="Typo.body1">@Lecture.Username</MudText>
+                <MudText Typo="Typo.body1">@Lecture.DateCreated</MudText>
+            </MudCardContent>
+        </MudItem>
+        <MudItem xs="5">
+            <MudImage Class="card-img pa-3" Src="@Lecture.Image" ObjectFit="ObjectFit.Contain"></MudImage>
+        </MudItem>
+    </MudGrid>
+
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="GoToUrl">View full lecture</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+@code {
+
+    [Parameter]
+    public LectureDto Lecture { get; set; }
+
+    private void GoToUrl()
+    {
+        navMgr.NavigateTo($"/Lectures/{Lecture.Url}");
+    }
+
+}
