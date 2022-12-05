@@ -62,4 +62,20 @@ public class UserGrpcClient : IUserService
         var userModel = user.AsGrpcModel();
         await _userClient.DeleteUserAsync(userModel);
     }
+
+    
+
+    public async Task<List<User>> GetAllUsersAsync()
+    {
+        List<User> users = new List<User>();
+        using (var call = _userClient.GetAllUsers(new UserId()))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentUser = call.ResponseStream.Current;
+               users.Add(currentUser.AsBase());
+            }
+        }
+    
+        return users;    }
 }

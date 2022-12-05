@@ -14,6 +14,7 @@ public class UserMapper {
                 .setImage(user.getImage())
                 .setRole(user.getRole())
                 .setSecurityLevel(user.getSecurity_level())
+                .setApproved(user.isApproved())
                 .build();
     }
 

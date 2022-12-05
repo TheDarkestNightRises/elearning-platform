@@ -16,8 +16,8 @@ public static class AuthorizationPolicies
                 a.RequireAuthenticatedUser().RequireClaim("Role", "Teacher"));
             options.AddPolicy("MustBeStudent", a =>
                 a.RequireAuthenticatedUser().RequireClaim("Role", "Student"));
-            options.AddPolicy("MustBeAdministrator", a =>
-                a.RequireAuthenticatedUser().RequireClaim("Role", "Administrator"));
+            options.AddPolicy("MustBeModerator", a =>
+                a.RequireAuthenticatedUser().RequireClaim("Role", "Moderator"));
 
             options.AddPolicy("SecurityLevel2OrAbove", a =>
                 a.RequireAuthenticatedUser().RequireAssertion(context =>

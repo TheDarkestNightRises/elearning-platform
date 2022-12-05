@@ -15,7 +15,8 @@ public static class GrpcTeacherExtension
             Email = user.Email,
             Password = user.Password,
             Role = user.Role,
-            SecurityLevel = user.SecurityLevel 
+            SecurityLevel = user.SecurityLevel,
+            Approved = user.Approved
         };
     }
 
@@ -29,7 +30,8 @@ public static class GrpcTeacherExtension
             Email = teacherModel.Email,
             Password = teacherModel.Password,
             Role = teacherModel.Role,
-            SecurityLevel = teacherModel.SecurityLevel
+            SecurityLevel = teacherModel.SecurityLevel,
+            Approved = teacherModel.Approved
         };
     }
 }
