@@ -69,7 +69,7 @@ public class AuthLogic : IAuthLogic
             throw new ValidationException("University does not exist");
         }
 
-        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role, dto.Image ,dto.SecurityLevel,university);
+        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role, dto.Image ,dto.SecurityLevel,university,dto.Approved);
         User created = await _userService.CreateNewUserAsync(user);
         return created;
     }

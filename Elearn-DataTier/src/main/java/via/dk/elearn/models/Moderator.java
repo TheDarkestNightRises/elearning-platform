@@ -15,10 +15,11 @@ public class Moderator extends User{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    public Moderator(Long id, String username, String email, String name, String password, String image, String role, int security_level, University university) {
-        super(id, username, email, name, password, image, role, security_level, university);
+    public Moderator(String username, String email, String name, String password, String image, String role, int security_level, University university, boolean approved) {
+        super(username, email, name, password, image, role, security_level, university, approved);
     }
-    public Moderator(String username, String email, String name, String password, String image, String role, int security_level, University university) {
-        super( username, email, name, password, image, role, security_level, university);
+
+    public Moderator(String username, String email, String name, String password, String role, int security_level, boolean approved) {
+        super(username, email, name, password, role, security_level, approved);
     }
 }

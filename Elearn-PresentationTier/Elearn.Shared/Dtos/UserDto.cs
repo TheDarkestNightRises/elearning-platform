@@ -10,10 +10,14 @@ public class UserDto
     public string Image { get; set; }
 
     public string Role { get; set; }
-    public int SecurityLevel { get; set; }
-    
+
+    public int SecurityLevel
+    {
+        get; set;
+    }
     public string UniversityName { get; set; }
     
+
     public UserDto(string username, string password, string email, string name, string role, int securityLevel, string universityName)
     {
         Username = username;
@@ -34,6 +38,8 @@ public class UserDto
         Name = name;
         Role = role;
         SecurityLevel = securityLevel;
+
+
     }
     public UserDto()
     {

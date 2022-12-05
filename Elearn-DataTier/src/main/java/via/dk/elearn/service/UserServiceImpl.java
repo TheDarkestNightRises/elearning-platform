@@ -6,6 +6,7 @@ import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
+import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Teacher;
 import via.dk.elearn.models.University;
 import via.dk.elearn.models.User;
@@ -13,6 +14,7 @@ import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.LectureRepository;
 import via.dk.elearn.repository.TeacherRepository;
 import via.dk.elearn.repository.UserRepository;
+import via.dk.elearn.service.mapper.LectureMapper;
 import via.dk.elearn.service.mapper.UniversityMapper;
 import via.dk.elearn.service.mapper.UserMapper;
 
@@ -86,7 +88,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
         UserModel userModel;
         if(user.getRole().equals("Teacher"))
         {
-            Teacher teacher = new Teacher(user.getUsername(),user.getEmail(), user.getName(), user.getPassword(), user.getImage(), user.getRole(), user.getSecurity_level(), user.getUniversity());
+            Teacher teacher = new Teacher(user.getUsername(),user.getEmail(), user.getName(), user.getPassword(), user.getImage(), user.getRole(), user.getSecurity_level(), user.getUniversity(),user.isApproved());
             Teacher teacherFromDB = teacherRepository.save(teacher);
             userModel = UserMapper.convertUserToGrpcModel(teacherFromDB);
         }
@@ -110,6 +112,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
             userFound.setPassword(request.getPassword());
             userFound.setEmail(request.getEmail());
         userFound.setEmail(request.getImage());
+        userFound.setApproved(request.getApproved());
         userRepository.save(userFound);
             UserModel userModel = UserMapper.convertUserToGrpcModel(userFound);
             responseObserver.onNext(userModel);
@@ -145,6 +148,28 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
             User userFound = user.get();
             UserModel userModel = UserMapper.convertUserToGrpcModel(userFound);
             responseObserver.onNext(userModel);
+            responseObserver.onCompleted();
+        }
+    }
+
+    @Override
+    public void getAllUsers(UserId request, StreamObserver<UserModel> responseObserver) {
+        List<User> users = userRepository.findAll();
+        if (users.isEmpty()) {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("User is not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("User not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+        } else {
+
+            for (User user : users) {
+                UserModel userModel = UserMapper.convertUserToGrpcModel(user);
+                responseObserver.onNext(userModel);
+            }
             responseObserver.onCompleted();
         }
     }

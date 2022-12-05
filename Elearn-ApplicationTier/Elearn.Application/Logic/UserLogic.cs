@@ -50,4 +50,9 @@ public class UserLogic : IUserLogic
         }
         await _userService.DeleteUserAsync(user);
     }
+
+    public async Task<List<User>> GetAllUsersAsync()
+    {
+        return await _userService.GetAllUsersAsync();
+    }
 }
