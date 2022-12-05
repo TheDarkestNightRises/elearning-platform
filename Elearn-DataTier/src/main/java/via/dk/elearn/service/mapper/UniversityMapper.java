@@ -12,12 +12,14 @@ public class UniversityMapper {
         return UniversityModel.newBuilder()
                 .setId(university.getId())
                 .setName(university.getUniversityName())
+                .setDescription(university.getDescription())
                 .build();
     }
     public static University convertGrpcModelToUniversity(UniversityModel model) {
         return University.builder()
                 .id(model.getId())
                 .universityName(model.getName())
+                .description(model.getDescription())
                 .build();
     }
 }
