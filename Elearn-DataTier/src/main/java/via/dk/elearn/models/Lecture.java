@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -40,10 +42,12 @@ public class Lecture {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Course course;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Teacher teacher;
 
     public Lecture(String title, String url, String image, String body) {

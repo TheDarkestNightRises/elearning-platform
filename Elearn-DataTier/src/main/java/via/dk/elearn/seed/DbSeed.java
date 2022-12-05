@@ -116,5 +116,10 @@ public class DbSeed implements CommandLineRunner {
             System.out.println(lectures.get(i).getTitle());
         }
 
+        LectureVote lectureVote = new LectureVote(createdTeacher1, createdlecture1, true);
+
+
+
+
     }
 }
