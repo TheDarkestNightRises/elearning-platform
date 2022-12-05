@@ -1,9 +1,7 @@
 package via.dk.elearn.service.mapper;
 
 import org.springframework.stereotype.Component;
-import via.dk.elearn.models.Teacher;
 import via.dk.elearn.models.University;
-import via.dk.elearn.protobuf.TeacherModel;
 import via.dk.elearn.protobuf.UniversityModel;
 
 @Component

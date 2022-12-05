@@ -2,6 +2,7 @@
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Extensions;
 
 
 namespace Elearn.WebAPI.Controllers;
@@ -19,12 +20,15 @@ public class CommentsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<Comment>> CreateAsync([FromBody] CommentCreationDto dto)
+    public async Task<ActionResult<CommentDto>> CreateAsync([FromBody] CommentCreationDto dto)
     {
         try
         {
-            Comment created = await commentLogic.CreateAsync(dto);
-            return Created($"/Comments/{created.Lecture.Url}", created);
+            Comment comment = dto.AsBaseFromCreation();
+            Comment created = await commentLogic.CreateAsync(comment);
+            CommentDto createdDto = created.AsDto();
+            
+            return Created($"/Comments/{created.Lecture.Url}", createdDto);
         }
         catch (Exception e)
         {
@@ -33,18 +37,18 @@ public class CommentsController : ControllerBase
         }
     }
 
-    [HttpGet("{url}")]
-    public  Task<ActionResult<List<Comment>>> GetAllCommentsByPostUrlAsync(string url)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<List<CommentUserDto>>> GetAllCommentsByLectureId(long id)
     {
         try
         {
-            var comments =  commentLogic.GetAllCommentsByPostUrlAsync(url);
-            return Task.FromResult<ActionResult<List<Comment>>>(Ok(comments));
+            var comments = await commentLogic.GetAllCommentsByLectureId(id);
+            return Ok(comments.AsDtos());
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            return Task.FromResult<ActionResult<List<Comment>>>(StatusCode(500, e.Message));
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
         }
     }
 }

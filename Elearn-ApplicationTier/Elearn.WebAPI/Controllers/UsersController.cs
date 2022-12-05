@@ -2,6 +2,7 @@
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Extensions;
 
 namespace Elearn.WebAPI.Controllers;
 
@@ -32,12 +33,13 @@ public class UsersController:ControllerBase
     }
     
     [HttpGet("{username}")]
-    public async Task<ActionResult<User>> GetUserAsync(string username)
+    public async Task<ActionResult<UserDto>> GetUserAsync([FromRoute]string username)
     {
         try
         {
             var user = await userLogic.GetUserByUsernameAsync(username);
-            return Ok(user);
+            UserDto createdDto = user.AsDto();
+            return Ok(createdDto);
         }
         catch (Exception e)
         {

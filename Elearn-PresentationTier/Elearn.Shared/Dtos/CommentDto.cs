@@ -4,10 +4,10 @@ namespace Elearn.Shared.Dtos;
 
 public class CommentDto
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
     
-    //Actual user needed
-    public int AuthorId{ get; set; }
+    
+    public long AuthorId{ get; set; }
     
     public long LectureId{ get; set; }
     
@@ -15,14 +15,28 @@ public class CommentDto
     
     public DateTime DateCreated { get; set; } 
 
-    public CommentDto(int AuthorId, long lectureId, string Text, DateTime dateCreated)
+    public CommentDto(long AuthorId, long LectureId, string Text, DateTime dateCreated)
     {
         this.AuthorId = AuthorId;
-        this.LectureId = lectureId;
+        this.LectureId = LectureId;
         this.Text = Text;
         DateCreated = dateCreated;
     }
     
+    public CommentDto(long Id,int AuthorId, long LectureId, string Text, DateTime dateCreated)
+    {
+        this.Id = Id;
+        this.AuthorId = AuthorId;
+        this.LectureId = LectureId;
+        this.Text = Text;
+        DateCreated = dateCreated;
+    }
+
+    public CommentDto()
+    {
+    }
+
+
     public override string ToString()
     {
         return $"{Id} {AuthorId} {LectureId} {Text} {DateCreated}";

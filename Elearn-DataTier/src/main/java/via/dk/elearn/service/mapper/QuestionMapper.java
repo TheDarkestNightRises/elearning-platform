@@ -1,7 +1,6 @@
 package via.dk.elearn.service.mapper;
 
 import via.dk.elearn.models.Question;
-
 import via.dk.elearn.protobuf.QuestionModel;
 
 public class QuestionMapper {

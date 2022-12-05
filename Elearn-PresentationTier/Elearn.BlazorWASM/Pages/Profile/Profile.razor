@@ -30,7 +30,7 @@
              <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
                 <h3 class=" d-flex justify-center">Hello, @CurrentUser?.Name</h3>
                  <div class="form-group d-flex justify-center">
-                     <label>User Id : @CurrentUser?.UserId</label>
+                     <label>User Id : @CurrentUser?.Id</label>
                  </div>
                  <div class="form-group d-flex justify-center">
                                       <label>Username : @CurrentUser?.Username</label>
@@ -170,14 +170,14 @@
 
 
     private async Task GetLecureByTeacherId() {
-        _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.UserId);
+        _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.Id);
     }
 
     private async Task GetUpvotedLecureByUserId() {
-        _upvotedLectureToShow = await _lectureService.GetUpvotedLectureByUserIdAsync(CurrentUser.UserId);
+        _upvotedLectureToShow = await _lectureService.GetUpvotedLectureByUserIdAsync(CurrentUser.Id);
     }
     private async Task GetQuestionByUserId() {
-        _questionToShow = await _questionService.GetQuestionByUserIdAsync(CurrentUser.UserId);
+        _questionToShow = await _questionService.GetQuestionByUserIdAsync(CurrentUser.Id);
     }
 
 }

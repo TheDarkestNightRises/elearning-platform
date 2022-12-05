@@ -1,18 +1,18 @@
-﻿namespace Elearn.Shared.Models;
+﻿namespace Elearn.Shared.Dtos;
 
-public class User
+public class UserDto
 {
     public long Id { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
-    public string Name { get; set; } //THE NAME IS MISSING
+    public string Name { get; set; } 
     public string Role { get; set; }
     public string Image { get; set; }
     public int SecurityLevel { get; set; }
-    public University? University { get; set; }
 
-    public User(string username, string password, string email, string name, string role, string image, int securityLevel, University? university)
+
+    public UserDto(string username, string password, string email, string name, string role, string image, int securityLevel)
     {
         Username = username;
         Password = password;
@@ -21,10 +21,10 @@ public class User
         Role = role;
         Image = image;
         SecurityLevel = securityLevel;
-        University = university;    
+        
     }
 
-    public User(long id, string username, string password, string email, string name, string role, string image, int securityLevel, University? university)
+    public UserDto(long id, string username, string password, string email, string name, string role, string image, int securityLevel)
     {
         Id = id;
         Username = username;
@@ -34,10 +34,9 @@ public class User
         Role = role;
         Image = image;
         SecurityLevel = securityLevel;
-        University = university;
     }
 
-    public User()
+    public UserDto()
     {
     }
     
@@ -45,6 +44,4 @@ public class User
     {
         return $"{Id} {Name} ";
     }
-
-   
 }

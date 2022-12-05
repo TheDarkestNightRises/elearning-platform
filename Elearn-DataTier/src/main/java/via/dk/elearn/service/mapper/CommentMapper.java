@@ -2,9 +2,7 @@ package via.dk.elearn.service.mapper;
 
 import org.springframework.stereotype.Component;
 import via.dk.elearn.models.Comment;
-import via.dk.elearn.models.Lecture;
 import via.dk.elearn.protobuf.CommentModel;
-import via.dk.elearn.protobuf.LectureModel;
 
 @Component
 public class CommentMapper {

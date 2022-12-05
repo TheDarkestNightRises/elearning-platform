@@ -12,6 +12,7 @@ service CommentService {
 
   rpc GetAllComments (NewCommentRequest) returns (stream CommentModel);
   rpc CreateNewComment (CommentModel) returns (CommentModel);
+  rpc GetCommentByLectureId(LectureId) returns (stream CommentModel);
 }
 
 message NewCommentRequest {

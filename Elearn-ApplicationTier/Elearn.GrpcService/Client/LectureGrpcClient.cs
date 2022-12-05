@@ -53,7 +53,7 @@ public class LectureGrpcClient : ILectureService
         return createdLecture;
     }
 
-    public async Task<Lecture?> GetByIdAsync(int id)
+    public async Task<Lecture?> GetByIdAsync(long id)
     {
         var lectureRequested = new LectureId { Id = id };
         var lectureGrpcModel = await _lectureClient.GetLectureByIdAsync(lectureRequested);

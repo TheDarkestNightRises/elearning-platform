@@ -31,10 +31,15 @@ public class CommentHttpClient : ICommentService
         return comment;
     }
 
-    public async Task<List<CommentDto>> GetCommentsByPostUrlAsync(string url)
+    public async Task<List<CommentUserDto?>> GetAllCommentsByLectureId(long id)
     {
-        //Todo: Refactor this so it fits with dtos
-        return await client.GetFromJsonAsync<List<CommentDto>>($"/Comments/{url}");
+        HttpResponseMessage response = await client.GetAsync($"/Comments/{id}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+        return await response.Content.ReadFromJsonAsync<List<CommentUserDto?>>();
     }
     
 }

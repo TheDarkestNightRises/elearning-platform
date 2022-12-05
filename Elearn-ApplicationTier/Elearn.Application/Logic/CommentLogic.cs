@@ -1,4 +1,5 @@
-﻿using Elearn.Application.LogicInterfaces;
+﻿using System.Security.AccessControl;
+using Elearn.Application.LogicInterfaces;
 using Elearn.Application.ServiceContracts;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
@@ -19,10 +20,10 @@ public class CommentLogic : ICommentLogic
         _userService = userService;
     }
 
-    public async Task<Comment> CreateAsync(CommentCreationDto dto)
+    public async Task<Comment> CreateAsync(Comment comment)
     { 
-        Lecture? lecture = await _lectureService.GetByIdAsync(dto.LectureId);
-        User? user = await _userService.GetUserByIdAsync(dto.UserId);
+        Lecture? lecture = await _lectureService.GetByIdAsync(comment.Lecture.Id);
+        User? user = await _userService.GetUserByIdAsync(comment.Author.Id);
         if (lecture == null)
         {
             throw new Exception($"Lecture was not found.");
@@ -31,9 +32,9 @@ public class CommentLogic : ICommentLogic
         {
             throw new Exception($"User was not found.");
         }
-        ValidateComment(dto);
-        Comment comment = new Comment(user,lecture,dto.Text);
-        Comment created = await _commentService.CreateAsync(comment);
+        ValidateComment(comment);
+        Comment commentAppended = new Comment(user,lecture,comment.Text);
+        Comment created = await _commentService.CreateAsync(commentAppended);
         return created;
     }
     
@@ -48,13 +49,13 @@ public class CommentLogic : ICommentLogic
         throw new NotImplementedException();
     }
 
-    public IQueryable<Comment> GetAllCommentsByPostUrlAsync(string url)
+    public async Task<List<Comment>> GetAllCommentsByLectureId(long id) 
     {
-        return _commentService.GetAllCommentsByPostUrlAsync(url);
+        return await _commentService.GetAllCommentsByLectureId(id);
     }
 
-    private void ValidateComment(CommentCreationDto dto)
+    private void ValidateComment(Comment comment)
     {
-        if (string.IsNullOrEmpty(dto.Text)) throw new Exception("Input cannot be empty.");
+        if (string.IsNullOrEmpty(comment.Text)) throw new Exception("Input cannot be empty.");
     }
 }
