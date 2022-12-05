@@ -17,4 +17,15 @@ public class UniversityLogic : IUniversityLogic
     {
         return await _universityService.GetAllUniversitiesAsync();
     }
+
+    public async Task<University> GetUniversitybyIdAsync(long id)
+    {
+        University university = await _universityService.GetUniversityByIdAsync(id);
+        if (university is null)
+        {
+            throw new Exception("No university found with this id");
+        }
+
+        return university;
+    }
 }

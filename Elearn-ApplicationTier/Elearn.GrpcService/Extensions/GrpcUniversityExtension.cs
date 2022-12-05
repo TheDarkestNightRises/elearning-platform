@@ -11,6 +11,7 @@ public static class GrpcUniversityExtension
         {
             Id = university.Id,
             Name = university.Name,
+            Description = university.Description
         };
     }
 
@@ -20,6 +21,7 @@ public static class GrpcUniversityExtension
         {
             Id = universityModel.Id,
             Name = universityModel.Name,
+            Description = universityModel.Description
         };
     }
 }

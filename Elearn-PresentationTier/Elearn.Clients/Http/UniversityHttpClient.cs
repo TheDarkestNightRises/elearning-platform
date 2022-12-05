@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Elearn.HttpClients.Service;
 using Elearn.Shared.Dtos;
 
@@ -26,5 +27,17 @@ public class UniversityHttpClient : IUniversityService
             PropertyNameCaseInsensitive = true
         })!;
         return universityDtos;
+    }
+
+    public async Task<UniversityDto> GetUniversityByIdAsync(long id)
+    {
+        HttpResponseMessage response = await client.GetAsync($"/Universities/{id}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+
+        return await response.Content.ReadFromJsonAsync<UniversityDto>();
     }
 }

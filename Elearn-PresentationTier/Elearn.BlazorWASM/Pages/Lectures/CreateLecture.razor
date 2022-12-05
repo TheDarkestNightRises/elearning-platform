@@ -116,7 +116,7 @@
         _newLecture.Body = await QuillHtml.GetHTML();
         _newLecture.Username = name;
         var createdPost = await LectureService.CreateAsync(_newLecture);
-        NavMgr.NavigateTo($"/posts/{_newLecture.Url}");
+        NavMgr.NavigateTo($"/Lectures/{_newLecture.Url}");
     }
 
     private async Task ShowPreviewOfBody()

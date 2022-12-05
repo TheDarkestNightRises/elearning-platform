@@ -1,0 +1,25 @@
+﻿@using Elearn.Shared.Dtos
+@inject NavigationManager navMgr
+
+<MudCard>
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@University.Name</MudText>
+        <MudText Typo="Typo.body2">@University.Description</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="GoToUrl">View lectures</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+@code {
+
+    [Parameter]
+    public UniversityDto University { get; set; }
+
+    private void GoToUrl()
+    {
+        navMgr.NavigateTo($"/Universities/{University.Id}/lectures");
+    }
+
+}
