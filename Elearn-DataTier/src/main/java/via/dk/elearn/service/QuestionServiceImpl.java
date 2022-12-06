@@ -47,7 +47,7 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
     }
 
     @Override
-    public void getAllQuestion(PaginationModel request, StreamObserver<QuestionModel> responseObserver) {
+    public void getAllQuestions(PaginationModel request, StreamObserver<QuestionModel> responseObserver) {
         Pageable sortedByDate =
                 PageRequest.of(request.getPageNumber(), request.getPageSize());
         Page<Question> questions = questionRepository.findAll(sortedByDate);
@@ -67,9 +67,10 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
         responseObserver.onCompleted();
     }
 
+
     @Override
     public void getQuestionsByUserId(QuestionUserId request, StreamObserver<QuestionModel> responseObserver) {
-        List<Question> questions = questionRepository.getQuestionByUserId(request.getUserId());
+        List<Question> questions = questionRepository.getQuestionByStudentId(request.getUserId());
         if (questions.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())

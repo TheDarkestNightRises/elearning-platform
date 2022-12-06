@@ -1,12 +1,14 @@
 package via.dk.elearn.models;
 
 import lombok.Data;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
 @Data
+@SuperBuilder
 public class Student extends User{
 
     public Student() {

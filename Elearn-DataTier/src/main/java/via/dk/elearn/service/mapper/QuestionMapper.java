@@ -9,15 +9,19 @@ public class QuestionMapper {
                 .setId(question.getId())
                 .setBody(question.getBody())
                 .setTitle(question.getTitle())
+                .setDescription(question.getDescription())
                 .setUrl(question.getUrl())
+                .setStudent(StudentMapper.convertUserToGrpcModel(question.getStudent()))
                 .build();
     }
 
     public static Question convertGrpcModelToQuestion(QuestionModel questionModel) {
         return Question.builder()
+                .id(questionModel.getId())
                 .body(questionModel.getBody())
                 .title(questionModel.getTitle())
                 .url(questionModel.getUrl())
+                .student(StudentMapper.convertGrpcModelToUser(questionModel.getStudent()))
                 .build();
     }
 }
