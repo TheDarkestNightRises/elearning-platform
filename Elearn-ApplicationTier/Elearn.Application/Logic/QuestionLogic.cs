@@ -8,9 +8,9 @@ namespace Elearn.Application.Logic;
 public class QuestionLogic : IQuestionLogic
 {
     private IQuestionService _questionService;
-    private IUserService _userService;
+    private IStudentService _userService;
 
-    public QuestionLogic(IQuestionService questionService, IUserService userService)
+    public QuestionLogic(IQuestionService questionService, IStudentService userService)
     {
         _questionService = questionService;
         _userService = userService;
@@ -18,12 +18,12 @@ public class QuestionLogic : IQuestionLogic
 
     public async Task<Question> CreateQuestionAsync(Question question)
     {
-        var user = await _userService.GetUserByNameAsync(question.Author.Name);
-        if (user is null)
+        var student = await _userService.GetStudentByUsernameAsync(question.Author.Name);
+        if (student is null)
         {
-            throw new Exception("User not found");
+            throw new Exception("Student not found");
         }
-        question.Author = user;
+        question.Author = student;
         var createdQuestion = await _questionService.CreateNewQuestionAsync(question);
         return createdQuestion;
     }

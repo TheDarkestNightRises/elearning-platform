@@ -12,7 +12,10 @@ public static class GrpcQuestionExtension
             Id = question.Id,
             Url = question.Url,
             Title = question.Title,
-            Body = question.Body
+            Body = question.Body,
+            Description = question.Description,
+            DateCreated = question.CreationDate.AsGrpcModel(),
+            Student = question.Author?.AsGrpcModel()
             // in the future add correct answer
             
         };
@@ -25,7 +28,10 @@ public static class GrpcQuestionExtension
             Id = questionModel.Id,
             Url = questionModel.Url,
             Title = questionModel.Title,
-            Body = questionModel.Body
+            Body = questionModel.Body,
+            Description = questionModel.Description,
+            CreationDate = questionModel.DateCreated.AsBase(),
+            Author = questionModel.Student?.AsBase()
         };
     }
 }
