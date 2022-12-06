@@ -1,6 +1,7 @@
 package via.dk.elearn.service;
 
 import com.google.protobuf.Any;
+import com.google.rpc.Code;
 import com.google.rpc.ErrorInfo;
 import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
@@ -143,5 +144,52 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
             }
             responseObserver.onCompleted();
         }
+    }
+
+    @Override
+    public void editLecture(LectureModel request, StreamObserver<LectureModel> responseObserver) {
+        Lecture lecture = LectureMapper.convertGrpcModelToLecture(request);
+        try
+        {
+            Lecture lectureFromDb = lectureRepository.save(lecture);
+
+            LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lectureFromDb);
+            responseObserver.onNext(lectureModel);
+            responseObserver.onCompleted();
+        }catch (Exception e)
+        {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(Code.INVALID_ARGUMENT.getNumber())
+                    .setMessage("Cannot edit lecture")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("Cannot edit lecture")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteLecture(LectureModel request, StreamObserver<LectureResponse> responseObserver) {
+        Lecture lecture = LectureMapper.convertGrpcModelToLecture(request);
+        try{
+            lectureRepository.deleteById(lecture.getId());
+            responseObserver.onNext(LectureResponse.newBuilder().build());
+            responseObserver.onCompleted();
+        }catch (Exception e)
+        {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("The lecture to be deleted is not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("Lecture to delete not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+            e.printStackTrace();
+        }
+
+
     }
 }
