@@ -31,7 +31,7 @@ public class LectureLogic : ILectureLogic
         {
             throw new Exception("Teacher not found in database");
         }
-        Lecture lectureAppended = new Lecture(lecture.Title, lecture.Body, lecture.Url, lecture.Image, teacher);
+        Lecture lectureAppended = new Lecture(lecture.Title, lecture.Body, lecture.Url, lecture.Image,lecture.Description, teacher);
         Lecture created = await _lectureService.CreateNewPostAsync(lectureAppended);
         return created;
     }

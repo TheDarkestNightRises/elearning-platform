@@ -13,27 +13,32 @@ public class Lecture
     
     public string Body { get; set; }
     
+    public string Description { get; set; }
+    
     public DateTime DateCreated { get; set; } = DateTime.Now;
     public Teacher Author { get; set; }
 
-    public Lecture(string title, string body, string url, string image, Teacher author)
+    public Lecture(string url, string image, string title, string body, string description, Teacher author)
     {
         Url = url;
         Image = image;
         Title = title;
         Body = body;
+        Description = description;
         Author = author;
     }
 
-    public Lecture(int id, string title, string body, string url, string image, Teacher author)
+    public Lecture(long id, string url, string image, string title, string body, string description, Teacher author)
     {
         Id = id;
         Url = url;
         Image = image;
         Title = title;
         Body = body;
+        Description = description;
         Author = author;
     }
+
 
     public Lecture()
     {

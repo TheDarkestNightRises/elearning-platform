@@ -6,12 +6,10 @@ import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
-import via.dk.elearn.models.Lecture;
-import via.dk.elearn.models.Teacher;
-import via.dk.elearn.models.University;
-import via.dk.elearn.models.User;
+import via.dk.elearn.models.*;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.LectureRepository;
+import via.dk.elearn.repository.StudentRepository;
 import via.dk.elearn.repository.TeacherRepository;
 import via.dk.elearn.repository.UserRepository;
 import via.dk.elearn.service.mapper.LectureMapper;
@@ -27,13 +25,13 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     private UserRepository userRepository;
     private TeacherRepository teacherRepository;
 
-    private LectureRepository lectureRepository;
+    private StudentRepository studentRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, TeacherRepository teacherRepository, LectureRepository lectureRepository) {
+    public UserServiceImpl(UserRepository userRepository, TeacherRepository teacherRepository, StudentRepository studentRepository) {
         this.userRepository = userRepository;
         this.teacherRepository = teacherRepository;
-        this.lectureRepository = lectureRepository;
+        this.studentRepository = studentRepository;
     }
 
     @Override
@@ -90,6 +88,11 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
             Teacher teacher = new Teacher(user.getUsername(), user.getEmail(), user.getName(), user.getPassword(), user.getImage(), user.getRole(), user.getSecurity_level(), user.getUniversity(), user.isApproved());
             Teacher teacherFromDB = teacherRepository.save(teacher);
             userModel = UserMapper.convertUserToGrpcModel(teacherFromDB);
+        } else if (user.getRole().equals("Student"))
+        {
+            Student student = new Student(user.getUsername(), user.getEmail(), user.getName(), user.getPassword(), user.getImage(), user.getRole(), user.getSecurity_level(), user.getUniversity(), user.isApproved());
+            Student studentrFromDB = studentRepository.save(student);
+            userModel = UserMapper.convertUserToGrpcModel(studentrFromDB);
         } else {
             User userFromDb = userRepository.saveAndFlush(user);
             userModel = UserMapper.convertUserToGrpcModel(userFromDb);
@@ -97,8 +100,8 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
 //        userModel = UserModel.newBuilder(userModel)
 //                .setUniversity(request.getUniversity())
 //                .build();
-//        responseObserver.onNext(userModel);
-//        responseObserver.onCompleted();
+        responseObserver.onNext(userModel);
+        responseObserver.onCompleted();
     }
 
     @Override

@@ -1,13 +1,14 @@
 syntax = "proto3";
 import "rpc_pagination.proto";
-
+import "rpc_student.proto";
 
 option java_multiple_files = true;
 option java_package = "via.dk.elearn.protobuf";
 
+
 service QuestionService {
   rpc GetQuestion (QuestionUrl) returns (QuestionModel);
-  rpc GetAllQuestion (PaginationModel) returns (stream QuestionModel);
+  rpc GetAllQuestions (PaginationModel) returns (stream QuestionModel);
   rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
   rpc GetQuestionsByUserId(QuestionUserId) returns (stream QuestionModel);
 }
@@ -23,7 +24,9 @@ message QuestionModel {
   int64 id = 1;
   string title = 2;
   string body = 3;
-  string url = 4;
-  string dateCreated = 5;
-  int64 correctAnswer = 6;
+  string description = 4;
+  string url = 5;
+  string dateCreated = 6;
+  int64 correctAnswer = 7;
+  StudentModel student = 8;
 }

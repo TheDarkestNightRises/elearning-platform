@@ -12,5 +12,5 @@ public interface QuestionRepository extends JpaRepository<Question,Long> {
 
     List<Question> findByTitleContaining(String title);
 
-    List<Question> getQuestionByUserId(long userId);
+    List<Question> getQuestionByStudentId(long studentId);
 }

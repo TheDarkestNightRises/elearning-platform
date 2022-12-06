@@ -34,6 +34,7 @@ message LectureModel {
   string title = 3;
   string url = 4;
   string image = 5;
-  TeacherModel teacher = 6;
-  DateModel date = 7;
+  string description = 6;
+  TeacherModel teacher = 7;
+  DateModel date = 8;
 }

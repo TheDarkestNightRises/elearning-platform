@@ -13,6 +13,7 @@ public class LectureMapper {
                 .setImage(lecture.getImage())
                 .setTitle(lecture.getTitle())
                 .setUrl(lecture.getUrl())
+                .setDescription(lecture.getDescription())
                 .setDate(DateMapper.convertDateToGrpcModel(lecture.getDate()))
                 .setTeacher(TeacherMapper.convertTeacherToGrpcModel(lecture.getTeacher()))
                 .build();
@@ -25,6 +26,7 @@ public class LectureMapper {
                 .body(lectureModel.getBody())
                 .image(lectureModel.getImage())
                 .url(lectureModel.getUrl())
+                .description(lectureModel.getDescription())
                 .date(DateMapper.convertGrpcModeltoDate(lectureModel.getDate()))
                 .teacher(TeacherMapper.convertGrpcModelToTeacher(lectureModel.getTeacher()))
                 .build();

@@ -21,7 +21,7 @@ public class QuestionGrpcClient : IQuestionService
     public async Task<List<Question>> GetAllQuestionsAsync()
     {
         List<Question> questions = new List<Question>();
-        using (var call = _questionClient.GetAllQuestion(new PaginationModel()))
+        using (var call = _questionClient.GetAllQuestions(new PaginationModel()))
         {
             while (await call.ResponseStream.MoveNext())
             {
@@ -69,7 +69,7 @@ public class QuestionGrpcClient : IQuestionService
             PageNumber = pageNumber,
             PageSize = pageSize,
         };
-        using (var call = _questionClient.GetAllQuestion(pagination))
+        using (var call = _questionClient.GetAllQuestions(pagination))
         {
             while (await call.ResponseStream.MoveNext())
             {

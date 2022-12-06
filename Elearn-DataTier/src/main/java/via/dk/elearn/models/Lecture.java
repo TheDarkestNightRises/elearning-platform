@@ -50,13 +50,6 @@ public class Lecture {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Teacher teacher;
 
-    public Lecture(String title, String url, String image, String body) {
-        this.title = title;
-        this.url = url;
-        this.image = image;
-        this.body = body;
-    }
-
     public Lecture(String title, String description, String url, String body, String image, LocalDate date, Course course, Teacher teacher) {
         this.title = title;
         this.description = description;

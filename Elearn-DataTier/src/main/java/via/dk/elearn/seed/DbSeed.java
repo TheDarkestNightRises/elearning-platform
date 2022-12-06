@@ -14,7 +14,6 @@ import java.util.List;
 public class DbSeed implements CommandLineRunner {
     private CommentRepository commentRepository;
     private CountryRepository countryRepository;
-
     private CourseRepository courseRepository;
     private LectureRepository lectureRepository;
     private LectureVoteRepository lectureVoteRepository;
@@ -102,19 +101,12 @@ public class DbSeed implements CommandLineRunner {
         Lecture createdlecture3 = lectureRepository.save(lecture3);
 
         //add questions
-        Question question = new Question("How to run npm with vite?", "Please help", "I tried to use vite but I dont know how to run the project", "npm-doenst-work", null, createdStudent);
+        Question question = new Question("How to run npm with vite?", "Please help", "I tried to use vite but I dont know how to run the project", "npm-doenst-work",LocalDate.now(), null, createdStudent);
         Question createdQuestion = questionRepository.save(question);
 
-        List<Lecture> lectures = lectureRepository.findAllByTeacher_University(createdUniversity2);
-
-        for(int i = 0; i < lectures.size(); i++){
-            System.out.println(lectures.get(i).getTitle());
-        }
-
+        //add lecture votes
         LectureVote lectureVote = new LectureVote(createdTeacher1, createdlecture1, true);
-
-
-
+        LectureVote createdLectureVote = lectureVoteRepository.save(lectureVote);
 
     }
 }
