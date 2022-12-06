@@ -13,6 +13,9 @@ public static class QuestionExtension
             Url = question.Url,
             Title = question.Title,
             Body = question.Body,
+            Description = question.Description,
+            CreationDate = question.CreationDate,
+            AuthorName = question.Author.Username,
             CorrectAnswerId = question.CorrectAnswerId,
         };
     }
@@ -30,21 +33,28 @@ public static class QuestionExtension
                 Url = question.Url,
                 Title = question.Title,
                 Body = question.Body,
+                Description = question.Description,
                 CreationDate = question.CreationDate,
+                AuthorName = question.Author.Username,
+                CorrectAnswerId = question.CorrectAnswerId,
             };
         return questionsResult;
     }
 
     public static Question AsBase(this QuestionDto questionDto)
     {
-        return new Question
+       Question question = new Question
         {
             Url = questionDto.Url,
             Title = questionDto.Title,
             Body = questionDto.Body,
             CreationDate = questionDto.CreationDate,
             CorrectAnswerId = questionDto.CorrectAnswerId
+            
         };
+        question.Author = new Student();
+        question.Author.Name = questionDto.AuthorName;
+        return question;
     }
 
     public static Question AsBaseFromCreation(this QuestionCreationDto questionDto)
@@ -54,6 +64,7 @@ public static class QuestionExtension
             Url = questionDto.Url,
             Title = questionDto.Title,
             Body = questionDto.Body,
+            Description = questionDto.Description,
             CreationDate = questionDto.CreationDate,
         };
         question.Author = new Student();

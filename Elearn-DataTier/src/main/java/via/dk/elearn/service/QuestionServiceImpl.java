@@ -61,6 +61,7 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
     @Override
     public void createNewQuestion(QuestionModel request, StreamObserver<QuestionModel> responseObserver) {
         Question question = QuestionMapper.convertGrpcModelToQuestion(request);
+        System.out.println(question.getDescription());
         Question questionFromDB = questionRepository.save(question);
         QuestionModel questionGrpcModel = QuestionMapper.convertQuestionToGrpcModel(questionFromDB);
         responseObserver.onNext(questionGrpcModel);
