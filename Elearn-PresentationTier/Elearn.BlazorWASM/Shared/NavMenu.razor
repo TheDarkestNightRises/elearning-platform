@@ -12,6 +12,7 @@
             <MudButton Variant="Variant.Text" OnClick="GoToProfile">Profile </MudButton>
             <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToAccountSettings"/>
             <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">Account Settings </MudButton>
+             <MudIconButton Icon="@Icons.Material.Outlined.Logout" OnClick="GoToLogout"/>
         </Authorized>
         <NotAuthorized>
                     <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="GoToLogin"/>
@@ -58,6 +59,10 @@
     private void GoToUniversities()
     {
         navMgr.NavigateTo("/Universities");
+    }
+    private void GoToLogout()
+    {
+        navMgr.NavigateTo("/Logout");
     }
 }
 

@@ -73,6 +73,7 @@ public class JwtHttpClient : IAuthService
         OnAuthStateChanged.Invoke(principal);
         await localStorageService.SetItemAsync<string>("jwt", null);
     }
+  
 
     public async Task RegisterAsync(UserCreationDto user)
     {
