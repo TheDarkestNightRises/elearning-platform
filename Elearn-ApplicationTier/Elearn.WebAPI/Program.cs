@@ -28,6 +28,7 @@ builder.Services.AddScoped<ITeacherService, TeacherGrpcClient>();
 builder.Services.AddScoped<IModeratorService, ModeratorGrpcClient>();
 builder.Services.AddScoped<ILectureVoteService, LectureVoteGrpcClient>();
 builder.Services.AddScoped<IUniversityService, UniversityGrpcClient>();
+builder.Services.AddScoped<IStudentService, StudentGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<ILectureLogic, LectureLogic>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
@@ -45,6 +46,7 @@ builder.Services.AddGrpcClient<TeacherGrpcClient>();
 builder.Services.AddGrpcClient<LectureVoteGrpcClient>();
 builder.Services.AddGrpcClient<UniversityGrpcClient>();
 builder.Services.AddGrpcClient<ModeratorGrpcClient>();
+builder.Services.AddScoped<StudentGrpcClient>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

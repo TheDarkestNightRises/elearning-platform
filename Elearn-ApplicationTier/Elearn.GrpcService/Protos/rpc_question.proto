@@ -1,6 +1,7 @@
 syntax = "proto3";
 import "rpc_student.proto";
 import "rpc_pagination.proto";
+import "rpc_date.proto";
 
 option csharp_namespace = "ElearnGrpc";
 
