@@ -112,6 +112,21 @@ public class LectureGrpcClient : ILectureService
         }
         return lectures;
     }
+
+    public async Task<Lecture> EditLectureAsync(Lecture lecture)
+    {
+        var postModel = lecture.AsGrpcModel();
+        var createdPostFromGrpc = await _lectureClient.EditLectureAsync(postModel);
+        Lecture createdLecture = createdPostFromGrpc.AsBase();
+        
+        return createdLecture;
+    }
+
+    public async Task DeleteLecture(Lecture lecture)
+    {
+        var postModel = lecture.AsGrpcModel();
+        await _lectureClient.DeleteLectureAsync(postModel);
+    }
 }
 
 
