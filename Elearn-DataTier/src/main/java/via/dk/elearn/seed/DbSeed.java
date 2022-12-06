@@ -102,12 +102,7 @@ public class DbSeed implements CommandLineRunner {
         Lecture createdlecture3 = lectureRepository.save(lecture3);
 
         //add questions
-        Question question = new Question();
-        question.setTitle("How to run npm with vite?");
-        question.setBody("I tried to use vite but I dont know how to run the project");
-        question.setUrl("npm-doenst-work");
-        question.setDescription("Please help");
-        question.setUser(createdStudent);
+        Question question = new Question("How to run npm with vite?", "Please help", "I tried to use vite but I dont know how to run the project", "npm-doenst-work", null, createdStudent);
         Question createdQuestion = questionRepository.save(question);
 
         List<Lecture> lectures = lectureRepository.findAllByTeacher_University(createdUniversity2);
