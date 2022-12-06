@@ -1,0 +1,17 @@
+﻿@page "/Logout"
+@using Elearn.HttpClients.Service
+@inject IAuthService AuthService
+@inject NavigationManager NavMgr 
+
+
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        
+        await AuthService.LogoutAsync();
+        NavMgr.NavigateTo("/");
+    }
+
+}
