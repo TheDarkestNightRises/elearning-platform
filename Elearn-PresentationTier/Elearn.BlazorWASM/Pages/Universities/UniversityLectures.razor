@@ -1,0 +1,59 @@
+﻿@page "/Universities/{id:long}/Lectures"
+@using Elearn.Shared.Dtos
+@using Elearn.HttpClients.Service
+@using Elearn.BlazorWASM.Pages.Universities.UIComponents
+@inject ILectureService LectureService
+@inject IUniversityService UniversityService
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="10" md="8">
+        <MudPaper Class="pa-5 rounded-xl" >
+            <MudText Class="pa-2" Align="Align.Center" Typo="Typo.h3">@currentUniversity?.Name</MudText>
+            <MudText Class="pa-2" Align="Align.Left" Typo="Typo.body1">@currentUniversity?.Description</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+
+@if (_lectureDtos == null)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+}
+else
+{
+    @if (_lectureDtos.Count == 0)
+    {
+        <span> No lectures found</span>
+    }
+    else
+    {
+        <MudGrid Class="my-6" Justify="Justify.Center">
+            @foreach (var post in _lectureDtos)
+            {
+                <MudItem xs="12" sm="8" md="7" Class="">
+                    <LectureLargeCard Lecture="@post"></LectureLargeCard>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+}
+
+
+@code {
+
+    [Parameter]
+    public long id { get; set; }
+    
+    private List<LectureDto?> _lectureDtos = new List<LectureDto?>();
+    private UniversityDto? currentUniversity;
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUniversity = await UniversityService.GetUniversityByIdAsync(id);
+        if (currentUniversity is not null)
+        {
+            _lectureDtos = await LectureService.GetLecturesByUniversity(currentUniversity.Id);
+        }
+    }
+
+}

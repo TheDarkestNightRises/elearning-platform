@@ -7,7 +7,7 @@ public class UpdateUserDto
     public string Password { get; set; }
     
     public string Email { get; set; }
-    public string Image { get; set; }
+    public string Image { get; set; } 
     public bool Approved { get; set; }
 
     public UpdateUserDto(string username, string password, string email, string image, bool approved)
@@ -18,6 +18,8 @@ public class UpdateUserDto
         Image = image;
         Approved = approved;
     }
+    
+    
 
     public UpdateUserDto()
     {

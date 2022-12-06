@@ -1,9 +1,7 @@
 package via.dk.elearn.service.mapper;
 
 import via.dk.elearn.models.Moderator;
-import via.dk.elearn.models.Teacher;
 import via.dk.elearn.protobuf.ModeratorModel;
-import via.dk.elearn.protobuf.TeacherModel;
 
 public class ModeratorMapper {
     public static ModeratorModel convertModeratorToGrpcModel(Moderator user) {

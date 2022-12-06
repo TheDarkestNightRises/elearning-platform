@@ -30,4 +30,19 @@ public class UniversitiesController : ControllerBase
         }
     
     }
+    [HttpGet("{id:long}")]
+    public async Task<ActionResult<UniversityDto>> GetUniversityByIdAsync(long id)
+    {
+        try
+        {
+            var universities = await _universityLogic.GetUniversitybyIdAsync(id);
+            return Ok(universities.AsDto());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
+        }
+    
+    }
 }

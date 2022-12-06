@@ -2,6 +2,7 @@
 @using Elearn.Shared.Dtos
 @using Elearn.Shared.Models
 @inject ICommentService CommentService
+@inject ILectureService LectureService
 
 <div>Comments:</div>
 @if (_commentsDto == null)
@@ -20,12 +21,14 @@
 
 @code {
     [Parameter]
-    public string Url { get; set; }
-    private List<CommentDto> _commentsDto = new();
+    public string? Url { get; set; }
+    private List<CommentUserDto?> _commentsDto = new();
+    LectureDto? _lectureDto;
 
     protected override async Task OnInitializedAsync()
-    { 
-        _commentsDto = await CommentService.GetCommentsByPostUrlAsync(Url);
+    {
+        if (Url != null) _lectureDto = await LectureService.GetLectureByUrlAsync(Url);
+        if (_lectureDto != null) _commentsDto = await CommentService.GetAllCommentsByLectureId(_lectureDto.Id);
     }
 
 }

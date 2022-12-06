@@ -4,7 +4,7 @@ namespace Elearn.Shared.Dtos;
 
 public class LectureDto
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
     public string Title{ get; set; }
     public string Body{ get; set; }
     public string Url{ get; set; } 

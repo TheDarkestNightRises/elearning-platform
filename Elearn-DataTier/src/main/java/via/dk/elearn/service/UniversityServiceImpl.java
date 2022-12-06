@@ -56,9 +56,9 @@ public class UniversityServiceImpl extends UniversityServiceGrpc.UniversityServi
         if (universities.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lectures are not found")
+                    .setMessage("No universities were not found")
                     .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lectures not found")
+                            .setReason("Universities not found")
                             .build()))
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));

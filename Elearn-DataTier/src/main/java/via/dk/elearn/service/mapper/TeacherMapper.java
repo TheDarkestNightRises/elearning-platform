@@ -1,9 +1,7 @@
 package via.dk.elearn.service.mapper;
 
 import via.dk.elearn.models.Teacher;
-import via.dk.elearn.models.User;
 import via.dk.elearn.protobuf.TeacherModel;
-import via.dk.elearn.protobuf.UserModel;
 
 public class TeacherMapper {
     public static TeacherModel convertTeacherToGrpcModel(Teacher user) {

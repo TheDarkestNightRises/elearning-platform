@@ -1,4 +1,5 @@
-﻿using Elearn.Application.LogicInterfaces;
+﻿using System.Diagnostics;
+using Elearn.Application.LogicInterfaces;
 using Elearn.Application.ServiceContracts;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
@@ -19,6 +20,7 @@ public class UserLogic : IUserLogic
     public async Task<User> UpdateUserAsync(UpdateUserDto dto)
     {
         User? user = await _userService.GetUserByNameAsync(dto.Name);
+        Console.WriteLine(user);
         if (user == null)
          {
              throw new Exception($"User with name {dto.Name} was not found.");
@@ -27,6 +29,7 @@ public class UserLogic : IUserLogic
          updated.Password = dto.Password;
          updated.Email = dto.Email;
          updated.Image = dto.Image;
+         updated.Approved = dto.Approved;
          await _userService.UpdateUserAsync(updated);
          return updated;
     }

@@ -2,39 +2,48 @@
 
 public class UserDto
 {
-    public int UserId { get; set; }
+
+    public long Id { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
-    public string Name { get; set; }
-    public string Image { get; set; }
-
+    public string Name { get; set; } 
     public string Role { get; set; }
+    public string Image { get; set; }
+    public int SecurityLevel { get; set; }
 
-    public int SecurityLevel
-    {
-        get; set;
-    }
-    public bool Approved { get; set; }
-    
-    
-    public UserDto(string username, string password, string email, string name, string role, int securityLevel, string image, bool approved)
+
+    public UserDto(string username, string password, string email, string name, string role, string image, int securityLevel)
     {
         Username = username;
         Password = password;
         Email = email;
         Name = name;
         Role = role;
-        SecurityLevel = securityLevel;
-        Approved = approved;
         Image = image;
+        SecurityLevel = securityLevel;
+        
     }
+
+    public UserDto(long id, string username, string password, string email, string name, string role, string image, int securityLevel)
+    {
+        Id = id;
+        Username = username;
+        Password = password;
+        Email = email;
+        Name = name;
+        Role = role;
+        Image = image;
+        SecurityLevel = securityLevel;
+    }
+
     public UserDto()
     {
     }
     
     public override string ToString()
     {
-        return $"{UserId} {Name}";
+
+        return $"{Id} {Name} ";
     }
 }

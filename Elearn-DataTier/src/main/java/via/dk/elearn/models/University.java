@@ -20,7 +20,11 @@ public class University {
     @Column(unique = true, name = "university_name", length = 100)
     private String universityName;
 
-    public University(String universityName) {
+    @Column(unique = true, name = "description", length = 1000)
+    private String description;
+
+    public University(String universityName, String description) {
         this.universityName = universityName;
+        this.description = description;
     }
 }

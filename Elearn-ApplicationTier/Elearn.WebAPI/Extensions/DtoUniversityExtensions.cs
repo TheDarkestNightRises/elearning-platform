@@ -10,7 +10,8 @@ public static class DtoUniversityExtensions
         return new UniversityDto()
         {
             Id = university.Id,
-            Name = university.Name
+            Name = university.Name,
+            Description = university.Description
         };
     }
 
@@ -20,7 +21,8 @@ public static class DtoUniversityExtensions
             select new UniversityDto 
             {
                 Id = university.Id,
-                Name = university.Name
+                Name = university.Name,
+                Description = university.Description
             });
         return universityDtos;                
     }

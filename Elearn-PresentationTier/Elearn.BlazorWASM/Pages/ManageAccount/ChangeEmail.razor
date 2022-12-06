@@ -79,6 +79,8 @@
         CurrentUser = await _UserService.GetUserByUsernameAsync(username);
         Dto.Password = CurrentUser.Password;
         Dto.Name = CurrentUser.Name;
+        Dto.Image = CurrentUser.Image;
+        Dto.Approved = CurrentUser.Approved;
     }
 
     private async Task ChangeUserEmail()
@@ -86,7 +88,7 @@
         if (userPassword.Equals(CurrentUser?.Password))
         {
             await _UserService.UpdateUserAsync(Dto);
-            NavMgr.NavigateTo($"/ManageAccount");
+            NavMgr.NavigateTo($"/ManageAccount",true);
         }
     }
 

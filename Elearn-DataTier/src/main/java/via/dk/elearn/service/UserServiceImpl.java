@@ -28,15 +28,16 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     private TeacherRepository teacherRepository;
 
     private LectureRepository lectureRepository;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository,TeacherRepository teacherRepository,LectureRepository lectureRepository) {
+    public UserServiceImpl(UserRepository userRepository, TeacherRepository teacherRepository, LectureRepository lectureRepository) {
         this.userRepository = userRepository;
         this.teacherRepository = teacherRepository;
         this.lectureRepository = lectureRepository;
     }
 
     @Override
-        public void getUserByName(via.dk.elearn.protobuf.Name request, StreamObserver<UserModel> responseObserver) {
+    public void getUserByName(via.dk.elearn.protobuf.Name request, StreamObserver<UserModel> responseObserver) {
 
         Optional<User> user = userRepository.findFirstByName(request.getName());
 
@@ -75,9 +76,8 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
 
         UserModel userModel = UserMapper.convertUserToGrpcModel(user.get());
         responseObserver.onNext(userModel);
-        responseObserver.onCompleted();    }
-
-
+        responseObserver.onCompleted();
+    }
 
 
     @Override
@@ -86,14 +86,11 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
         University university = UniversityMapper.convertGrpcModelToUniversity(request.getUniversity());
         user.setUniversity(university);
         UserModel userModel;
-        if(user.getRole().equals("Teacher"))
-        {
-            Teacher teacher = new Teacher(user.getUsername(),user.getEmail(), user.getName(), user.getPassword(), user.getImage(), user.getRole(), user.getSecurity_level(), user.getUniversity(),user.isApproved());
+        if (user.getRole().equals("Teacher")) {
+            Teacher teacher = new Teacher(user.getUsername(), user.getEmail(), user.getName(), user.getPassword(), user.getImage(), user.getRole(), user.getSecurity_level(), user.getUniversity(), user.isApproved());
             Teacher teacherFromDB = teacherRepository.save(teacher);
             userModel = UserMapper.convertUserToGrpcModel(teacherFromDB);
-        }
-        else
-        {
+        } else {
             User userFromDb = userRepository.saveAndFlush(user);
             userModel = UserMapper.convertUserToGrpcModel(userFromDb);
         }
@@ -107,17 +104,17 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     @Override
     public void updateUser(UserModel request, StreamObserver<UserModel> responseObserver) {
 
-            Optional<User> findUser = userRepository.findById(request.getId());
-            User userFound = findUser.get();
-            userFound.setPassword(request.getPassword());
-            userFound.setEmail(request.getEmail());
-        userFound.setEmail(request.getImage());
+        Optional<User> findUser = userRepository.findById(request.getId());
+        User userFound = findUser.get();
+        userFound.setPassword(request.getPassword());
+        userFound.setEmail(request.getEmail());
+        userFound.setImage(request.getImage());
         userFound.setApproved(request.getApproved());
         userRepository.save(userFound);
-            UserModel userModel = UserMapper.convertUserToGrpcModel(userFound);
-            responseObserver.onNext(userModel);
-            responseObserver.onCompleted();
-        }
+        UserModel userModel = UserMapper.convertUserToGrpcModel(userFound);
+        responseObserver.onNext(userModel);
+        responseObserver.onCompleted();
+    }
 
 
     @Override
@@ -132,8 +129,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     @Override
     public void getUserByID(UserId request, StreamObserver<UserModel> responseObserver) {
         Optional<User> user = userRepository.findById(request.getId());
-        if(user.isEmpty())
-        {
+        if (user.isEmpty()) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
                     .setMessage("The requested user was not found")
@@ -142,9 +138,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
                             .build()))
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-        }
-        else
-        {
+        } else {
             User userFound = user.get();
             UserModel userModel = UserMapper.convertUserToGrpcModel(userFound);
             responseObserver.onNext(userModel);

@@ -26,6 +26,19 @@ public class User
         University = university;    
     }
 
+    public User(long id, string username, string password, string email, string name, string role, string image, int securityLevel, University? university)
+    {
+        Id = id;
+        Username = username;
+        Password = password;
+        Email = email;
+        Name = name;
+        Role = role;
+        Image = image;
+        SecurityLevel = securityLevel;
+        University = university;
+    }
+
     public User()
     {
     }

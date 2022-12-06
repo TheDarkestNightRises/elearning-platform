@@ -55,19 +55,19 @@ public class DbSeed implements CommandLineRunner {
         Country createdCountry1 = countryRepository.save(country1);
 
         //add Universities
-        University university1 = new University("VIA University College");
+        University university1 = new University("VIA University College", "VIA is one of Denmark’s six university colleges. Programmes, courses and research focus on professional practice in areas such as healthcare, teaching, social education, technology, business and design.");
         University createdUniversity1 = universityRepository.save(university1);
 
-        University university2 = new University("Aarhus University");
+        University university2 = new University("Aarhus University", "VIA is one of Denmark’s six university colleges. Programmes, courses and research focus on professional practice in areas such as healthcare, teaching, social education, technology, business and design.");
         University createdUniversity2 = universityRepository.save(university2);
 
-        University university3 = new University("Aalborg University");
+        University university3 = new University("Aalborg University", "VIA is one of Denmark’s six university colleges. Programmes, courses and research focus on professional practice in areas such as healthcare, teaching, social education, technology, business and design.");
         University createdUniversity3 = universityRepository.save(university3);
 
-        University university4 = new University("Dania Academy");
+        University university4 = new University("Dania Academy", "VIA is one of Denmark’s six university colleges. Programmes, courses and research focus on professional practice in areas such as healthcare, teaching, social education, technology, business and design.");
         University createdUniversity4 = universityRepository.save(university4);
 
-        University university5 = new University("Copenhagen University College");
+        University university5 = new University("Copenhagen University College", "VIA is one of Denmark’s six university colleges. Programmes, courses and research focus on professional practice in areas such as healthcare, teaching, social education, technology, business and design.");
         University createdUniversity5 = universityRepository.save(university5);
 
         //add teachers
@@ -102,12 +102,7 @@ public class DbSeed implements CommandLineRunner {
         Lecture createdlecture3 = lectureRepository.save(lecture3);
 
         //add questions
-        Question question = new Question();
-        question.setTitle("How to run npm with vite?");
-        question.setBody("I tried to use vite but I dont know how to run the project");
-        question.setUrl("npm-doenst-work");
-        question.setDescription("Please help");
-        question.setUser(createdStudent);
+        Question question = new Question("How to run npm with vite?", "Please help", "I tried to use vite but I dont know how to run the project", "npm-doenst-work", null, createdStudent);
         Question createdQuestion = questionRepository.save(question);
 
         List<Lecture> lectures = lectureRepository.findAllByTeacher_University(createdUniversity2);
@@ -115,6 +110,11 @@ public class DbSeed implements CommandLineRunner {
         for(int i = 0; i < lectures.size(); i++){
             System.out.println(lectures.get(i).getTitle());
         }
+
+        LectureVote lectureVote = new LectureVote(createdTeacher1, createdlecture1, true);
+
+
+
 
     }
 }

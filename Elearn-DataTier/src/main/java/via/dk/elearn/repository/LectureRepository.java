@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Teacher;
 import via.dk.elearn.models.University;
-import via.dk.elearn.protobuf.UserId;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@
 
 public class UserDto
 {
-    public int UserId { get; set; }
+    public long Id { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
     public string Email { get; set; }
@@ -11,14 +11,15 @@ public class UserDto
 
     public string Role { get; set; }
 
+    public bool Approved { get; set; }
     public int SecurityLevel
     {
         get; set;
     }
-    public bool Approved { get; set; }
+    public string UniversityName { get; set; }
     
-    
-    public UserDto(string username, string password, string email, string name, string role, int securityLevel, bool approved)
+
+    public UserDto(string username, string password, string email, string name, string role, int securityLevel, string universityName)
     {
         Username = username;
         Password = password;
@@ -26,7 +27,20 @@ public class UserDto
         Name = name;
         Role = role;
         SecurityLevel = securityLevel;
-        Approved = approved;
+        UniversityName = universityName;
+    }
+    
+    public UserDto(long id, string username, string password, string email, string name, string role, int securityLevel)
+    {
+        Id = id;
+        Username = username;
+        Password = password;
+        Email = email;
+        Name = name;
+        Role = role;
+        SecurityLevel = securityLevel;
+
+
     }
     public UserDto()
     {
@@ -34,6 +48,6 @@ public class UserDto
     
     public override string ToString()
     {
-        return $"{UserId} {Name}";
+        return $"{Id} {Name}";
     }
 }

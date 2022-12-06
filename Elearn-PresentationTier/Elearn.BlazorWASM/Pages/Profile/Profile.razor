@@ -18,85 +18,96 @@
         </div>
         <div>
             <MudCardActions Class="d-flex justify-center">
-                               <MudButton Class="mx-2" OnClick="() => OpenLoginView()" Variant="Variant.Filled" Color="Color.Success"><img src="img/Login.png"/></MudButton>
-                           </MudCardActions>
+                <MudButton Class="mx-2" OnClick="() => OpenLoginView()" Variant="Variant.Filled" Color="Color.Success">
+                    <img src="img/Login.png"/>
+                </MudButton>
+            </MudCardActions>
         </div>
-        
+
     </NotAuthorized>
     <Authorized Context="Auth">
 
 
         <div class="page-background-class align-center justify-center">
-             <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
+            <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
                 <h3 class=" d-flex justify-center">Hello, @CurrentUser?.Name</h3>
-                 <div class="form-group d-flex justify-center">
-                     <label>User Id : @CurrentUser?.UserId</label>
-                 </div>
-                 <div class="form-group d-flex justify-center">
-                                      <label>Username : @CurrentUser?.Username</label>
-                                  </div>
-                 <div class="form-group d-flex justify-center">
-                     <label>Current email : @CurrentUser?.Email</label>
-                 </div>
-                 <div class="form-group d-flex justify-center">
-                     <label> Role : @CurrentUser?.Role</label>
-                 </div>
-                 
-                 <MudCard>
-                     <MudCardContent>
-                         <MudImage Class="card-img" Src="@Dto.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
-                     </MudCardContent>
-                     <MudCardActions class="form-control-file">
-                           <label for="image">Image</label>
-                         <InputFile OnChange="OnFileChange"></InputFile>
-                     </MudCardActions>
-                     <MudCardActions>
-                         <MudButton Variant="Variant.Filled" Color="Color.Error"  OnClick="@(() => AddImage())">Save</MudButton>
-                     </MudCardActions>
-                 </MudCard>
-                 
+                <div class="form-group d-flex justify-center">
+                    <label>User Id : @CurrentUser?.Id</label>
+                </div>
+                <div class="form-group d-flex justify-center">
+                    <label>Username : @CurrentUser?.Username</label>
+                </div>
+                <div class="form-group d-flex justify-center">
+                    <label>Current email : @CurrentUser?.Email</label>
+                </div>
+                <div class="form-group d-flex justify-center">
+                    <label> Role : @CurrentUser?.Role</label>
+                </div>
 
-             </MudCard>
+                <MudCard>
+                    <MudCardContent>
+                        <MudImage Class="card-img" Src="@Dto.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
+                    </MudCardContent>
+                    <MudCardActions class="form-control-file">
+                        <label for="image">Image</label>
+                        <InputFile OnChange="OnFileChange"></InputFile>
+                    </MudCardActions>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(UpdateImage)">Save</MudButton>
+                    </MudCardActions>
+                </MudCard>
+
+
+            </MudCard>
         </div>
-            <br/>
+        <br/>
 
-            <hr/>
-            <br/>
-            <br/>
-            <div class="page-background-class align-center justify-center">
-            <div class="allLectures"><h2>All Lectures</h2>
-                @if (_lectureToShow == null) {
+        <hr/>
+        <br/>
+        <br/>
+        <div class="page-background-class align-center justify-center">
+            <div class="allLectures">
+                <h2>All Lectures</h2>
+                @if (_lectureToShow == null)
+                {
                     <LoadingComponent message=" Lectures. Please wait.."></LoadingComponent>
                 }
-                else {
+                else
+                {
                     <LectureList lectureToShow="_lecturesToShow"/>
                 }
-                
+
                 <hr/>
-            <br/>
-            <br/>
+                <br/>
+                <br/>
 
             </div>
-            <div class="allLectures"><h2>Upvoted Lectures</h2>
-                @if (_upvotedLectureToShow== null) {
+            <div class="allLectures">
+                <h2>Upvoted Lectures</h2>
+                @if (_upvotedLectureToShow == null)
+                {
                     <LoadingComponent message=" Upvoted lectures. Please wait.."></LoadingComponent>
                 }
-                else {
+                else
+                {
                     <LectureList upvotedLectureToShow="_upvotedLectureToShow"/>
                 }
-              <hr/>
-                        <br/>
-                        <br/>
+                <hr/>
+                <br/>
+                <br/>
             </div>
-              <div class="allQuestions"> <h2>All Questions</h2> 
-                                        @if (_questionToShow == null) {
-                                            <LoadingComponent message=" Questions. Please wait.."></LoadingComponent>
-                                        }
-                                        else {
-                                            <QuestionList questionToShow="_questionToShow"/>
-                                        }
-              </div>
-</div>
+            <div class="allQuestions">
+                <h2>All Questions</h2>
+                @if (_questionToShow == null)
+                {
+                    <LoadingComponent message=" Questions. Please wait.."></LoadingComponent>
+                }
+                else
+                {
+                    <QuestionList questionToShow="_questionToShow"/>
+                }
+            </div>
+        </div>
     </Authorized>
 
 </AuthorizeView>
@@ -105,6 +116,7 @@
 
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
+
     private IEnumerable<Claim>? userClaims;
     private string? username;
     private bool isLoggedIn;
@@ -124,64 +136,82 @@
 
     protected override async Task OnInitializedAsync()
     {
+        if (await InitUpdateUser()) return;
+        await InitHistory();
+    }
+
+    private async Task<bool> InitUpdateUser()
+    {
         AuthenticationState authState = await AuthState;
         ClaimsPrincipal user = authState.User;
         isLoggedIn = user.Identity != null;
-        if (!isLoggedIn) return;
+        if (!isLoggedIn) return true;
         userClaims = user.Claims;
         username = user.Identity!.Name;
-        UserCreationDto Dto = new();
         CurrentUser = await _userService.GetUserByUsernameAsync(username);
-        try {
-        
-            await GetLecureByTeacherId();
+        CreateDto(CurrentUser);
+        return false;
+    }
+
+    private void CreateDto(UserDto userDto)
+    {
+        Dto = new UpdateUserDto
+        {
+            Name = userDto.Name,
+            Password = userDto.Password,
+            Email = userDto.Email,
+            Image = userDto.Image,
+            Approved = userDto.Approved
+        };
+    }
+
+    private async Task InitHistory()
+    {
+        try
+        {
+            await GetLectureByTeacherId();
             await GetUpvotedLecureByUserId();
             await GetQuestionByUserId();
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Console.WriteLine(e.Message);
         }
-        
     }
 
-  
+
     async Task OnFileChange(InputFileChangeEventArgs e)
     {
         var format = "image/png";
-        foreach (var image in e.GetMultipleFiles(int.MaxValue))
-        {
-            var resizedImage = await e.File.RequestImageFileAsync(format, 500, 500);
-            var buffer = new byte[resizedImage.Size];
-            await resizedImage.OpenReadStream().ReadAsync(buffer);
-            var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-            Dto.Image = imageData;
-        }
+        var resizedImage = await e.File.RequestImageFileAsync(format, 500, 500);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        Console.WriteLine($"{imageData} is here");
+        Dto.Image = imageData;
     }
-    private async Task AddImage()
+
+    private async Task UpdateImage()
     {
-        if (Convert.ToBoolean(Dto.Image))
-        {
-            await _userService.UpdateUserAsync(Dto);
-            NavMgr.NavigateTo($"/ManageAccount");
-        }
+        Console.WriteLine(Dto);
+        await _userService.UpdateUserAsync(Dto);
+        NavMgr.NavigateTo($"/ManageAccount", true);
     }
 
 
-
-
-    private async Task GetLecureByTeacherId() {
-        _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.UserId);
+    private async Task GetLectureByTeacherId()
+    {
+        _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.Id);
     }
 
-    private async Task GetUpvotedLecureByUserId() {
-        _upvotedLectureToShow = await _lectureService.GetUpvotedLectureByUserIdAsync(CurrentUser.UserId);
+    private async Task GetUpvotedLecureByUserId()
+    {
+        _upvotedLectureToShow = await _lectureService.GetUpvotedLectureByUserIdAsync(CurrentUser.Id);
     }
-    private async Task GetQuestionByUserId() {
-        _questionToShow = await _questionService.GetQuestionByUserIdAsync(CurrentUser.UserId);
+
+    private async Task GetQuestionByUserId()
+    {
+        _questionToShow = await _questionService.GetQuestionByUserIdAsync(CurrentUser.Id);
     }
 
 }
-
-
-
-

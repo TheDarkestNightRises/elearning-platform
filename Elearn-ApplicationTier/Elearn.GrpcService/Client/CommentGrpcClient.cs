@@ -16,7 +16,7 @@ public class CommentGrpcClient : ICommentService
             new Channel("localhost:8843", ChannelCredentials.Insecure);
         _commentClient = new CommentService.CommentServiceClient(_grpcChannel);
     }
-    
+
     public async Task<Comment> CreateAsync(Comment comment)
     {
         var commentModel = comment.AsGrpcModel();
@@ -25,8 +25,19 @@ public class CommentGrpcClient : ICommentService
         return createdComment;
     }
 
-    public IQueryable<Comment> GetAllCommentsByPostUrlAsync(string url)
+    public async Task<List<Comment>> GetAllCommentsByLectureId(long id)
     {
-        throw new NotImplementedException();
+        List<Comment> comments = new List<Comment>();
+        var request = new LectureId() { Id = id };
+        using (var call = _commentClient.GetCommentByLectureId(new LectureId(request)))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentComment = call.ResponseStream.Current;
+                comments.Add(currentComment.AsBase());
+            }
+        }
+
+        return comments;
     }
 }
