@@ -9,6 +9,8 @@ public class QuestionDto
     
     public string Body { get; set; }
     
+    public string Description { get; set; }
+    
     public string Url { get; set; }
     
     public DateTime CreationDate { get; set; }
@@ -17,10 +19,11 @@ public class QuestionDto
     
     public string AuthorName { get; set; }
 
-    public QuestionDto(string title, string body, string url, DateTime creationDate, long correctAnswerId, string authorName)
+    public QuestionDto(string title, string body, string description, string url, DateTime creationDate, long correctAnswerId, string authorName)
     {
         Title = title;
         Body = body;
+        Description = description;
         Url = url;
         CreationDate = creationDate;
         CorrectAnswerId = correctAnswerId;

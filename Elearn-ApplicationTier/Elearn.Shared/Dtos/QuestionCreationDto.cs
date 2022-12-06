@@ -6,6 +6,8 @@ public class QuestionCreationDto
     public string Body { get; set; }
     public string Url { get; set; }
     
+    public string Description{ get; set; }
+    
     public DateTime CreationDate { get; set; }
 
     public string AuthorName { get; set; }
