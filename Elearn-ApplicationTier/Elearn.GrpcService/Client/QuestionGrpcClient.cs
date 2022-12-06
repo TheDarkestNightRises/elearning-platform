@@ -40,9 +40,13 @@ public class QuestionGrpcClient : IQuestionService
         return questionFromDB.AsBase();
     }
 
-    public Task<Question> CreateNewQuestionAsync(Question question)
+    public async Task<Question> CreateNewQuestionAsync(Question question)
     {
-        throw new NotImplementedException();
+        var questionModel = question.AsGrpcModel();
+        var createdPostFromGrpc = await _questionClient.CreateNewQuestionAsync(questionModel);
+        Question createdLecture = createdPostFromGrpc.AsBase();
+        //createdLecture.Author = createdPostFromGrpc.Teacher.AsBase();
+        return createdLecture;
     }
 
     public async Task<List<Question>> GetQuestionByUserIdAsync(long userId)

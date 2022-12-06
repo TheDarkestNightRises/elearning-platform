@@ -56,7 +56,7 @@ public static class QuestionExtension
             Body = questionDto.Body,
             CreationDate = questionDto.CreationDate,
         };
-        question.Author = new User();
+        question.Author = new Student();
         question.Author.Name = questionDto.AuthorName;
         return question;
     }

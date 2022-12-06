@@ -1,6 +1,7 @@
 syntax = "proto3";
 import "rpc_pagination.proto";
 import "rpc_student.proto";
+import "rpc_date.proto";
 
 option java_multiple_files = true;
 option java_package = "via.dk.elearn.protobuf";
@@ -26,7 +27,7 @@ message QuestionModel {
   string body = 3;
   string description = 4;
   string url = 5;
-  string dateCreated = 6;
+  DateModel dateCreated = 6;
   int64 correctAnswer = 7;
   StudentModel student = 8;
 }
