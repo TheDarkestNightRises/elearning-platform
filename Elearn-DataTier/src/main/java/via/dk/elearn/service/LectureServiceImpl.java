@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Teacher;
+import via.dk.elearn.models.User;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.LectureRepository;
 import via.dk.elearn.repository.TeacherRepository;
@@ -172,24 +173,30 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
 
     @Override
     public void deleteLecture(LectureModel request, StreamObserver<LectureResponse> responseObserver) {
-        Lecture lecture = LectureMapper.convertGrpcModelToLecture(request);
-        try{
-            lectureRepository.deleteById(lecture.getId());
-            responseObserver.onNext(LectureResponse.newBuilder().build());
-            responseObserver.onCompleted();
-        }catch (Exception e)
-        {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lecture to be deleted is not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lecture to delete not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-            e.printStackTrace();
-        }
+//        Lecture lecture = LectureMapper.convertGrpcModelToLecture(request);
+//        try{
+//            lectureRepository.deleteById(lecture.getId());
+//            responseObserver.onNext(null);
+//            responseObserver.onCompleted();
+//        }catch (Exception e)
+//        {
+//            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+//                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+//                    .setMessage("The lecture to be deleted is not found")
+//                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+//                            .setReason("Lecture to delete not found")
+//                            .build()))
+//                    .build();
+//            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+//            e.printStackTrace();
+//        }
 
+        Optional<Lecture> findUser = lectureRepository.findById(request.getId());
+        Lecture userFound = findUser.get();
+        lectureRepository.delete(userFound);
+        responseObserver.onNext(null);
+        responseObserver.onCompleted();
 
     }
+
 }
