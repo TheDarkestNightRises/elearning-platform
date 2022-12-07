@@ -62,4 +62,36 @@ public class UsersController:ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpGet("/Users/user/{name}")]
+    public async Task<ActionResult<UserDto>> GetByName([FromRoute]string name)
+    {
+        try
+        {
+            var user = await userLogic.GetUserByNameAsync(name);
+            UserDto createdDto = user.AsDto();
+            return Ok(createdDto);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<List<UserDto>>> GetUsers()
+    {
+        try
+        {
+            var users = await userLogic.GetAllUsersAsync();
+            return Ok(users.AsDtos());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
+        }
+   
+    }
 }

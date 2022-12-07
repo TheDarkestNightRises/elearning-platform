@@ -5,75 +5,126 @@
 @using Elearn.Shared.Dtos
 @inject IAuthService authService
 @inject NavigationManager navMgr
-
+@inject IUserService UserService
 
 <style>
     body {
-    background-image: url("img/pawel-nolbert-4u2U8EO9OzY-unsplash.jpg");
+    background-image: url("img/1426870.png");
     }
 </style>
 
-<AuthorizeView Context="authContext">
-    <NotAuthorized>
-        <div class="page-background-class">
-            <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
-                <MudText Align="Align.Center" Typo="Typo.h3" Class="mt-1 my-9"> Login </MudText>
-                <EditForm Model="@_userLoginDto" OnValidSubmit="LoginAsync" Context="formContext">
-                    <DataAnnotationsValidator/>
-                    <div class="form-group">
-                        <MudTextField Validation="@(new Func<string, string>(UsernameError))" @bind-Value="_userLoginDto.Username" Label="Username" Variant="Variant.Text" Class="mt-5"></MudTextField>
-                        <ValidationMessage For="@(() => _userLoginDto.Username)"/>
-                    </div>
-                    <div class="form-group">
-                        <MudTextField Validation="@(new Func<string, string>(PasswordError))" @bind-Value="_userLoginDto.Password" Label="Password" Variant="Variant.Text" Class="mt-5" InputType="InputType.Password"></MudTextField>
-                        <ValidationMessage For="@(() => _userLoginDto.Password)"/>
-                    </div>
-                    <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Send" Color="Color.Primary" ButtonType="ButtonType.Submit" Class="mt-10">Login</MudButton>
-                    <ValidationSummary/>
-                </EditForm>
-            </MudCard>
-        </div>
-    </NotAuthorized>
-    <Authorized>
-        <MudCard>
-            <MudText> Hello, @authContext.User.Identity.Name</MudText>
-        </MudCard>
-    </Authorized>
-</AuthorizeView>
+
+<MudForm Model="@_userLoginDto" @ref="form" @bind-IsValid="@success" Class="pb-12">
+    <MudGrid Class="d-flex justify-center align-center mx-auto pa-4 mt-8" Style="width: 700px;" Elevation="0">
+        <MudItem xs="12" sm="7">
+            <MudPaper Class="pa-4">
+                <h3>
+                    <MudInputLabel Class="d-flex align-center justify-center ">Login</MudInputLabel>
+                </h3>
+                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(UsernameError))" Typo="Typo.subtitle2" Label="Username" Required="true" @bind-Value="_userLoginDto.Username" InputType="InputType.Text"
+                              For="@(() => _userLoginDto.Username)" RequiredError="Username field is required!">
+                </MudTextField>
+                <MudTextField T="string" Class="pb-2" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Label="Password" Required="true" @bind-Value="_userLoginDto.Password" InputType="InputType.Password"
+                              For="@(() => _userLoginDto.Password)" RequiredError="Password filed is required!">
+                </MudTextField>
+
+                <div Class="d-flex justify-center align-center mx-auto ">
+                    <MudIcon Icon="@Icons.Material.Filled.MenuBook" Style="font-size: 4rem;"/>
+                </div>
+
+                <div Class="d-flex justify-center align-center pb-2">@Error</div>
+
+
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Class="mx-2" OnClick="LoginAsync" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">Login</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.Reset())" Class="mx-2">Reset</MudButton>
+                </MudCardActions>
+            </MudPaper>
+        </MudItem>
+
+    </MudGrid>
+
+
+</MudForm>
 
 
 @code {
-    private string errorLabel;
     private UserLoginDto _userLoginDto = new();
+    public bool success;
+    public MudForm form;
+    public string Error = "";
+    public List<UserDto> users = new();
+    public bool UsernameFound;
+    public bool AccountFound;
 
     private async Task LoginAsync()
     {
-        errorLabel = "";
-
         try
         {
+                  UsernameFound = false;
+                  AccountFound = false;
+            
+            foreach (var user in users)
+            {
+                if (user.Username.Equals(_userLoginDto.Username))
+                {
+                    UsernameFound = true;
+                }
+
+                if (user.Username.Equals(_userLoginDto.Username) && user.Password.Equals(_userLoginDto.Password))
+                {
+                    AccountFound = true;
+                }
+            }
+
+            if(UsernameFound is false)
+            {
+                Error = "Account does not exist";
+                return;
+            }
+            
+            
+            if (AccountFound is false && UsernameFound)
+            {
+                Error = "Wrong Password";
+                return;
+            }
+            
+            
+            
+      
+
+
             await authService.LoginAsync(_userLoginDto.Username, _userLoginDto.Password);
+            navMgr.NavigateTo("/");
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
-            errorLabel = $"Error: {e.Message}";
         }
     }
-    private string UsernameError(string arg)
+
+    protected override async Task OnInitializedAsync()
     {
-        if (_userLoginDto.Username is null)
-        {
-            return "You should input your  Username";
-        }
-        return null;
+        users = await UserService.GetUsersAsync();
     }
-    private string PasswordError(string arg)
+
+    private IEnumerable<string> UsernameError(string username)
     {
-        if (_userLoginDto.Password is null)
+        if (string.IsNullOrWhiteSpace(username))
         {
-            return "You should input your Password";
+            yield return "Username is required!";
+            yield break;
         }
-        return null;
+        if (username.Length < 6)
+            yield return "Username must be at least of length 6";
     }
+
+
+    private IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+            yield return "Password is required!";
+    }
+
 }

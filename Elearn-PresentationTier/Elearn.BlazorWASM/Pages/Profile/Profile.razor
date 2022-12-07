@@ -26,7 +26,7 @@
 
     </NotAuthorized>
     <Authorized Context="Auth">
-
+   
 
         <div class="page-background-class align-center justify-center">
             <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
@@ -195,7 +195,7 @@
     {
         Console.WriteLine(Dto);
         await _userService.UpdateUserAsync(Dto);
-        NavMgr.NavigateTo($"/ManageAccount", true);
+        NavMgr.NavigateTo($"/Profile", true);
     }
 
 

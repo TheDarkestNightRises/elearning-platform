@@ -46,6 +46,22 @@ public class UserHttpClient : IUserService
         }
     }
 
+    public async Task<List<UserDto>> GetUsersAsync()
+    {
+        HttpResponseMessage response = await client.GetAsync("/Users");
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        List<UserDto> usersDtos = JsonSerializer.Deserialize<List<UserDto>>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return usersDtos;
+    }
+
     public async Task DeleteUserAsync(string username)
     {
         HttpResponseMessage response = await client.DeleteAsync($"Users/{username}");
@@ -54,5 +70,21 @@ public class UserHttpClient : IUserService
             string content = await response.Content.ReadAsStringAsync();
             throw new Exception(content);
         }
+    }
+
+    public async Task<UserDto> GetUserByNameAsync(string? name)
+    {
+        HttpResponseMessage response = await client.GetAsync($"/Users/user/{name}");
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        UserDto userDto = JsonSerializer.Deserialize<UserDto>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return userDto;
     }
 }

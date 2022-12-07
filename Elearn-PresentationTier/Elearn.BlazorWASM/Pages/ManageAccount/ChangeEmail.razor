@@ -14,10 +14,14 @@
         <h3>Please log in to change your email</h3>
     </NotAuthorized>
     <Authorized Context="Auth">
+   <style>
+    body {
+    background-image: url("img/1426870.png");
+    }
+</style>
+        <MudForm Model="@Dto" @ref="form" @bind-IsValid="@success" Class="pb-12">
 
-        <MudForm Model="@Dto" @ref="form" @bind-IsValid="@success" Class="pb-8">
-
-            <MudGrid Class="d-flex justify-center align-center" Elevation="0">
+            <MudGrid Class="d-flex justify-center align-center  mx-auto pa-4 mt-8" Elevation="0"  Style="width: 900px;">
                 <MudItem xs="12" sm="7">
                     <MudPaper Class="pa-4">
                         <h3>

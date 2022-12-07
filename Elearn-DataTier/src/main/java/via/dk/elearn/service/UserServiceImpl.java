@@ -82,6 +82,7 @@ public class UserServiceImpl extends UserServiceGrpc.UserServiceImplBase {
     public void createNewUser(UserModel request, StreamObserver<UserModel> responseObserver) {
         User user = UserMapper.convertGrpcModelToUser(request);
         University university = UniversityMapper.convertGrpcModelToUniversity(request.getUniversity());
+//        user.setImage("placeholder string");
         user.setUniversity(university);
         UserModel userModel;
         if (user.getRole().equals("Teacher")) {
