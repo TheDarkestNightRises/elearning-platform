@@ -16,12 +16,14 @@
 
 @foreach (var comment in _commentsDto)
 {
-    <CommentBody Text="@comment.Text"></CommentBody>
+    <CommentBody DateCreated="comment.DateCreated" ImageText="@comment?.user.Image" Name="@comment?.user.Name" Text="@comment?.Text"></CommentBody>
 }
-
+<div class="pa-4"></div>
 @code {
+
     [Parameter]
     public string? Url { get; set; }
+
     private List<CommentUserDto?> _commentsDto = new();
     LectureDto? _lectureDto;
 
