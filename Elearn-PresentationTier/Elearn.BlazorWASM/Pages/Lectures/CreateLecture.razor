@@ -14,89 +14,117 @@
         <h3>Please log in to create a post</h3>
     </NotAuthorized>
     <Authorized Context="Auth">
-        <h3>Create a New Educational Post</h3>
+        <style>
+    body {
+    background-image: url("img/1426870.png");
+    }
+</style>
+
         <EditForm Model="@_newLecture" OnValidSubmit="CreateNewPost">
-            <DataAnnotationsValidator/>
-            <div class="form-group">
-                <label for="title">Title</label>
-                <InputText id="title" @bind-Value="_newLecture.Title" class="form-control"/>
-                <ValidationMessage For="@(() => _newLecture.Title)"/>
-            </div>
-            <div class="form-group">
-                <label for="url">Url</label>
-                <InputText id="url" @bind-Value="_newLecture.Url" class="form-control"/>
-                <ValidationMessage For="@(() => _newLecture.Url)"/>
-            </div>
-            <div class="form-control-file">
-                <label for="image">Image</label>
-                <InputFile OnChange="OnFileChange"></InputFile>
-            </div>
-            <div class="form-group">
-                <label for="date">Date</label>
-                <InputDate id="date" @bind-Value="_newLecture.Date" class="form-control"/>
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-            <div class="col-md-8">
-        
-                <div class="card">
-                    <div class="card-header">
-                        Html Text Editor
-                    </div>
-                    <div class="card-body mb-5" style="height:200px; color:black;">
-                        <!-- Text editor -->
-                        <BlazoredTextEditor @ref=QuillHtml Placeholder="write somthing...">
-        
-                            <ToolbarContent>
-                                <select class="ql-header">
-                                    <option selected=""></option>
-                                    <option value="1"></option>
-                                    <option value="2"></option>
-                                    <option value="3"></option>
-                                    <option value="4"></option>
-                                    <option value="5"></option>
-                                </select>
-                                <span class="ql-formats">
-                                    <button class="ql-bold"></button>
-                                    <button class="ql-italic"></button>
-                                    <button class="ql-underline"></button>
-                                    <button class="ql-strike"></button>
-                                </span>
-                                <span class="ql-formats">
-                                    <select class="ql-color"></select>
-                                    <select class="ql-background"></select>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-list" value="ordered"></button>
-                                    <button class="ql-list" value="bullet"></button>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-link"></button>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-video"></button>
-                                </span>
-        
-                            </ToolbarContent>
-        
-                        </BlazoredTextEditor>
-        
-                    </div>
-                </div>
-            </div>
-            <ValidationSummary/>
+            <MudGrid Class="d-flex justify-center align-center mx-auto pa-4 mt-8 " Style="width: 1300px;" Elevation="0">
+                <MudItem xs="12" sm="7">
+                    <MudPaper Class="pa-4">
+                        <DataAnnotationsValidator/>
+                        <h3 class=" pb-8">
+                            <MudInputLabel Class="d-flex align-center justify-center ">Create a New Educational Lecure</MudInputLabel>
+                        </h3>
+
+
+                        <div class="form-group pb-4">
+                            <label for="title">Title</label>
+                            <InputText id="title" @bind-Value="_newLecture.Title" class="form-control"/>
+                            <ValidationMessage For="@(() => _newLecture.Title)"/>
+                        </div>
+                        <div class="form-group pb-4">
+                            <label for="url">Url</label>
+                            <InputText id="url" @bind-Value="_newLecture.Url" class="form-control"/>
+                            <ValidationMessage For="@(() => _newLecture.Url)"/>
+                        </div>
+                        <div class="form-group pb-4">
+                            <label for="url">Description</label>
+                            <InputText id="description" @bind-Value="_newLecture.Description" class="form-control"/>
+                            <ValidationMessage For="@(() => _newLecture.Description)"/>
+                        </div>
+                        <div class="form-control-file pb-4">
+                            <label for="image">Image</label>
+                            <InputFile OnChange="OnFileChange"></InputFile>
+                        </div>
+                        <div class="form-group pb-4">
+                            <label for="date">Date</label>
+                            <InputDate id="date" @bind-Value="_newLecture.Date" class="form-control"/>
+                        </div>
+
+
+                        <div class="card pb-4" style="height:350px;">
+                            <div class="card-header">
+                                Html Text Editor
+                            </div>
+                            <div style="height:250px; color:black;">
+
+                                <!-- Text editor -->
+                                <BlazoredTextEditor @ref=QuillHtml Placeholder="write somthing...">
+                                    <ToolbarContent>
+                                        <select class="ql-header">
+                                            <option selected=""></option>
+                                            <option value="1"></option>
+                                            <option value="2"></option>
+                                            <option value="3"></option>
+                                            <option value="4"></option>
+                                            <option value="5"></option>
+                                        </select>
+                                        <span class="ql-formats">
+                                            <button class="ql-bold"></button>
+                                            <button class="ql-italic"></button>
+                                            <button class="ql-underline"></button>
+                                            <button class="ql-strike"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <select class="ql-color"></select>
+                                            <select class="ql-background"></select>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-list" value="ordered"></button>
+                                            <button class="ql-list" value="bullet"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-link"></button>
+                                        </span>
+                                        <span class="ql-formats">
+                                            <button class="ql-video"></button>
+                                        </span>
+                                    </ToolbarContent>
+                                </BlazoredTextEditor>
+
+                            </div>
+                        </div>
+
+                        <MudCardActions Class="d-flex justify-center pb-4">
+                            <button type="submit" class="btn btn-primary">Create</button>
+                            @* <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Create Lecture</MudButton> *@
+                        </MudCardActions>
+
+
+                        <!-- Preview card -->
+                        <div class="card text-dark pb-4">
+                            <div class="card-header text-dark">
+                                the preview Of html editor
+                            </div>
+                            <div class="card-body">
+                                @preview
+                            </div>
+                        </div>
+                        <div class="card-footer d-flex justify-center">
+                            <button type="button" class="btn btn-success" @onclick=@(async () => await ShowPreviewOfBody())>Show OutPut</button>
+                        </div>
+
+
+                        <ValidationSummary/>
+                    </MudPaper>
+                </MudItem>
+
+            </MudGrid>
         </EditForm>
-        <!-- Preview card -->
-        <div class="card">
-            <div class="card-header">
-                the preview Of html editor
-            </div>
-            <div class="card-body">
-                @preview
-            </div>
-        </div>
-        <div class="card-footer">
-            <button type="button" class="btn btn-success" @onclick=@(async () => await ShowPreviewOfBody())>Show OutPut</button>
-        </div>
+
     </Authorized>
 </AuthorizeView>
 
@@ -104,9 +132,10 @@
     private BlazoredTextEditor QuillHtml;
     private MarkupString preview;
     private LectureCreationDto _newLecture = new();
-    
+
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
+
     private string? name;
     private IEnumerable<Claim>? userClaims;
     private bool isLoggedIn;
@@ -142,9 +171,9 @@
         AuthenticationState authState = await AuthState;
         ClaimsPrincipal user = authState.User;
         isLoggedIn = user.Identity != null;
-        
+
         if (!isLoggedIn) return;
-        
+
         userClaims = user.Claims;
         name = user.Identity!.Name!;
     }

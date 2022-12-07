@@ -5,8 +5,8 @@
         <Authorized>
             <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" OnClick="GoHome"/>
                   <MudButton Variant="Variant.Text" OnClick="GoToHome">Home</MudButton>
-            <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
-            <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
+            <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddALecture"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToAddALecture">Add lecture</MudButton>
             <MudButton Variant="Variant.Text" OnClick="GoToUniversities">Universities</MudButton>
             <MudSpacer/>
             <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
@@ -31,7 +31,7 @@
 
 @code {
 
-    private void GoToAddAPost()
+    private void GoToAddALecture()
     {
         navMgr.NavigateTo("/Create-lecture");
     }
