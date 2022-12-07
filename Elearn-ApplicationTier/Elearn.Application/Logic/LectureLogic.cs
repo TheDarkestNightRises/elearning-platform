@@ -21,16 +21,21 @@ public class LectureLogic : ILectureLogic
 
     public async Task<Lecture> CreateAsync(Lecture lecture)
     {
-        //TODO: validate user when login part done
-        //TODO: validate unique url
-        //ValidateCreationDto(dto);
-       
-        Teacher teacher = await _teacherService.GetTeacherByUsernameAsync(lecture.Author.Username);
+        ValidateCreation(lecture);
+
+        Teacher? teacher = await _teacherService.GetTeacherByUsernameAsync(lecture.Author.Username);
+        Lecture? existingLecture = await _lectureService.GetPostAsync(lecture.Url);
         
         if (teacher is null)
         {
             throw new Exception("Teacher not found in database");
         }
+
+        if (existingLecture is not null)
+        {
+            throw new Exception("This URL is already used");
+        }
+        
         Lecture lectureAppended = new Lecture(lecture.Title, lecture.Body, lecture.Url, lecture.Image,lecture.Description, teacher);
         Lecture created = await _lectureService.CreateNewPostAsync(lectureAppended);
         return created;
@@ -75,10 +80,48 @@ public class LectureLogic : ILectureLogic
         return lectures;
     }
 
+    public async Task<Lecture> EditLectureAsync(Lecture lecture)
+    {
+        ValidateCreation(lecture);
+
+        Teacher? teacher = await _teacherService.GetTeacherByUsernameAsync(lecture.Author.Username);
+        Lecture? existingLecture = await _lectureService.GetPostAsync(lecture.Url);
+
+        if (teacher is null)
+        {
+            throw new Exception("Teacher not found in database");
+        }
+        if (existingLecture is null)
+        {
+            throw new Exception("Lecture not found");
+        }
+        if (!existingLecture.Author.Username.Equals(teacher.Username))
+        {
+            throw new Exception("Teacher cannot be changed");
+        }
+        
+        Lecture lectureAppended = new Lecture(existingLecture.Id,existingLecture.Url, lecture.Image, lecture.Title, lecture.Body,lecture.Description, teacher);
+        Lecture created = await _lectureService.EditLectureAsync(lectureAppended);
+        return created;
+    }
+
+    public async Task DeleteLecture(Lecture lecture)
+    {
+        Lecture? lectureToDelete = await _lectureService.GetPostAsync(lecture.Url);
+        if (lectureToDelete is null)
+        {
+            throw new Exception("Lecture not found");
+        }
+        await _lectureService.DeleteLecture(lectureToDelete);
+    }
+
     private void ValidateCreation(Lecture lecture)
     {
         if (string.IsNullOrEmpty(lecture.Title)) throw new Exception("Title cannot be empty.");
         if (string.IsNullOrEmpty(lecture.Body)) throw new Exception("Lecture body cannot be empty.");
         if (string.IsNullOrEmpty(lecture.Url)) throw new Exception("Url cannot be empty.");
+        if (string.IsNullOrEmpty(lecture.Description)) throw new Exception("Description cannot be empty.");
+        if (string.IsNullOrEmpty(lecture.Image)) throw new Exception("Image cannot be empty.");
+        if (string.IsNullOrEmpty(lecture.DateCreated.ToString())) throw new Exception("Date cannot be empty.");
     }
 }

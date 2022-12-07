@@ -37,8 +37,17 @@ public class LectureGrpcClient : ILectureService
     public async Task<Lecture?> GetPostAsync(string url)
     {
         var lectureRequested = new LectureUrl { Url = url };
-        var postFromGrpc = await _lectureClient.GetLectureAsync(lectureRequested);
-        return postFromGrpc.AsBase();
+        try
+        {
+            var postFromGrpc = await _lectureClient.GetLectureAsync(lectureRequested);
+            return postFromGrpc.AsBase();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        return null;
     }
 
     public async Task<Lecture> CreateNewPostAsync(Lecture lecture)
@@ -73,10 +82,8 @@ public class LectureGrpcClient : ILectureService
             }
         }
 
-        return lectures;     }
-
-    
-    
+        return lectures;
+    }
 
 
     public async Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(long userId)
@@ -92,7 +99,8 @@ public class LectureGrpcClient : ILectureService
             }
         }
 
-        return lectures;     }
+        return lectures;
+    }
 
     public async Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize)
     {
@@ -110,6 +118,7 @@ public class LectureGrpcClient : ILectureService
                 lectures.Add(currentLecture.AsBase());
             }
         }
+
         return lectures;
     }
 
@@ -118,7 +127,7 @@ public class LectureGrpcClient : ILectureService
         var postModel = lecture.AsGrpcModel();
         var createdPostFromGrpc = await _lectureClient.EditLectureAsync(postModel);
         Lecture createdLecture = createdPostFromGrpc.AsBase();
-        
+
         return createdLecture;
     }
 
@@ -128,6 +137,3 @@ public class LectureGrpcClient : ILectureService
         await _lectureClient.DeleteLectureAsync(postModel);
     }
 }
-
-
-   
