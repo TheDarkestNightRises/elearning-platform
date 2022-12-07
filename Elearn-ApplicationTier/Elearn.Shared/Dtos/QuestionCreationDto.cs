@@ -7,8 +7,8 @@ public class QuestionCreationDto
     public string Url { get; set; }
     
     public string Description{ get; set; }
-    
-    public DateTime CreationDate { get; set; }
+
+    public DateTime CreationDate { get; set; } = DateTime.Now;
 
     public string AuthorName { get; set; }
 }

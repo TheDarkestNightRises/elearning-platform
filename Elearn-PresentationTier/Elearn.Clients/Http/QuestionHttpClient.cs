@@ -57,4 +57,20 @@ public class QuestionHttpClient : IQuestionService
         }
         return await response.Content.ReadFromJsonAsync<List<QuestionDto>>();
     }
+
+    public async Task<QuestionDto> CreateAsync(QuestionCreationDto dto)
+    {
+        HttpResponseMessage response = await client.PostAsJsonAsync("/Questions", dto);
+        string content = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(content);
+        }
+
+        QuestionDto questionDto = JsonSerializer.Deserialize<QuestionDto>(content, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return questionDto;
+    }
 }

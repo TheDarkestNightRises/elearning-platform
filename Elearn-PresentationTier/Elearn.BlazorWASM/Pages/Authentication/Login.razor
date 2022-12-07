@@ -96,7 +96,7 @@
 
 
             await authService.LoginAsync(_userLoginDto.Username, _userLoginDto.Password);
-            navMgr.NavigateTo("/");
+            navMgr.NavigateTo("/",true);
         }
         catch (Exception e)
         {
