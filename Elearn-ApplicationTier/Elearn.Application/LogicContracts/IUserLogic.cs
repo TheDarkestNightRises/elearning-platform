@@ -9,5 +9,7 @@ public interface IUserLogic
     Task<User?> GetUserByUsernameAsync(string username);
     Task DeleteUserAsync(string username);
     Task<List<User>> GetAllUsersAsync();
+    
+    Task<User> GetUserByNameAsync(string name);
 
 }

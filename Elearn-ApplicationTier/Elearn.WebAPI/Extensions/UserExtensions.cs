@@ -33,4 +33,21 @@ public static class UserExtensions
             
         };
     }
+    
+    public static IEnumerable<UserDto> AsDtos(this IEnumerable<User> users)
+    {
+        var usersDtos = (from user in users 
+            select new UserDto 
+            {
+                Id = user.Id,
+                Username = user.Username,
+                Password = user.Password,
+                Email = user.Email,
+                Name = user.Name,
+                Role = user.Role,
+                Image = user.Image,
+                SecurityLevel = user.SecurityLevel,
+            });
+        return usersDtos;                
+    }
 }

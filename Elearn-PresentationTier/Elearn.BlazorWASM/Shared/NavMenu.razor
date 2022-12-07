@@ -3,7 +3,8 @@
 <MudToolBar>
     <AuthorizeView>
         <Authorized>
-            <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" Class="mr-5" OnClick="GoHome"/>
+            <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" OnClick="GoHome"/>
+                  <MudButton Variant="Variant.Text" OnClick="GoToHome">Home</MudButton>
             <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
             <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
             <MudButton Variant="Variant.Text" OnClick="GoToUniversities">Universities</MudButton>
@@ -12,17 +13,20 @@
             <MudButton Variant="Variant.Text" OnClick="GoToProfile">Profile </MudButton>
             <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToAccountSettings"/>
             <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">Account Settings </MudButton>
-             <MudIconButton Icon="@Icons.Material.Outlined.Logout" OnClick="GoToLogout"/>
+            <MudIconButton Icon="@Icons.Material.Outlined.Logout" OnClick="GoToLogout"/>
         </Authorized>
         <NotAuthorized>
-                    <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="GoToLogin"/>
-                    <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
-                    <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
-                    <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
-                         </NotAuthorized>
-         </AuthorizeView>
-   
- 
+            <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" OnClick="GoHome"/>
+                     <MudButton Variant="Variant.Text" OnClick="GoToHome">Home</MudButton>
+            <MudSpacer/>
+            <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="GoToLogin"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
+            <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
+        </NotAuthorized>
+    </AuthorizeView>
+
+
 </MudToolBar>
 
 @code {
@@ -51,18 +55,25 @@
     {
         navMgr.NavigateTo("/Profile");
     }
-    
+
     private void GoToAccountSettings()
     {
         navMgr.NavigateTo("/ManageAccount");
     }
+
     private void GoToUniversities()
     {
         navMgr.NavigateTo("/Universities");
     }
+
     private void GoToLogout()
     {
         navMgr.NavigateTo("/Logout");
     }
-}
+    
+    private void GoToHome()
+        {
+            navMgr.NavigateTo("/");
+        }
 
+}

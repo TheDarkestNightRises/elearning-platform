@@ -58,4 +58,14 @@ public class UserLogic : IUserLogic
     {
         return await _userService.GetAllUsersAsync();
     }
+    
+    public async Task<User> GetUserByNameAsync(string name)
+    {
+        User? user = await _userService.GetUserByNameAsync(name);
+        if (user == null)
+        {
+            throw new Exception($"User with name {name} was not found.");
+        }
+        return user;
+    }
 }
