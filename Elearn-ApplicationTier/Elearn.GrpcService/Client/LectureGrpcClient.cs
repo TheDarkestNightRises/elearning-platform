@@ -131,9 +131,9 @@ public class LectureGrpcClient : ILectureService
         return createdLecture;
     }
 
-    public async Task DeleteLecture(Lecture lecture)
+    public async Task DeleteLectureAsync(Lecture lecture)
     {
-        var postModel = lecture.AsGrpcModel();
-        await _lectureClient.DeleteLectureAsync(postModel);
+        var lectureModel = lecture.AsGrpcModel();
+        await _lectureClient.DeleteLectureAsync(lectureModel);
     }
 }

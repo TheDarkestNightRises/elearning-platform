@@ -13,5 +13,5 @@ public interface ILectureLogic
     Task<List<Lecture>> GetLecturesByUniversityAsync(University university);
     Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize);
     Task<Lecture> EditLectureAsync(Lecture lecture);
-    Task DeleteLecture(Lecture lecture);
+    Task DeleteLectureAsync(string url);
 }

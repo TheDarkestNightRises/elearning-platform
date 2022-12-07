@@ -105,14 +105,14 @@ public class LectureLogic : ILectureLogic
         return created;
     }
 
-    public async Task DeleteLecture(Lecture lecture)
+    public async Task DeleteLectureAsync(string url)
     {
-        Lecture? lectureToDelete = await _lectureService.GetPostAsync(lecture.Url);
+        Lecture? lectureToDelete = await _lectureService.GetPostAsync(url);
         if (lectureToDelete is null)
         {
             throw new Exception("Lecture not found");
         }
-        await _lectureService.DeleteLecture(lectureToDelete);
+        await _lectureService.DeleteLectureAsync(lectureToDelete);
     }
 
     private void ValidateCreation(Lecture lecture)
