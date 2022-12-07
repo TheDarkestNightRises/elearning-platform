@@ -34,9 +34,9 @@ public class StudentServiceImpl extends StudentServiceGrpc.StudentServiceImplBas
         if (student == null) {
             com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
                     .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The teacher is not found")
+                    .setMessage("The studnet is not found")
                     .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("User not found")
+                            .setReason("Student not found")
                             .build()))
                     .build();
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
