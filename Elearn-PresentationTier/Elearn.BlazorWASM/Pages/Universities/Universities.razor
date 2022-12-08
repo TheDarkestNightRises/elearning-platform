@@ -3,7 +3,10 @@
 @using Elearn.HttpClients.Service
 @using Elearn.BlazorWASM.Pages.Universities.UIComponents
 @inject IUniversityService UniversityService
-<MudText Align="Align.Center" Typo="Typo.h3">See lectures from different universities</MudText>
+@inject IStringLocalizer<App> Localizer
+
+
+<MudText Align="Align.Center" Typo="Typo.h3"> @Localizer["See-lectures-from-different-universities-text"]</MudText>
 @if (_universityDtos == null)
 {
     <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
@@ -12,7 +15,7 @@ else
 {
     @if (_universityDtos.Count == 0)
     {
-        <span> No universities found</span>
+        <span> @Localizer["no-universities-found-text"]</span>
     }
     else
     {

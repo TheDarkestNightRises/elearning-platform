@@ -4,24 +4,26 @@
 @inject ILectureService _lectureService;
 @using Elearn.BlazorWASM.Pages.Lectures.UIComponents
 @using System.Diagnostics
-<h3>PaginationLectures</h3>
+@inject IStringLocalizer<App> Localizer
+
+<h3>  @Localizer["pagination-lectures-text"]</h3>
 
 @if (_lectures is null)
 {
-    <p> Loading..</p>
+    <p> @Localizer["loading text"]</p>
 }
 else
 {
     <MudTable
               Dense="true" Hover="true" @ref="_table" Items="@_lectures">
         <ToolBarContent>
-            <MudText Typo="Typo.h6">Posts</MudText>
+            <MudText Typo="Typo.h6">@Localizer["posts-text"]</MudText>
             <MudSpacer/>
         </ToolBarContent>
         <HeaderContent>
-            <MudTh>Id</MudTh>
-            <MudTh>Item Name</MudTh>
-            <MudTh>Is Completed</MudTh>
+            <MudTh>@Localizer["id-text"]</MudTh>
+            <MudTh>@Localizer["itm-name-text"]</MudTh>
+            <MudTh>@Localizer["is-completed-text"]</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Nr">@context.Id</MudTd>

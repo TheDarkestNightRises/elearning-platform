@@ -4,10 +4,11 @@
 @using Elearn.Shared.Models
 @inject IUserService _UserService
 @inject NavigationManager NavMgr 
+@inject IStringLocalizer<App> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
-        <h3>Please log in to manage your account</h3>
+        <h3>@Localizer["please-log-in-to-manage-your-account-text"]</h3>
     </NotAuthorized>
     <Authorized Context="Auth">
 
@@ -16,19 +17,19 @@
                    <MudGrid Class="d-flex justify-center align-center" Elevation="0">
                        <MudItem xs="12" sm="7">
              <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
-                <h3 class=" d-flex justify-center">Hello, @CurrentUser?.Name</h3>
+                <h3 class="d-flex justify-center"> @Localizer["hello-text"] @CurrentUser?.Name</h3>
                
                  <div class="form-group d-flex justify-center">
-                     <label>Current email : @CurrentUser?.Email</label>
+                     <label>@Localizer["current-email-text"]@CurrentUser?.Email</label>
                  </div>
                  <MudCardActions Class="d-flex justify-center">
-                    <MudButton Class="mx-2" OnClick="() => OpenChangePassword()" Variant="Variant.Filled" Color="Color.Success">Change Password</MudButton>
+                    <MudButton Class="mx-2" OnClick="() => OpenChangePassword()" Variant="Variant.Filled" Color="Color.Success">@Localizer["change-password-text"]</MudButton>
                 </MudCardActions>
                  <MudCardActions Class="d-flex justify-center">
-                     <MudButton Class="mx-2" OnClick="() => OpenChangeEmail()" Variant="Variant.Filled" Color="Color.Success">Change Email</MudButton>
+                     <MudButton Class="mx-2" OnClick="() => OpenChangeEmail()" Variant="Variant.Filled" Color="Color.Success">@Localizer["change-email-text"]</MudButton>
                  </MudCardActions>
                  <MudCardActions Class="d-flex justify-center">
-                                     <MudButton Class="mx-2" OnClick="() => OpenDeleteAccount()" Variant="Variant.Filled" Color="Color.Success">Delete Account</MudButton>
+                                     <MudButton Class="mx-2" OnClick="() => OpenDeleteAccount()" Variant="Variant.Filled" Color="Color.Success">@Localizer["delete-account-text"]</MudButton>
                                  </MudCardActions>
 
             </MudCard>

@@ -4,6 +4,9 @@
 @using System.Security.Claims
 @inject ICommentService CommentService
 @inject IUserService UserService
+@inject IStringLocalizer<App> Localizer
+
+
 <link href="CreateComment.razor.css" rel="stylesheet"/>
 <AuthorizeView>
     <Authorized>
@@ -11,7 +14,7 @@
         <div class="card">
 
             <div class="form-group field flex-container">
-                <div class="comment-section">Comment section below</div>
+                <div class="comment-section">@Localizer["comment-section-below-text"]</div>
                 <MudAvatar Size="Size.Small" Image="img/avatar.jpg"/>
                 <input class="comment-input" type="text" placeholder="Post a comment" @bind="bodyText" @bind:event="oninput"/>
                 <div class="button-row">

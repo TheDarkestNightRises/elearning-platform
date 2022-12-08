@@ -3,27 +3,31 @@
 @using Elearn.Shared.Dtos
 @inject ISearchService SearchService 
 @using Elearn.BlazorWASM.Pages.Lectures.UIComponents
-<h3>SearchLectures</h3>
+@inject IStringLocalizer<App> Localizer
+
+
+
+<h3> @Localizer["search-lectures-text"]</h3>
 
 <MudTextField @bind-Value="_searchInput" Label="Search" Variant="Variant.Text"></MudTextField>
 
-<MudButton Color="Color.Primary" Variant="Variant.Outlined" OnClick="@(() => OnSearchAsync())">Search</MudButton>
+<MudButton Color="Color.Primary" Variant="Variant.Outlined" OnClick="@(() => OnSearchAsync())">@Localizer["search-text"]</MudButton>
 
 @if (string.IsNullOrWhiteSpace(_searchInput))
 {
-    <p>Search for item</p>
+    <p>@Localizer["search-for-item-text"]</p>
 }
 else
 {
     @if (_lectures is null)
     {
-        <p>Loading...</p>
+        <p>@Localizer["loading-text"]</p>
     }
     else
     {
         @if (_lectures.Count == 0)
         {
-            <p>No results found</p>
+            <p>@Localizer["no-results-found.text"]</p>
         }
         else
         {

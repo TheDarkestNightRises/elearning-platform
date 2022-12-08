@@ -4,7 +4,9 @@
 @inject ISearchService SearchService 
 @using Elearn.BlazorWASM.Pages.Questions.UIComponents
 @using Elearn.Shared.Models
-<h3>Search Users</h3>
+@inject IStringLocalizer<App> Localizer
+
+<h3>@Localizer["search-users-text"]</h3>
 
 <MudTextField @bind-Value="_searchInput" Label="Search" Variant="Variant.Text"></MudTextField>
 
@@ -12,25 +14,25 @@
 
 @if (string.IsNullOrWhiteSpace(_searchInput))
 {
-    <p>Search for item</p>
+    <p>@Localizer["search-for-item-text"]</p>
 }
 else
 {
     @if (_users is null)
     {
-        <p>Loading...</p>
+        <p>@Localizer["loading-text"]</p>
     }
     else
     {
         @if (_users.Count == 0)
         {
-            <p>No results found</p>
+            <p>@Localizer["no-results-found"]</p>
         }
         else
         {
             @foreach (var user in _users)
             {
-                <h1>Not implemented</h1>
+                <h1>@Localizer["not-implemented-text"]</h1>
             }
         }
     }

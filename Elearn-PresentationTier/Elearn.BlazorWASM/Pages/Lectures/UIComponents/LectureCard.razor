@@ -2,6 +2,9 @@
 @using Elearn.Shared.Dtos
 @inject NavigationManager navMgr
 <link href="LectureCard.razor.css" rel="stylesheet"/>
+@inject IStringLocalizer<App> Localizer
+
+
 <MudCard>
     <MudImage Class="card-img" Src="@Lecture.Image" ObjectFit="ObjectFit.Contain"></MudImage>
     <MudCardContent>
@@ -10,7 +13,7 @@
         <MudText Typo="Typo.body2">@Lecture.DateCreated</MudText>
     </MudCardContent>
     <MudCardActions>
-        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="GoToUrl">Learn More</MudButton>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="GoToUrl">@Localizer["learn-more-text"]</MudButton>
     </MudCardActions>
 </MudCard>
 

@@ -7,6 +7,7 @@ public class LocalizerSettings
     public static readonly List<CultureName> SupportedCultureNames = new()
     {
         new CultureName("English","en-US"),
-        new CultureName("Spanish(Mexico)","es-MX")
+        new CultureName("Spanish(Mexico)","es-MX"),
+        new CultureName("Italian","it")
     };
 }

@@ -118,228 +118,208 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="welcome" xml:space="preserve">
-    <value>Welcome</value>
+    <value>Benvenuti</value>
   </data>
   <data name="intro-text-part-1" xml:space="preserve">
-    <value>We provide quality education</value>
+    <value>Forniamo un'istruzione di qualità
+</value>
   </data>
   <data name="intro-text-part-2" xml:space="preserve">
-    <value>for all people</value>
-  </data>
-  <data name="login-in-view-profile-text" xml:space="preserve">
-    <value>Please log in to view your user profile</value>
-  </data>
-  <data name="universities-text" xml:space="preserve">
-    <value>Universities</value>
+    <value>per tutti</value>
   </data>
   <data name="account-settings-text" xml:space="preserve">
-    <value>Account Settings</value>
+    <value>Impostazioni Account</value>
+  </data>
+  <data name="add-post-text" xml:space="preserve">
+    <value>Aggiungi post</value>
+  </data>
+  <data name="all-lectures-text" xml:space="preserve">
+    <value>Lezioni</value>
+  </data>
+  <data name="all-questions-text" xml:space="preserve">
+    <value>Tutte le domande</value>
+  </data>
+  <data name="change-email-text" xml:space="preserve">
+    <value>Cambia email</value>
+  </data>
+  <data name="change-password-text" xml:space="preserve">
+    <value>Cambia password</value>
+  </data>
+  <data name="comment-section-below-text" xml:space="preserve">
+    <value>Sezioni commenti </value>
+  </data>
+  <data name="comments-text" xml:space="preserve">
+    <value>Caricamento dei commenti in corso </value>
+  </data>
+  <data name="create-a-new-educational-post-text" xml:space="preserve">
+    <value>Crea un nuovo post</value>
+  </data>
+  <data name="create-text" xml:space="preserve">
+    <value>Crea</value>
+  </data>
+  <data name="current-email -text" xml:space="preserve">
+    <value>Email </value>
+  </data>
+  <data name="current-email-text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="current-email-text:" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="date-text" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="delete-account-text" xml:space="preserve">
+    <value>Cancella Account</value>
+  </data>
+  <data name="educational-app-text" xml:space="preserve">
+    <value>Software Educativo</value>
+  </data>
+  <data name="hello-text" xml:space="preserve">
+    <value>Ciao,</value>
+  </data>
+  <data name="help-other-students-by-answering-questions-text" xml:space="preserve">
+    <value>Aiuta altri studenti rispondendo alle domande</value>
+  </data>
+  <data name="html-text-editor-text" xml:space="preserve">
+    <value>Editor di testo html</value>
+  </data>
+  <data name="image-text" xml:space="preserve">
+    <value>Immagine</value>
+  </data>
+  <data name="improve-yourself-text" xml:space="preserve">
+    <value>Perfezionati!</value>
+  </data>
+  <data name="latest-lectures-text" xml:space="preserve">
+    <value>Ultime lezioni</value>
+  </data>
+  <data name="learn-more-text" xml:space="preserve">
+    <value>Vuoi saperne di più?</value>
+  </data>
+  <data name="loading-text" xml:space="preserve">
+    <value>Caricamento in corso...</value>
+  </data>
+  <data name="login-in-view-profile-text" xml:space="preserve">
+    <value>Per favore, esegui il login per visualizzare il profilo</value>
   </data>
   <data name="login-text" xml:space="preserve">
     <value>Login</value>
   </data>
-  <data name="profile-text" xml:space="preserve">
-    <value>Profile</value>
-  </data>
-  <data name="register-text" xml:space="preserve">
-    <value>Register</value>
-  </data>
-  <data name="add-post-text" xml:space="preserve">
-    <value>Add post</value>
-  </data>
-  <data name="all-lectures-text" xml:space="preserve">
-    <value>All Lectures</value>
-  </data>
-  <data name="hello-text" xml:space="preserve">
-    <value>Hello,</value>
-  </data>
-  <data name="user-id-text" xml:space="preserve">
-    <value>User Id:</value>
-  </data>
-  <data name="username-text" xml:space="preserve">
-    <value>Username</value>
-  </data>
-  <data name="current-email-text" xml:space="preserve">
-    <value>Current email:</value>
-  </data>
-  <data name="current-email-text" xml:space="preserve">
-    <value>Current email :</value>
-  </data>
-  <data name="role-text" xml:space="preserve">
-    <value>Role:</value>
-  </data>
-  <data name="image-text" xml:space="preserve">
-    <value>Image</value>
-  </data>
-  <data name="upvoted-lectures-text" xml:space="preserve">
-    <value>Upvoted Lectures</value>
-  </data>
-  <data name="all-questions-text" xml:space="preserve">
-    <value>All Questions</value>
-  </data>
-  <data name="please-log-in-to-manage-your-account-text" xml:space="preserve">
-    <value>Please log in to manage your account</value>
-  </data>
-  <data name="current-email-text:" xml:space="preserve">
-    <value>Current email</value>
-  </data>
-  <data name="change-password-text" xml:space="preserve">
-    <value>Change Password</value>
-  </data>
-  <data name="change-email-text" xml:space="preserve">
-    <value>Change Email</value>
-  </data>
-  <data name="delete-account-text" xml:space="preserve">
-    <value>Delete Account</value>
-  </data>
-  <data name="latest-lectures-text" xml:space="preserve">
-    <value>Latest Lectures</value>
-  </data>
-  <data name="search-text" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="no-lectures-found-text" xml:space="preserve">
-    <value>No lectures found</value>
-  </data>
-  <data name="comments-text" xml:space="preserve">
-    <value>Comments Loading...</value>
-  </data>
-  <data name="no-comments-text" xml:space="preserve">
-    <value>No comments</value>
-  </data>
-  <data name="comment-section-below-text" xml:space="preserve">
-    <value>Comment section below</value>
-  </data>
-  <data name="please-log-in-to-create-a-post-text" xml:space="preserve">
-    <value>Please log in to create a post </value>
-  </data>
-  <data name="create-a-new-educational-post-text" xml:space="preserve">
-    <value>Create a New Educational Post</value>
-  </data>
-  <data name="title-text" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="date-text" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="create-text" xml:space="preserve">
-    <value>Create</value>
-  </data>
-  <data name="html-text-editor-text" xml:space="preserve">
-    <value>Html Text Editor</value>
-  </data>
-  <data name="the-preview-of-html-editor-text" xml:space="preserve">
-    <value>The preview of html editor</value>
-  </data>
-  <data name="help-other-students-by-answering-questions-text" xml:space="preserve">
-    <value>Help other students by answering questions   </value>
-  </data>
-  <data name="you-can-help-text" xml:space="preserve">
-    <value>You can help </value>
-  </data>
-  <data name="study-more-and-you-will-become-a-professional-text" xml:space="preserve">
-    <value>Study more and you will become a professional</value>
-  </data>
-  <data name="improve-yourself-text" xml:space="preserve">
-    <value>Improve yourself</value>
-  </data>
   <data name="look-for-posts-with-different-categories" xml:space="preserve">
-    <value>Look for posts with different categories </value>
-  </data>
-  <data name="try-to-learn-more-text" xml:space="preserve">
-    <value>Try to learn more</value>
-  </data>
-  <data name="educational-app-text" xml:space="preserve">
-    <value>Educational App</value>
-  </data>
-  <data name="please-log-in-to-change-your-email-text" xml:space="preserve">
-    <value>Please log in to change your email</value>
-  </data>
-  <data name="validate-text" xml:space="preserve">
-    <value>Validate</value>
-  </data>
-  <data name="reset-text" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="please-log-in-to-change-your-password-text" xml:space="preserve">
-    <value>Please log in to change your password</value>
-  </data>
-  <data name="please-log-in-to-delete-your-account-text" xml:space="preserve">
-    <value>Please log in to delete your account</value>
+    <value>Trova posts in differenti categorie</value>
   </data>
   <data name="moderator-text" xml:space="preserve">
-    <value>Moderator</value>
+    <value>Moderatore</value>
   </data>
-  <data name="learn-more-text" xml:space="preserve">
-    <value>Learn More</value>
+  <data name="no-comments-text" xml:space="preserve">
+    <value>Nessun commento</value>
+  </data>
+  <data name="no-lectures-found-text" xml:space="preserve">
+    <value>Nessuna lezione trovata</value>
   </data>
   <data name="no-questions-found" xml:space="preserve">
-    <value>No questions found</value>
-  </data>
-  <data name="questions-text" xml:space="preserve">
-    <value>Questions</value>
-  </data>
-  <data name="search-lectures-text" xml:space="preserve">
-    <value>Search Lectures</value>
-  </data>
-  <data name="search-for-item-text" xml:space="preserve">
-    <value>Search for item</value>
-  </data>
-  <data name="loading-text" xml:space="preserve">
-    <value>Loading...</value>
+    <value>Nessuna domanda trovata</value>
   </data>
   <data name="no-results-found.text" xml:space="preserve">
-    <value>No results found</value>
-  </data>
-  <data name="search-users-text" xml:space="preserve">
-    <value>Search Users</value>
-  </data>
-  <data name="not-implemented-text" xml:space="preserve">
-    <value>Not implemented</value>
-  </data>
-  <data name="view-lectures-text" xml:space="preserve">
-    <value>View lectures</value>
-  </data>
-  <data name="See-lectures-from-different-universities-text" xml:space="preserve">
-    <value>See lectures from different universities</value>
+    <value>Nessun risultato trovato</value>
   </data>
   <data name="no-universities-found-text" xml:space="preserve">
-    <value>No universities found</value>
-  </data>
-  <data name="You-ll-have-to-log-in-text" xml:space="preserve">
-    <value>You'll have to log in!</value>
+    <value>Nessuna università trovata</value>
   </data>
   <data name="not-found-text" xml:space="preserve">
-    <value> Not found</value>
+    <value>Nessun elemento trovato</value>
+  </data>
+  <data name="not-implemented-text" xml:space="preserve">
+    <value>In costruzione</value>
+  </data>
+  <data name="please-log-in-to-change-your-email-text" xml:space="preserve">
+    <value>Per favore, esegui il login per cambiare l'email</value>
+  </data>
+  <data name="please-log-in-to-change-your-password-text" xml:space="preserve">
+    <value>Per favore, esegui il login per cambiare la password</value>
+  </data>
+  <data name="please-log-in-to-create-a-post-text" xml:space="preserve">
+    <value>Per favore, esegui il login per creare un post</value>
+  </data>
+  <data name="please-log-in-to-delete-your-account-text" xml:space="preserve">
+    <value>Per favore, esegui il login per cancellare l'account</value>
+  </data>
+  <data name="please-log-in-to-manage-your-account-text" xml:space="preserve">
+    <value>Per favore, esegui il login per gestire l'account</value>
+  </data>
+  <data name="profile-text" xml:space="preserve">
+    <value>Profilo</value>
+  </data>
+  <data name="questions-text" xml:space="preserve">
+    <value>Domande</value>
+  </data>
+  <data name="register-text" xml:space="preserve">
+    <value>Registrati</value>
+  </data>
+  <data name="reset-text" xml:space="preserve">
+    <value>Resetta</value>
+  </data>
+  <data name="role-text" xml:space="preserve">
+    <value>Ruolo</value>
+  </data>
+  <data name="search-for-item-text" xml:space="preserve">
+    <value>Cerca articoli</value>
+  </data>
+  <data name="search-lectures-text" xml:space="preserve">
+    <value>Cerca lezioni</value>
+  </data>
+  <data name="search-text" xml:space="preserve">
+    <value>Cerca</value>
+  </data>
+  <data name="search-users-text" xml:space="preserve">
+    <value>Cerca Utenti</value>
+  </data>
+  <data name="See-lectures-from-different-universities-text" xml:space="preserve">
+    <value>Visualizza le lezioni delle diverse università</value>
   </data>
   <data name="sorry-there-is-nothing-at-this-address-text" xml:space="preserve">
-    <value>Sorry, there's nothing at this address</value>
+    <value>Spiacenti, nessun elemento a questo indirizzo</value>
+  </data>
+  <data name="study-more-and-you-will-become-a-professional-text" xml:space="preserve">
+    <value>Studia di più e diventerai un professionista</value>
+  </data>
+  <data name="the-preview-of-html-editor-text" xml:space="preserve">
+    <value>Anteprima dell'editor html</value>
+  </data>
+  <data name="title-text" xml:space="preserve">
+    <value>Titolo</value>
+  </data>
+  <data name="try-to-learn-more-text" xml:space="preserve">
+    <value>Per saperne di più clicca qui!</value>
+  </data>
+  <data name="universities-text" xml:space="preserve">
+    <value>Università</value>
+  </data>
+  <data name="upvoted-lectures-text" xml:space="preserve">
+    <value>Lezioni con voti positivi</value>
+  </data>
+  <data name="user-id-text" xml:space="preserve">
+    <value>Id utente</value>
+  </data>
+  <data name="username-text" xml:space="preserve">
+    <value>nome utente</value>
+  </data>
+  <data name="validate-text" xml:space="preserve">
+    <value>Convalida </value>
+  </data>
+  <data name="view-lectures-text" xml:space="preserve">
+    <value>Visualizza lezioni</value>
+  </data>
+  <data name="you-can-help-text" xml:space="preserve">
+    <value>Unisciti alla comunità di studenti</value>
+  </data>
+  <data name="You-ll-have-to-log-in-text" xml:space="preserve">
+    <value>Hai bisogno di eseguire il login</value>
   </data>
   <data name="here-text" xml:space="preserve">
-    <value>text here</value>
+    <value>Inserisci il testo qui</value>
   </data>
   <data name="show-output-text" xml:space="preserve">
-    <value>Show Output</value>
-  </data>
-  <data name="pagination-lectures-text" xml:space="preserve">
-    <value>Pagination Lectures</value>
-  </data>
-  <data name="posts-text" xml:space="preserve">
-    <value>Posts</value>
-  </data>
-  <data name="id-text" xml:space="preserve">
-    <value>ID</value>
-  </data>
-  <data name="item-name-text" xml:space="preserve">
-    <value>Item Name</value>
-  </data>
-  <data name="is-completed-text" xml:space="preserve">
-    <value>Is Completed</value>
-  </data>
-  <data name="current-email -text" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="save-text" xml:space="preserve">
-    <value>Save Text</value>
+    <value>Invia</value>
   </data>
 </root>

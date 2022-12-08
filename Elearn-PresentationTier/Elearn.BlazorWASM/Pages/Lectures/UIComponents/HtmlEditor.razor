@@ -1,4 +1,6 @@
 @using Blazored.TextEditor
+@inject IStringLocalizer<App> Localizer
+
 <div class="card-body mb-5" style="height:200px;">
     <!-- Text editor -->
     <BlazoredTextEditor @ref=QuillHtml Placeholder="write somthing...">
@@ -40,11 +42,11 @@
 <!-- Preview card -->
 </div>
 <div class="card-header my-4">
-    <button type="button" class="btn btn-success" @onclick=@(async () => await ShowAoutPutPreview())>Show OutPut</button>
+    <button type="button" class="btn btn-success" @onclick=@(async () => await ShowAoutPutPreview())>@Localizer["welcome"]</button>
 </div>
 <div class="card my-4">
     <div class="card-header">
-        the preview Of html editor
+       @Localizer["the-preview-of-html-editor-text"]
     </div>
     <div class="card-body">
         @preview

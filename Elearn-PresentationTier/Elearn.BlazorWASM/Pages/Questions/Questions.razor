@@ -3,9 +3,10 @@
 @using Elearn.HttpClients.Service
 @using Elearn.Shared.Dtos
 @inject IQuestionService QuestionService
+@inject IStringLocalizer<App> Localizer
 
 
-<h2>Questions</h2>
+<h2>@Localizer["questions-text"]</h2>
 @if (_questions is null)
 {
     <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
@@ -14,7 +15,7 @@ else
 {
     @if(!_questions.Any())
     {
-        <p>No questions found</p>
+        <p>@Localizer["no-questions-found"]</p>
     }
     else
     {

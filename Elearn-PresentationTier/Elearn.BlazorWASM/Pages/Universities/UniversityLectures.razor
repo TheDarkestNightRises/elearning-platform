@@ -4,6 +4,7 @@
 @using Elearn.BlazorWASM.Pages.Universities.UIComponents
 @inject ILectureService LectureService
 @inject IUniversityService UniversityService
+@inject IStringLocalizer<App> Localizer
 
 <MudGrid Justify="Justify.Center">
     <MudItem xs="12" sm="10" md="8">
@@ -23,7 +24,7 @@ else
 {
     @if (_lectureDtos.Count == 0)
     {
-        <span> No lectures found</span>
+        <span> @Localizer["no-lectures-found-text"]</span>
     }
     else
     {

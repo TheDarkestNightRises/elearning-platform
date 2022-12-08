@@ -9,12 +9,13 @@
 @inject IQuestionService _questionService
 @inject IUserService _userService
 @inject NavigationManager NavMgr 
+@inject IStringLocalizer<App> Localizer
 
 
 <AuthorizeView>
     <NotAuthorized>
         <div class="d-flex align-center justify-center">
-            <h3>Please log in to view your user profile</h3>
+            <h3>@Localizer["login-in-view-profil-text"]</h3>
         </div>
         <div>
             <MudCardActions Class="d-flex justify-center">
@@ -30,18 +31,18 @@
 
         <div class="page-background-class align-center justify-center">
             <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
-                <h3 class=" d-flex justify-center">Hello, @CurrentUser?.Name</h3>
+                <h3 class=" d-flex justify-center">@Localizer["hello-text"] @CurrentUser?.Name</h3>
                 <div class="form-group d-flex justify-center">
-                    <label>User Id : @CurrentUser?.Id</label>
+                    <label>@Localizer["user-id-text"] @CurrentUser?.Id</label>
                 </div>
                 <div class="form-group d-flex justify-center">
-                    <label>Username : @CurrentUser?.Username</label>
+                    <label>@Localizer["username-text"] @CurrentUser?.Username</label>
                 </div>
                 <div class="form-group d-flex justify-center">
-                    <label>Current email : @CurrentUser?.Email</label>
+                    <label>@Localizer["current-email-text"] @CurrentUser?.Email</label>
                 </div>
                 <div class="form-group d-flex justify-center">
-                    <label> Role : @CurrentUser?.Role</label>
+                    <label> @Localizer["role-text"] @CurrentUser?.Role</label>
                 </div>
 
                 <MudCard>
@@ -49,11 +50,11 @@
                         <MudImage Class="card-img" Src="@Dto.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
                     </MudCardContent>
                     <MudCardActions class="form-control-file">
-                        <label for="image">Image</label>
+                        <label for="image">@Localizer["image-text"]</label>
                         <InputFile OnChange="OnFileChange"></InputFile>
                     </MudCardActions>
                     <MudCardActions>
-                        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(UpdateImage)">Save</MudButton>
+                        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(UpdateImage)">@Localizer["save-text"]</MudButton>
                     </MudCardActions>
                 </MudCard>
 
@@ -67,7 +68,7 @@
         <br/>
         <div class="page-background-class align-center justify-center">
             <div class="allLectures">
-                <h2>All Lectures</h2>
+                <h2>@Localizer["all-lectures-text"]</h2>
                 @if (_lectureToShow == null)
                 {
                     <LoadingComponent message=" Lectures. Please wait.."></LoadingComponent>
@@ -83,7 +84,7 @@
 
             </div>
             <div class="allLectures">
-                <h2>Upvoted Lectures</h2>
+                <h2>@Localizer["upvoted-lectures-text"]</h2>
                 @if (_upvotedLectureToShow == null)
                 {
                     <LoadingComponent message=" Upvoted lectures. Please wait.."></LoadingComponent>
@@ -97,7 +98,7 @@
                 <br/>
             </div>
             <div class="allQuestions">
-                <h2>All Questions</h2>
+                <h2>@Localizer["all-questions-text"]</h2>
                 @if (_questionToShow == null)
                 {
                     <LoadingComponent message=" Questions. Please wait.."></LoadingComponent>

@@ -1,23 +1,25 @@
 ﻿@inject NavigationManager navMgr
+@inject IStringLocalizer<App> Localizer
 
 <MudToolBar>
     <AuthorizeView>
         <Authorized>
             <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" Class="mr-5" OnClick="GoHome"/>
             <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
-            <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
-            <MudButton Variant="Variant.Text" OnClick="GoToUniversities">Universities</MudButton>
+            <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">@Localizer["add-post-text"]</MudButton>
+            <MudButton Variant="Variant.Text" OnClick="GoToUniversities">@Localizer["universities-text"]</MudButton>
             <MudSpacer/>
             <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
-            <MudButton Variant="Variant.Text" OnClick="GoToProfile">Profile </MudButton>
+            <MudButton Variant="Variant.Text" OnClick="GoToProfile">@Localizer["profile-text"]</MudButton>
             <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToAccountSettings"/>
-            <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">Account Settings </MudButton>
+            <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">@Localizer["account-settings-text"]</MudButton>
+
         </Authorized>
         <NotAuthorized>
                     <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="GoToLogin"/>
-                    <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
+                    <MudButton Variant="Variant.Text" OnClick="GoToLogin">@Localizer["login-text"]</MudButton>
                     <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
-                    <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
+                    <MudButton Variant="Variant.Text" OnClick="GoToRegister">@Localizer["register-text"]</MudButton>
                          </NotAuthorized>
          </AuthorizeView>
    
