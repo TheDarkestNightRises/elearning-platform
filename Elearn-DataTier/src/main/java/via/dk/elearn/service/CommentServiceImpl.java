@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import via.dk.elearn.models.Comment;
 import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Teacher;
+import via.dk.elearn.models.User;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.CommentRepository;
 import via.dk.elearn.repository.LectureRepository;
 import via.dk.elearn.service.mapper.CommentMapper;
 import via.dk.elearn.service.mapper.LectureMapper;
+import via.dk.elearn.service.mapper.UserMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -63,4 +65,34 @@ public class CommentServiceImpl extends CommentServiceGrpc.CommentServiceImplBas
             responseObserver.onCompleted();
         }
     }
+
+    @Override
+    public void getCommentById(CommentId request, StreamObserver<CommentModel> responseObserver) {
+        Optional<Comment> comment = commentRepository.findById(request.getId());
+        if (comment.isEmpty()) {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+                    .setMessage("The requested comment was not found")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("Comment not found")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+        } else {
+            Comment commentFound = comment.get();
+            CommentModel commentModel = CommentMapper.convertCommentToGrpcModel(commentFound);
+            responseObserver.onNext(commentModel);
+            responseObserver.onCompleted();
+        }
+    }
+
+    @Override
+    public void deleteComment(CommentModel request, StreamObserver<Nothing> responseObserver) {
+        Optional<Comment> findComment = commentRepository.findById(request.getId());
+        Comment commentFound = findComment.get();
+        commentRepository.delete(commentFound);
+        responseObserver.onNext(null);
+        responseObserver.onCompleted();
+    }
+
 }

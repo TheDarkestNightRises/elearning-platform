@@ -40,4 +40,17 @@ public class CommentGrpcClient : ICommentService
 
         return comments;
     }
+
+    public async Task<Comment?> GetCommentById(long id)
+    {
+        var commentRequested = new CommentId {  Id = id};
+        var commentFromGrpc = await _commentClient.GetCommentByIdAsync(commentRequested);
+        return commentFromGrpc.AsBase();
+    }
+
+    public async Task DeleteCommentAsync(Comment comment)
+    {
+        var commentModel = comment.AsGrpcModel();
+        await _commentClient.DeleteCommentAsync(commentModel);
+    }
 }

@@ -13,4 +13,5 @@ public interface ICommentLogic
     
     Task DeleteAsync(int id);
     Task<List<Comment>> GetAllCommentsByLectureId(long id);
+    Task DeleteCommentAsync(long id);
 }

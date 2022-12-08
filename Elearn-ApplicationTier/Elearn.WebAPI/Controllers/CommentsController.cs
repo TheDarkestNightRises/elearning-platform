@@ -36,8 +36,23 @@ public class CommentsController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> DeleteAsync([FromRoute] long id)
+    {
+        try
+        {
+            await commentLogic.DeleteCommentAsync(id);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 
-    [HttpGet("{id}")]
+    [HttpGet ,Route("/Comments/Lecture/{id}")]
     public async Task<ActionResult<List<CommentUserDto>>> GetAllCommentsByLectureId(long id)
     {
         try

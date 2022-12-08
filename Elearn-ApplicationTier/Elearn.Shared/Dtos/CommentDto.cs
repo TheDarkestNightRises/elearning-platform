@@ -21,7 +21,16 @@ public class CommentDto
         this.Text = Text;
         DateCreated = dateCreated;
     }
-    
+
+    public CommentDto(long id, long authorId, long lectureId, string text, DateTime dateCreated)
+    {
+        Id = id;
+        AuthorId = authorId;
+        LectureId = lectureId;
+        Text = text;
+        DateCreated = dateCreated;
+    }
+
     public override string ToString()
     {
         return $"{Id} {AuthorId} {LectureId} {Text} {DateCreated}";

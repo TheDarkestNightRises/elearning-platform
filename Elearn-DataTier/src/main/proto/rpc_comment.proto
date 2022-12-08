@@ -12,6 +12,8 @@ service CommentService {
   rpc GetAllComments (NewCommentRequest) returns (stream CommentModel);
   rpc CreateNewComment (CommentModel) returns (CommentModel);
   rpc GetCommentByLectureId(LectureId) returns (stream CommentModel);
+  rpc GetCommentById(CommentId) returns (CommentModel);
+  rpc DeleteComment(CommentModel) returns(Nothing);
 }
 
 message NewCommentRequest {
@@ -24,5 +26,10 @@ message CommentModel {
   string text = 4;
   DateModel date = 5;
 }
+
+message CommentId{
+  int64 id = 1;
+}
+
 
 

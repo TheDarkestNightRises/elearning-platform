@@ -31,9 +31,19 @@ public class CommentHttpClient : ICommentService
         return comment;
     }
 
+    public async Task DeleteCommentAsync(long id)
+    {
+        HttpResponseMessage response = await client.DeleteAsync($"Comments/{id}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+    }
+
     public async Task<List<CommentUserDto?>> GetAllCommentsByLectureId(long id)
     {
-        HttpResponseMessage response = await client.GetAsync($"/Comments/{id}");
+        HttpResponseMessage response = await client.GetAsync($"/Comments/Lecture/{id}");
         if (!response.IsSuccessStatusCode)
         {
             string content = await response.Content.ReadAsStringAsync();

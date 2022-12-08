@@ -54,6 +54,16 @@ public class CommentLogic : ICommentLogic
         return await _commentService.GetAllCommentsByLectureId(id);
     }
 
+    public async Task DeleteCommentAsync(long id)
+    {
+        Comment? comment = await _commentService.GetCommentById(id);
+        if (comment == null)
+        {
+            throw new Exception($"Comment with id {id} was not found.");
+        }
+        await _commentService.DeleteCommentAsync(comment);
+    }
+
     private void ValidateComment(Comment comment)
     {
         if (string.IsNullOrEmpty(comment.Text)) throw new Exception("Input cannot be empty.");

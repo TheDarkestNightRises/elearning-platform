@@ -10,13 +10,13 @@
             <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" OnClick="GoHome"/>
             <MudButton Variant="Variant.Text" OnClick="GoToHome">Home</MudButton>
             
-            @if(CurrentUser.SecurityLevel == 4)
+            @if(CurrentUser?.SecurityLevel == 4)
             {
             <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddALecture"/>
             <MudButton Variant="Variant.Text" OnClick="GoToAddALecture">Add lecture</MudButton>
             }
             
-            @if(CurrentUser.SecurityLevel == 2)
+            @if(CurrentUser?.SecurityLevel == 2)
             {
               <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAQuestion"/>
             <MudButton Variant="Variant.Text" OnClick="GoToAddAQuestion">Add question</MudButton>
@@ -52,7 +52,7 @@
     private IEnumerable<Claim>? userClaims;
     private string? username;
     private bool isLoggedIn;
-    public UserDto? CurrentUser;
+    private UserDto? CurrentUser;
 
     private void GoToAddALecture()
     {

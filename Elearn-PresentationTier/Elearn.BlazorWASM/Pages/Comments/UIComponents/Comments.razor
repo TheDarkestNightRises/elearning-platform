@@ -16,7 +16,7 @@
 
 @foreach (var comment in _commentsDto)
 {
-    <CommentBody DateCreated="comment.DateCreated" ImageText="@comment?.user.Image" Name="@comment?.user.Name" Text="@comment?.Text"></CommentBody>
+    <CommentBody Id="comment.Id" DateCreated="comment.DateCreated" ImageText="@comment?.user.Image" Name="@comment?.user.Name" Text="@comment?.Text"></CommentBody>
 }
 <div class="pa-4"></div>
 @code {

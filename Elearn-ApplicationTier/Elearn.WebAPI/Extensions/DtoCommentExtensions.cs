@@ -23,7 +23,8 @@ public static class DtoCommentExtensions
         var commentDtos = (from comment in comments 
             select new CommentUserDto
             {
-              user  = comment.Author.AsUserForCommentDto(),
+                Id = comment.CommentId,
+                user  = comment.Author.AsUserForCommentDto(),
               LectureId  = comment.Lecture.Id,
               DateCreated  = comment.DateCreated,
               Text = comment.Text
