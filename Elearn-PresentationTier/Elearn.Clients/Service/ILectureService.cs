@@ -14,5 +14,6 @@ public interface ILectureService
     Task<List<LectureDto>> GetLectureByTeacherIdAsync(long userId);
     Task<List<LectureDto>> GetUpvotedLectureByUserIdAsync(long userId);
     Task<List<LectureDto?>> GetLecturesByUniversity(long universityId);
+    Task UpdateLecture(LectureUpdateDto updateDto);
 
 }

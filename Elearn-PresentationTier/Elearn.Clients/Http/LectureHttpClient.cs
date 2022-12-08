@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using Elearn.HttpClients.Service;
 using Elearn.Shared.Dtos;
@@ -110,5 +111,18 @@ public class LectureHttpClient : ILectureService
         }
 
         return await response.Content.ReadFromJsonAsync<List<LectureDto?>>();
+    }
+
+    public async Task UpdateLecture(LectureUpdateDto updateDto)
+    {
+        string dtoAsJson = JsonSerializer.Serialize(updateDto);
+        StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await client.PatchAsync("/Lectures", body);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
     }
 }
