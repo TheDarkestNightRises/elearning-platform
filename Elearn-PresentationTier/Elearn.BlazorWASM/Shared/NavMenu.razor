@@ -1,12 +1,28 @@
-﻿@inject NavigationManager navMgr
+﻿@using System.Security.Claims
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Models
+@inject NavigationManager navMgr
+@inject IUserService _UserService
 
 <MudToolBar>
     <AuthorizeView>
         <Authorized>
             <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" OnClick="GoHome"/>
-                  <MudButton Variant="Variant.Text" OnClick="GoToHome">Home</MudButton>
+            <MudButton Variant="Variant.Text" OnClick="GoToHome">Home</MudButton>
+            
+            @if(CurrentUser.SecurityLevel == 4)
+            {
             <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddALecture"/>
             <MudButton Variant="Variant.Text" OnClick="GoToAddALecture">Add lecture</MudButton>
+            }
+            
+            @if(CurrentUser.SecurityLevel == 2)
+            {
+              <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAQuestion"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToAddAQuestion">Add question</MudButton>
+            }
+            
+            
             <MudButton Variant="Variant.Text" OnClick="GoToUniversities">Universities</MudButton>
             <MudSpacer/>
             <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
@@ -30,6 +46,13 @@
 </MudToolBar>
 
 @code {
+    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    public UserDto? CurrentUser;
 
     private void GoToAddALecture()
     {
@@ -69,6 +92,7 @@
     private void GoToLogout()
     {
         navMgr.NavigateTo("/Logout");
+        
     }
     
     private void GoToHome()
@@ -76,4 +100,20 @@
             navMgr.NavigateTo("/");
         }
 
+    private void GoToAddAQuestion()
+    {
+        navMgr.NavigateTo("/Create-question");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        CurrentUser = await _UserService.GetUserByUsernameAsync(username);
+        
+    }
 }

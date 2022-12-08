@@ -1,16 +1,28 @@
 <link href="CommentBody.razor.css" rel="stylesheet"/>
 <div></div>
-  <div class="comments">
-      <div class="card">
-          <div class="form-group field flex-container">
-              <MudAvatar Size="Size.Medium" Image = "img/avatar.jpg"/>
-              <div class="comment-content">@Text</div>
-          </div>
-      </div>
-  </div>
-  
-   @code {
-       
+<div class="comments">
+    <div class="card">
+        <div class="d-flex justify-center align-center">
+            <MudAvatar Size="Size.Medium" Image="@ImageText"/>
+            <div class="user-name">@Name (@DateCreated):</div>
+            <div class="comment-content">@Text</div>
+        </div>
+    </div>
+</div>
+
+@code {
+
     [Parameter]
     public string Text { get; set; }
+
+    [Parameter]
+    public string Name { get; set; }
+    
+    [Parameter]
+    public string ImageText { get; set; }
+    
+    [Parameter]
+    public DateTime DateCreated { get; set; }
+
+
 }

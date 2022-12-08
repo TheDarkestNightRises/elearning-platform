@@ -1,5 +1,6 @@
-@page "/create-lecture"
-@inject ILectureService LectureService
+﻿@page "/Create-question"
+
+@inject IQuestionService QuestionService
 @inject IAuthService authService
 @inject NavigationManager NavMgr 
 @using Blazored.TextEditor
@@ -11,7 +12,7 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <h3>Please log in to create a post</h3>
+        <h3>Please log in to ask a question</h3>
     </NotAuthorized>
     <Authorized Context="Auth">
         <style>
@@ -20,43 +21,39 @@
     }
 </style>
 
-        <EditForm Model="@_newLecture" OnValidSubmit="CreateNewLecture">
+        <EditForm Model="@_newQuestion" OnValidSubmit="CreateNewQuestion">
             <MudGrid Class="d-flex justify-center align-center mx-auto pa-4 mt-8 " Style="width: 1300px;" Elevation="0">
                 <MudItem xs="12" sm="7">
                     <MudPaper Class="pa-4">
                         <DataAnnotationsValidator/>
                         <h3 class=" pb-8">
-                            <MudInputLabel Class="d-flex align-center justify-center ">Create a New Educational Lecure</MudInputLabel>
+                            <MudInputLabel Class="d-flex align-center justify-center ">Ask a question!</MudInputLabel>
                         </h3>
 
 
                         <div class="form-group pb-4">
-                            <label for="title">Title</label>
-                            <InputText id="title" @bind-Value="_newLecture.Title" class="form-control"/>
-                            <ValidationMessage For="@(() => _newLecture.Title)"/>
+                            <label for="title">Question Title</label>
+                            <InputText id="title" @bind-Value="_newQuestion.Title" class="form-control"/>
+                            <ValidationMessage For="@(() => _newQuestion.Title)"/>
                         </div>
                         <div class="form-group pb-4">
                             <label for="url">Url</label>
-                            <InputText id="url" @bind-Value="_newLecture.Url" class="form-control"/>
-                            <ValidationMessage For="@(() => _newLecture.Url)"/>
+                            <InputText id="url" @bind-Value="_newQuestion.Url" class="form-control"/>
+                            <ValidationMessage For="@(() => _newQuestion.Url)"/>
                         </div>
                         <div class="form-group pb-4">
-                            <label for="url">Description</label>
-                            <InputText id="description" @bind-Value="_newLecture.Description" class="form-control"/>
-                            <ValidationMessage For="@(() => _newLecture.Description)"/>
-                        </div>
-                        <div class="form-control-file pb-4">
-                            <label for="image">Image</label>
-                            <InputFile OnChange="OnFileChange"></InputFile>
+                            <label for="url">Question Description</label>
+                            <InputText id="description" @bind-Value="_newQuestion.Description" class="form-control"/>
+                            <ValidationMessage For="@(() => _newQuestion.Description)"/>
                         </div>
                         <div class="form-group pb-4">
                             <label for="date">Date</label>
-                            <InputDate id="date" @bind-Value="_newLecture.Date" class="form-control"/>
+                            <InputDate id="date" @bind-Value="_newQuestion.CreationDate" class="form-control"/>
                         </div>
 
 
                         <div class="card pb-8" style="height:350px;">
-                            <div class="card-header">
+                            <div class="card-header text-dark">
                                 Html Text Editor
                             </div>
                             <div style="height:250px; color:black;">
@@ -135,7 +132,7 @@
 @code {
     private BlazoredTextEditor QuillHtml;
     private MarkupString preview;
-    private LectureCreationDto _newLecture = new();
+    private QuestionCreationDto _newQuestion = new();
 
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
@@ -145,35 +142,35 @@
     private bool isLoggedIn;
     public string Error = "";
 
-    async Task CreateNewLecture()
+    async Task CreateNewQuestion()
     {
-        _newLecture.Body = await QuillHtml.GetHTML();
+        _newQuestion.Body = await QuillHtml.GetHTML();
         
-        if (string.IsNullOrEmpty(_newLecture.Body))
+        if (string.IsNullOrEmpty(_newQuestion.Body))
         {
             Error = "No body found!";
             return;
         }
-        if (string.IsNullOrEmpty(_newLecture.Description))
+        if (string.IsNullOrEmpty(_newQuestion.Description))
         {
             Error = "Description is missing!";
             return;
         }
-        if (string.IsNullOrEmpty(_newLecture.Title))
+        if (string.IsNullOrEmpty(_newQuestion.Title))
         {
             Error = "Title is missing!";
             return;
         }
-        if (string.IsNullOrEmpty(_newLecture.Url))
+        if (string.IsNullOrEmpty(_newQuestion.Url))
         {
             Error = "Url is missing!";
             return;
         }
 
-       
-        _newLecture.Username = name;
-        var createdPost = await LectureService.CreateAsync(_newLecture);
-        NavMgr.NavigateTo($"/Lectures/{_newLecture.Url}");
+        
+        _newQuestion.AuthorName = name;
+        var createdPost = await QuestionService.CreateAsync(_newQuestion);
+        NavMgr.NavigateTo($"/Questions/{_newQuestion.Url}");
     }
 
     private async Task ShowPreviewOfBody()
@@ -182,16 +179,6 @@
         {
             preview = (MarkupString)await QuillHtml.GetHTML();
         }
-    }
-
-    async Task OnFileChange(InputFileChangeEventArgs e)
-    {
-        var format = "image/png";
-        var resizedImage = await e.File.RequestImageFileAsync(format, 500, 500);
-        var buffer = new byte[resizedImage.Size];
-        await resizedImage.OpenReadStream().ReadAsync(buffer);
-        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
-        _newLecture.Image = imageData;
     }
 
     protected override async Task OnInitializedAsync()

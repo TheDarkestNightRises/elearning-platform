@@ -3,7 +3,6 @@ import "rpc_date.proto";
 import "rpc_user.proto";
 import "rpc_lecture.proto";
 
-
 option java_multiple_files = true;
 option java_package = "via.dk.elearn.protobuf";
 

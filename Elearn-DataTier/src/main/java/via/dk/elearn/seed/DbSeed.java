@@ -70,11 +70,11 @@ public class DbSeed implements CommandLineRunner {
         University createdUniversity5 = universityRepository.save(university5);
 
         //add teachers
-        Teacher teacher1 = new Teacher("oriana","email","Oriana Cinimo Amadeo","ihatenes", "placeholder string","teacher",3,createdUniversity1, true);
+        Teacher teacher1 = new Teacher("oriana","email","Oriana Cinimo Amadeo","ihatenes", "placeholder string","teacher",4,createdUniversity1, true);
 
         Teacher createdTeacher1 = teacherRepository.save(teacher1);
 
-        Teacher teacher2 = new Teacher("cosmin","email3","Cosmin Teodoru","password", "placeholder-string","teacher",3, createdUniversity2, true);
+        Teacher teacher2 = new Teacher("cosmin","email3","Cosmin Teodoru","password", "placeholder-string","teacher",4, createdUniversity2, true);
         Teacher createdTeacher2 = teacherRepository.save(teacher2);
 
 
@@ -82,7 +82,7 @@ public class DbSeed implements CommandLineRunner {
         Moderator createdModerator = moderatorRepository.save(moderator);
 
         //add students
-        Student student = new Student("Dexter","email2","Dexter Morgan","bloodanalyst", "placeholder string","Student",1, createdUniversity1,false);
+        Student student = new Student("Dexter","email2","Dexter Morgan","bloodanalyst", "placeholder string","Student",2, createdUniversity1,false);
         Student createdStudent = studentRepository.save(student);
 
         //add courses

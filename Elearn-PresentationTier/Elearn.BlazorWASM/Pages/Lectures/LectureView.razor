@@ -18,7 +18,7 @@ else
         @((MarkupString)_currentLecture.Body)
     </MudCard>
 }
-<LectureVote url="@_currentLecture?.Url"></LectureVote>
+<LectureVote url="@_currentLecture.Url"></LectureVote>
 <CreateComment CurrentLecture="@_currentLecture"></CreateComment>
 <Comments Url="@Url"></Comments>
 

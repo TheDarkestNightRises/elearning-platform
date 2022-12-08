@@ -123,5 +123,36 @@ public class LecturesController : ControllerBase
         }
    
     }
+    
+    [HttpPatch]
+    public async Task<ActionResult> UpdateLectureAsync([FromBody] LectureUpdateDto dto)
+    {
+        try
+        {
+            
+            await _lectureLogic.EditLectureAsync(dto.AsBaseFromUpdate());
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpDelete("{url}")]
+    public async Task<ActionResult> DeleteAsync([FromRoute] string url)
+    {
+        try
+        {
+            await _lectureLogic.DeleteLectureAsync(url);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 
 }
