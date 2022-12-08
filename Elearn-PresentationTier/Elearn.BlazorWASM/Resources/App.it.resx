@@ -322,4 +322,61 @@
   <data name="show-output-text" xml:space="preserve">
     <value>Invia</value>
   </data>
+  <data name="more-info-text" xml:space="preserve">
+    <value>Ulteriori informazioni</value>
+  </data>
+  <data name="about-text" xml:space="preserve">
+    <value>Informazioni</value>
+  </data>
+  <data name="careers-text" xml:space="preserve">
+    <value>Carriera</value>
+  </data>
+  <data name="support-text" xml:space="preserve">
+    <value>Supporto</value>
+  </data>
+  <data name="contact-text" xml:space="preserve">
+    <value>Contatti</value>
+  </data>
+  <data name="phone-text" xml:space="preserve">
+    <value>Telefono</value>
+  </data>
+  <data name="address-text" xml:space="preserve">
+    <value>Indirizzo</value>
+  </data>
+  <data name="general-text" xml:space="preserve">
+    <value>Generale</value>
+  </data>
+  <data name="footer-question-text" xml:space="preserve">
+    <value>Vuoi imparare insieme?</value>
+  </data>
+  <data name="website-text" xml:space="preserve">
+    <value>Sito web</value>
+  </data>
+  <data name="we-are-a-community-that-share-knowledge-for-learning-text" xml:space="preserve">
+    <value>Siamo una comunità che condivide la conoscenza per la crescita personale</value>
+  </data>
+  <data name="events-text" xml:space="preserve">
+    <value>Eventi</value>
+  </data>
+  <data name="id-text" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="is-completed-text" xml:space="preserve">
+    <value>Completato</value>
+  </data>
+  <data name="item-name-text" xml:space="preserve">
+    <value>Nome</value>
+  </data>
+  <data name="pagination-lectures-text" xml:space="preserve">
+    <value>Lezioni</value>
+  </data>
+  <data name="posts-text" xml:space="preserve">
+    <value>Posts</value>
+  </data>
+  <data name="project-text" xml:space="preserve">
+    <value>Progetto</value>
+  </data>
+  <data name="save-text" xml:space="preserve">
+    <value>Invia</value>
+  </data>
 </root>

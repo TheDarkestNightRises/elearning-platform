@@ -342,4 +342,43 @@
   <data name="save-text" xml:space="preserve">
     <value>Save Text</value>
   </data>
+  <data name="footer-question-text" xml:space="preserve">
+    <value>Do you want to learn with us?</value>
+  </data>
+  <data name="we-are-a-community-that-share-knowledge-for-learning-text" xml:space="preserve">
+    <value>We are a community that share knowledge for learning</value>
+  </data>
+  <data name="more-info-text" xml:space="preserve">
+    <value>More info</value>
+  </data>
+  <data name="website-text" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="about-text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="project-text" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="careers-text" xml:space="preserve">
+    <value>Career</value>
+  </data>
+  <data name="support-text" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="contact-text" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="events-text" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="phone-text" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="address-text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="general-text" xml:space="preserve">
+    <value>General</value>
+  </data>
 </root>
