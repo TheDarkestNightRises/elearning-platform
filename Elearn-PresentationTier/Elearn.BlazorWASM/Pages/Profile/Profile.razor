@@ -5,6 +5,7 @@
 @using Elearn.HttpClients.Service
 @using System.Security.Claims
 @using System.Net.Mime
+@using Elearn.BlazorWASM.Pages.Profile.UIComponents
 @inject ILectureService _lectureService
 @inject IQuestionService _questionService
 @inject IUserService _userService
@@ -68,14 +69,24 @@
         <div class="page-background-class align-center justify-center">
             <div class="allLectures">
                 <h2>All Lectures</h2>
-                @if (_lectureToShow == null)
-                {
-                    <LoadingComponent message=" Lectures. Please wait.."></LoadingComponent>
-                }
-                else
-                {
-                    <LectureList lectureToShow="_lecturesToShow"/>
-                }
+                   
+                   @if (CurrentUser == null)
+                     {
+                         <span> No lectures found</span>
+                     }
+                     else
+                     {
+                         <MudGrid Class="my-6" Justify="Justify.Center">
+                             @foreach (var lectures in _lectureToShow)
+                             {
+                                 <MudItem xs="12" sm="9" md="7">
+                                     <History Lecture="@lectures"></History>
+                                 </MudItem>
+                                 
+                             }
+                         </MudGrid>
+                     }
+                   
 
                 <hr/>
                 <br/>
@@ -84,28 +95,45 @@
             </div>
             <div class="allLectures">
                 <h2>Upvoted Lectures</h2>
-                @if (_upvotedLectureToShow == null)
+                @if (CurrentUser == null)
                 {
-                    <LoadingComponent message=" Upvoted lectures. Please wait.."></LoadingComponent>
+                    <span> No lectures found</span>
                 }
                 else
                 {
-                    <LectureList upvotedLectureToShow="_upvotedLectureToShow"/>
+                    <MudGrid Class="my-6" Justify="Justify.Center">
+                        @foreach (var lectures in _upvotedLectureToShow)
+                        {
+                            <MudItem xs="12" sm="9" md="7">
+                                <History Lecture="@lectures"></History>
+                            </MudItem>
+                                                 
+                        }
+                    </MudGrid>
                 }
                 <hr/>
                 <br/>
                 <br/>
             </div>
+            
             <div class="allQuestions">
                 <h2>All Questions</h2>
-                @if (_questionToShow == null)
-                {
-                    <LoadingComponent message=" Questions. Please wait.."></LoadingComponent>
-                }
-                else
-                {
-                    <QuestionList questionToShow="_questionToShow"/>
-                }
+                 @if (CurrentUser == null)
+                                                    {
+                                                        <span> No questions found</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <MudGrid Class="my-6" Justify="Justify.Center">
+                                                            @foreach (var lectures in _questionToShow)
+                                                            {
+                                                                <MudItem xs="12" sm="9" md="7">
+                                                                    <QuestionHistory QuestionDto="@lectures"></QuestionHistory>
+                                                                </MudItem>
+                                                                
+                                                            }
+                                                        </MudGrid>
+                                                    }
             </div>
         </div>
     </Authorized>
@@ -120,10 +148,11 @@
     private IEnumerable<Claim>? userClaims;
     private string? username;
     private bool isLoggedIn;
-    private List<LectureDto?>? _lectureToShow;
-    private LectureDto _lectureToDto;
-    private List<LectureDto?> _upvotedLectureToShow;
-    private List<QuestionDto?> _questionToShow;
+    private List<LectureDto?> _lectureToShow = new List<LectureDto?>();
+  //  private List<LectureDto> _lectureToDto;
+    private List<LectureDto?> _upvotedLectureToShow = new List<LectureDto?>();
+    private List<QuestionDto?> _questionToShow = new List<QuestionDto?>();
+
     private bool _hidePosition;
     private bool _loading;
     public UserDto? CurrentUser;
@@ -138,6 +167,8 @@
     {
         if (await InitUpdateUser()) return;
         await InitHistory();
+        Console.WriteLine("sdadasdassdas");
+       
     }
 
     private async Task<bool> InitUpdateUser()
@@ -169,12 +200,15 @@
     {
         try
         {
+            Console.WriteLine("Ion Baton");
             await GetLectureByTeacherId();
             await GetUpvotedLecureByUserId();
             await GetQuestionByUserId();
+            Console.WriteLine("asdasdasdas");
         }
         catch (Exception e)
         {
+            Console.WriteLine("Nu merge");
             Console.WriteLine(e.Message);
         }
     }
@@ -200,18 +234,33 @@
 
 
     private async Task GetLectureByTeacherId()
-    {
-        _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.Id);
+    { 
+      //  CurrentUser = await _userService.GetUserByNameAsync(username);
+        Console.WriteLine(CurrentUser);
+        if (CurrentUser is not null)
+        {
+            _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.Id);
+            Console.WriteLine(_lectureToShow);
+        }
+     //  _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.Id);
     }
 
     private async Task GetUpvotedLecureByUserId()
     {
-        _upvotedLectureToShow = await _lectureService.GetUpvotedLectureByUserIdAsync(CurrentUser.Id);
-    }
+        Console.WriteLine(CurrentUser);
+        if (CurrentUser is not null)
+        {
+            _upvotedLectureToShow = await _lectureService.GetUpvotedLectureByUserIdAsync(CurrentUser.Id);
+            Console.WriteLine(_lectureToShow);
+        }    }
 
     private async Task GetQuestionByUserId()
     {
-        _questionToShow = await _questionService.GetQuestionByUserIdAsync(CurrentUser.Id);
-    }
+        Console.WriteLine(CurrentUser);
+        if (CurrentUser is not null)
+        {
+            _questionToShow = await _questionService.GetQuestionByUserIdAsync(CurrentUser.Id);
+            Console.WriteLine(_lectureToShow);
+        }     }
 
 }
