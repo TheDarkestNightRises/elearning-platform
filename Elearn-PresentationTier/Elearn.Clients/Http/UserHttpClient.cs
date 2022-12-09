@@ -87,4 +87,20 @@ public class UserHttpClient : IUserService
         })!;
         return userDto;
     }
+
+    public async Task<List<UserDto>> GetAllUsersAsync()
+    {
+        HttpResponseMessage response = await client.GetAsync("/Users/users");
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
+
+        List<UserDto> userDtos = JsonSerializer.Deserialize<List<UserDto>>(result, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        })!;
+        return userDtos;
+    }
 }
