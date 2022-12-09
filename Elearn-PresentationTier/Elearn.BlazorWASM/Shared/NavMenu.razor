@@ -24,7 +24,13 @@
             }
             
             
+
             <MudButton Variant="Variant.Text" OnClick="GoToUniversities">@Localizer["Universities"]</MudButton>
+
+          
+            <MudIconButton Icon="@Icons.Material.Outlined.People" OnClick="GoToModerator"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToModerator">Moderator View </MudButton>
+
             <MudSpacer/>
             <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
             <MudButton Variant="Variant.Text" OnClick="GoToProfile">@Localizer["Profile"]</MudButton>
@@ -104,6 +110,10 @@
     private void GoToAddAQuestion()
     {
         navMgr.NavigateTo("/Create-question");
+    }
+    private void GoToModerator()
+    {
+        navMgr.NavigateTo("/Moderator");
     }
 
     protected override async Task OnInitializedAsync()
