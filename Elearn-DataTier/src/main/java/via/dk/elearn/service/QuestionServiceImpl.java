@@ -48,9 +48,9 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
 
     @Override
     public void getAllQuestions(PaginationModel request, StreamObserver<QuestionModel> responseObserver) {
-        Pageable sortedByDate =
-                PageRequest.of(request.getPageNumber(), request.getPageSize());
-        Page<Question> questions = questionRepository.findAll(sortedByDate);
+//        Pageable sortedByDate =
+//                PageRequest.of(request.getPageNumber(), request.getPageSize());
+        List<Question> questions = questionRepository.findAll();
         for (Question question : questions) {
             QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
             responseObserver.onNext(questionModel);

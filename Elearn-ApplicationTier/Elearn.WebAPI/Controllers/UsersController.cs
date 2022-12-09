@@ -32,23 +32,23 @@ public class UsersController : ControllerBase
         }
     }
 
-    [HttpGet, Route(("/Users/users"))]
-
-    public async Task<ActionResult<List<UserDto>>> GetAllUsersAsync()
-    {
-        try
-        {
-            var users = await userLogic.GetAllUsersAsync();
-         //   HttpContext.AddPaginationHeader(lectures, paginationDto.PageSize);
-            return Ok(users.AsDtos());
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e); 
-            return StatusCode(500, e.Message);
-        }
-   
-    }
+    // [HttpGet, Route(("/Users/users"))]
+    //
+    // public async Task<ActionResult<List<UserDto>>> GetAllUsersAsync()
+    // {
+    //     try
+    //     {
+    //         var users = await userLogic.GetAllUsersAsync();
+    //      //   HttpContext.AddPaginationHeader(lectures, paginationDto.PageSize);
+    //         return Ok(users.AsDtos());
+    //     }
+    //     catch (Exception e)
+    //     {
+    //         Console.WriteLine(e); 
+    //         return StatusCode(500, e.Message);
+    //     }
+    //
+    // }
     
     [HttpGet("{username}")]
     public async Task<ActionResult<UserDto>> GetUserAsync([FromRoute]string username)

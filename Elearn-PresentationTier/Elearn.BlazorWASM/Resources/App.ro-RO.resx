@@ -371,4 +371,10 @@
     <data name="You can help" xml:space="preserve">
         <value>Poti ajuta</value>
     </data>
+    <data name="support-text" xml:space="preserve">
+        <value>Suport</value>
+    </data>
+    <data name="about-text" xml:space="preserve">
+        <value>Despre noi</value>
+    </data>
 </root>

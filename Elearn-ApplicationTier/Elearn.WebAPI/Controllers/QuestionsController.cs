@@ -50,12 +50,12 @@ public class QuestionsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<QuestionDto>> GetAllQuestionsAsync([FromQuery] PaginationDto paginationDto)
+    public async Task<ActionResult<QuestionDto>> GetAllQuestionsAsync()
     {
         try
         {
-            var questions = await questionLogic.GetQuestionsAsync(paginationDto.PageNumber,paginationDto.PageSize);
-            HttpContext.AddPaginationHeader(questions, paginationDto.PageSize);
+            var questions = await questionLogic.GetQuestionsAsync();
+            //HttpContext.AddPaginationHeader(questions, paginationDto.PageSize);
             return Ok(questions.AsDtos());
         }
         catch (Exception e)

@@ -20,6 +20,7 @@ import via.dk.elearn.repository.TeacherRepository;
 import via.dk.elearn.service.mapper.LectureMapper;
 import via.dk.elearn.service.mapper.TeacherMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,9 +59,8 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
 
     @Override
     public void getAllLectures(PaginationModel request, StreamObserver<LectureModel> responseObserver) {
-        Pageable sortedByDate =
-                PageRequest.of(request.getPageNumber(), request.getPageSize(), Sort.by("date").descending());
-        Page<Lecture> lectures = lectureRepository.findAll(sortedByDate);
+
+        List<Lecture> lectures = lectureRepository.findAll();
         for (Lecture lecture : lectures) {
             LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(lectureModel);
@@ -106,18 +106,18 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
     @Override
     public void getLectureByUserId(LectureUserId request, StreamObserver<LectureModel> responseObserver) {
         Optional<Teacher> teacher = teacherRepository.findById(request.getUserId());
-        List<Lecture> lectures = lectureRepository.findAllByTeacher(teacher.get());
-        if (lectures.isEmpty()) {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lecture is not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lecture not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+        if (teacher.isEmpty()) {
+//            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+//                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
+//                    .setMessage("The lecture is not found")
+//                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+//                            .setReason("Lecture not found")
+//                            .build()))
+//                    .build();
+//            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+            responseObserver.onCompleted();
         } else {
-
+            List<Lecture> lectures = lectureRepository.findAllByTeacher(teacher.get());
             for (Lecture lecture : lectures) {
                 LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
                 responseObserver.onNext(lectureModel);

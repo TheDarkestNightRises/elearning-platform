@@ -36,12 +36,12 @@ public class LecturesController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<ActionResult<List<LectureDto>>> GetAllLecturesAsync([FromQuery] PaginationDto paginationDto)
+    public async Task<ActionResult<List<LectureDto>>> GetAllLecturesAsync()
     {
         try
         {
-            var lectures = await _lectureLogic.GetAllLecturesAsync(paginationDto.PageNumber,paginationDto.PageSize);
-            HttpContext.AddPaginationHeader(lectures, paginationDto.PageSize);
+            var lectures = await _lectureLogic.GetAllLecturesAsync();
+            //HttpContext.AddPaginationHeader(lectures, paginationDto.PageSize);
             return Ok(lectures.AsDtos());
         }
         catch (Exception e)
