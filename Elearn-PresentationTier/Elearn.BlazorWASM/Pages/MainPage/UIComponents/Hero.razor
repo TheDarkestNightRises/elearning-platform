@@ -1,5 +1,7 @@
+@inject IStringLocalizer<App> Localizer
+
 <link href="Hero.razor.css" rel="stylesheet"/>
-<h1 class="">We provide quality education<br/> for all people</h1>
+<h1 class="">@Localizer["We provide quality education"]<br/>@Localizer["for all people"]</h1>
 <MudCarousel Class="mud-width-full" Style="height:450px;" ShowArrows="@arrows" ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
 
     <MudCarouselItem Transition="transition" Color="@Color.Primary">
@@ -8,8 +10,8 @@
             <MudImage Class="card-img" Src="/img/brooke-cagle-g1Kr4Ozfoac-unsplash.jpg" ObjectFit="ObjectFit.Contain"></MudImage>
         </div>
         <div class="carousel-caption">
-                <MudText Color="Color.Default">Help other students by answering questions</MudText>
-                <MudText Color="Color.Default">You can help</MudText>
+                <MudText Color="Color.Default">@Localizer["Help other students by answering questions"]</MudText>
+                <MudText Color="Color.Default">@Localizer["You can help"]</MudText>
         </div>
     </MudCarouselItem>
 
@@ -19,8 +21,8 @@
 
             <MudImage Class="card-img" Src="/img/jaredd-craig-HH4WBGNyltc-unsplash.jpg" ObjectFit="ObjectFit.Contain"></MudImage>
             <div class="carousel-caption">
-                <MudText Color="Color.Default">Study more and you will become a profesional</MudText>
-                <MudText Color="Color.Default">Improve yourself</MudText>
+                <MudText Color="Color.Default">@Localizer["Study more and you will become a professional"]</MudText>
+                <MudText Color="Color.Default">@Localizer["Improve yourself"]</MudText>
             </div>
         </div>
 
@@ -32,8 +34,8 @@
 
             <MudImage Class="card-img" Src="/img/rohit-tandon-9wg5jCEPBsw-unsplash.jpg" ObjectFit="ObjectFit.Contain"></MudImage>
             <div class="carousel-caption">
-                <MudText Color="Color.Default">Look for posts with diferent categories</MudText>
-                <MudText Color="Color.Default">Try to learn more</MudText>
+                <MudText Color="Color.Default">@Localizer["Look for posts with diferent categories"]</MudText>
+                <MudText Color="Color.Default">@Localizer["Try to learn more"]</MudText>
             </div>
         </div>
 

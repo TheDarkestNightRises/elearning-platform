@@ -6,6 +6,7 @@
 @inject IAuthService authService
 @inject NavigationManager navMgr
 @inject IUserService UserService
+@inject IStringLocalizer<App> Localizer
 
 <style>
     body {
@@ -19,12 +20,12 @@
         <MudItem xs="12" sm="7">
             <MudPaper Class="pa-4">
                 <h3>
-                    <MudInputLabel Class="d-flex align-center justify-center ">Login</MudInputLabel>
+                    <MudInputLabel Class="d-flex align-center justify-center ">@Localizer["Login"]</MudInputLabel>
                 </h3>
-                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(UsernameError))" Typo="Typo.subtitle2" Label="Username" Required="true" @bind-Value="_userLoginDto.Username" InputType="InputType.Text"
+                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(UsernameError))" Typo="Typo.subtitle2" Label="@Localizer["Username"]" Required="true" @bind-Value="_userLoginDto.Username" InputType="InputType.Text"
                               For="@(() => _userLoginDto.Username)" RequiredError="Username field is required!">
                 </MudTextField>
-                <MudTextField T="string" Class="pb-2" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Label="Password" Required="true" @bind-Value="_userLoginDto.Password" InputType="InputType.Password"
+                <MudTextField T="string" Class="pb-2" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Label=@Localizer["Password"] Required="true" @bind-Value="_userLoginDto.Password" InputType="InputType.Password"
                               For="@(() => _userLoginDto.Password)" RequiredError="Password filed is required!">
                 </MudTextField>
 
@@ -36,8 +37,8 @@
 
 
                 <MudCardActions Class="d-flex justify-center">
-                    <MudButton Class="mx-2" OnClick="LoginAsync" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">Login</MudButton>
-                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.Reset())" Class="mx-2">Reset</MudButton>
+                    <MudButton Class="mx-2" OnClick="LoginAsync" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">@Localizer["Login"]</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.Reset())" Class="mx-2">@Localizer["Reset"]</MudButton>
                 </MudCardActions>
             </MudPaper>
         </MudItem>
@@ -79,14 +80,14 @@
 
             if(UsernameFound is false)
             {
-                Error = "Account does not exist";
+                Error = Localizer["Account does not exist"];
                 return;
             }
             
             
             if (AccountFound is false && UsernameFound)
             {
-                Error = "Wrong Password";
+                Error = Localizer["Wrong Password"];
                 return;
             }
             
@@ -113,18 +114,18 @@
     {
         if (string.IsNullOrWhiteSpace(username))
         {
-            yield return "Username is required!";
+            yield return Localizer["Username is required!"];
             yield break;
         }
         if (username.Length < 6)
-            yield return "Username must be at least of length 6";
+            yield return Localizer["Username must be at least of length 6"];
     }
 
 
     private IEnumerable<string> PasswordStrength(string pw)
     {
         if (string.IsNullOrWhiteSpace(pw))
-            yield return "Password is required!";
+            yield return Localizer["Password is required!"];
     }
 
 }

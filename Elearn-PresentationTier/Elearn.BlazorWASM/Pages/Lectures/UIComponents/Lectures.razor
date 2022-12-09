@@ -4,6 +4,7 @@
 @inject IUniversityService UniversityService
 @using Elearn.BlazorWASM.Pages.Lectures.UIComponents
 @using Elearn.Shared.Dtos
+@inject IStringLocalizer<App> Localizer
 
 <h2>Latest lectures<br/> Here ! </h2>
 
@@ -22,7 +23,7 @@ else
     <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Search" Color="Color.Info" OnClick="GetLecturesByCurrentUniversity">Search</MudButton>
     @if (_lectureDtos.Count == 0)
     {
-        <span> No lectures found</span>
+        <span> @Localizer["No lectures found"]</span>
     }
     else
     {

@@ -6,10 +6,11 @@
 @using Elearn.Shared.Dtos
 @using Elearn.BlazorWASM.Pages.Comments.UIComponents
 @using System.Security.Claims
+@inject IStringLocalizer<App> Localizer
 
 @if (_currentLecture == null)
 {
-    <span>Getting the blog post...</span>
+    <span>@Localizer["Getting the blog post"]...</span>
 }
 else
 {

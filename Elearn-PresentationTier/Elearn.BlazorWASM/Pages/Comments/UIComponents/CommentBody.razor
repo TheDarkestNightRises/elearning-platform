@@ -3,6 +3,7 @@
 @using Elearn.Shared.Models
 @inject IUserService _UserService
 @inject ICommentService _CommentService
+@inject IStringLocalizer<App> Localizer
 
 <link href="CommentBody.razor.css" rel="stylesheet"/>
 <div></div>
@@ -15,7 +16,7 @@
                  @if (_currentUser is not null && _currentUser!.Name.Equals(Name))
                  {
                   
-                     <MudButton Class="d-flex justify-center align-center" Size = "Size.Small" OnClick="DeleteComment" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+                     <MudButton Class="d-flex justify-center align-center" Size = "Size.Small" OnClick="DeleteComment" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">@Localizer["Delete"]</MudButton>
                  }
         </div>
     </div>

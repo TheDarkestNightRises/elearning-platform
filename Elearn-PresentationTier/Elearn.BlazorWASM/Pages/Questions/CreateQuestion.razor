@@ -9,10 +9,11 @@
 @using Elearn.Shared.Models
 @using Microsoft.AspNetCore.Components
 @using System.Security.Claims
+@inject IStringLocalizer<App> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
-        <h3>Please log in to ask a question</h3>
+        <h3>@Localizer["Please log in to ask a question"]</h3>
     </NotAuthorized>
     <Authorized Context="Auth">
         <style>
@@ -27,27 +28,27 @@
                     <MudPaper Class="pa-4">
                         <DataAnnotationsValidator/>
                         <h3 class=" pb-8">
-                            <MudInputLabel Class="d-flex align-center justify-center ">Ask a question!</MudInputLabel>
+                            <MudInputLabel Class="d-flex align-center justify-center ">@Localizer["Ask a question!"]</MudInputLabel>
                         </h3>
 
 
                         <div class="form-group pb-4">
-                            <label for="title">Question Title</label>
+                            <label for="title">@Localizer["Question Title"]</label>
                             <InputText id="title" @bind-Value="_newQuestion.Title" class="form-control"/>
                             <ValidationMessage For="@(() => _newQuestion.Title)"/>
                         </div>
                         <div class="form-group pb-4">
-                            <label for="url">Url</label>
+                            <label for="url">@Localizer["Url"]</label>
                             <InputText id="url" @bind-Value="_newQuestion.Url" class="form-control"/>
                             <ValidationMessage For="@(() => _newQuestion.Url)"/>
                         </div>
                         <div class="form-group pb-4">
-                            <label for="url">Question Description</label>
+                            <label for="url">@Localizer["Question Description"]</label>
                             <InputText id="description" @bind-Value="_newQuestion.Description" class="form-control"/>
                             <ValidationMessage For="@(() => _newQuestion.Description)"/>
                         </div>
                         <div class="form-group pb-4">
-                            <label for="date">Date</label>
+                            <label for="date">@Localizer["Date!"]</label>
                             <InputDate id="date" @bind-Value="_newQuestion.CreationDate" class="form-control"/>
                         </div>
 

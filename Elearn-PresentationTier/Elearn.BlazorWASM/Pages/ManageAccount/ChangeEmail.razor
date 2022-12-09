@@ -7,11 +7,12 @@
 @using System.ComponentModel.DataAnnotations
 @inject IUserService _UserService
 @inject NavigationManager NavMgr 
+@inject IStringLocalizer<App> Localizer
 
 
 <AuthorizeView>
     <NotAuthorized>
-        <h3>Please log in to change your email</h3>
+        <h3>@Localizer["Please log in to change your email"]</h3>
     </NotAuthorized>
     <Authorized Context="Auth">
    <style>
@@ -25,21 +26,21 @@
                 <MudItem xs="12" sm="7">
                     <MudPaper Class="pa-4">
                         <h3>
-                            <MudInputLabel Class="d-flex align-center justify-center ">Change Email</MudInputLabel>
+                            <MudInputLabel Class="d-flex align-center justify-center ">@Localizer["Change Email"]</MudInputLabel>
                         </h3>
-                        <MudTextField T="string" Label="Password" @bind-Value="@userPassword" InputType="InputType.Password"
+                        <MudTextField T="string" Label=@Localizer["Password"] @bind-Value="@userPassword" InputType="InputType.Password"
                                       For="@(() => userPassword)" Validation="@(new Func<string, IEnumerable<string>>(WrongPassword))" Required="true" RequiredError="Old password field is required!">
                         </MudTextField>
 
-                        <MudTextField T="string" Label="New email" Required="true" @bind-Value="@Dto.Email" InputType="InputType.Email"
+                        <MudTextField T="string" Label=@Localizer["New Email"] Required="true" @bind-Value="@Dto.Email" InputType="InputType.Email"
                                       For="@(() => Dto.Email)" RequiredError="New Email field is required!" Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})">
                         </MudTextField>
 
 
                         <MudCardActions Class="d-flex justify-center pt-4">
-                            <MudButton Class="mx-2" OnClick="ChangeUserEmail" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">Change Email</MudButton>
-                            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">Validate</MudButton>
-                            <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.Reset())" Class="mx-2">Reset</MudButton>
+                            <MudButton Class="mx-2" OnClick="ChangeUserEmail" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">@Localizer["Change Email"]</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">@Localizer["Validate"]</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.Reset())" Class="mx-2">@Localizer["Reset"]</MudButton>
                         </MudCardActions>
                     </MudPaper>
                 </MudItem>
@@ -101,7 +102,7 @@
     {
         if (!CurrentUser.Password.Equals(pw))
         {
-            yield return "password is wrong!";
+            yield return Localizer["password is wrong!"];
         }
     }
 
