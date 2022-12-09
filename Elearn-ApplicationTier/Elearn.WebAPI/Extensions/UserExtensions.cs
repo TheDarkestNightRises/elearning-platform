@@ -17,7 +17,8 @@ public static class UserExtensions
             Role = user.Role,
             Image = user.Image,
             SecurityLevel = user.SecurityLevel,
-            
+            UniversityId = user.University?.Id,
+            CountryId = user.Country?.Id
         };
     }
     
@@ -47,6 +48,8 @@ public static class UserExtensions
                 Role = user.Role,
                 Image = user.Image,
                 SecurityLevel = user.SecurityLevel,
+                UniversityId = user.University?.Id,
+                CountryId = user.Country?.Id
             });
         return usersDtos;                
     }

@@ -4,6 +4,7 @@ import com.google.protobuf.Any;
 import com.google.rpc.ErrorInfo;
 import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
+import org.lognet.springboot.grpc.GRpcService;
 import via.dk.elearn.models.Country;
 import via.dk.elearn.models.University;
 import via.dk.elearn.protobuf.*;
@@ -13,7 +14,7 @@ import via.dk.elearn.service.mapper.UniversityMapper;
 
 import java.util.List;
 import java.util.Optional;
-
+@GRpcService
 public class CountryServiceImpl extends CountryServiceGrpc.CountryServiceImplBase {
 
     private CountryRepository countryRepository;

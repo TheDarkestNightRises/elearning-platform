@@ -10,11 +10,13 @@ public class AuthLogic : IAuthLogic
 {
     private readonly IUserService _userService;
     private readonly IUniversityService _universityService;
+    private readonly ICountryService _countryService;
 
-    public AuthLogic(IUserService userService, IUniversityService universityService)
+    public AuthLogic(IUserService userService, IUniversityService universityService, ICountryService countryService)
     {
         _userService = userService;
         _universityService = universityService;
+        _countryService = countryService;
     }
 
     public async Task<User> ValidateUserAsync(string username, string password)
@@ -69,7 +71,12 @@ public class AuthLogic : IAuthLogic
             throw new ValidationException("University does not exist");
         }
 
-        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role, dto.Image ,dto.SecurityLevel,university,dto.Approved);
+        Country country = await _countryService.GetCountryByIdAsync(dto.CountryId);
+        if (country is null)
+        {
+            throw new ValidationException("Country does not exist");
+        }
+        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role, dto.Image ,dto.SecurityLevel,university,dto.Approved, country);
         User created = await _userService.CreateNewUserAsync(user);
         return created;
     }
