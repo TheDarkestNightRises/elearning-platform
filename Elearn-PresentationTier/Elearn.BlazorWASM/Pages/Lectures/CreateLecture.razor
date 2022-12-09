@@ -2,6 +2,7 @@
 @inject ILectureService LectureService
 @inject IAuthService authService
 @inject NavigationManager NavMgr 
+@inject IStringLocalizer<App> Localizer
 @using Blazored.TextEditor
 @using Elearn.HttpClients.Service
 @using Elearn.Shared.Dtos
@@ -11,7 +12,7 @@
 
 <AuthorizeView>
     <NotAuthorized>
-        <h3>Please log in to create a post</h3>
+        <h3>@Localizer["Please log in to create a post"]</h3>
     </NotAuthorized>
     <Authorized Context="Auth">
         <style>
@@ -26,31 +27,31 @@
                     <MudPaper Class="pa-4">
                         <DataAnnotationsValidator/>
                         <h3 class=" pb-8">
-                            <MudInputLabel Class="d-flex align-center justify-center ">Create a New Educational Lecure</MudInputLabel>
+                            <MudInputLabel Class="d-flex align-center justify-center ">@Localizer["Create a New Educational Lecture"]</MudInputLabel>
                         </h3>
 
 
                         <div class="form-group pb-4">
-                            <label for="title">Title</label>
+                            <label for="title">@Localizer["Title"]</label>
                             <InputText id="title" @bind-Value="_newLecture.Title" class="form-control"/>
                             <ValidationMessage For="@(() => _newLecture.Title)"/>
                         </div>
                         <div class="form-group pb-4">
-                            <label for="url">Url</label>
+                            <label for="url">@Localizer["Url"]</label>
                             <InputText id="url" @bind-Value="_newLecture.Url" class="form-control"/>
                             <ValidationMessage For="@(() => _newLecture.Url)"/>
                         </div>
                         <div class="form-group pb-4">
-                            <label for="url">Description</label>
+                            <label for="url">@Localizer["Description"]</label>
                             <InputText id="description" @bind-Value="_newLecture.Description" class="form-control"/>
                             <ValidationMessage For="@(() => _newLecture.Description)"/>
                         </div>
                         <div class="form-control-file pb-4">
-                            <label for="image">Image</label>
+                            <label for="image">@Localizer["Image"]</label>
                             <InputFile OnChange="OnFileChange"></InputFile>
                         </div>
                         <div class="form-group pb-4">
-                            <label for="date">Date</label>
+                            <label for="date">@Localizer["Date"]</label>
                             <InputDate id="date" @bind-Value="_newLecture.Date" class="form-control"/>
                         </div>
 

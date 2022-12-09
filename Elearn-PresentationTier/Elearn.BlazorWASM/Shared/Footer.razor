@@ -1,4 +1,5 @@
 <link href="Footer.razor.css" rel="stylesheet"/>
+@inject IStringLocalizer<App> Localizer
 <!-- Footer -->
 <footer class="text-center text-lg-start text-white p-md-12"
         style="background-color: #3e4551">
@@ -7,8 +8,8 @@
     <div class="container-fluid  text-white p-3" style="font-family: 'Serif', sans-serif; background: #3e4450;">
 
         <div class="mt-3 ">
-            <h3 class="text-center fw-bold">Want to learn with us?</h3>
-            <p class="text-center">We are a community that share knowledge for learning</p>
+            <h3 class="text-center fw-bold">@Localizer["footer-question-text"]</h3>
+            <p class="text-center">@Localizer["we-are-a-community-that-share-knowledge-for-learning-text"]</p>
             <hr>
         </div>
 
@@ -16,62 +17,63 @@
 
             <div class="col-md-2 text-center">
                 <h2 class="fw-bold mt-3 ">Elearn</h2>
-                <h2>Team 5</h2>
+                <h4>Team 5</h4>
             </div>
             <div class="col-md-2">
                 <ul class="list-unstyled">
-                    <li class="fw-bold my-2">Partnership</li>
+                    <li class="fw-bold my-2">Networking</li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Resources</a>
+                        <a href="#" class="text-decoration-none text-white">@Localizer["website-text"]</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white"> Social Media</a>
+                        <a href="#" class="text-decoration-none text-white">Social Media</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Website</a>
+                        <a href="#" class="text-decoration-none text-white">@Localizer["more-info-text"]</a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-2">
                 <ul class="list-unstyled">
-                    <li class="fw-bold my-2">About</li>
+                    <li class="fw-bold my-2">@Localizer["about-text"]</li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Our Project</a>
+                        <a href="#" class="text-decoration-none text-white">@Localizer["project-text"]</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Careers</a>
+                        <a href="#" class="text-decoration-none text-white">@Localizer["careers-text"]</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">About us</a>
+                        <a href="#" class="text-decoration-none text-white">Team5</a>
                     </li>
 
                 </ul>
             </div>
             <div class="col-md-2">
                 <ul class="list-unstyled">
-                    <li class="fw-bold my-2">Product</li>
+                    <li class="fw-bold my-2">@Localizer["support-text"]</li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Teachers</a>
+                        <a href="#" class="text-decoration-none text-white">@Localizer["contact-text"]
+</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Students</a>
+                        <a href="#" class="text-decoration-none text-white">Networking</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Universities</a>
+                        <a href="#" class="text-decoration-none text-white">@Localizer["events-text"]</a>
                     </li>
                 </ul>
             </div>
             <div class="col-md-2">
                 <ul class="list-unstyled">
-                    <li class="fw-bold my-2">Contact</li>
+                    <li class="fw-bold my-2">@Localizer["contact-text"]</li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Address</a>
+                        <a href="#" class="text-decoration-none text-white">@Localizer["phone-text"]</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Support</a>
+                        <a href="#" class="text-decoration-none text-white">@Localizer["address-text"]</a>
                     </li>
                     <li>
-                        <a href="#" class="text-decoration-none text-white">Phone</a>
+                        <a href="#" class="text-decoration-none text-white">@Localizer["general-text"]</a>
                     </li>
                 </ul>
             </div>
@@ -88,4 +90,4 @@
 </footer>
 <!-- Footer -->
 
-<!-- End of the container -->
+<!-- End of the container -->a

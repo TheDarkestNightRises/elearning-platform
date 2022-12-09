@@ -12,6 +12,7 @@
 @inject IUserService UserService
 @inject ICountryService CountryService
 @inject NavigationManager NavMgr 
+@inject IStringLocalizer<App> Localizer
 
 
 
@@ -27,41 +28,41 @@
         <MudItem xs="12" sm="7">
             <MudPaper Class="pa-4">
                 <h3>
-                    <MudInputLabel Class="d-flex align-center justify-center ">Register</MudInputLabel>
+                    <MudInputLabel Class="d-flex align-center justify-center ">@Localizer["Register-text"]</MudInputLabel>
                 </h3>
 
-                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(UsernameError))" Typo="Typo.subtitle2" Label="Username" Required="true" @bind-Value="newUser.Username" InputType="InputType.Text"
+                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(UsernameError))" Typo="Typo.subtitle2" Label="@Localizer["Username-text"]" Required="true" @bind-Value="newUser.Username" InputType="InputType.Text"
                               For="@(() => newUser.Username)" RequiredError="Username field is required!">
                 </MudTextField>
-                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Label="Password" Required="true" @bind-Value="newUser.Password" InputType="InputType.Password"
+                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Label=@Localizer["Password-text"] Required="true" @bind-Value="newUser.Password" InputType="InputType.Password"
                               For="@(() => newUser.Password)" RequiredError="Password filed is required!">
                 </MudTextField>
-                <MudTextField T="string" Required="true" Label="Repeat the password" @bind-Value="@repeatPassword" InputType="InputType.Password"
-                              For="@(() => @repeatPassword)" RequiredError="Repeat password field is required!" Validation="@(new Func<string, string>(PasswordMatch))">
+                <MudTextField T="string" Required="true" Label=@Localizer["Repeat Password-text"] @bind-Value="@repeatPassword" InputType="InputType.Password"
+                              For="@(() => @repeatPassword)" RequiredError=@Localizer["password field is required!"] Validation="@(new Func<string, string>(PasswordMatch))">
                 </MudTextField>
-                <MudTextField T="string" Label="Email" Required="true" @bind-Value="newUser.Email" InputType="InputType.Email"
+                <MudTextField T="string" Label="@Localizer["Email-text"]" Required="true" @bind-Value="newUser.Email" InputType="InputType.Email"
                               Validation="@(new EmailAddressAttribute() { ErrorMessage = "The email address is invalid" })" For="@(() => newUser.Email)" RequiredError="Email is required!">
                 </MudTextField>
-                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(NameError))" Label="Name" Required="true" @bind-Value="newUser.Name" InputType="InputType.Text"
+                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(NameError))" Label="@Localizer["Name-text"]" Required="true" @bind-Value="newUser.Name" InputType="InputType.Text"
                               For="@(() => newUser.Name)" RequiredError="Name of user is required!">
                 </MudTextField>
 
 
-                <MudSelect @bind-Value="newUser.Role" Label="Select role" AdornmentColor="Color.Secondary">
+                <MudSelect @bind-Value="newUser.Role" Label="@Localizer["Select Role-text"]" AdornmentColor="Color.Secondary">
                     @foreach (var item in Enum.GetValues(typeof(RoleEnum)))
                     {
                         <MudSelectItem Value="@item.ToString()">@item</MudSelectItem>
                     }
                 </MudSelect>
 
-                <MudSelect @bind-Value="@currentunivesity" Required="true" Dense="true" ToStringFunc="@convertUniversity" Label="Select your university" AdornmentColor="Color.Secondary">
+                <MudSelect @bind-Value="@currentunivesity" Required="true" Dense="true" ToStringFunc="@convertUniversity" Label="@Localizer["Select your university-text"]" AdornmentColor="Color.Secondary">
                     @foreach (UniversityDto item in _universityDtos)
                     {
                         <MudSelectItem Value="@item"/>
                     }
                 </MudSelect>
                 
-                <MudSelect @bind-Value="@currentCountry" Required="true" Dense="true" ToStringFunc="@convertCountry" Label="Select your country" AdornmentColor="Color.Secondary">
+                <MudSelect @bind-Value="@currentCountry" Required="true" Dense="true" ToStringFunc="@convertCountry" Label="@Localizer["Select your country-text"]" AdornmentColor="Color.Secondary">
                     @foreach (CountryDto item in countryDtos)
                     {
                         <MudSelectItem Value="@item"/>
@@ -71,9 +72,9 @@
 
 
                 <MudCardActions Class="d-flex justify-center">
-                    <MudButton Class="mx-2" OnClick="CreateNewUserAsync" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">Create Account</MudButton>
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">Validate</MudButton>
-                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.Reset())" Class="mx-2">Reset</MudButton>
+                    <MudButton Class="mx-2" OnClick="CreateNewUserAsync" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">@Localizer["Create an account-text"]</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">@Localizer["Validate-text"]</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.Reset())" Class="mx-2">@Localizer["Reset-text"]</MudButton>
                 </MudCardActions>
             </MudPaper>
         </MudItem>
@@ -111,19 +112,19 @@
         {
             if (user.Username.Equals(newUser.Username))
             {
-                Error = "Username already taken";
+                Error = Localizer["Username already taken-text"];
                 return;
             }
 
             if (user.Name.Equals(newUser.Name))
             {
-                Error = "Name already taken";
+                Error = Localizer["Name already taken"];
                 return;
             }
 
             if (user.Email.Equals(newUser.Email))
             {
-                Error = "Email already taken";
+                Error = Localizer["Email already taken"];
                 return;
             }
         }
@@ -159,23 +160,23 @@
     {
         if (string.IsNullOrWhiteSpace(pw))
         {
-            yield return "Password is required!";
+            yield return Localizer["Password is required!"];
             yield break;
         }
         if (pw.Length < 8)
-            yield return "Password must be at least of length 8";
+            yield return Localizer["Password must be at least of length 8"];
         if (!Regex.IsMatch(pw, @"[A-Z]"))
-            yield return "Password must contain at least one capital letter";
+            yield return Localizer["Password must contain at least one capital letter"];
         if (!Regex.IsMatch(pw, @"[a-z]"))
-            yield return "Password must contain at least one lowercase letter";
+            yield return Localizer["Password must contain at least one lowercase letter"];
         if (!Regex.IsMatch(pw, @"[0-9]"))
-            yield return "Password must contain at least one digit";
+            yield return Localizer["Password must contain at least one digit"];
     }
 
     private string PasswordMatch(string arg)
     {
         if (newUser.Password != arg)
-            return "Passwords doesn't match";
+            return Localizer["Passwords doesn't match"];
         return null;
     }
 
@@ -184,22 +185,22 @@
     {
         if (string.IsNullOrWhiteSpace(username))
         {
-            yield return "Username is required!";
+            yield return Localizer["Username is required!"];
             yield break;
         }
         if (username.Length < 6)
-            yield return "Username must be at least of length 6";
+            yield return Localizer["Username must be at least of length 6"];
     }
 
     private IEnumerable<string> NameError(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            yield return "Name is required!";
+            yield return Localizer["Name is required!"];
             yield break;
         }
         if (name.Length < 6)
-            yield return "Name must be at least of length 6";
+            yield return Localizer["Name must be at least of length 6"];
     }
 
 }

@@ -3,15 +3,16 @@
 @using Elearn.Shared.Models
 @inject ICommentService CommentService
 @inject ILectureService LectureService
+@inject IStringLocalizer<App> Localizer
 
-<div>Comments:</div>
+<div>@Localizer["Comments"]:</div>
 @if (_commentsDto == null)
 {
-    <span>Comments Loading...</span>
+    <span>@Localizer["Comments Loading"]...</span>
 }
 @if (_commentsDto.Count == 0)
 {
-    <span> No comments </span>
+    <span>@Localizer["No comments"]</span>
 }
 
 @foreach (var comment in _commentsDto)

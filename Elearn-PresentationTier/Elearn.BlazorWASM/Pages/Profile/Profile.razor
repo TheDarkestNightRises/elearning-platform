@@ -12,11 +12,12 @@
 @inject NavigationManager NavMgr 
 @inject IUniversityService UniversityService
 @inject ICountryService CountryService
+@inject IStringLocalizer<App> Localizer
 
 <AuthorizeView>
     <NotAuthorized>
         <div class="d-flex align-center justify-center">
-            <h3>Please log in to view your user profile</h3>
+            <h3>@Localizer["Please log in to view your user profile"]</h3>
         </div>
         <div>
             <MudCardActions Class="d-flex justify-center">
@@ -32,21 +33,21 @@
 
         <div class="page-background-class align-center justify-center">
             <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
-                <h3 class=" d-flex justify-center">Hello, @CurrentUser?.Name</h3>
+                <h3 class=" d-flex justify-center">@Localizer["Hello"], @CurrentUser?.Name</h3>
                 <div class="form-group d-flex justify-center">
-                    <label>Username : @CurrentUser?.Username</label>
+                    <label>@Localizer["Username"] : @CurrentUser?.Username</label>
                 </div>
                 <div class="form-group d-flex justify-center">
-                    <label>Current email : @CurrentUser?.Email</label>
+                    <label>@Localizer["Email"] : @CurrentUser?.Email</label>
                 </div>
                 <div class="form-group d-flex justify-center">
-                    <label> Role : @CurrentUser?.Role</label>
+                    <label> @Localizer["Role"] : @CurrentUser?.Role</label>
                 </div>
                 <div class="form-group d-flex justify-center">
-                    <label> University : @currentUniversity?.Name</label>
+                    <label> @Localizer["University"] : @currentUniversity?.Name</label>
                 </div>
                 <div class="form-group d-flex justify-center">
-                    <label> Country : @currentCountry?.Name</label>
+                    <label> @Localizer["Country"] : @currentCountry?.Name</label>
                 </div>
 
                 <MudCard>
@@ -54,11 +55,11 @@
                         <MudImage Class="card-img" Src="@Dto.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
                     </MudCardContent>
                     <MudCardActions class="form-control-file">
-                        <label for="image">Image</label>
+                        <label for="image">@Localizer["Image"]</label>
                         <InputFile OnChange="OnFileChange"></InputFile>
                     </MudCardActions>
                     <MudCardActions>
-                        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(UpdateImage)">Save</MudButton>
+                        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(UpdateImage)">@Localizer["Save"]</MudButton>
                     </MudCardActions>
                 </MudCard>
 
@@ -73,11 +74,11 @@
         <div class="page-background-class align-center justify-center">
             @if (CurrentUser is not null && CurrentUser.SecurityLevel == 4)
             {  <div class="allLectures">
-                   <h2>All Lectures</h2>
+                   <h2>@Localizer["All Lectures"]</h2>
 
                    @if (CurrentUser == null)
                    {
-                       <span> No lectures found</span>
+                       <span> @Localizer["No lectures found"]</span>
                    }
                    else
                    {
@@ -101,10 +102,10 @@
             
 
             <div class="upVotedLectures">
-                <h2>Upvoted Lectures</h2>
+                <h2>@Localizer["Up voted Lectures"]</h2>
                 @if (CurrentUser == null)
                 {
-                    <span> No lectures found</span>
+                    <span>@Localizer["No up voted lectures found"]</span>
                 }
                 else
                 {
@@ -125,10 +126,10 @@
              @if (CurrentUser is not null && CurrentUser.SecurityLevel == 2)
             {
             <div class="allQuestions">
-                <h2>All Questions</h2>
+                <h2>@Localizer["All questions"]</h2>
                 @if (CurrentUser == null)
                 {
-                    <span> No questions found</span>
+                    <span> @Localizer["No questions found"]</span>
                 }
                 else
                 {
