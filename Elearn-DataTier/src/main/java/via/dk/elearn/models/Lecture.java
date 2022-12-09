@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -38,7 +39,7 @@ public class Lecture {
     private String image;
 
     @Column
-    private LocalDate date;
+    private LocalDateTime date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "course_id")
@@ -50,7 +51,7 @@ public class Lecture {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Teacher teacher;
 
-    public Lecture(String title, String description, String url, String body, String image, LocalDate date, Course course, Teacher teacher) {
+    public Lecture(String title, String description, String url, String body, String image, LocalDateTime date, Course course, Teacher teacher) {
         this.title = title;
         this.description = description;
         this.url = url;

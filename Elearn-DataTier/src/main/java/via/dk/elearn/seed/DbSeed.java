@@ -7,6 +7,7 @@ import via.dk.elearn.models.*;
 import via.dk.elearn.repository.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -38,8 +39,6 @@ public class DbSeed implements CommandLineRunner {
         this.universityRepository = universityRepository;
         this.userRepository = userRepository;
     }
-
-
 
 
     @Override
@@ -82,18 +81,18 @@ public class DbSeed implements CommandLineRunner {
         //https://about.ku.dk/profile-history/history/
 
         //add teachers
-        Teacher teacher1 = new Teacher("oriana","oriana@email.dk","Oriana Cinimo Amadeo","Password1234", "Placeholder","Teacher",true,4,createdCountry2,createdUniversity1);
+        Teacher teacher1 = new Teacher("oriana", "oriana@email.dk", "Oriana Cinimo Amadeo", "Password1234", "Placeholder", "Teacher", true, 4, createdCountry2, createdUniversity1);
         Teacher createdTeacher1 = teacherRepository.save(teacher1);
 
-        Teacher teacher2 = new Teacher("cosmin","cosmin@email.com","Cosmin Teodoru","Cosmin1234", "Placeholder", "Teacher", true,4, createdCountry1, createdUniversity2);
+        Teacher teacher2 = new Teacher("cosmin", "cosmin@email.com", "Cosmin Teodoru", "Cosmin1234", "Placeholder", "Teacher", true, 4, createdCountry1, createdUniversity2);
         Teacher createdTeacher2 = teacherRepository.save(teacher2);
 
         //add moderators
-        Moderator moderator = new Moderator("moderator","moderator@via.dk","Admin","Admin1234","placeholder-string","Moderator", true,10,createdCountry1, createdUniversity1);
+        Moderator moderator = new Moderator("moderator", "moderator@via.dk", "Admin", "Admin1234", "placeholder-string", "Moderator", true, 10, createdCountry1, createdUniversity1);
         Moderator createdModerator = moderatorRepository.save(moderator);
 
         //add students
-        Student student = new Student("dexter","email@host.dk","Dexter Morgan","Student1234", "placeholder string","Student",false, 2, createdCountry1,createdUniversity1);
+        Student student = new Student("dexter", "email@host.dk", "Dexter Morgan", "Student1234", "placeholder string", "Student", false, 2, createdCountry1, createdUniversity1);
         Student createdStudent = studentRepository.save(student);
 
         //add courses
@@ -102,19 +101,19 @@ public class DbSeed implements CommandLineRunner {
         Course createdCourse1 = courseRepository.save(course1);
 
         //add lectures
-        Lecture lecture1 = new Lecture("Lorem Ipsum - part 1", "What is Lorem Ipsum", "lorem-ipsum-1", "LLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "placeholder string", LocalDate.of(2020, 12, 12), createdCourse1, createdTeacher1);
+        Lecture lecture1 = new Lecture("Lorem Ipsum - part 1", "What is Lorem Ipsum", "lorem-ipsum-1", "LLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "placeholder string", LocalDateTime.of(2020, 12, 12, 14, 10, 15), createdCourse1, createdTeacher1);
         Lecture createdlecture1 = lectureRepository.save(lecture1);
         //https://www.lipsum.com/
 
-        Lecture lecture2 = new Lecture("Lorem Ipsum - part 2", "Why do we use Lorem Ipsum?", "lorem-ipsum-2", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).", "placeholder string", LocalDate.of(2020, 12, 12), createdCourse1, createdTeacher1);
+        Lecture lecture2 = new Lecture("Lorem Ipsum - part 2", "Why do we use Lorem Ipsum?", "lorem-ipsum-2", "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).", "placeholder string", LocalDateTime.of(2020, 12, 12, 8, 56,9), createdCourse1, createdTeacher1);
         Lecture createdlecture2 = lectureRepository.save(lecture2);
         //https://www.lipsum.com/
-        Lecture lecture3 = new Lecture("Original Lorem Ipsum", "The standard Lorem Ipsum passage, used since the 1500s", "original-lorem-ipsum", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "placeholder string", LocalDate.of(2020, 12, 12), createdCourse1, createdTeacher2);
+        Lecture lecture3 = new Lecture("Original Lorem Ipsum", "The standard Lorem Ipsum passage, used since the 1500s", "original-lorem-ipsum", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "placeholder string", LocalDateTime.of(2020, 12, 12, 18, 2, 31), createdCourse1, createdTeacher2);
         Lecture createdlecture3 = lectureRepository.save(lecture3);
         //https://www.lipsum.com/
         //add questions
 
-        Question question = new Question("Generated Lorem Ipsum paragraph?", "Please help", "I tried using several generators but none of them had enough generation parameters. Can you help me find one?", "where-lorem-ipsum",LocalDate.now(), null, createdStudent);
+        Question question = new Question("Generated Lorem Ipsum paragraph?", "Please help", "I tried using several generators but none of them had enough generation parameters. Can you help me find one?", "where-lorem-ipsum", LocalDateTime.now(), null, createdStudent);
         Question createdQuestion = questionRepository.save(question);
 
         //add lecture votes

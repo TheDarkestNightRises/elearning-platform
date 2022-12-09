@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -25,7 +26,7 @@ public class Comment {
     private String text;
 
     @Column
-    private LocalDate published_date;
+    private LocalDateTime published_date;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "lecture_id")
@@ -39,7 +40,7 @@ public class Comment {
 
 
 
-    public Comment(String text, LocalDate published_date, Lecture lecture, User user) {
+    public Comment(String text, LocalDateTime published_date, Lecture lecture, User user) {
         this.text = text;
         this.published_date = published_date;
         this.lecture = lecture;

@@ -10,12 +10,15 @@ public static class GrpcDateExtension
         {
             Year = date.Year,
             Month = date.Month,
-            Day = date.Day
+            Day = date.Day,
+            Hour = date.Hour,
+            Minute = date.Minute,
+            Second = date.Second
         };
     }
 
     public static DateTime AsBase(this DateModel dateModel)
     {
-        return new DateTime(dateModel.Year, dateModel.Month, dateModel.Day);
+        return new DateTime(dateModel.Year, dateModel.Month, dateModel.Day, dateModel.Hour, dateModel.Minute, dateModel.Second);
     }
 }
