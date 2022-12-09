@@ -1,0 +1,70 @@
+﻿@using Elearn.Shared.Dtos
+@using Elearn.BlazorWASM.Pages.ModeratorView.UIComponents
+@using Elearn.Shared.Models
+@using System.Security.Claims
+@using Elearn.Clients.Http
+@using Elearn.HttpClients.Service
+@inject NavigationManager navMgr
+@inject IUserService _UserService
+@inject ILectureService httpClient
+<MudTable Items="@Users" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <HeaderContent>
+        <MudTh>Id</MudTh>
+        <MudTh>Name</MudTh>
+        <MudTh>Role</MudTh>
+        <MudTh>Country</MudTh>
+        <MudTh>Email</MudTh>
+        <MudTh>Delete</MudTh>
+    </HeaderContent>
+    <RowTemplate >
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Name">@context.Name</MudTd>
+        <MudTd DataLabel="Role">@context.Role</MudTd>
+        <MudTd DataLabel="Country" HideSmall="_hidePosition">@context.CountryId</MudTd>
+        <MudTd DataLabel="Email">@context.Email</MudTd>
+        <MudTd DataLabel="Delete">
+            <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="@DeleteUser" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+        </PagerContent>
+</MudTable>
+
+@code { 
+    private bool _hidePosition;
+    private bool _loading;
+   private List<UserDto> Users = new List<UserDto>();
+    // [Parameter]
+     public UserDto User { get; set; }
+    
+    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    private UserDto? _currentUser;
+   
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        _currentUser = await _UserService.GetUserByUsernameAsync(username);
+        Users = await _UserService.GetUsersAsync();
+
+    }
+    
+    private async Task DeleteUser()
+    {
+        await _UserService.DeleteUserAsync(User.Name);
+        navMgr.NavigateTo($"/Moderator");
+
+       
+    }
+
+}

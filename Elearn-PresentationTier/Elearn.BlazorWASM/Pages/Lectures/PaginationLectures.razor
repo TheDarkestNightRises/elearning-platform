@@ -43,13 +43,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _lectures = await _lectureService.GetLecturesAsync(0, 1);
+        _lectures = await _lectureService.GetLecturesAsync();
     }
 
     private async Task PageChanged(int i)
     {
         Console.WriteLine(i);
-        _lectures = await _lectureService.GetLecturesAsync(i-1, 1);
+        _lectures = await _lectureService.GetLecturesAsync();
         _table.NavigateTo(i-1);
     }
 

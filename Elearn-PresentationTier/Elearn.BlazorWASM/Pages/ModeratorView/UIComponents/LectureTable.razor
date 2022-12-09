@@ -1,0 +1,71 @@
+﻿@using Elearn.Shared.Dtos
+@using Elearn.BlazorWASM.Pages.ModeratorView.UIComponents
+@using Elearn.Shared.Models
+@using System.Security.Claims
+@using Elearn.Clients.Http
+@using Elearn.HttpClients.Service
+@inject NavigationManager navMgr
+@inject ILectureService _lectureService
+@inject IUserService _UserService
+@inject ILectureService httpClient
+<MudTable Items="@Lecture" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <HeaderContent>
+        <MudTh>Id</MudTh>
+        <MudTh>Title</MudTh>
+        <MudTh>Description</MudTh>
+        <MudTh>Image</MudTh>
+        <MudTh>Url</MudTh>
+        <MudTh>Delete</MudTh>
+    </HeaderContent>
+    <RowTemplate >
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="Title">@context.Title</MudTd>
+        <MudTd DataLabel="Description">@context.Description</MudTd>
+        <MudTd DataLabel="Image" HideSmall="_hidePosition">@context.Image</MudTd>
+        <MudTd DataLabel="Url">@context.Url</MudTd>
+        <MudTd DataLabel="Delete">
+            <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="@DeleteLecture" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+        </PagerContent>
+</MudTable>
+
+@code { 
+    private bool _hidePosition;
+    private bool _loading;
+   private List<LectureDto> Lecture = new List<LectureDto>();
+    // [Parameter]
+     public LectureDto Lectures { get; set; }
+    
+    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    private UserDto? _currentUser;
+   
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        _currentUser = await _UserService.GetUserByUsernameAsync(username);
+        Lecture = await _lectureService.GetLecturesAsync();
+
+    }
+    
+    private async Task DeleteLecture()
+    {
+        await _lectureService.DeleteLectureAsync(Lectures.Url);
+        navMgr.NavigateTo($"/Moderator");
+
+       
+    }
+
+}
