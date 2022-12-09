@@ -367,7 +367,7 @@
     <value>New Email</value>
   </data>
   <data name="Validate" xml:space="preserve">
-    <value>Username</value>
+    <value>Validate</value>
   </data>
   <data name="password is wrong!" xml:space="preserve">
     <value>Password is wrong</value>
@@ -476,11 +476,5 @@
   </data>
   <data name="Repeat new password" xml:space="preserve">
     <value>Repeat new password</value>
-  </data>
-  <data name="support-text" xml:space="preserve">
-    <value>Support</value>
-  </data>
-  <data name="about-text" xml:space="preserve">
-    <value>About</value>
   </data>
 </root>

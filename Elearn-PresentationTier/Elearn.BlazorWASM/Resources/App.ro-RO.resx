@@ -354,7 +354,7 @@
         <value>Numele de utilizator exista deja</value>
     </data>
     <data name="Validate" xml:space="preserve">
-        <value>Nume de utilizator</value>
+        <value>Valideaza</value>
     </data>
     <data name="We provide quality education" xml:space="preserve">
         <value>Oferim educatie de calitate</value>
@@ -370,11 +370,5 @@
     </data>
     <data name="You can help" xml:space="preserve">
         <value>Poti ajuta</value>
-    </data>
-    <data name="support-text" xml:space="preserve">
-        <value>Suport</value>
-    </data>
-    <data name="about-text" xml:space="preserve">
-        <value>Despre noi</value>
     </data>
 </root>
