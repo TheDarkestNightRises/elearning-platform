@@ -480,4 +480,10 @@
   <data name="See lectures from different universities" xml:space="preserve">
     <value>See lectures from different universities</value>
   </data>
+  <data name="Lastest-lectures-here" xml:space="preserve">
+    <value>See the lastest lectures!</value>
+  </data>
+  <data name="Lastest-questions-here" xml:space="preserve">
+    <value>Students have recently asked these questions</value>
+  </data>
 </root>

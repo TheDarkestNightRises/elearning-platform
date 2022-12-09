@@ -1,0 +1,39 @@
+﻿@using Elearn.Shared.Models
+@using Elearn.Shared.Dtos
+@using System.Security.Claims
+@using Elearn.HttpClients.Service
+@inject NavigationManager navMgr
+
+
+
+@* <link href="LectureCard.razor.css" rel="stylesheet"/> *@
+<MudCard Class="mb-5">
+    @* <MudImage Class="card-img" Src="@Lecture.Image" ObjectFit="ObjectFit.Contain"></MudImage> *@
+    <MudCardContent>
+        <MudText Typo="Typo.h5">@Question.Title</MudText>
+        <MudText Typo="Typo.body2">@Question.AuthorName</MudText>
+        <MudText Typo="Typo.body2">@Question.CreationDate</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="GoToUrl">Learn More</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+@code {
+
+    [Parameter]
+    public QuestionDto Question { get; set; }
+    
+    
+
+    private void GoToUrl()
+    {
+        navMgr.NavigateTo($"/Questions/{Question.Url}");
+    }
+    
+
+    
+ 
+
+}

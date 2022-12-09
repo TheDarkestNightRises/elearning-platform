@@ -374,4 +374,10 @@
     <data name="You can help" xml:space="preserve">
         <value>Potete aiutarci</value>
     </data>
+    <data name="Lastest-lectures-here" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Lastest-questions-here" xml:space="preserve">
+        <value />
+    </data>
 </root>

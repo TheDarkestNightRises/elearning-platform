@@ -16,7 +16,7 @@ public class QuestionHttpClient : IQuestionService
         this.client = client;
     }
     
-    public async Task<IEnumerable<QuestionDto>> GetAllQuestionsAsync()
+    public async Task<List<QuestionDto>> GetAllQuestionsAsync()
     {
         HttpResponseMessage response = await client.GetAsync("Questions");
         string result = await response.Content.ReadAsStringAsync();
@@ -25,7 +25,7 @@ public class QuestionHttpClient : IQuestionService
             throw new Exception(result);
         }
 
-        IEnumerable<QuestionDto> questionDtos = JsonSerializer.Deserialize<IEnumerable<QuestionDto>>(result, new JsonSerializerOptions
+        List<QuestionDto> questionDtos = JsonSerializer.Deserialize<List<QuestionDto>>(result, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         })!;

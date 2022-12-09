@@ -374,4 +374,10 @@
     <data name="See lectures from different universities" xml:space="preserve">
         <value>Vezi lectiile de la universitati</value>
     </data>
+    <data name="Lastest-lectures-here" xml:space="preserve">
+        <value>Vezi cele mai noi lectii!</value>
+    </data>
+    <data name="Lastest-questions-here" xml:space="preserve">
+        <value>Intrebari recente puse de studenti</value>
+    </data>
 </root>
