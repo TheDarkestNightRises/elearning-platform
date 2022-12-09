@@ -34,6 +34,7 @@
         <Protobuf Include="Protos\rpc_university.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <Protobuf Include="Protos\rpc_pagination.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <Protobuf Include="Protos\rpc_student.proto" GrpcServices="Client" ProtoRoot="Protos\" />
+        <Protobuf Include="Protos\rpc_country.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <None Remove="Protos\rpc_moderator.proto" />
         <Protobuf Include="Protos\rpc_moderator.proto" GrpcServices="Client" ProtoRoot="Protos\" />
     </ItemGroup>
