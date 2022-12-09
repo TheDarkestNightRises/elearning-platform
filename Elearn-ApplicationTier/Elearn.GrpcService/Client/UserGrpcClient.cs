@@ -34,8 +34,10 @@ public class UserGrpcClient : IUserService
     public async Task<User> CreateNewUserAsync(User user)
     {
         var userModel = user.AsGrpcModel();
-        var universityModel = user.University is not null ? user.University.AsGrpcModel() : null;
+        var universityModel = user.University?.AsGrpcModel();
+        var countryModel = user.Country?.AsGrpcModel();
         userModel.University = universityModel;
+        userModel.Country = countryModel;
         var createdUserFromGrpc = await _userClient.CreateNewUserAsync(userModel);
         User userRetrieved = createdUserFromGrpc.AsBase();
         userRetrieved.Country = createdUserFromGrpc.Country.AsBase();
