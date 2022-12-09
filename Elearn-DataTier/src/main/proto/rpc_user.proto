@@ -4,6 +4,7 @@ option java_multiple_files = true;
 option java_package = "via.dk.elearn.protobuf";
 
 import "rpc_university.proto";
+import "rpc_country.proto";
 service UserService {
   rpc GetUserByName (Name) returns (UserModel);
   rpc GetUserByUsername (UserName) returns (UserModel);
@@ -26,6 +27,7 @@ message UserModel {
   int32 securityLevel = 8;
   UniversityModel university = 9;
   bool approved = 10;
+  CountryModel country = 11;
 }
 
 message UserId{

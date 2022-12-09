@@ -11,21 +11,11 @@ public class UserDto
     public string Role { get; set; }
     public string Image { get; set; }
     public int SecurityLevel { get; set; }
+    public long? UniversityId { get; set; }
+    public long? CountryId { get; set; }
 
 
-    public UserDto(string username, string password, string email, string name, string role, string image, int securityLevel)
-    {
-        Username = username;
-        Password = password;
-        Email = email;
-        Name = name;
-        Role = role;
-        Image = image;
-        SecurityLevel = securityLevel;
-        
-    }
-
-    public UserDto(long id, string username, string password, string email, string name, string role, string image, int securityLevel)
+    public UserDto(long id, string username, string password, string email, string name, string role, string image, int securityLevel, long universityId, long countryId)
     {
         Id = id;
         Username = username;
@@ -35,6 +25,21 @@ public class UserDto
         Role = role;
         Image = image;
         SecurityLevel = securityLevel;
+        UniversityId = universityId;
+        CountryId = countryId;
+    }
+
+    public UserDto(string username, string password, string email, string name, string role, string image, int securityLevel, long universityId, long countryId)
+    {
+        Username = username;
+        Password = password;
+        Email = email;
+        Name = name;
+        Role = role;
+        Image = image;
+        SecurityLevel = securityLevel;
+        UniversityId = universityId;
+        CountryId = countryId;
     }
 
     public UserDto()

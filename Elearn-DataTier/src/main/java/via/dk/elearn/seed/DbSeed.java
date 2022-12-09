@@ -49,9 +49,17 @@ public class DbSeed implements CommandLineRunner {
         if (countryRepository.count() > 0) return;// if there are no countries, no other entity can be created
 
         //add countries
-        Country country1 = new Country();
-        country1.setCountryName("Denmark");
+        Country country1 = new Country("Denmark");
         Country createdCountry1 = countryRepository.save(country1);
+
+        Country country2 = new Country("Italy");
+        Country createdCountry2 = countryRepository.save(country2);
+
+        Country country3 = new Country("Romania");
+        Country createdCountry3 = countryRepository.save(country3);
+
+        Country country4 = new Country("Germany");
+        Country createdCountry4 = countryRepository.save(country4);
 
         //add Universities
         University university1 = new University("VIA University College", "VIA is one of Denmark’s six university colleges. Programmes, courses and research focus on professional practice in areas such as healthcare, teaching, social education, technology, business and design.");
@@ -70,19 +78,18 @@ public class DbSeed implements CommandLineRunner {
         University createdUniversity5 = universityRepository.save(university5);
 
         //add teachers
-        Teacher teacher1 = new Teacher("oriana","email","Oriana Cinimo Amadeo","ihatenes", "placeholder string","teacher",4,createdUniversity1, true);
-
+        Teacher teacher1 = new Teacher("oriana","email","Oriana Cinimo Amadeo","ihatenes", "placeholder string","Teacher",true,4,createdCountry2,createdUniversity1);
         Teacher createdTeacher1 = teacherRepository.save(teacher1);
 
-        Teacher teacher2 = new Teacher("cosmin","email3","Cosmin Teodoru","password", "placeholder-string","teacher",4, createdUniversity2, true);
+        Teacher teacher2 = new Teacher("cosmin","email3","Cosmin Teodoru","password", "placeholder-string","Teacher", true,4, createdCountry1, createdUniversity2);
         Teacher createdTeacher2 = teacherRepository.save(teacher2);
 
-
-        Moderator moderator = new Moderator("moderator","moderator@via.dk","Admin","Admin","placeholder-string","Moderator",10,createdUniversity1, true);
+        //add moderators
+        Moderator moderator = new Moderator("moderator","moderator@via.dk","Admin","Admin","placeholder-string","Moderator", true,10,createdCountry3, createdUniversity1);
         Moderator createdModerator = moderatorRepository.save(moderator);
 
         //add students
-        Student student = new Student("Dexter","email2","Dexter Morgan","bloodanalyst", "placeholder string","Student",2, createdUniversity1,false);
+        Student student = new Student("Dexter","email2","Dexter Morgan","bloodanalyst", "placeholder string","Student",false, 2, createdCountry1,createdUniversity1);
         Student createdStudent = studentRepository.save(student);
 
         //add courses

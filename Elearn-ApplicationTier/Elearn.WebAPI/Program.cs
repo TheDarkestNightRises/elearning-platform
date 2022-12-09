@@ -29,6 +29,7 @@ builder.Services.AddScoped<IModeratorService, ModeratorGrpcClient>();
 builder.Services.AddScoped<ILectureVoteService, LectureVoteGrpcClient>();
 builder.Services.AddScoped<IUniversityService, UniversityGrpcClient>();
 builder.Services.AddScoped<IStudentService, StudentGrpcClient>();
+builder.Services.AddScoped<ICountryService, CountryGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<ILectureLogic, LectureLogic>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
@@ -37,6 +38,7 @@ builder.Services.AddScoped<IAuthLogic, AuthLogic>();
 builder.Services.AddScoped<ILectureVoteLogic, LectureVoteLogic>();
 builder.Services.AddScoped<IQuestionLogic,QuestionLogic>();
 builder.Services.AddScoped<IUniversityLogic, UniversityLogic>();
+builder.Services.AddScoped<ICountryLogic, CountryLogic>();
 builder.Services.AddGrpcClient<SearchGrpcClient>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();
 builder.Services.AddGrpcClient<LectureGrpcClient>();
@@ -46,7 +48,8 @@ builder.Services.AddGrpcClient<TeacherGrpcClient>();
 builder.Services.AddGrpcClient<LectureVoteGrpcClient>();
 builder.Services.AddGrpcClient<UniversityGrpcClient>();
 builder.Services.AddGrpcClient<ModeratorGrpcClient>();
-builder.Services.AddScoped<StudentGrpcClient>();
+builder.Services.AddGrpcClient<StudentGrpcClient>();
+builder.Services.AddGrpcClient<StudentGrpcClient>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {

@@ -16,29 +16,20 @@ public class UserCreationDto
     
     public long UniversityId { get; set; }
     public bool Approved { get; set; }
+    public long CountryId { get; set; }
 
-    public UserCreationDto(string username, string image,string password, string email, string name, string role, int securityLevel, bool approved)
+    public UserCreationDto(string username, string password, string email, string name, string image, string role, int securityLevel, long universityId, bool approved, long countryId)
     {
         Username = username;
+        Password = password;
+        Email = email;
+        Name = name;
         Image = image;
-        Password = password;
-        Email = email;
-        Name = name;
-        Role = role;
-        SecurityLevel = securityLevel;
-        Approved = approved;
-    }
-
-    public UserCreationDto(string username, string password, string email, string name, string role, int securityLevel, long universityId, bool approved)
-    {
-        Username = username;
-        Password = password;
-        Email = email;
-        Name = name;
         Role = role;
         SecurityLevel = securityLevel;
         UniversityId = universityId;
         Approved = approved;
+        CountryId = countryId;
     }
 
     public UserCreationDto()

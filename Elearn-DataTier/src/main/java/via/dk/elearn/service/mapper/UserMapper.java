@@ -28,6 +28,7 @@ public class UserMapper {
                 .image(userModel.getImage())
                 .role(userModel.getRole())
                 .security_level(userModel.getSecurityLevel())
+                .approved(userModel.getApproved())
                 .build();
     }
 
