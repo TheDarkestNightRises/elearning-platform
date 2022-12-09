@@ -259,7 +259,7 @@
     <value>Project-Text</value>
   </data>
   <data name="careers-text" xml:space="preserve">
-    <value>Carrers</value>
+    <value>Career</value>
   </data>
   <data name="contact-text" xml:space="preserve">
     <value>Contact</value>
@@ -376,7 +376,7 @@
     <value>Change Password</value>
   </data>
   <data name="Please log in to change your password" xml:space="preserve">
-    <value>PLease log in to change your password</value>
+    <value>Please log in to change your password</value>
   </data>
   <data name="Old password" xml:space="preserve">
     <value>Old password</value>
@@ -394,7 +394,7 @@
     <value>Repeat password</value>
   </data>
   <data name="Please log in to delete your account" xml:space="preserve">
-    <value>PLease log in to delete your account</value>
+    <value>Please log in to delete your account</value>
   </data>
   <data name="Delete account" xml:space="preserve">
     <value>Delete Account</value>
@@ -478,6 +478,6 @@
     <value>Repeat new password</value>
   </data>
   <data name="See lectures from different universities" xml:space="preserve">
-    <value>See lectures from diffenret universities</value>
+    <value>See lectures from different universities</value>
   </data>
 </root>

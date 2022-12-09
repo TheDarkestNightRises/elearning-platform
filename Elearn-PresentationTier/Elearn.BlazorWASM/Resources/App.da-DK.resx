@@ -15,21 +15,363 @@
         <value>Velkommen</value>
     </data>
     <data name="Repeat Password-text" xml:space="preserve">
-        <value />
+        <value>Gentag adgangskode</value>
     </data>
     <data name="Name is required!" xml:space="preserve">
-        <value />
+        <value>Navn er påkrævet</value>
     </data>
     <data name="Username must be at least of length 6" xml:space="preserve">
-        <value />
+        <value>Brugernavn skal være på mindst 6 tegn</value>
     </data>
     <data name="Create A New Educational Lecture" xml:space="preserve">
-        <value />
+        <value>Opret en ny lektie</value>
     </data>
     <data name="Repeat new password password" xml:space="preserve">
-        <value />
+        <value>Gentag ny adgangskode</value>
     </data>
     <data name="@Localizer[&quot;Save&quot;]" xml:space="preserve">
-        <value />
+        <value>Gem</value>
+    </data>
+    <data name="Account does not exist" xml:space="preserve">
+        <value>Kontoen eksisterer ikke!</value>
+    </data>
+    <data name="Account Settings" xml:space="preserve">
+        <value>Kontoindstillinger</value>
+    </data>
+    <data name="Add lecture" xml:space="preserve">
+        <value>Tilføj en lektie</value>
+    </data>
+    <data name="Add question" xml:space="preserve">
+        <value>Tilføj et spørgsmål</value>
+    </data>
+    <data name="address-text" xml:space="preserve">
+        <value>Adresse</value>
+    </data>
+    <data name="All Lectures" xml:space="preserve">
+        <value>Alle lektier</value>
+    </data>
+    <data name="All questions" xml:space="preserve">
+        <value>Alle spørgsmål</value>
+    </data>
+    <data name="Ask a question!" xml:space="preserve">
+        <value>Stil et spørgsmål!</value>
+    </data>
+    <data name="careers-text" xml:space="preserve">
+        <value>Karriere</value>
+    </data>
+    <data name="Change Email" xml:space="preserve">
+        <value>Skift e-mail</value>
+    </data>
+    <data name="Change Password" xml:space="preserve">
+        <value>Ændre adgangskode</value>
+    </data>
+    <data name="Choose a strong password" xml:space="preserve">
+        <value>Vælg en stærk adgangskode</value>
+    </data>
+    <data name="Comment section below" xml:space="preserve">
+        <value>Kommentarfelt nedenfor</value>
+    </data>
+    <data name="Comments" xml:space="preserve">
+        <value>Kommentarer</value>
+    </data>
+    <data name="Comments Loading" xml:space="preserve">
+        <value>Kommentarer Indlæsning</value>
+    </data>
+    <data name="contact-text" xml:space="preserve">
+        <value>Kontakt</value>
+    </data>
+    <data name="Country" xml:space="preserve">
+        <value>Land</value>
+    </data>
+    <data name="Create an account-text" xml:space="preserve">
+        <value>Opret en konto</value>
+    </data>
+    <data name="Current email" xml:space="preserve">
+        <value>E-mail</value>
+    </data>
+    <data name="Date" xml:space="preserve">
+        <value>Dato</value>
+    </data>
+    <data name="Date!" xml:space="preserve">
+        <value>Dato</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>Slet</value>
+    </data>
+    <data name="Delete account" xml:space="preserve">
+        <value>Slet konto</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>Beskrivelse</value>
+    </data>
+    <data name="Description is missing!" xml:space="preserve">
+        <value>Der mangler en beskrivelse</value>
+    </data>
+    <data name="Edit this lecture" xml:space="preserve">
+        <value>Rediger denne lektie</value>
+    </data>
+    <data name="Email" xml:space="preserve">
+        <value>E-mail</value>
+    </data>
+    <data name="Email already taken" xml:space="preserve">
+        <value>E-mail allerede optaget</value>
+    </data>
+    <data name="Email is required!" xml:space="preserve">
+        <value>E-mail er nødvendig</value>
+    </data>
+    <data name="Email-text" xml:space="preserve">
+        <value>E-mail</value>
+    </data>
+    <data name="events-text" xml:space="preserve">
+        <value>Arrangementer</value>
+    </data>
+    <data name="footer-question-text" xml:space="preserve">
+        <value>Spørgsmål</value>
+    </data>
+    <data name="for all people" xml:space="preserve">
+        <value>For alle mennesker</value>
+    </data>
+    <data name="general-text" xml:space="preserve">
+        <value>Generelt</value>
+    </data>
+    <data name="Getting the blog post" xml:space="preserve">
+        <value>Få blogindlægget</value>
+    </data>
+    <data name="Hello" xml:space="preserve">
+        <value>Hej</value>
+    </data>
+    <data name="Help other students by answering questions" xml:space="preserve">
+        <value>Hjælp andre elever ved at besvare spørgsmål</value>
+    </data>
+    <data name="Home" xml:space="preserve">
+        <value>Hjem</value>
+    </data>
+    <data name="Image" xml:space="preserve">
+        <value>Billede</value>
+    </data>
+    <data name="Improve yourself" xml:space="preserve">
+        <value>Forbedre dig selv</value>
+    </data>
+    <data name="Loading" xml:space="preserve">
+        <value>Indlæsning</value>
+    </data>
+    <data name="Login" xml:space="preserve">
+        <value>Login</value>
+    </data>
+    <data name="Look for posts with diferent categories" xml:space="preserve">
+        <value>Se efter indlæg med forskellige kategorier</value>
+    </data>
+    <data name="more-info-text" xml:space="preserve">
+        <value>Mere info</value>
+    </data>
+    <data name="Name already taken" xml:space="preserve">
+        <value>Navn allerede optaget</value>
+    </data>
+    <data name="Name must be at least of length 6" xml:space="preserve">
+        <value>Navnet skal bestå af mindst 6 tegn</value>
+    </data>
+    <data name="Name-text" xml:space="preserve">
+        <value>Navn</value>
+    </data>
+    <data name="New Email" xml:space="preserve">
+        <value>Ny e-mail</value>
+    </data>
+    <data name="New password" xml:space="preserve">
+        <value>Ny adgangskode</value>
+    </data>
+    <data name="No body found!" xml:space="preserve">
+        <value>Der er ikke fundet noget lig!</value>
+    </data>
+    <data name="No comments" xml:space="preserve">
+        <value>Ingen kommentarer</value>
+    </data>
+    <data name="No lectures found" xml:space="preserve">
+        <value>Ingen lektier fundet</value>
+    </data>
+    <data name="No questions found" xml:space="preserve">
+        <value>Ingen spørgsmål fundet</value>
+    </data>
+    <data name="No results found" xml:space="preserve">
+        <value>Der blev ikke fundet nogen resultater</value>
+    </data>
+    <data name="No up voted lectures found" xml:space="preserve">
+        <value>Ingen opstemte lektie fundet</value>
+    </data>
+    <data name="Old password" xml:space="preserve">
+        <value>tidligere adgangskode</value>
+    </data>
+    <data name="Only the creator of this lecture can edit it!" xml:space="preserve">
+        <value>Kun den, der har oprettet denne lektie, kan redigere det</value>
+    </data>
+    <data name="Password" xml:space="preserve">
+        <value>Adgangskode</value>
+    </data>
+    <data name="Password is required!" xml:space="preserve">
+        <value>Adgangskode er påkrævet</value>
+    </data>
+    <data name="password is wrong!" xml:space="preserve">
+        <value>Adgangskoden er forkert</value>
+    </data>
+    <data name="Password must be at least of length 8" xml:space="preserve">
+        <value>Adgangskoden skal bestå af mindst 8 tegn</value>
+    </data>
+    <data name="Password must contain at least one capital letter" xml:space="preserve">
+        <value>Adgangskoden skal indeholde mindst ét stort bogstav</value>
+    </data>
+    <data name="Password must contain at least one digit" xml:space="preserve">
+        <value>Adgangskoden skal indeholde mindst ét ciffer</value>
+    </data>
+    <data name="Password must contain at least one lowercase letter" xml:space="preserve">
+        <value>Adgangskoden skal indeholde mindst ét lille bogstav</value>
+    </data>
+    <data name="Password-text" xml:space="preserve">
+        <value>Adgangskode</value>
+    </data>
+    <data name="Passwords doesn't match" xml:space="preserve">
+        <value>Adgangskode passer ikke til</value>
+    </data>
+    <data name="phone-text" xml:space="preserve">
+        <value>Telefon</value>
+    </data>
+    <data name="Please log in to ask a question" xml:space="preserve">
+        <value>Log ind for at stille et spørgsmål</value>
+    </data>
+    <data name="Please log in to change your email" xml:space="preserve">
+        <value>Log ind for at ændre din e-mail</value>
+    </data>
+    <data name="Please log in to change your password" xml:space="preserve">
+        <value>Log ind for at ændre din adgangskode</value>
+    </data>
+    <data name="Please log in to create a post" xml:space="preserve">
+        <value>Log ind for at oprette et indlæg</value>
+    </data>
+    <data name="Please log in to delete your account" xml:space="preserve">
+        <value>Log ind for at slette din konto</value>
+    </data>
+    <data name="Please log in to manage your account" xml:space="preserve">
+        <value>Log ind for at administrere din konto</value>
+    </data>
+    <data name="Please log in to view your user profile" xml:space="preserve">
+        <value>Log ind for at se din brugerprofil</value>
+    </data>
+    <data name="Profile" xml:space="preserve">
+        <value>Profil</value>
+    </data>
+    <data name="project-text" xml:space="preserve">
+        <value>Projekt-tekst</value>
+    </data>
+    <data name="Question Description" xml:space="preserve">
+        <value>Beskrivelse af spørgsmålet</value>
+    </data>
+    <data name="Question Title" xml:space="preserve">
+        <value>Spørgsmålets titel</value>
+    </data>
+    <data name="Questions" xml:space="preserve">
+        <value>Spørgsmål</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Registrere</value>
+    </data>
+    <data name="Register-text" xml:space="preserve">
+        <value>Registrere</value>
+    </data>
+    <data name="Repeat new password" xml:space="preserve">
+        <value>Gentag ny adgangskode</value>
+    </data>
+    <data name="Repeat password field is required!" xml:space="preserve">
+        <value>Det er nødvendigt at gentage adgangskoden</value>
+    </data>
+    <data name="repeatPassword" xml:space="preserve">
+        <value>Gentag adgangskode</value>
+    </data>
+    <data name="Reset" xml:space="preserve">
+        <value>Nulstilling</value>
+    </data>
+    <data name="Reset-text" xml:space="preserve">
+        <value>Nulstilling</value>
+    </data>
+    <data name="Role" xml:space="preserve">
+        <value>Rolle</value>
+    </data>
+    <data name="Search" xml:space="preserve">
+        <value>Søg </value>
+    </data>
+    <data name="SearchLectures" xml:space="preserve">
+        <value>Søg lektier</value>
+    </data>
+    <data name="See lectures from different universities" xml:space="preserve">
+        <value>Se lektier fra forskellige universiteter</value>
+    </data>
+    <data name="Select Role-text" xml:space="preserve">
+        <value>Vælg rolle</value>
+    </data>
+    <data name="Select your country-text" xml:space="preserve">
+        <value>Vælg dit land</value>
+    </data>
+    <data name="Select your university-text" xml:space="preserve">
+        <value>Vælg dit universitet</value>
+    </data>
+    <data name="Study more and you will become a professional" xml:space="preserve">
+        <value>Studer mere, så bliver du professionel</value>
+    </data>
+    <data name="The email address is invalid" xml:space="preserve">
+        <value>E-mail-adressen er ugyldig</value>
+    </data>
+    <data name="Title" xml:space="preserve">
+        <value>Titel</value>
+    </data>
+    <data name="Title is missing!" xml:space="preserve">
+        <value>Der mangler et titel</value>
+    </data>
+    <data name="Try to learn more" xml:space="preserve">
+        <value>Prøv at lære mere</value>
+    </data>
+    <data name="Universities" xml:space="preserve">
+        <value>Universiteter</value>
+    </data>
+    <data name="University" xml:space="preserve">
+        <value>Universitet</value>
+    </data>
+    <data name="Up voted Lectures" xml:space="preserve">
+        <value>Op stemte lektier</value>
+    </data>
+    <data name="Url" xml:space="preserve">
+        <value>Url</value>
+    </data>
+    <data name="Url is missing!" xml:space="preserve">
+        <value>Url mangler</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+        <value>Brugernavn allerede optaget</value>
+    </data>
+    <data name="Username already taken-text" xml:space="preserve">
+        <value>Brugernavn allerede optaget</value>
+    </data>
+    <data name="Username is required!" xml:space="preserve">
+        <value>Brugernavn er påkrævet</value>
+    </data>
+    <data name="Username-text" xml:space="preserve">
+        <value>Brugernavn</value>
+    </data>
+    <data name="Validate" xml:space="preserve">
+        <value>Validering</value>
+    </data>
+    <data name="Validate-text" xml:space="preserve">
+        <value>Validering</value>
+    </data>
+    <data name="We provide quality education" xml:space="preserve">
+        <value>Vi tilbyder kvalitetsuddannelse</value>
+    </data>
+    <data name="we-are-a-community-that-share-knowledge-for-learning-text" xml:space="preserve">
+        <value>Vi-er-et-fællesskab,-der-deler-viden-for-at-lære</value>
+    </data>
+    <data name="website-text" xml:space="preserve">
+        <value>Hjemmeside</value>
+    </data>
+    <data name="Wrong Password" xml:space="preserve">
+        <value>Forkert adgangskode</value>
+    </data>
+    <data name="You can help" xml:space="preserve">
+        <value>Du kan hjælpe</value>
     </data>
 </root>
