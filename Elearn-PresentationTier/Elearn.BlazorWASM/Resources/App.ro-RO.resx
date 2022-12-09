@@ -348,7 +348,7 @@
         <value>Url</value>
     </data>
     <data name="Url is missing!" xml:space="preserve">
-        <value>Nume de utilizator</value>
+        <value>Url lipseste</value>
     </data>
     <data name="Username" xml:space="preserve">
         <value>Numele de utilizator exista deja</value>
@@ -370,5 +370,8 @@
     </data>
     <data name="You can help" xml:space="preserve">
         <value>Poti ajuta</value>
+    </data>
+    <data name="See lectures from different universities" xml:space="preserve">
+        <value>Vezi lectiile de la universitati</value>
     </data>
 </root>

@@ -325,7 +325,7 @@
     <value>Title is missing</value>
   </data>
   <data name="Url is missing!" xml:space="preserve">
-    <value>Username</value>
+    <value>Url is missing</value>
   </data>
   <data name="Create A New Educational Lecture" xml:space="preserve">
     <value>Create a new Educational Lecture</value>
@@ -476,5 +476,8 @@
   </data>
   <data name="Repeat new password" xml:space="preserve">
     <value>Repeat new password</value>
+  </data>
+  <data name="See lectures from different universities" xml:space="preserve">
+    <value>See lectures from diffenret universities</value>
   </data>
 </root>

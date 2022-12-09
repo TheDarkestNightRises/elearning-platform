@@ -29,4 +29,7 @@
     <data name="Repeat new password password" xml:space="preserve">
         <value />
     </data>
+    <data name="@Localizer[&quot;Save&quot;]" xml:space="preserve">
+        <value />
+    </data>
 </root>
