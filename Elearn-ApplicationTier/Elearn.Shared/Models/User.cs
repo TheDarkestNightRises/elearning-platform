@@ -12,6 +12,7 @@ public class User
     public int SecurityLevel { get; set; }
     public University? University { get; set; }
     public bool Approved { get; set; }
+    public Country Country { get; set; }
 
     public User(string username, string password, string email, string name, string role, string image, int securityLevel, University? university, bool approved)
     {
@@ -24,6 +25,20 @@ public class User
         Image = image;
         SecurityLevel = securityLevel;
         University = university;    
+    }
+
+    public User(string username, string password, string email, string name, string role, string image, int securityLevel, University? university, bool approved, Country country)
+    {
+        Username = username;
+        Password = password;
+        Email = email;
+        Name = name;
+        Role = role;
+        Image = image;
+        SecurityLevel = securityLevel;
+        University = university;
+        Approved = approved;
+        Country = country;
     }
 
     public User(long id, string username, string password, string email, string name, string role, string image, int securityLevel, University? university)

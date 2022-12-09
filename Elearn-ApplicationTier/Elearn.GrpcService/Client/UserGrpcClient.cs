@@ -22,7 +22,11 @@ public class UserGrpcClient : IUserService
     {
         var userRequested = new Name { Name_ = name};
         var userFromGrpc = await _userClient.GetUserByNameAsync(userRequested);
-        return userFromGrpc.AsBase();
+        
+        User user = userFromGrpc.AsBase();
+        user.Country = userFromGrpc.Country.AsBase();
+        user.University = userFromGrpc.University.AsBase();
+        return user;
     }
 
    
@@ -33,14 +37,20 @@ public class UserGrpcClient : IUserService
         var universityModel = user.University is not null ? user.University.AsGrpcModel() : null;
         userModel.University = universityModel;
         var createdUserFromGrpc = await _userClient.CreateNewUserAsync(userModel);
-        return createdUserFromGrpc.AsBase();
+        User userRetrieved = createdUserFromGrpc.AsBase();
+        userRetrieved.Country = createdUserFromGrpc.Country.AsBase();
+        userRetrieved.University = createdUserFromGrpc.University.AsBase();
+        return userRetrieved;
     }
 
     public async Task<User?> GetUserByIdAsync(long id)
     {
         var userRequested = new UserId { Id = id };
         var userFromGrpc = await _userClient.GetUserByIDAsync(userRequested);
-        return userFromGrpc.AsBase();
+        User user = userFromGrpc.AsBase();
+        user.Country = userFromGrpc.Country.AsBase();
+        user.University = userFromGrpc.University.AsBase();
+        return user;
     }
 
     public async Task<User> UpdateUserAsync(User updated)
@@ -54,7 +64,10 @@ public class UserGrpcClient : IUserService
     {
         var userRequested = new UserName {  Username = username };
         var userFromGrpc = await _userClient.GetUserByUsernameAsync(userRequested);
-        return userFromGrpc.AsBase();
+        User user = userFromGrpc.AsBase();
+        user.Country = userFromGrpc.Country.AsBase();
+        user.University = userFromGrpc.University.AsBase();
+        return user;
     }
     
     public  async Task DeleteUserAsync(User user)
