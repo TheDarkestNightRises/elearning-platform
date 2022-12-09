@@ -53,37 +53,27 @@ public class User {
 //    @Column(name = "user_photo")
 //    private String user_photo;
 //
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "country_id")
-//    private Country country;
-//
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "country_id")
+    private Country country;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "university_id") /// Nullable??
     private University university;
-    
 
-    public User(String username, String email, String name, String password, String image, String role, int security_level, University university, boolean approved) {
+
+    public User(String username, String email, String name, String password, String image, String role, boolean approved, int security_level, Country country, University university) {
         this.username = username;
         this.email = email;
         this.name = name;
         this.password = password;
         this.image = image;
         this.role = role;
+        this.approved = approved;
         this.security_level = security_level;
+        this.country = country;
         this.university = university;
-        this.approved = approved;
     }
-
-    public User(String username, String email, String name, String password, String role, int security_level, boolean approved) {
-        this.username = username;
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.role = role;
-        this.security_level = security_level;
-        this.approved = approved;
-    }
-
 
     @Override
     public String toString() {
