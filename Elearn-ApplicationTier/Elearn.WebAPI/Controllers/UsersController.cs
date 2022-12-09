@@ -8,7 +8,7 @@ namespace Elearn.WebAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class UsersController:ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly IUserLogic userLogic;
 
@@ -16,7 +16,7 @@ public class UsersController:ControllerBase
     {
         this.userLogic = userLogic;
     }
-    
+
     [HttpPatch]
     public async Task<ActionResult> UpdateUserAsync([FromBody] UpdateUserDto dto)
     {
@@ -30,6 +30,24 @@ public class UsersController:ControllerBase
             Console.WriteLine(e);
             return StatusCode(500, e.Message);
         }
+    }
+
+    [HttpGet, Route(("/Users/users"))]
+
+    public async Task<ActionResult<List<UserDto>>> GetAllUsersAsync()
+    {
+        try
+        {
+            var users = await userLogic.GetAllUsersAsync();
+         //   HttpContext.AddPaginationHeader(lectures, paginationDto.PageSize);
+            return Ok(users.AsDtos());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
+        }
+   
     }
     
     [HttpGet("{username}")]
