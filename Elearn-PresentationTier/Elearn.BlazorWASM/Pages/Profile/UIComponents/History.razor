@@ -68,6 +68,8 @@
     private async Task DeleteLecture()
     {
         await _lectureService.DeleteLectureAsync(Lecture.Url);
+        navMgr.NavigateTo($"/Profile");
+
     }
 
 }

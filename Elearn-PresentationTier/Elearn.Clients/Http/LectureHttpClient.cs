@@ -49,21 +49,7 @@ public class LectureHttpClient : ILectureService
         return lectureDtos;
     }
 
-    public async Task<List<LectureDto>> GetLecturesAsync(int pageNumber, int pageSize)
-    {
-        HttpResponseMessage response = await client.GetAsync($"/Lectures?PageNumber={pageNumber}&PageSize={pageSize}");
-        string result = await response.Content.ReadAsStringAsync();
-        if (!response.IsSuccessStatusCode)
-        {
-            throw new Exception(result);
-        }
-
-        List<LectureDto> lectureDtos = JsonSerializer.Deserialize<List<LectureDto>>(result, new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        })!;
-        return lectureDtos;
-    }
+  
 
     public async Task<LectureDto?> GetLectureByUrlAsync(string url)
     {
