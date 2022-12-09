@@ -10,6 +10,7 @@
 @inject IAuthService authService
 @inject IUniversityService universityService
 @inject IUserService UserService
+@inject ICountryService CountryService
 @inject NavigationManager NavMgr 
 
 
@@ -59,6 +60,13 @@
                         <MudSelectItem Value="@item"/>
                     }
                 </MudSelect>
+                
+                <MudSelect @bind-Value="@currentCountry" Required="true" Dense="true" ToStringFunc="@convertCountry" Label="Select your country" AdornmentColor="Color.Secondary">
+                    @foreach (CountryDto item in countryDtos)
+                    {
+                        <MudSelectItem Value="@item"/>
+                    }
+                </MudSelect>
                 <div Class="d-flex justify-center align-center">@Error</div>
 
 
@@ -88,6 +96,10 @@
     private List<UniversityDto>? _universityDtos = new List<UniversityDto>();
     private UniversityDto? currentunivesity;
     private Func<UniversityDto, string> convertUniversity = ci => ci?.Name;
+    
+    private List<CountryDto>? countryDtos = new List<CountryDto>();
+    private CountryDto? currentCountry;
+    private Func<CountryDto, string> convertCountry = ci => ci?.Name;
     
     MudTextField<string> pwField1;
 
@@ -126,6 +138,9 @@
         if (currentunivesity is not null)
             newUser.UniversityId = currentunivesity.Id;
 
+        if (currentCountry is not null)
+            newUser.CountryId = currentCountry.Id;
+
         if (repeatPassword.Equals(newUser.Password))
             await authService.RegisterAsync(newUser);
 
@@ -136,6 +151,7 @@
     protected override async Task OnInitializedAsync()
     {
         _universityDtos = await universityService.GetAllUniveritiesAsync();
+        countryDtos = await CountryService.GetAllCountriesAsync();
         users = await UserService.GetUsersAsync();
     }
 

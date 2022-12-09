@@ -10,7 +10,8 @@
 @inject IQuestionService _questionService
 @inject IUserService _userService
 @inject NavigationManager NavMgr 
-
+@inject IUniversityService UniversityService
+@inject ICountryService CountryService
 
 <AuthorizeView>
     <NotAuthorized>
@@ -33,9 +34,6 @@
             <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
                 <h3 class=" d-flex justify-center">Hello, @CurrentUser?.Name</h3>
                 <div class="form-group d-flex justify-center">
-                    <label>User Id : @CurrentUser?.Id</label>
-                </div>
-                <div class="form-group d-flex justify-center">
                     <label>Username : @CurrentUser?.Username</label>
                 </div>
                 <div class="form-group d-flex justify-center">
@@ -43,6 +41,12 @@
                 </div>
                 <div class="form-group d-flex justify-center">
                     <label> Role : @CurrentUser?.Role</label>
+                </div>
+                <div class="form-group d-flex justify-center">
+                    <label> University : @currentUniversity?.Name</label>
+                </div>
+                <div class="form-group d-flex justify-center">
+                    <label> Country : @currentCountry?.Name</label>
                 </div>
 
                 <MudCard>
@@ -153,6 +157,9 @@
     private List<LectureDto?> _upvotedLectureToShow = new List<LectureDto?>();
     private List<QuestionDto?> _questionToShow = new List<QuestionDto?>();
 
+    private UniversityDto? currentUniversity;
+    private CountryDto? currentCountry;
+
     private bool _hidePosition;
     private bool _loading;
     public UserDto? CurrentUser;
@@ -167,6 +174,8 @@
     {
         if (await InitUpdateUser()) return;
         await InitHistory();
+        currentCountry = await CountryService.GetCountryByIdAsync(CurrentUser.CountryId.Value);
+        currentUniversity = await UniversityService.GetUniversityByIdAsync(CurrentUser.UniversityId.Value);
         Console.WriteLine("sdadasdassdas");
        
     }

@@ -24,6 +24,7 @@ builder.Services.AddScoped<IUserService, UserHttpClient>();
 builder.Services.AddScoped<IQuestionService, QuestionHttpClient>();
 builder.Services.AddScoped<ILectureVoteService, LectureVoteHttpClient>();
 builder.Services.AddScoped<IUniversityService, UniversityHttpClient>();
+builder.Services.AddScoped<ICountryService, CountryHttpClient>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddScoped<ISearchService, SearchHttpClient>();
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
