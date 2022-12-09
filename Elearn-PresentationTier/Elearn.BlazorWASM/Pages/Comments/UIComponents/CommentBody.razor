@@ -12,7 +12,7 @@
             <MudAvatar Size="Size.Medium" Image="@ImageText"/>
             <div class="user-name">@Name (@DateCreated):</div>
             <div class="comment-content">@Text</div>
-                 @if (_currentUser!.Name.Equals(Name))
+                 @if (_currentUser is not null && _currentUser!.Name.Equals(Name))
                  {
                   
                      <MudButton Class="d-flex justify-center align-center" Size = "Size.Small" OnClick="DeleteComment" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>

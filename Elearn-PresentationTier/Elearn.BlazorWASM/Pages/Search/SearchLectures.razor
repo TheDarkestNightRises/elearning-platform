@@ -5,13 +5,13 @@
 @using Elearn.BlazorWASM.Pages.Lectures.UIComponents
 <h3>SearchLectures</h3>
 
-<MudTextField @bind-Value="_searchInput" Label="Search" Variant="Variant.Text"></MudTextField>
+<MudTextField Class="mb-5" @bind-Value="_searchInput" Label="Search" Variant="Variant.Text"></MudTextField>
 
 <MudButton Color="Color.Primary" Variant="Variant.Outlined" OnClick="@(() => OnSearchAsync())">Search</MudButton>
 
 @if (string.IsNullOrWhiteSpace(_searchInput))
 {
-    <p>Search for item</p>
+    <p></p>
 }
 else
 {

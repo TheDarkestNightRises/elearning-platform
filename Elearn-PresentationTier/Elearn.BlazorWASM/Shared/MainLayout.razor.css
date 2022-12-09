@@ -6,7 +6,7 @@
 
 main {
     flex: 1;
-    min-height: 1200px
+    min-height: 700px;
 }
 
 .sidebar {

@@ -125,4 +125,14 @@ public class LectureHttpClient : ILectureService
             throw new Exception(result);
         }
     }
+
+    public async Task DeleteLectureAsync(string url)
+    {
+        HttpResponseMessage response = await client.DeleteAsync($"Lectures/{url}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+    }
 }

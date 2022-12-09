@@ -6,9 +6,9 @@
 @using Elearn.Shared.Models
 <h3>Search Users</h3>
 
-<MudTextField @bind-Value="_searchInput" Label="Search" Variant="Variant.Text"></MudTextField>
+<MudTextField @bind-Value="_searchInput" Label="Search" Class="card pb-4" Variant="Variant.Text"></MudTextField>
 
-<MudButton Color="Color.Primary" Variant="Variant.Outlined" OnClick="@(() => OnSearchAsync())">Search</MudButton>
+<MudButton Color="Color.Primary"  Variant="Variant.Outlined" OnClick="@(() => OnSearchAsync())">Search</MudButton>
 
 @if (string.IsNullOrWhiteSpace(_searchInput))
 {

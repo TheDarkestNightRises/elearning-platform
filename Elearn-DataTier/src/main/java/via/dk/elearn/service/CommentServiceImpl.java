@@ -47,16 +47,6 @@ public class CommentServiceImpl extends CommentServiceGrpc.CommentServiceImplBas
     public void getCommentByLectureId(LectureId request, StreamObserver<CommentModel> responseObserver) {
         Optional<Lecture> lecture = lectureRepository.findById(request.getId());
         List<Comment> comments = commentRepository.findAllByLecture(lecture.get());
-        if (comments.isEmpty()) {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The comments are not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Comments not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-        } else {
 
             for (Comment comment : comments) {
                 CommentModel commentModel = CommentMapper.convertCommentToGrpcModel(comment);
@@ -64,7 +54,7 @@ public class CommentServiceImpl extends CommentServiceGrpc.CommentServiceImplBas
             }
             responseObserver.onCompleted();
         }
-    }
+
 
     @Override
     public void getCommentById(CommentId request, StreamObserver<CommentModel> responseObserver) {

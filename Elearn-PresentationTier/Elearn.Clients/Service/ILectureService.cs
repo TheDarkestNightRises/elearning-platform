@@ -1,6 +1,4 @@
-﻿
-
-using Elearn.Shared.Dtos;
+﻿using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
 
 namespace Elearn.HttpClients.Service;
@@ -16,4 +14,5 @@ public interface ILectureService
     Task<List<LectureDto?>> GetLecturesByUniversity(long universityId);
     Task UpdateLecture(LectureUpdateDto updateDto);
 
+    Task DeleteLectureAsync(string url);
 }
