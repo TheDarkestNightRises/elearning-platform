@@ -32,6 +32,7 @@
     {
         if (Url != null) _lectureDto = await LectureService.GetLectureByUrlAsync(Url);
         if (_lectureDto != null) _commentsDto = await CommentService.GetAllCommentsByLectureId(_lectureDto.Id);
+     
     }
 
 }

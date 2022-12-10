@@ -5,6 +5,7 @@
 @inject ICommentService CommentService
 @inject IUserService UserService
 @inject IStringLocalizer<App> Localizer
+@inject NavigationManager NavMgr 
 <link href="CreateComment.razor.css" rel="stylesheet"/>
 <AuthorizeView>
     <Authorized>
@@ -13,7 +14,7 @@
 
             <div class="form-group field flex-container">
                 <div class="comment-section">@Localizer["Comment section below"]</div>
-                <MudAvatar Size="Size.Small" Image="img/avatar.jpg"/>
+                <MudAvatar Size="Size.Small" Image="@CurrentUser?.Image"/>
                 <input class="comment-input" type="text" placeholder="Post a comment" @bind="bodyText" @bind:event="oninput"/>
                 <div class="button-row">
                     <button @onclick="Create" disabled="@(string.IsNullOrEmpty(bodyText))" class="acceptbtn">
@@ -63,6 +64,7 @@
         {
             await CommentService.Create(new CommentCreationDto(CurrentUser.Id, CurrentLecture.Id, bodyText));
             bodyText = "";
+          
         }
         catch (Exception e)
         {
