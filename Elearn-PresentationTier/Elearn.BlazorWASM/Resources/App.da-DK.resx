@@ -126,7 +126,7 @@
         <value>Arrangementer</value>
     </data>
     <data name="footer-question-text" xml:space="preserve">
-        <value>Spørgsmål</value>
+        <value>Find ud af mere</value>
     </data>
     <data name="for all people" xml:space="preserve">
         <value>For alle mennesker</value>
@@ -342,7 +342,7 @@
         <value>Url mangler</value>
     </data>
     <data name="Username" xml:space="preserve">
-        <value>Brugernavn allerede optaget</value>
+        <value>Brugernavn</value>
     </data>
     <data name="Username already taken-text" xml:space="preserve">
         <value>Brugernavn allerede optaget</value>
@@ -373,5 +373,22 @@
     </data>
     <data name="You can help" xml:space="preserve">
         <value>Du kan hjælpe</value>
+    </data>
+    <data name="Lastest-questions-here" xml:space="preserve">
+        <value>Seneste spørgsmål her</value>
+    </data>
+    <data name="Lastest-lectures-here" xml:space="preserve">
+        <value>
+Seneste foredrag
+ her</value>
+    </data>
+    <data name="Search Lectures" xml:space="preserve">
+        <value>Søg foredrag</value>
+    </data>
+    <data name="Search Questions" xml:space="preserve">
+        <value>Søgespørgsmål</value>
+    </data>
+    <data name="Language" xml:space="preserve">
+        <value>Sprog</value>
     </data>
 </root>

@@ -5,7 +5,9 @@
 @using Elearn.HttpClients.Service
 @using System.Security.Claims
 @using System.Net.Mime
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
 @using Elearn.BlazorWASM.Pages.Profile.UIComponents
+@using Elearn.BlazorWASM.Pages.Questions.UIComponents
 @inject ILectureService _lectureService
 @inject IQuestionService _questionService
 @inject IUserService _userService
@@ -75,18 +77,19 @@
             @if (CurrentUser is not null && CurrentUser.SecurityLevel == 4)
             {  <div class="allLectures">
                    <h2>@Localizer["All Lectures"]</h2>
-
+                        <br/>
+                   <br/>
                    @if (CurrentUser == null)
                    {
                        <span> @Localizer["No lectures found"]</span>
                    }
                    else
                    {
-                       <MudGrid Class="my-6" Justify="Justify.Center">
+                       <MudGrid Justify="Justify.SpaceEvenly" Class="align-items-center">
                            @foreach (var lectures in _lectureToShow)
                            {
-                               <MudItem xs="12" sm="9" md="7">
-                                   <History Lecture="@lectures"></History>
+                               <MudItem xs="3" >
+                                   <LectureCard Lecture="@lectures"></LectureCard>
                                </MudItem>
                            }
                        </MudGrid>
@@ -100,6 +103,28 @@
                </div>
             }    
             
+               @if (CurrentUser is not null && CurrentUser.SecurityLevel == 2)
+                        {
+                        <div class="allQuestions">
+                            <h2>@Localizer["All questions"]</h2>
+                            @if (CurrentUser == null)
+                            {
+                                <span> @Localizer["No questions found"]</span>
+                            }
+                            else
+                            {
+                                <MudGrid Class="my-6" Justify="Justify.Center">
+                                    @foreach (var lectures in _questionToShow)
+                                    {
+                                        <MudItem xs="12" sm="9" md="7">
+                                            <QuestionHistory QuestionDto="@lectures"></QuestionHistory>
+                                        </MudItem>
+                                    }
+                                </MudGrid>
+                            }
+                        </div>
+                        
+                        }
 
             <div class="upVotedLectures">
                 <h2>@Localizer["Up voted Lectures"]</h2>
@@ -122,29 +147,6 @@
                 <br/>
                 <br/>
             </div>
-
-             @if (CurrentUser is not null && CurrentUser.SecurityLevel == 2)
-            {
-            <div class="allQuestions">
-                <h2>@Localizer["All questions"]</h2>
-                @if (CurrentUser == null)
-                {
-                    <span> @Localizer["No questions found"]</span>
-                }
-                else
-                {
-                    <MudGrid Class="my-6" Justify="Justify.Center">
-                        @foreach (var lectures in _questionToShow)
-                        {
-                            <MudItem xs="12" sm="9" md="7">
-                                <QuestionHistory QuestionDto="@lectures"></QuestionHistory>
-                            </MudItem>
-                        }
-                    </MudGrid>
-                }
-            </div>
-            
-            }
         </div>
         
     </Authorized>
@@ -160,7 +162,6 @@
     private string? username;
     private bool isLoggedIn;
     private List<LectureDto?> _lectureToShow = new();
-  
     private List<LectureDto?> _upvotedLectureToShow = new();
     private List<QuestionDto?> _questionToShow = new();
 
@@ -268,7 +269,12 @@
 
         if (CurrentUser is not null)
         {
-            _lectureToShow = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.Id);
+            var list = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.Id);
+            list.Reverse();
+            for (int i = 0; i < (list.Count < 8 ? list.Count : 8); i++)
+            {
+                _lectureToShow.Add(list[i]);
+            }
         }
 
     }
@@ -278,18 +284,28 @@
   
         if (CurrentUser is not null)
         {
-            _upvotedLectureToShow = await _lectureService.GetUpvotedLectureByUserIdAsync(CurrentUser.Id);
-           
+            var list = await _lectureService.GetUpvotedLectureByUserIdAsync(CurrentUser.Id);
+            list.Reverse();
+            for (int i = 0; i < (list.Count < 5 ? list.Count : 5); i++)
+            {
+                _upvotedLectureToShow.Add(list[i]);
+            }
         }
     }
 
     private async Task GetQuestionByUserId()
     {
-        Console.WriteLine(CurrentUser);
+      
         if (CurrentUser is not null)
         {
-            _questionToShow = await _questionService.GetQuestionByUserIdAsync(CurrentUser.Id);
-            Console.WriteLine(_lectureToShow);
+           
+            var list = await _questionService.GetQuestionByUserIdAsync(CurrentUser.Id);
+            list.Reverse();
+            for (int i = 0; i < (list.Count < 5 ? list.Count : 5); i++)
+            {
+                _questionToShow.Add(list[i]);
+            }
+        
         }
     }
 

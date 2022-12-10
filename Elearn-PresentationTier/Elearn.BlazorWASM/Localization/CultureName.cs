@@ -10,4 +10,8 @@ public class CultureName
         Name = name;
         Culture = culture;
     }
+
+    public CultureName()
+    {
+    }
 }

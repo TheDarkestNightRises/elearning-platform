@@ -32,17 +32,6 @@ public class UniversityServiceImpl extends UniversityServiceGrpc.UniversityServi
     @Override
     public void getLecturesByUniversity(UniversityModel request, StreamObserver<LectureModel> responseObserver) {
         List<Lecture> lectures = lectureRepository.findAllByTeacher_University(UniversityMapper.convertGrpcModelToUniversity(request));
-        if (lectures.isEmpty()) {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lectures are not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lectures not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-            return;
-        }
         for(Lecture lecture : lectures) {
             LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(lectureModel);

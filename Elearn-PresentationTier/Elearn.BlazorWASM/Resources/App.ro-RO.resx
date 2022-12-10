@@ -186,7 +186,7 @@
         <value>Evenimente</value>
     </data>
     <data name="footer-question-text" xml:space="preserve">
-        <value>Intrebare</value>
+        <value>Afla mai multe</value>
     </data>
     <data name="for all people" xml:space="preserve">
         <value>Pentru toti </value>
@@ -216,7 +216,7 @@
         <value>Se incarca..</value>
     </data>
     <data name="Login" xml:space="preserve">
-        <value>Logheazate</value>
+        <value>Logheaza-te</value>
     </data>
     <data name="Look for posts with diferent categories" xml:space="preserve">
         <value>Uitate la postari din diferite categorii</value>
@@ -351,7 +351,7 @@
         <value>Url lipseste</value>
     </data>
     <data name="Username" xml:space="preserve">
-        <value>Numele de utilizator exista deja</value>
+        <value>Numele de utilizator </value>
     </data>
     <data name="Validate" xml:space="preserve">
         <value>Valideaza</value>
@@ -379,5 +379,14 @@
     </data>
     <data name="Lastest-questions-here" xml:space="preserve">
         <value>Intrebari recente puse de studenti</value>
+    </data>
+    <data name="Search Lectures" xml:space="preserve">
+        <value>Cauta lectii</value>
+    </data>
+    <data name="Search Questions" xml:space="preserve">
+        <value>Cauta intrebari</value>
+    </data>
+    <data name="Language" xml:space="preserve">
+        <value>Limba</value>
     </data>
 </root>

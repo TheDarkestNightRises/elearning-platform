@@ -114,7 +114,7 @@
         <value>Eventi</value>
     </data>
     <data name="footer-question-text" xml:space="preserve">
-        <value>Domanda</value>
+        <value>Scopri di più</value>
     </data>
     <data name="for all people" xml:space="preserve">
         <value>Per tutte le persone</value>
@@ -339,7 +339,7 @@
         <value>L'URL è assente</value>
     </data>
     <data name="Username" xml:space="preserve">
-        <value>Nome utente già preso</value>
+        <value>Nome </value>
     </data>
     <data name="Username already taken-text" xml:space="preserve">
         <value>Nome utente già preso</value>
@@ -375,9 +375,21 @@
         <value>Potete aiutarci</value>
     </data>
     <data name="Lastest-lectures-here" xml:space="preserve">
-        <value />
+        <value>Le ultime lezioni
+ qui</value>
     </data>
     <data name="Lastest-questions-here" xml:space="preserve">
-        <value />
+        <value>Ultime domande qui</value>
+    </data>
+    <data name="Search Lectures" xml:space="preserve">
+        <value>Cerca Lezioni</value>
+    </data>
+    <data name="Search Questions" xml:space="preserve">
+        <value>
+Cerca domande</value>
+    </data>
+    <data name="Language" xml:space="preserve">
+        <value>
+Lingua</value>
     </data>
 </root>

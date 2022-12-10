@@ -3,10 +3,11 @@
 @inject NavigationManager Navigation
 @inject ILocalStorageService LocalStorage
 @inject IStringLocalizer<App> Loc
+@inject IStringLocalizer<App> Localizer
 
 <span>
-    @Loc[nameof(CultureName.Name)]
-    <select @onchange="NewCultureSelectedAsync">
+    @Localizer["Language"]
+    <select class="text-light bg-dark" @onchange="NewCultureSelectedAsync">
         @foreach (var culture in LocalizerSettings.SupportedCultureNames)
         {
             @if (SelectedCulture != null && culture == SelectedCulture)

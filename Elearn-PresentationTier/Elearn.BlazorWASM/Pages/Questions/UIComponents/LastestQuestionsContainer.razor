@@ -4,6 +4,7 @@
 @using Elearn.BlazorWASM.Pages.Lectures.UIComponents
 @using Elearn.Shared.Dtos
 @inject IStringLocalizer<App> Localizer
+@using Elearn.BlazorWASM.Pages.Profile.UIComponents
 
 <MudText Typo="Typo.h3" Align="Align.Center" Class="py-6">@Localizer["Lastest-questions-here"]</MudText>
 
@@ -19,11 +20,11 @@ else
     }
     else
     {
-        <MudGrid Justify="Justify.SpaceEvenly" Class="align-items-center">
-            @foreach (var lecture in _questionDtos)
+        <MudGrid Class="my-6" Justify="Justify.Center">
+            @foreach (var questions in _questionDtos)
             {
-                <MudItem xs="3">
-                    <QuestionSmallCard Question="@lecture"></QuestionSmallCard>
+                <MudItem xs="12" sm="9" md="7">
+                    <QuestionHistory QuestionDto="@questions"></QuestionHistory>
                 </MudItem>
             }
         </MudGrid>

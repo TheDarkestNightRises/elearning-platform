@@ -86,21 +86,12 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
     @Override
     public void getLectureById(LectureId request, StreamObserver<LectureModel> responseObserver) {
         Optional<Lecture> lectures = lectureRepository.findById(request.getId());
-        if (lectures.isEmpty()) {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lecture is not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lecture not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-        } else {
+
             Lecture lecture = lectures.get();
             LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(lectureModel);
             responseObserver.onCompleted();
-        }
+
     }
 
     @Override
@@ -173,23 +164,6 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
 
     @Override
     public void deleteLecture(LectureModel request, StreamObserver<LectureResponse> responseObserver) {
-//        Lecture lecture = LectureMapper.convertGrpcModelToLecture(request);
-//        try{
-//            lectureRepository.deleteById(lecture.getId());
-//            responseObserver.onNext(null);
-//            responseObserver.onCompleted();
-//        }catch (Exception e)
-//        {
-//            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-//                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-//                    .setMessage("The lecture to be deleted is not found")
-//                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-//                            .setReason("Lecture to delete not found")
-//                            .build()))
-//                    .build();
-//            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-//            e.printStackTrace();
-//        }
 
         Optional<Lecture> findUser = lectureRepository.findById(request.getId());
         Lecture userFound = findUser.get();
