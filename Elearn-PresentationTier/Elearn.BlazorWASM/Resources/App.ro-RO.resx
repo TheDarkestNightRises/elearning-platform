@@ -389,4 +389,13 @@
     <data name="Language" xml:space="preserve">
         <value>Limba</value>
     </data>
+    <data name="Verified" xml:space="preserve">
+        <value>Verificat</value>
+    </data>
+    <data name="Lectures" xml:space="preserve">
+        <value>Lecturi</value>
+    </data>
+    <data name="All Question" xml:space="preserve">
+        <value>Toate intrebarile</value>
+    </data>
 </root>

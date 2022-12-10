@@ -24,10 +24,9 @@
         <MudTd DataLabel="Image" HideSmall="_hidePosition">@context.Image</MudTd>
         <MudTd DataLabel="Url">@context.Url</MudTd>
         <MudTd DataLabel="Delete">
-            @if (Lecture is null)
-            {
-                <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="@DeleteLecture" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
-            }
+          
+                <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="() => DeleteLecture(context.Url)" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+            
             </MudTd>
     </RowTemplate>
     <PagerContent>
@@ -39,8 +38,7 @@
     private bool _hidePosition;
     private bool _loading;
    private List<LectureDto> Lecture = new List<LectureDto>();
-    // [Parameter]
-     public LectureDto Lectures { get; set; }
+    public LectureDto Lectures { get; set; }
     
     
     [CascadingParameter]
@@ -63,9 +61,9 @@
 
     }
     
-    private async Task DeleteLecture()
+    private async Task DeleteLecture(string url)
     {
-        await _lectureService.DeleteLectureAsync(Lectures.Url);
+        await _lectureService.DeleteLectureAsync(url);
         navMgr.NavigateTo($"/Moderator", true);
 
        

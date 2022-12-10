@@ -391,4 +391,14 @@ Seneste foredrag
     <data name="Language" xml:space="preserve">
         <value>Sprog</value>
     </data>
+    <data name="Verified" xml:space="preserve">
+        <value>
+verificeret</value>
+    </data>
+    <data name="Lectures" xml:space="preserve">
+        <value>foredrag</value>
+    </data>
+    <data name="All Question" xml:space="preserve">
+        <value>Alle spørgsmål</value>
+    </data>
 </root>

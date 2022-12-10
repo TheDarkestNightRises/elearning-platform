@@ -81,10 +81,10 @@ public class DbSeed implements CommandLineRunner {
         //https://about.ku.dk/profile-history/history/
 
         //add teachers
-        Teacher teacher1 = new Teacher("oriana", "oriana@email.dk", "Oriana Cinimo Amadeo", "Password1234", "Placeholder", "Teacher", true, 4, createdCountry2, createdUniversity1);
+        Teacher teacher1 = new Teacher("oriana", "oriana@email.dk", "Oriana Cinimo Amadeo", "Password1234", "Placeholder", "Teacher", false, 4, createdCountry2, createdUniversity1);
         Teacher createdTeacher1 = teacherRepository.save(teacher1);
 
-        Teacher teacher2 = new Teacher("cosmin", "cosmin@email.com", "Cosmin Teodoru", "Cosmin1234", "Placeholder", "Teacher", true, 4, createdCountry1, createdUniversity2);
+        Teacher teacher2 = new Teacher("cosmin", "cosmin@email.com", "Cosmin Teodoru", "Cosmin1234", "Placeholder", "Teacher", false, 4, createdCountry1, createdUniversity2);
         Teacher createdTeacher2 = teacherRepository.save(teacher2);
 
         //add moderators

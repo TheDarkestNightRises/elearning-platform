@@ -24,7 +24,7 @@
            <MudTd DataLabel="Approve" HideSmall="_hidePosition">@context.Approved</MudTd>
            <MudTd DataLabel="Email">@context.Email</MudTd>
            <MudTd DataLabel="Approve">
-            <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="UpdateApproved" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Update" Color="Color.Success">Approve</MudButton>
+            <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="() => UpdateApproved(context.Name)" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Update" Color="Color.Success">Approve</MudButton>
         </MudTd>
     </RowTemplate>
     <PagerContent>
@@ -35,7 +35,7 @@
 @code {
     private bool _hidePosition;
     private bool _loading;
-    private List<UserDto> Users = new List<UserDto>();
+    private List<UserDto> Users = new();
     // [Parameter]
     public UserDto User { get; set; }
 
@@ -59,7 +59,16 @@
         userClaims = user.Claims;
         username = user.Identity!.Name;
         _currentUser = await _UserService.GetUserByUsernameAsync(username);
-        Users = await _UserService.GetUsersAsync();
+
+        var list = await _UserService.GetUsersAsync();
+        list.Reverse();
+        Users = new();
+
+        foreach (var selectedUser in list)
+        {
+            if(selectedUser.SecurityLevel == 4 && selectedUser.Approved.Equals(false))
+                Users.Add(selectedUser);
+        }
 
     }
     private void CreateDto(UserDto userDto)
@@ -70,13 +79,17 @@
             Password = userDto.Password,
             Email = userDto.Email,
             Image = userDto.Image,
-            Approved = userDto.Approved
+            Approved = true
         };
     }
-    private async Task UpdateApproved()
+    private async Task UpdateApproved(string name)
     {
-      
-        await _UserService.UpdateUserAsync(Dto);
-        navMgr.NavigateTo($"/Profile", true);
+        UserDto userFound = await _UserService.GetUserByNameAsync(name);
+        if (userFound.Approved.Equals(false))
+        {
+            CreateDto(userFound);
+            await _UserService.UpdateUserAsync(Dto);
+            navMgr.NavigateTo($"/Moderator", true);
+        }
     }
 }

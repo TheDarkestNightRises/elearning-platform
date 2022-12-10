@@ -23,7 +23,7 @@
         <MudTd DataLabel="Country" HideSmall="_hidePosition">@context.CountryId</MudTd>
         <MudTd DataLabel="Email">@context.Email</MudTd>
         <MudTd DataLabel="Delete">
-            <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="@DeleteUser" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+            <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="() => DeleteUser(context.Name)" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
         </MudTd>
     </RowTemplate>
     <PagerContent>
@@ -36,9 +36,9 @@
     private bool _loading;
    private List<UserDto> Users = new List<UserDto>();
     // [Parameter]
-     public UserDto User { get; set; }
-    
-    
+     public UserDto User  { get; set; } = null!;
+
+
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
     private IEnumerable<Claim>? userClaims;
@@ -59,9 +59,10 @@
 
     }
     
-    private async Task DeleteUser()
+    private async Task DeleteUser(string name)
     {
-        await _UserService.DeleteUserAsync(User.Name);
+        UserDto userFound = await  _UserService.GetUserByNameAsync(name);
+        await _UserService.DeleteUserAsync(userFound.Username);
         navMgr.NavigateTo($"/Moderator",true);
 
        

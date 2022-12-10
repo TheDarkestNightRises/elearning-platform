@@ -18,7 +18,9 @@ public static class UserExtensions
             Image = user.Image,
             SecurityLevel = user.SecurityLevel,
             UniversityId = user.University?.Id,
-            CountryId = user.Country?.Id
+            CountryId = user.Country?.Id,
+            Approved = user.Approved
+            
         };
     }
     
@@ -49,7 +51,9 @@ public static class UserExtensions
                 Image = user.Image,
                 SecurityLevel = user.SecurityLevel,
                 UniversityId = user.University?.Id,
-                CountryId = user.Country?.Id
+                CountryId = user.Country?.Id,
+                Approved = user.Approved
+                
             });
         return usersDtos;                
     }

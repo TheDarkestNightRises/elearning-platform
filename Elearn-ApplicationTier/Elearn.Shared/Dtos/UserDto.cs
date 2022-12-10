@@ -13,6 +13,8 @@ public class UserDto
     public int SecurityLevel { get; set; }
     public long? UniversityId { get; set; }
     public long? CountryId { get; set; }
+    
+    public bool Approved { get; set; }
 
 
     public UserDto(long id, string username, string password, string email, string name, string role, string image, int securityLevel, long universityId, long countryId)
