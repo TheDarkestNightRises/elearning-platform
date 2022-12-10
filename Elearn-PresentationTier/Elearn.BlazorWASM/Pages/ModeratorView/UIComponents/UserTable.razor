@@ -62,7 +62,7 @@
     private async Task DeleteUser()
     {
         await _UserService.DeleteUserAsync(User.Name);
-        navMgr.NavigateTo($"/Moderator");
+        navMgr.NavigateTo($"/Moderator",true);
 
        
     }

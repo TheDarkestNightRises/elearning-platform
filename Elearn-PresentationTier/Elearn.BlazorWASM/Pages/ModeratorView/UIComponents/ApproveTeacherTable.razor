@@ -13,7 +13,7 @@
            <MudTh>Id</MudTh>
            <MudTh>Name</MudTh>
            <MudTh>Role</MudTh>
-           <MudTh>Country</MudTh>
+           <MudTh>Approval</MudTh>
            <MudTh>Email</MudTh>
            <MudTh>Approve</MudTh>
        </HeaderContent>
@@ -21,7 +21,7 @@
            <MudTd DataLabel="Id">@context.Id</MudTd>
            <MudTd DataLabel="Name">@context.Name</MudTd>
            <MudTd DataLabel="Role">@context.Role</MudTd>
-           <MudTd DataLabel="Country" HideSmall="_hidePosition">@context.Approved</MudTd>
+           <MudTd DataLabel="Approve" HideSmall="_hidePosition">@context.Approved</MudTd>
            <MudTd DataLabel="Email">@context.Email</MudTd>
            <MudTd DataLabel="Approve">
             <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="UpdateApproved" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Update" Color="Color.Success">Approve</MudButton>

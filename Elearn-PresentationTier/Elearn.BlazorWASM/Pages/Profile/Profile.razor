@@ -51,7 +51,12 @@
                 <div class="form-group d-flex justify-center">
                     <label> @Localizer["Country"] : @currentCountry?.Name</label>
                 </div>
-
+                 @if (CurrentUser?.SecurityLevel == 4)
+                 {
+                     <div class="form-group d-flex justify-center">
+                         <label> @Localizer["Verified"] : @CurrentUser?.Approved</label>
+                     </div>
+                 }
                 <MudCard>
                     <MudCardContent>
                         <MudImage Class="card-img" Src="@Dto.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
