@@ -80,4 +80,19 @@ public class QuestionsController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    [HttpPatch]
+    public async Task<ActionResult> UpdateLQuestionAsync([FromBody] QuestionUpdateDto dto)
+    {
+        try
+        {
+            
+            await questionLogic.EditQuestionAsync(dto.AsBaseFromUpdate());
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 }

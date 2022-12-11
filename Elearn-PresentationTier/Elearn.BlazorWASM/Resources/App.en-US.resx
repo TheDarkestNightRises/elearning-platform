@@ -504,4 +504,10 @@
   <data name="All Question" xml:space="preserve">
     <value>All Questions</value>
   </data>
+  <data name="Edit this question" xml:space="preserve">
+    <value>Edit this question</value>
+  </data>
+  <data name="Save changes" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
 </root>

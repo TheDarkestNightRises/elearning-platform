@@ -1,6 +1,7 @@
 package via.dk.elearn.service;
 
 import com.google.protobuf.Any;
+import com.google.rpc.Code;
 import com.google.rpc.ErrorInfo;
 import io.grpc.protobuf.StatusProto;
 import io.grpc.stub.StreamObserver;
@@ -10,9 +11,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import via.dk.elearn.models.Lecture;
 import via.dk.elearn.models.Question;
 import via.dk.elearn.protobuf.*;
 import via.dk.elearn.repository.QuestionRepository;
+import via.dk.elearn.service.mapper.LectureMapper;
 import via.dk.elearn.service.mapper.QuestionMapper;
 
 import java.util.List;
@@ -88,6 +91,30 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
                 responseObserver.onNext(questionModel);
             }
             responseObserver.onCompleted();
+        }
+    }
+
+    @Override
+    public void editQuestion(QuestionModel request, StreamObserver<QuestionModel> responseObserver) {
+        Question question = QuestionMapper.convertGrpcModelToQuestion(request);
+        try
+        {
+            Question questonFromDB = questionRepository.save(question);
+
+            QuestionModel lectureModel = QuestionMapper.convertQuestionToGrpcModel(questonFromDB);
+            responseObserver.onNext(lectureModel);
+            responseObserver.onCompleted();
+        }catch (Exception e)
+        {
+            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
+                    .setCode(Code.INVALID_ARGUMENT.getNumber())
+                    .setMessage("Cannot edit question")
+                    .addDetails(Any.pack(ErrorInfo.newBuilder()
+                            .setReason("Cannot edit question")
+                            .build()))
+                    .build();
+            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
+            e.printStackTrace();
         }
     }
 }

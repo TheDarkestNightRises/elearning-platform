@@ -84,4 +84,13 @@ public class QuestionGrpcClient : IQuestionService
 
         return questions;
     }
+
+    public async Task<Question> EditQuestionAsync(Question question)
+    {
+        var questionModel = question.AsGrpcModel();
+        var questionFromGrpc = await _questionClient.EditQuestionAsync(questionModel);
+        Question editedQuestion = questionFromGrpc.AsBase();
+
+        return editedQuestion;
+    }
 }
