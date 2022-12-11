@@ -1,4 +1,5 @@
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using Elearn.HttpClients.Service;
 using Elearn.Shared.Dtos;
@@ -72,5 +73,18 @@ public class QuestionHttpClient : IQuestionService
             PropertyNameCaseInsensitive = true
         })!;
         return questionDto;
+    }
+
+    public async Task UpdateQuestionAsync(QuestionUpdateDto dto)
+    {
+        string dtoAsJson = JsonSerializer.Serialize(dto);
+        StringContent body = new StringContent(dtoAsJson, Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await client.PatchAsync("/Questions", body);
+        string result = await response.Content.ReadAsStringAsync();
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new Exception(result);
+        }
     }
 }
