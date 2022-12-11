@@ -12,6 +12,7 @@ service QuestionService {
   rpc GetAllQuestions (PaginationModel) returns (stream QuestionModel);
   rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
   rpc GetQuestionsByUserId(QuestionUserId) returns (stream QuestionModel);
+  rpc EditQuestion(QuestionModel) returns (QuestionModel);
 }
 
 message QuestionUserId{
