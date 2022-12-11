@@ -1,7 +1,10 @@
 @page "/questions/{url}"
 @using Elearn.HttpClients.Service
 @using Elearn.Shared.Dtos
+@using System.Security.Claims
 @inject IQuestionService _questionService
+@inject NavigationManager NavMgr 
+
 
 @if (CurrentQuestion is null)
 {
@@ -13,6 +16,10 @@ else
     <MudCard Class="mx-auto pa-6 mt-12">
         @((MarkupString)CurrentQuestion.Body)
     </MudCard>
+    @if (name is not null && name.Equals(CurrentQuestion.AuthorName))
+    {
+        <MudButton Variant="Variant.Filled" OnClick="OnEdit">Edit</MudButton>
+    }
 }
 
 @code {
@@ -20,8 +27,27 @@ else
     public string Url { get; set; }
     public QuestionDto? CurrentQuestion { get; set; }
 
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    private string? name;
+    private IEnumerable<Claim>? userClaims;
+    private bool isLoggedIn;
+    
     protected override async Task OnInitializedAsync()
     {
         CurrentQuestion = await _questionService.GetQuestionByUrlAsync(Url);
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+
+        if (!isLoggedIn) return;
+
+        userClaims = user.Claims;
+        name = user.Identity!.Name!;
+    }
+    private void OnEdit()
+    {
+        NavMgr.NavigateTo($"/EditQuestion/{CurrentQuestion?.Url}");
     }
 }

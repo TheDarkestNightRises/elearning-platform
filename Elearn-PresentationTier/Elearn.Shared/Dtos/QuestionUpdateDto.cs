@@ -1,10 +1,12 @@
-namespace Elearn.Shared.Dtos;
+﻿namespace Elearn.Shared.Dtos;
 
-public class QuestionDto
+public class QuestionUpdateDto
 {
     public string Title { get; set; }
     
     public string Body { get; set; }
+    
+    public string Description { get; set; }
     
     public string Url { get; set; }
     
@@ -13,9 +15,8 @@ public class QuestionDto
     public long CorrectAnswerId { get; set; } 
     
     public string AuthorName { get; set; }
-    public string Description { get; set; }
 
-    public QuestionDto()
+    public QuestionUpdateDto()
     {
     }
 }

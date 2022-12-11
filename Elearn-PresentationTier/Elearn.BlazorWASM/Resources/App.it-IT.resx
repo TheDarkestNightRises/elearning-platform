@@ -402,4 +402,10 @@ verificato</value>
     <data name="All Question" xml:space="preserve">
         <value>Tutte le domande</value>
     </data>
+    <data name="Edit this question" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Save changes" xml:space="preserve">
+        <value />
+    </data>
 </root>
