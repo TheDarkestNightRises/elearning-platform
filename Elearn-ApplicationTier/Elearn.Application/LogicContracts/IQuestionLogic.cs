@@ -9,4 +9,5 @@ public interface IQuestionLogic
     Task<List<Question>> GetQuestionsAsync();
     Task<List<Question>> GetQuestionByUserIdAsync(long userId);
     Task<List<Question>> GetQuestionsAsync(int pageNumber, int pageSize);
+    Task<Question> EditQuestionAsync(Question question);
 }
