@@ -18,7 +18,7 @@ public class QuestionLogic : IQuestionLogic
 
     public async Task<Question> CreateQuestionAsync(Question question)
     {
-        var student = await _userService.GetStudentByUsernameAsync(question.Author.Name);
+        var student = await _userService.GetStudentByUsernameAsync(question.Author.Username);
         if (student is null)
         {
             throw new Exception("Student not found");
@@ -55,6 +55,7 @@ public class QuestionLogic : IQuestionLogic
         return questions;
     }
 
+
     public async Task DeleteQuestionAsync(string url)
     {
         Question? questionToDelete = await _questionService.GetQuestionByUrlAsync(url);
@@ -63,5 +64,56 @@ public class QuestionLogic : IQuestionLogic
             throw new Exception("Lecture not found");
         }
         await _questionService.DeleteQuestionAsync(questionToDelete);
+
+
+    public async Task<Question> EditQuestionAsync(Question question)
+    {
+        Student? student = null;
+        Question? existingQuestion = null;
+        try
+        {
+            student = await _userService.GetStudentByUsernameAsync(question.Author.Username);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Student not found");
+        }
+        try
+        {
+             existingQuestion = await _questionService.GetQuestionByUrlAsync(question.Url);
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Question not found");
+        }
+        
+        
+
+        if (student is null)
+        {
+            throw new Exception("Teacher not found in database");
+        }
+        if (existingQuestion is null)
+        {
+            throw new Exception("Lecture not found");
+        }
+        if (!existingQuestion.Author.Username.Equals(student.Username))
+        {
+            throw new Exception("Teacher cannot be changed");
+        }
+
+        Question questionEdit = new Question()
+        {
+            Id = existingQuestion.Id,
+            Title = question.Title,
+            Body = question.Body,
+            Description = question.Description,
+            Url = existingQuestion.Url,
+            CreationDate = existingQuestion.CreationDate,
+            Author = student
+        };
+        Question edited = await _questionService.EditQuestionAsync(questionEdit);
+        return edited;
+
     }
 }

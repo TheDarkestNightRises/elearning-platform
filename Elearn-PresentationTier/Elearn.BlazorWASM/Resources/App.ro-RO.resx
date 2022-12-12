@@ -398,4 +398,10 @@
     <data name="All Question" xml:space="preserve">
         <value>Toate intrebarile</value>
     </data>
+    <data name="Edit this question" xml:space="preserve">
+        <value>Editeaza aceasta intrebare</value>
+    </data>
+    <data name="Save changes" xml:space="preserve">
+        <value>Salveaza modificarile</value>
+    </data>
 </root>

@@ -55,7 +55,7 @@ public static class QuestionExtension
             
         };
         question.Author = new Student();
-        question.Author.Name = questionDto.AuthorName;
+        question.Author.Username = questionDto.AuthorName;
         return question;
     }
 
@@ -71,7 +71,21 @@ public static class QuestionExtension
             CorrectAnswer = questionDto.CorrectAnswer
         };
         question.Author = new Student();
-        question.Author.Name = questionDto.AuthorName;
+        question.Author.Username = questionDto.AuthorName;
+        return question;
+    }
+    public static Question AsBaseFromUpdate(this QuestionUpdateDto questionDto)
+    {
+        var question = new Question
+        {
+            Url = questionDto.Url,
+            Title = questionDto.Title,
+            Body = questionDto.Body,
+            Description = questionDto.Description,
+            CreationDate = questionDto.CreationDate,
+        };
+        question.Author = new Student();
+        question.Author.Username = questionDto.AuthorName;
         return question;
     }
 }

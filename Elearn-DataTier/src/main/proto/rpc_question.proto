@@ -13,6 +13,8 @@ service QuestionService {
   rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
   rpc GetQuestionsByUserId(QuestionUserId) returns (stream QuestionModel);
   rpc DeleteLecture(QuestionModel) returns (QuestionResponse);
+  rpc EditQuestion(QuestionModel) returns (QuestionModel);
+
 }
 
 message QuestionUserId{
