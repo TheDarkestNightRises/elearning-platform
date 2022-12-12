@@ -10,11 +10,11 @@ public class Question
     public string Url { get; set; }
     public DateTime CreationDate { get; set; }
 
-    public long CorrectAnswerId { get; set; }
+    public bool CorrectAnswer { get; set; }
     
     public Student Author { get; set; }
 
-    public Question(long id, string title, string body, string description, string url, DateTime creationDate, long correctAnswerId, Student author)
+    public Question(long id, string title, string body, string description, string url, DateTime creationDate, bool correctAnswer, Student author)
     {
         Id = id;
         Title = title;
@@ -22,18 +22,18 @@ public class Question
         Description = description;
         Url = url;
         CreationDate = creationDate;
-        CorrectAnswerId = correctAnswerId;
+        CorrectAnswer = correctAnswer;
         Author = author;
     }
 
-    public Question(string title, string body, string description, string url, DateTime creationDate, long correctAnswerId, Student author)
+    public Question(string title, string body, string description, string url, DateTime creationDate, bool correctAnswer, Student author)
     {
         Title = title;
         Body = body;
         Description = description;
         Url = url;
         CreationDate = creationDate;
-        CorrectAnswerId = correctAnswerId;
+        CorrectAnswer = correctAnswer;
         Author = author;
     }
 
@@ -43,6 +43,6 @@ public class Question
     
     public override string ToString()
     {
-        return $"Id: {Id}, Title: {Title}, Body: {Body}, Url: {Url}, CreationDate: {CreationDate}, CorrectAnswerId: {CorrectAnswerId}, Author: {Author}";
+        return $"Id: {Id}, Title: {Title}, Body: {Body}, Url: {Url}, CreationDate: {CreationDate}, CorrectAnswerId: {CorrectAnswer}, Author: {Author}";
     }
 }

@@ -11,6 +11,7 @@ public class QuestionMapper {
                 .setTitle(question.getTitle())
                 .setDescription(question.getDescription())
                 .setUrl(question.getUrl())
+                .setCorrectAnswer(question.isCorrectAnswer())
                 .setDateCreated(DateMapper.convertDateToGrpcModel(question.getDate()))
                 .setStudent(StudentMapper.convertUserToGrpcModel(question.getStudent()))
                 .build();
@@ -23,6 +24,7 @@ public class QuestionMapper {
                 .title(questionModel.getTitle())
                 .description(questionModel.getDescription())
                 .url(questionModel.getUrl())
+                .correctAnswer(questionModel.getCorrectAnswer())
                 .date(DateMapper.convertGrpcModeltoDate(questionModel.getDateCreated()))
                 .student(StudentMapper.convertGrpcModelToUser(questionModel.getStudent()))
                 .build();

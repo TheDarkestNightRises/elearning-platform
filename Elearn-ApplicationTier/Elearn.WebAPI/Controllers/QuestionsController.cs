@@ -80,4 +80,19 @@ public class QuestionsController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpDelete("{url}")]
+    public async Task<ActionResult> DeleteAsync([FromRoute] string url)
+    {
+        try
+        {
+            await questionLogic.DeleteQuestionAsync(url);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
 }

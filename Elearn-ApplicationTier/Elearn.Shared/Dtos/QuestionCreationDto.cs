@@ -11,4 +11,6 @@ public class QuestionCreationDto
     public DateTime CreationDate { get; set; } = DateTime.Now;
 
     public string AuthorName { get; set; }
+    
+    public bool CorrectAnswer { get; set; } 
 }

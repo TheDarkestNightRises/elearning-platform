@@ -11,6 +11,7 @@ service QuestionService {
   rpc GetAllQuestions (PaginationModel) returns (stream QuestionModel);
   rpc CreateNewQuestion(QuestionModel) returns (QuestionModel);
   rpc GetQuestionsByUserId(QuestionUserId) returns (stream QuestionModel);
+  rpc DeleteLecture(QuestionModel) returns (QuestionResponse);
 }
 
 message QuestionUserId{
@@ -28,6 +29,10 @@ message QuestionModel {
   string description = 4;
   string url = 5;
   DateModel dateCreated = 6;
-  int64 correctAnswer = 7;
+  bool correctAnswer = 7;
   StudentModel student = 8;
+}
+
+message QuestionResponse{
+
 }

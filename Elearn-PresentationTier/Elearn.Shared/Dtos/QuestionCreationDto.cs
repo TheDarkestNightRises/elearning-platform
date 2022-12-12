@@ -10,6 +10,8 @@ public class QuestionCreationDto
     
     public DateTime CreationDate { get; set; } = DateTime.Now;
 
+    public bool CorrectAnswer { get; set; } = false;
+
     public string AuthorName { get; set; }
 
     public QuestionCreationDto()

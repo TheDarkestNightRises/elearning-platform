@@ -84,4 +84,10 @@ public class QuestionGrpcClient : IQuestionService
 
         return questions;
     }
+
+    public async Task DeleteQuestionAsync(Question questionToDelete)
+    {
+        var questionModel = questionToDelete.AsGrpcModel();
+        await _questionClient.DeleteLectureAsync(questionModel);
+    }
 }

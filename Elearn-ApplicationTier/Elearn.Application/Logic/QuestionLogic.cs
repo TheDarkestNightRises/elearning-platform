@@ -54,4 +54,14 @@ public class QuestionLogic : IQuestionLogic
         if (questions is null) throw new Exception($"Lectures not found for {pageNumber} , {pageSize}");
         return questions;
     }
+
+    public async Task DeleteQuestionAsync(string url)
+    {
+        Question? questionToDelete = await _questionService.GetQuestionByUrlAsync(url);
+        if (questionToDelete is null)
+        {
+            throw new Exception("Lecture not found");
+        }
+        await _questionService.DeleteQuestionAsync(questionToDelete);
+    }
 }

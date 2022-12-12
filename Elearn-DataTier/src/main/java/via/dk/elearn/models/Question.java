@@ -37,6 +37,9 @@ public class Question {
     @Column
     private LocalDateTime date;
 
+    @Column
+    private boolean correctAnswer;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id")
     @OnDelete(action = OnDeleteAction.CASCADE)

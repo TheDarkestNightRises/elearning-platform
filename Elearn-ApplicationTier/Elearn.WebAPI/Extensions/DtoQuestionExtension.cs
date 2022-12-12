@@ -16,7 +16,7 @@ public static class QuestionExtension
             Description = question.Description,
             CreationDate = question.CreationDate,
             AuthorName = question.Author.Username,
-            CorrectAnswerId = question.CorrectAnswerId,
+            CorrectAnswer = question.CorrectAnswer,
         };
     }
 
@@ -36,7 +36,7 @@ public static class QuestionExtension
                 Description = question.Description,
                 CreationDate = question.CreationDate,
                 AuthorName = question.Author.Username,
-                CorrectAnswerId = question.CorrectAnswerId,
+                CorrectAnswer = question.CorrectAnswer,
             };
         return questionsResult;
     }
@@ -49,7 +49,9 @@ public static class QuestionExtension
             Title = questionDto.Title,
             Body = questionDto.Body,
             CreationDate = questionDto.CreationDate,
-            CorrectAnswerId = questionDto.CorrectAnswerId
+            CorrectAnswer = questionDto.CorrectAnswer,
+            Description = questionDto.Description
+            
             
         };
         question.Author = new Student();
@@ -66,6 +68,7 @@ public static class QuestionExtension
             Body = questionDto.Body,
             Description = questionDto.Description,
             CreationDate = questionDto.CreationDate,
+            CorrectAnswer = questionDto.CorrectAnswer
         };
         question.Author = new Student();
         question.Author.Name = questionDto.AuthorName;
