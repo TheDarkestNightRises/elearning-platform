@@ -5,6 +5,7 @@ namespace Elearn.Shared.Dtos;
 
 public class QuestionDto
 {
+    public long Id { get; set; }
     public string Title { get; set; }
     
     public string Body { get; set; }

@@ -37,6 +37,19 @@ public static class UserExtensions
         };
     }
     
+    public static UserForAnswerDto AsUserForAnswerDto(this User user) 
+    {
+        return new UserForAnswerDto
+        {
+         
+            Username = user.Username,
+            Name = user.Name,
+            Image = user.Image,
+         
+            
+        };
+    }
+    
     public static IEnumerable<UserDto> AsDtos(this IEnumerable<User> users)
     {
         var usersDtos = (from user in users 

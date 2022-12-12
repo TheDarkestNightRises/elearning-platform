@@ -401,4 +401,32 @@ verificeret</value>
     <data name="All Question" xml:space="preserve">
         <value>Alle spørgsmål</value>
     </data>
+    <data name="Answers section below" xml:space="preserve">
+        <value>Svarsektionen nedenfor</value>
+    </data>
+    <data name="Answers" xml:space="preserve">
+        <value>Svar</value>
+    </data>
+    <data name="Answers Loading" xml:space="preserve">
+        <value>
+Svar indlæses</value>
+    </data>
+    <data name="Edit this question" xml:space="preserve">
+        <value>Rediger dette spørgsmål
+</value>
+    </data>
+    <data name="No answers" xml:space="preserve">
+        <value>
+Ingen svar</value>
+    </data>
+    <data name="Save changes" xml:space="preserve">
+        <value>
+Gem ændringer</value>
+    </data>
+    <data name="Post an answer" xml:space="preserve">
+        <value>post et svar</value>
+    </data>
+    <data name="Edit" xml:space="preserve">
+        <value>Redige</value>
+    </data>
 </root>

@@ -8,5 +8,6 @@ import via.dk.elearn.models.Question;
 import java.util.List;
 
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
+
     List<Answer> findAllByQuestion(Question question);
 }

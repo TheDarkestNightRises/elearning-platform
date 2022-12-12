@@ -10,6 +10,7 @@ public static class QuestionExtension
     {
         return new QuestionDto
         {
+            Id = question.Id,
             Url = question.Url,
             Title = question.Title,
             Body = question.Body,
@@ -30,6 +31,7 @@ public static class QuestionExtension
         var questionsResult = from question in questions
             select new QuestionDto
             {
+                Id = question.Id,
                 Url = question.Url,
                 Title = question.Title,
                 Body = question.Body,
@@ -45,6 +47,7 @@ public static class QuestionExtension
     {
        Question question = new Question
         {
+            Id = questionDto.Id,
             Url = questionDto.Url,
             Title = questionDto.Title,
             Body = questionDto.Body,

@@ -4,6 +4,9 @@
 @using System.Security.Claims
 @inject IQuestionService _questionService
 @inject NavigationManager NavMgr 
+@inject IStringLocalizer<App> Localizer
+@using Elearn.BlazorWASM.Pages.Answers.UIComponents
+
 
 
 @if (CurrentQuestion is null)
@@ -18,13 +21,21 @@ else
     </MudCard>
     @if (name is not null && name.Equals(CurrentQuestion.AuthorName))
     {
-        <MudButton Variant="Variant.Filled" OnClick="OnEdit">Edit</MudButton>
+        <MudButton Variant="Variant.Filled" OnClick="OnEdit">@Localizer["Edit"]</MudButton>
     }
+    
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="10" md="7">
+            <CreateAnswer CurrentQuestion="@CurrentQuestion"></CreateAnswer>
+            <Answers Url="@Url"></Answers>
+        </MudItem>
+    </MudGrid>
+
 }
 
 @code {
     [Parameter]
-    public string Url { get; set; }
+    public string? Url { get; set; }
     public QuestionDto? CurrentQuestion { get; set; }
 
     [CascadingParameter]

@@ -404,4 +404,19 @@
     <data name="Save changes" xml:space="preserve">
         <value>Salveaza modificarile</value>
     </data>
+    <data name="Answers section below" xml:space="preserve">
+        <value>Sectiunea de raspunsuri mai jos</value>
+    </data>
+    <data name="Answers" xml:space="preserve">
+        <value>Raspunsuri</value>
+    </data>
+    <data name="Answers Loading" xml:space="preserve">
+        <value>Raspunsurile se incarca</value>
+    </data>
+    <data name="No answers" xml:space="preserve">
+        <value>Niciun raspuns</value>
+    </data>
+    <data name="Post an answer" xml:space="preserve">
+        <value>posteaza un raspuns</value>
+    </data>
 </root>

@@ -28,6 +28,7 @@ builder.Services.AddScoped<ITeacherService, TeacherGrpcClient>();
 builder.Services.AddScoped<IModeratorService, ModeratorGrpcClient>();
 builder.Services.AddScoped<ILectureVoteService, LectureVoteGrpcClient>();
 builder.Services.AddScoped<IUniversityService, UniversityGrpcClient>();
+builder.Services.AddScoped<IAnswerService, AnswerGrpcClient>();
 builder.Services.AddScoped<IStudentService, StudentGrpcClient>();
 builder.Services.AddScoped<ICountryService, CountryGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
@@ -35,10 +36,12 @@ builder.Services.AddScoped<ILectureLogic, LectureLogic>();
 builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<ISearchLogic, SearchLogic>();
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
+builder.Services.AddScoped<IAnswerLogic,AnswerLogic>();
 builder.Services.AddScoped<ILectureVoteLogic, LectureVoteLogic>();
 builder.Services.AddScoped<IQuestionLogic,QuestionLogic>();
 builder.Services.AddScoped<IUniversityLogic, UniversityLogic>();
 builder.Services.AddScoped<ICountryLogic, CountryLogic>();
+builder.Services.AddGrpcClient<AnswerGrpcClient>();
 builder.Services.AddGrpcClient<SearchGrpcClient>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();
 builder.Services.AddGrpcClient<LectureGrpcClient>();
@@ -89,6 +92,7 @@ app.UseAuthorization();
 app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapGrpcService<AnswerGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<CommentGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<LectureGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<UserGrpcClient>().EnableGrpcWeb();

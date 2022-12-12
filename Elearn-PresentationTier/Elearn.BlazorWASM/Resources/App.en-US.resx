@@ -510,4 +510,22 @@
   <data name="Save changes" xml:space="preserve">
     <value>Save changes</value>
   </data>
+  <data name="Answers section below" xml:space="preserve">
+    <value>Answers section below</value>
+  </data>
+  <data name="Answers" xml:space="preserve">
+    <value>Answers</value>
+  </data>
+  <data name="Answers Loading" xml:space="preserve">
+    <value>Answers loading</value>
+  </data>
+  <data name="No answers" xml:space="preserve">
+    <value>No answers</value>
+  </data>
+  <data name="Post an answer" xml:space="preserve">
+    <value>Post an answer</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>

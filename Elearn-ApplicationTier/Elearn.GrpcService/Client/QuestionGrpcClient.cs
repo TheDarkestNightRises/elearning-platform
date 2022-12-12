@@ -100,4 +100,11 @@ public class QuestionGrpcClient : IQuestionService
         Question editedQuestion = questionFromGrpc.AsBase();
         return editedQuestion;
     }
+
+    public async Task<Question?> GetQuestionByIdAsync(long questionId)
+    {
+        var questionRequested = new QuestionId { Id = questionId };
+        var questionGrpcModel = await _questionClient.GetQuestionByIdAsync(questionRequested);
+        return questionGrpcModel.AsBase();
+    }
 }

@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+import "rpc_date.proto";
+import "rpc_user.proto";
+import "rpc_question.proto";
+
+option csharp_namespace = "ElearnGrpc";
+
+service AnswerService {
+  
+  rpc CreateNewAnswer (AnswerModel) returns (AnswerModel);
+  rpc GetAnswerByQuestionId(QuestionId) returns (stream AnswerModel);
+  rpc GetAnswerById(AnswerId) returns (AnswerModel);
+  rpc DeleteAnswer(AnswerModel) returns(Nothing);
+}
+
+message NewAnswerRequest {
+}
+
+message AnswerModel {
+  int64 id = 1;
+  UserModel author = 2;
+  QuestionModel question = 3;
+  string text = 4;
+  DateModel date = 5;
+  bool correct = 6;
+}
+
+message AnswerId{
+  int64 id = 1;
+}

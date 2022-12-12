@@ -13,6 +13,7 @@ service QuestionService {
   rpc GetQuestionsByUserId(QuestionUserId) returns (stream QuestionModel);
   rpc DeleteLecture(QuestionModel) returns (QuestionResponse);
   rpc EditQuestion(QuestionModel) returns (QuestionModel);
+  rpc GetQuestionById (QuestionId) returns (QuestionModel);
 
 }
 
@@ -22,6 +23,10 @@ message QuestionUserId{
 }
 message QuestionUrl {
   string url = 1;
+}
+
+message QuestionId {
+  int64 id = 1;
 }
 
 message QuestionModel {

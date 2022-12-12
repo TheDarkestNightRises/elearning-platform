@@ -1,0 +1,38 @@
+﻿@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@using Elearn.Shared.Models
+@inject IAnswerService AnswerService
+@inject IQuestionService QuestionService
+@inject IStringLocalizer<App> Localizer
+
+<div>@Localizer["Answers"]:</div>
+@if (_answersDto == null)
+{
+    <span>@Localizer["Answers Loading"]...</span>
+}
+@if (_answersDto.Count == 0)
+{
+    <span>@Localizer["No answers"]</span>
+}
+
+@foreach (var answer in _answersDto)
+{
+    <AnswerBody Id="answer.Id" DateCreated="answer.DateCreated" ImageText="@answer?.User.Image" Name="@answer?.User.Name" Text="@answer?.Body"></AnswerBody>
+}
+<div class="pa-4"></div>
+@code {
+
+    [Parameter]
+    public string? Url { get; set; }
+
+    private List<AnswerUserDto?> _answersDto = new();
+    QuestionDto? _questionDto;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Url != null) _questionDto = await QuestionService.GetQuestionByUrlAsync(Url);
+        if (_questionDto != null) _answersDto = await AnswerService.GetAllAnswersByQuestionId(_questionDto.Id);
+     
+    }
+
+}

@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Protobuf Include="Protos\rpc_answer.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <Protobuf Include="Protos\rpc_lecture.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <Protobuf Include="Protos\rpc_user.proto" GrpcServices="Client" ProtoRoot="Protos\" />
         <Protobuf Include="Protos\rpc_question.proto" GrpcServices="Client" ProtoRoot="Protos\" />

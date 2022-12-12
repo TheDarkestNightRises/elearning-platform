@@ -39,16 +39,6 @@ public class CommentLogic : ICommentLogic
     }
     
 
-    public Task<IEnumerable<Comment>> GetAsync(SearchCommentParametersDto searchParameters)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<List<Comment>> GetAllCommentsByLectureId(long id) 
     {
         return await _commentService.GetAllCommentsByLectureId(id);

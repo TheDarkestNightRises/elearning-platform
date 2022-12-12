@@ -14,4 +14,5 @@ public interface IQuestionService
     Task DeleteQuestionAsync(Question questionToDelete);
     Task<Question> EditQuestionAsync(Question question);
 
+    Task<Question?> GetQuestionByIdAsync(long questionId);
 }

@@ -128,4 +128,14 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
         }
 
     }
+
+    @Override
+    public void getQuestionById(QuestionId request, StreamObserver<QuestionModel> responseObserver) {
+        Optional<Question> questionFound = questionRepository.findById(request.getId());
+
+        Question question = questionFound.get();
+        QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
+        responseObserver.onNext(questionModel);
+        responseObserver.onCompleted();
+    }
 }

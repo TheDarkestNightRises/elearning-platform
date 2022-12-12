@@ -1,22 +1,23 @@
-@using System.Security.Claims
+﻿@using System.Security.Claims
 @using Elearn.HttpClients.Service
 @using Elearn.Shared.Models
 @inject IUserService _UserService
-@inject ICommentService CommentService
+@inject IAnswerService _AnswerService
 @inject IStringLocalizer<App> Localizer
 
-<link href="CommentBody.razor.css" rel="stylesheet"/>
+<link href="AnswerBody.razor.css" rel="stylesheet"/>
 <div></div>
 <div class="comments">
     <div class="card">
         <div class="d-flex justify-center align-center">
             <MudAvatar Size="Size.Medium" Image="@ImageText"/>
-            <div class="user-name">@Name (@DateCreated):</div>
-            <div class="comment-content">@Text</div>
+            <div class="user-name">@Name (@DateCreated)</div>
+            <MudIcon Icon="@Icons.Filled.StarBorder" Size="Size.Medium"/>
+            <div class="comment-content">: @Text</div>
                  @if (_currentUser is not null && _currentUser!.Name.Equals(Name))
                  {
                   
-                     <MudButton Class="d-flex justify-center align-center" Size = "Size.Small" OnClick="DeleteComment" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">@Localizer["Delete"]</MudButton>
+                     <MudButton Class="d-flex justify-center align-center" Size = "Size.Small" OnClick="DeleteAnswer" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">@Localizer["Delete"]</MudButton>
                  }
         </div>
     </div>
@@ -59,8 +60,8 @@
         
     }
 
-    private async Task DeleteComment()
+    private async Task DeleteAnswer()
     {
-        await CommentService.DeleteCommentAsync(Id);
+        await _AnswerService.DeleteAnswerAsync(Id);
     }
 }

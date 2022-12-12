@@ -9,9 +9,6 @@ public interface ICommentLogic
 {
     Task<Comment> CreateAsync(Comment comment);
     
-    Task<IEnumerable<Comment>> GetAsync(SearchCommentParametersDto searchParameters);
-    
-    Task DeleteAsync(int id);
     Task<List<Comment>> GetAllCommentsByLectureId(long id);
     Task DeleteCommentAsync(long id);
 }
