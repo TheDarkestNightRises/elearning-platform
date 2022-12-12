@@ -22,12 +22,14 @@ else
     @if (_questions is null)
     {
         <p>@Localizer["Loading"]...</p>
+        return;
     }
     else
     {
         @if (_questions.Count == 0)
         {
             <p>@Localizer["No results found"]</p>
+            return;
         }
         else
         {
@@ -45,8 +47,11 @@ else
 
     private async Task OnSearchAsync()
     {
-        _questions = null;
-        _questions = await SearchService.SearchQuestionsAsync(_searchInput);
+        if (!string.IsNullOrWhiteSpace(_searchInput))
+        {
+            _questions = null;
+            _questions = await SearchService.SearchQuestionsAsync(_searchInput);
+        }
     }
 
 }

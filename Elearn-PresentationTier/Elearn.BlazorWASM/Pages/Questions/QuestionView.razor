@@ -13,7 +13,7 @@
 else
 {
     <MudText Align="Align.Center" Typo="Typo.h3" Class="mt-1 my-9"> @CurrentQuestion.Title </MudText>
-    <MudCard Class="mx-auto pa-6 mt-12">
+    <MudCard Class="mx-auto pa-6 mt-12 mb-4">
         @((MarkupString)CurrentQuestion.Body)
     </MudCard>
     @if (name is not null && name.Equals(CurrentQuestion.AuthorName))

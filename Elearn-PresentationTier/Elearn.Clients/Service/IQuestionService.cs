@@ -9,5 +9,7 @@ public interface IQuestionService
     Task<List<QuestionDto>> GetQuestionByUserIdAsync(long userId);
     Task<QuestionDto> CreateAsync(QuestionCreationDto dto);
     Task UpdateQuestionAsync(QuestionUpdateDto dto);
+    
+    Task DeleteLectureAsync(string url);
 
 }

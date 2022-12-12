@@ -63,8 +63,9 @@ public class QuestionLogic : IQuestionLogic
         {
             throw new Exception("Lecture not found");
         }
-        await _questionService.DeleteQuestionAsync(questionToDelete);
 
+        await _questionService.DeleteQuestionAsync(questionToDelete);
+    }
 
     public async Task<Question> EditQuestionAsync(Question question)
     {
