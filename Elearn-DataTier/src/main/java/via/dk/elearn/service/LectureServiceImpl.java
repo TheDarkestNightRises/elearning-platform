@@ -71,13 +71,12 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
     @Override
     public void createNewLecture(LectureModel request, StreamObserver<LectureModel> responseObserver) {
         Lecture lecture = LectureMapper.convertGrpcModelToLecture(request);
-        //Teacher teacher = TeacherMapper.convertGrpcModelToTeacher(request.getTeacher());
-        //lecture.setTeacher(teacher);
+
 
         Lecture lectureFromDb = lectureRepository.save(lecture);
-        //lectureFromDb.setTeacher(teacher);
+
         LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lectureFromDb);
-        //LectureModel lectureModel1 = LectureModel.newBuilder(lectureModel).setTeacher(request.getTeacher()).build();
+
         responseObserver.onNext(lectureModel);
         responseObserver.onCompleted();
     }
@@ -98,14 +97,6 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
     public void getLectureByUserId(LectureUserId request, StreamObserver<LectureModel> responseObserver) {
         Optional<Teacher> teacher = teacherRepository.findById(request.getUserId());
         if (teacher.isEmpty()) {
-//            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-//                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-//                    .setMessage("The lecture is not found")
-//                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-//                            .setReason("Lecture not found")
-//                            .build()))
-//                    .build();
-//            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
             responseObserver.onCompleted();
         } else {
             List<Lecture> lectures = lectureRepository.findAllByTeacher(teacher.get());
@@ -165,9 +156,9 @@ public class LectureServiceImpl extends LectureServiceGrpc.LectureServiceImplBas
     @Override
     public void deleteLecture(LectureModel request, StreamObserver<LectureResponse> responseObserver) {
 
-        Optional<Lecture> findUser = lectureRepository.findById(request.getId());
-        Lecture userFound = findUser.get();
-        lectureRepository.delete(userFound);
+        Optional<Lecture> findLecture = lectureRepository.findById(request.getId());
+        Lecture lectureFound = findLecture.get();
+        lectureRepository.delete(lectureFound);
         responseObserver.onNext(null);
         responseObserver.onCompleted();
 

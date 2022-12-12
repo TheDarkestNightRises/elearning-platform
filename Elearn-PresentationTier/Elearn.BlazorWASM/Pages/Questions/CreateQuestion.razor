@@ -134,6 +134,8 @@
     private BlazoredTextEditor QuillHtml;
     private MarkupString preview;
     private QuestionCreationDto _newQuestion = new();
+    private List<QuestionDto> _questionDtos = new();
+    public bool QuestionFound;
 
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
@@ -145,6 +147,23 @@
 
     async Task CreateNewQuestion()
     {
+        foreach (var question in _questionDtos)
+        {
+            QuestionFound = false;
+            
+            if (question.Url.Equals(_newQuestion.Url))
+            {
+                QuestionFound = true;
+            }
+        }
+        
+        if(QuestionFound)
+        {
+            Error = Localizer["Url already exists"];
+            return;
+        }
+        
+        
         _newQuestion.Body = await QuillHtml.GetHTML();
         
         if (string.IsNullOrEmpty(_newQuestion.Body))
@@ -192,6 +211,8 @@
 
         userClaims = user.Claims;
         name = user.Identity!.Name!;
+
+        _questionDtos = await QuestionService.GetAllQuestionsAsync();
     }
 
 }

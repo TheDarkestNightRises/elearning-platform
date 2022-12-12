@@ -15,18 +15,18 @@ public class QuestionDto
     
     public DateTime CreationDate { get; set; }
     
-    public long CorrectAnswerId { get; set; } 
+    public bool CorrectAnswer { get; set; } 
     
     public string AuthorName { get; set; }
 
-    public QuestionDto(string title, string body, string description, string url, DateTime creationDate, long correctAnswerId, string authorName)
+    public QuestionDto(string title, string body, string description, string url, DateTime creationDate, bool correctAnswer, string authorName)
     {
         Title = title;
         Body = body;
         Description = description;
         Url = url;
         CreationDate = creationDate;
-        CorrectAnswerId = correctAnswerId;
+        CorrectAnswer = correctAnswer;
         AuthorName = authorName;
     }
 

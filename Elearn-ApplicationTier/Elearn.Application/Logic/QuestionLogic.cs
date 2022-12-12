@@ -55,6 +55,17 @@ public class QuestionLogic : IQuestionLogic
         return questions;
     }
 
+
+    public async Task DeleteQuestionAsync(string url)
+    {
+        Question? questionToDelete = await _questionService.GetQuestionByUrlAsync(url);
+        if (questionToDelete is null)
+        {
+            throw new Exception("Lecture not found");
+        }
+        await _questionService.DeleteQuestionAsync(questionToDelete);
+
+
     public async Task<Question> EditQuestionAsync(Question question)
     {
         Student? student = null;
@@ -103,5 +114,6 @@ public class QuestionLogic : IQuestionLogic
         };
         Question edited = await _questionService.EditQuestionAsync(questionEdit);
         return edited;
+
     }
 }

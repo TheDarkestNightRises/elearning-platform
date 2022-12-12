@@ -138,6 +138,8 @@
     private MarkupString preview;
     private LectureCreationDto _newLecture = new();
 
+    private List<LectureDto> lectures = new();
+
     [CascadingParameter]
     public Task<AuthenticationState> AuthState { get; set; } = null!;
 
@@ -145,11 +147,29 @@
     private IEnumerable<Claim>? userClaims;
     private bool isLoggedIn;
     public string Error = "";
-
+    public bool LectureFound;
+    
     async Task CreateNewLecture()
     {
         _newLecture.Body = await QuillHtml.GetHTML();
+
+        foreach (var lecture in lectures)
+        {
+            LectureFound = false;
+            
+            if (lecture.Url.Equals(_newLecture.Url))
+            {
+                LectureFound = true;
+            }
+        }
         
+        if(LectureFound)
+        {
+            Error = Localizer["Url already exists"];
+            return;
+        }
+
+
         if (string.IsNullOrEmpty(_newLecture.Body))
         {
             Error = "No body found!";
@@ -205,6 +225,8 @@
 
         userClaims = user.Claims;
         name = user.Identity!.Name!;
+
+        lectures = await LectureService.GetLecturesAsync();
     }
 
 }

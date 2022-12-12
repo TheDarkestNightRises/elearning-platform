@@ -15,9 +15,9 @@ public static class GrpcQuestionExtension
             Body = question.Body,
             Description = question.Description,
             DateCreated = question.CreationDate.AsGrpcModel(),
-            Student = question.Author?.AsGrpcModel()
-            // in the future add correct answer
-            
+            Student = question.Author?.AsGrpcModel(),
+            CorrectAnswer = question.CorrectAnswer
+
         };
     }
 
@@ -31,7 +31,9 @@ public static class GrpcQuestionExtension
             Body = questionModel.Body,
             Description = questionModel.Description,
             CreationDate = questionModel.DateCreated.AsBase(),
-            Author = questionModel.Student?.AsBase()
+            Author = questionModel.Student.AsBase(),
+            CorrectAnswer = questionModel.CorrectAnswer
+            
         };
     }
 }

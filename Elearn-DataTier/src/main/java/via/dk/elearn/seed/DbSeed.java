@@ -114,6 +114,7 @@ public class DbSeed implements CommandLineRunner {
         //add questions
 
         Question question = new Question("Generated Lorem Ipsum paragraph?", "Please help", "I tried using several generators but none of them had enough generation parameters. Can you help me find one?", "where-lorem-ipsum", LocalDateTime.now(), null, createdStudent);
+        question.setCorrectAnswer(false);
         Question createdQuestion = questionRepository.save(question);
 
         //add lecture votes

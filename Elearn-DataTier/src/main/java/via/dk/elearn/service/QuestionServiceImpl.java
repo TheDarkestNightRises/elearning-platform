@@ -19,6 +19,7 @@ import via.dk.elearn.service.mapper.LectureMapper;
 import via.dk.elearn.service.mapper.QuestionMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @GRpcService
 public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImplBase {
@@ -95,6 +96,15 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
     }
 
     @Override
+    public void deleteLecture(QuestionModel request, StreamObserver<QuestionResponse> responseObserver) {
+        Optional<Question> findQuestion = questionRepository.findById(request.getId());
+        Question questionFound = findQuestion.get();
+        questionRepository.delete(questionFound);
+        responseObserver.onNext(null);
+        responseObserver.onCompleted();
+        }
+
+   @Override
     public void editQuestion(QuestionModel request, StreamObserver<QuestionModel> responseObserver) {
         Question question = QuestionMapper.convertGrpcModelToQuestion(request);
         try
@@ -116,5 +126,6 @@ public class QuestionServiceImpl extends QuestionServiceGrpc.QuestionServiceImpl
             responseObserver.onError(StatusProto.toStatusRuntimeException(status));
             e.printStackTrace();
         }
+
     }
 }
