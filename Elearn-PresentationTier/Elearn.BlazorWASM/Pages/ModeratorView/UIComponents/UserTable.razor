@@ -12,7 +12,6 @@
         <MudTh>Id</MudTh>
         <MudTh>Name</MudTh>
         <MudTh>Role</MudTh>
-        <MudTh>Country</MudTh>
         <MudTh>Email</MudTh>
         <MudTh>Delete</MudTh>
     </HeaderContent>
@@ -20,7 +19,6 @@
         <MudTd DataLabel="Id">@context.Id</MudTd>
         <MudTd DataLabel="Name">@context.Name</MudTd>
         <MudTd DataLabel="Role">@context.Role</MudTd>
-        <MudTd DataLabel="Country" HideSmall="_hidePosition">@context.CountryId</MudTd>
         <MudTd DataLabel="Email">@context.Email</MudTd>
         <MudTd DataLabel="Delete">
             <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="() => DeleteUser(context.Name)" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
