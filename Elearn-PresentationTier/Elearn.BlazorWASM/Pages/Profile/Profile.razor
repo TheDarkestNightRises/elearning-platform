@@ -1,0 +1,317 @@
+﻿@page "/Profile"
+@using Elearn.Shared.Models
+@using Microsoft.AspNetCore.Components
+@using Elearn.Shared.Dtos
+@using Elearn.HttpClients.Service
+@using System.Security.Claims
+@using System.Net.Mime
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@using Elearn.BlazorWASM.Pages.Profile.UIComponents
+@using Elearn.BlazorWASM.Pages.Questions.UIComponents
+@inject ILectureService _lectureService
+@inject IQuestionService _questionService
+@inject IUserService _userService
+@inject NavigationManager NavMgr 
+@inject IUniversityService UniversityService
+@inject ICountryService CountryService
+@inject IStringLocalizer<App> Localizer
+
+<AuthorizeView>
+    <NotAuthorized>
+        <div class="d-flex align-center justify-center">
+            <h3>@Localizer["Please log in to view your user profile"]</h3>
+        </div>
+        <div>
+            <MudCardActions Class="d-flex justify-center">
+                <MudButton Class="mx-2" OnClick="() => OpenLoginView()" Variant="Variant.Filled" Color="Color.Success">
+                    <img src="img/Login.png"/>
+                </MudButton>
+            </MudCardActions>
+        </div>
+
+    </NotAuthorized>
+    <Authorized Context="Auth">
+
+
+        <div class="page-background-class align-center justify-center">
+            <MudCard Class="mx-auto pa-6 mt-12" Style="width: 500px;">
+                <h3 class=" d-flex justify-center">@Localizer["Hello"], @CurrentUser?.Name</h3>
+                <div class="form-group d-flex justify-center">
+                    <label>@Localizer["Username"] : @CurrentUser?.Username</label>
+                </div>
+                <div class="form-group d-flex justify-center">
+                    <label>@Localizer["Email"] : @CurrentUser?.Email</label>
+                </div>
+                <div class="form-group d-flex justify-center">
+                    <label> @Localizer["Role"] : @CurrentUser?.Role</label>
+                </div>
+                <div class="form-group d-flex justify-center">
+                    <label> @Localizer["University"] : @currentUniversity?.Name</label>
+                </div>
+                <div class="form-group d-flex justify-center">
+                    <label> @Localizer["Country"] : @currentCountry?.Name</label>
+                </div>
+                 @if (CurrentUser?.SecurityLevel == 4)
+                 {
+                     <div class="form-group d-flex justify-center">
+                         <label> @Localizer["Verified"] : @CurrentUser?.Approved</label>
+                     </div>
+                 }
+                <MudCard>
+                    <MudCardContent>
+                        <MudImage Class="card-img" Src="@Dto.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
+                    </MudCardContent>
+                    <MudCardActions class="form-control-file">
+                        <label for="image">@Localizer["Image"]</label>
+                        <InputFile OnChange="OnFileChange"></InputFile>
+                    </MudCardActions>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Filled" Color="Color.Error" OnClick="@(UpdateImage)">@Localizer["Save"]</MudButton>
+                    </MudCardActions>
+                </MudCard>
+
+
+            </MudCard>
+        </div>
+        <br/>
+
+        <hr/>
+        <br/>
+        <br/>
+        <div class="page-background-class align-center justify-center">
+            @if (CurrentUser is not null && CurrentUser.SecurityLevel == 4)
+            {  <div class="allLectures">
+                   <h2>@Localizer["All Lectures"]</h2>
+                        <br/>
+                   <br/>
+                   @if (CurrentUser == null)
+                   {
+                       <span> @Localizer["No lectures found"]</span>
+                   }
+                   else
+                   {
+                       <MudGrid Justify="Justify.SpaceEvenly" Class="align-items-center">
+                           @foreach (var lectures in _lectureToShow)
+                           {
+                               <MudItem xs="3" >
+                                   <LectureCard Lecture="@lectures"></LectureCard>
+                               </MudItem>
+                           }
+                       </MudGrid>
+                   }
+
+
+                   <hr/>
+                   <br/>
+                   <br/>
+
+               </div>
+            }    
+            
+               @if (CurrentUser is not null && CurrentUser.SecurityLevel == 2)
+                        {
+                        <div class="allQuestions">
+                            <h2>@Localizer["All questions"]</h2>
+                            @if (CurrentUser == null)
+                            {
+                                <span> @Localizer["No questions found"]</span>
+                            }
+                            else
+                            {
+                                <MudGrid Class="my-6" Justify="Justify.Center">
+                                    @foreach (var lectures in _questionToShow)
+                                    {
+                                        <MudItem xs="12" sm="9" md="7">
+                                            <QuestionHistory QuestionDto="@lectures"></QuestionHistory>
+                                        </MudItem>
+                                    }
+                                </MudGrid>
+                            }
+                        </div>
+                        
+                        }
+
+            <div class="upVotedLectures">
+                <h2>@Localizer["Up voted Lectures"]</h2>
+                @if (CurrentUser == null)
+                {
+                    <span>@Localizer["No up voted lectures found"]</span>
+                }
+                else
+                {
+                    <MudGrid Class="my-6" Justify="Justify.Center">
+                        @foreach (var lectures in _upvotedLectureToShow)
+                        {
+                            <MudItem xs="12" sm="9" md="7">
+                                <History Lecture="@lectures"></History>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                }
+                <hr/>
+                <br/>
+                <br/>
+            </div>
+        </div>
+        
+    </Authorized>
+
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    private List<LectureDto?> _lectureToShow = new();
+    private List<LectureDto?> _upvotedLectureToShow = new();
+    private List<QuestionDto?> _questionToShow = new();
+
+    private UniversityDto? currentUniversity;
+    private CountryDto? currentCountry;
+
+    private bool _hidePosition;
+    private bool _loading;
+    public UserDto? CurrentUser;
+    public UpdateUserDto Dto = new();
+
+    private void OpenLoginView()
+    {
+        NavMgr.NavigateTo($"/LoginUI");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (await InitUpdateUser()) return;
+        await InitHistory();
+        currentCountry = await CountryService.GetCountryByIdAsync(CurrentUser.CountryId.Value);
+        currentUniversity = await UniversityService.GetUniversityByIdAsync(CurrentUser.UniversityId.Value);
+      
+    }
+
+    private async Task<bool> InitUpdateUser()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return true;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        CurrentUser = await _userService.GetUserByUsernameAsync(username);
+        CreateDto(CurrentUser);
+        return false;
+    }
+
+    private void CreateDto(UserDto userDto)
+    {
+        Dto = new UpdateUserDto
+        {
+            Name = userDto.Name,
+            Password = userDto.Password,
+            Email = userDto.Email,
+            Image = userDto.Image,
+            Approved = userDto.Approved
+        };
+    }
+
+    private async Task InitHistory()
+    {
+        try
+        {
+            if(CurrentUser is not null && CurrentUser.SecurityLevel == 4)
+                await GetLectureByTeacherId();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        
+        try
+        {
+            await GetUpvotedLecureByUserId();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+        
+        try
+        {
+            if(CurrentUser is not null && CurrentUser.SecurityLevel == 2)
+                await GetQuestionByUserId();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
+
+
+    async Task OnFileChange(InputFileChangeEventArgs e)
+    {
+        var format = "image/png";
+        var resizedImage = await e.File.RequestImageFileAsync(format, 500, 500);
+        var buffer = new byte[resizedImage.Size];
+        await resizedImage.OpenReadStream().ReadAsync(buffer);
+        var imageData = $"data:{format};base64,{Convert.ToBase64String(buffer)}";
+        
+        Dto.Image = imageData;
+    }
+
+    private async Task UpdateImage()
+    {
+      
+        await _userService.UpdateUserAsync(Dto);
+        NavMgr.NavigateTo($"/Profile", true);
+    }
+
+
+    private async Task GetLectureByTeacherId()
+    {
+
+        if (CurrentUser is not null)
+        {
+            var list = await _lectureService.GetLectureByTeacherIdAsync(CurrentUser.Id);
+            list.Reverse();
+            for (int i = 0; i < (list.Count < 8 ? list.Count : 8); i++)
+            {
+                _lectureToShow.Add(list[i]);
+            }
+        }
+
+    }
+
+    private async Task GetUpvotedLecureByUserId()
+    {
+  
+        if (CurrentUser is not null)
+        {
+            var list = await _lectureService.GetUpvotedLectureByUserIdAsync(CurrentUser.Id);
+            list.Reverse();
+            for (int i = 0; i < (list.Count < 5 ? list.Count : 5); i++)
+            {
+                _upvotedLectureToShow.Add(list[i]);
+            }
+        }
+    }
+
+    private async Task GetQuestionByUserId()
+    {
+      
+        if (CurrentUser is not null)
+        {
+           
+            var list = await _questionService.GetQuestionByUserIdAsync(CurrentUser.Id);
+            list.Reverse();
+            for (int i = 0; i < (list.Count < 5 ? list.Count : 5); i++)
+            {
+                _questionToShow.Add(list[i]);
+            }
+        
+        }
+    }
+
+}

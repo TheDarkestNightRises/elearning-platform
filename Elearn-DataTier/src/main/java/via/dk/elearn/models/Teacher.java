@@ -14,8 +14,11 @@ import javax.persistence.*;
 @SuperBuilder
 public class Teacher extends User{
 
-    public Teacher(String username, String email, String name, String password, String role, int security_level) {
-        super(username, email, name, password, role, security_level);
+    public Teacher(Long id, String username, String email, String name, String password, String image, String role, boolean approved, int security_level, Country country, University university) {
+        super(id, username, email, name, password, image, role, approved, security_level, country, university);
     }
 
+    public Teacher(String username, String email, String name, String password, String image, String role, boolean approved, int security_level, Country country, University university) {
+        super(username, email, name, password, image, role, approved, security_level, country, university);
+    }
 }

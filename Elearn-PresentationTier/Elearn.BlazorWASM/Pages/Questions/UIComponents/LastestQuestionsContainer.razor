@@ -1,0 +1,49 @@
+﻿@using Elearn.BlazorWASM
+@using Elearn.HttpClients.Service
+@inject IQuestionService QuestionService
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@using Elearn.Shared.Dtos
+@inject IStringLocalizer<App> Localizer
+@using Elearn.BlazorWASM.Pages.Profile.UIComponents
+
+<MudText Typo="Typo.h3" Align="Align.Center" Class="py-6">@Localizer["Lastest-questions-here"]</MudText>
+
+@if (_questionDtos == null)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+}
+else
+{
+    @if (_questionDtos.Count == 0)
+    {
+        <span> @Localizer["No questions found"]</span>
+    }
+    else
+    {
+        <MudGrid Class="my-6" Justify="Justify.Center">
+            @foreach (var questions in _questionDtos)
+            {
+                <MudItem xs="12" sm="9" md="7">
+                    <QuestionHistory QuestionDto="@questions"></QuestionHistory>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+}
+
+
+@code {
+
+    private List<QuestionDto>? _questionDtos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var list = await QuestionService.GetAllQuestionsAsync();
+        list.Reverse();
+        _questionDtos = new();
+        for (int i = 0; i < (list.Count < 3 ? list.Count : 3); i++)
+        {
+            _questionDtos.Add(list[i]);
+        }
+    }
+}

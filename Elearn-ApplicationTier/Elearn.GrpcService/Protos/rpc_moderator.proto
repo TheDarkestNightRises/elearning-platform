@@ -1,0 +1,24 @@
+﻿syntax = "proto3"; // Use the latest proto syntax
+
+option java_multiple_files = true;
+option java_package = "via.dk.elearn.protobuf";
+
+service ModeratorService {
+  rpc getModeratorByUsername(ModeratorUsername) returns (ModeratorModel);
+}
+
+message ModeratorModel {
+  int64 id = 1;
+  string username = 2;
+  string email = 3;
+  string name = 4;
+  string password =5;
+  string image = 6;
+  string role = 7;
+  int32 securityLevel = 8;
+  bool approved = 9;
+}
+
+message ModeratorUsername {
+  string username = 1;
+}

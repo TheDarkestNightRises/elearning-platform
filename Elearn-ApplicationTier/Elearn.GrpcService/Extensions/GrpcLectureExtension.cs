@@ -4,7 +4,7 @@ using ElearnGrpc;
 
 namespace Elearn.GrpcService.Extensions;
 
-public static class GrpcLectureExtension
+public static class  GrpcLectureExtension
 {
     public static LectureModel AsGrpcModel(this Lecture lecture)
     {
@@ -15,6 +15,7 @@ public static class GrpcLectureExtension
             Image = lecture.Image,
             Title = lecture.Title,
             Body = lecture.Body,
+            Description = lecture.Description,
             Teacher = GrpcTeacherExtension.AsGrpcModel(lecture.Author),
             Date = GrpcDateExtension.AsGrpcModel(lecture.DateCreated)
         };
@@ -29,6 +30,7 @@ public static class GrpcLectureExtension
             Image = lectureModel.Image,
             Title = lectureModel.Title,
             Body = lectureModel.Body,
+            Description = lectureModel.Description,
             Author = GrpcTeacherExtension.AsBase(lectureModel.Teacher),
             DateCreated = GrpcDateExtension.AsBase(lectureModel.Date)
         };

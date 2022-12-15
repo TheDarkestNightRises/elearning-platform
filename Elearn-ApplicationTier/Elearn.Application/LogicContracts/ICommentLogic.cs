@@ -7,10 +7,8 @@ namespace Elearn.Application.LogicInterfaces;
 
 public interface ICommentLogic
 {
-    Task<Comment> CreateAsync(CommentCreationDto dto);
+    Task<Comment> CreateAsync(Comment comment);
     
-    Task<IEnumerable<Comment>> GetAsync(SearchCommentParametersDto searchParameters);
-    
-    Task DeleteAsync(int id);
-    IQueryable<Comment> GetAllCommentsByPostUrlAsync(string url);
+    Task<List<Comment>> GetAllCommentsByLectureId(long id);
+    Task DeleteCommentAsync(long id);
 }

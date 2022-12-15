@@ -1,0 +1,52 @@
+﻿@page "/AllQuestions"
+
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@using Elearn.BlazorWASM.Pages.Questions.UIComponents
+@inject IStringLocalizer<App> Localizer
+@inject IQuestionService _questionService
+
+<h3>@Localizer["All Questions"]</h3>
+
+<br/>
+<br/>
+
+
+    @if (_questions is null)
+    {
+        <p>@Localizer["Loading"]...</p>
+    }
+    else
+    {
+        @if (_questions.Count == 0)
+        {
+            <p>@Localizer["No results found"]</p>
+        }
+        else
+        {
+            @foreach (var question in _questions)
+            {
+                <QuestionCard QuestionDto="@question"></QuestionCard>
+            }
+        }
+    }
+
+
+@code {
+    private string _searchInput = string.Empty;
+    private List<QuestionDto>? _questions;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _questions = null;
+
+        var list = await _questionService.GetAllQuestionsAsync();
+        list.Reverse();
+        _questions = new();
+        for (int i = 0; i < (list.Count < 100 ? list.Count : 100); i++)
+        {
+            _questions.Add(list[i]);
+        }
+    }
+
+}

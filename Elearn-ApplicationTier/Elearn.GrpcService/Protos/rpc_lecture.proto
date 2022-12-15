@@ -1,23 +1,23 @@
 syntax = "proto3"; // Use the latest proto syntax
 
-import "rpc_user.proto";
 import "rpc_date.proto";
 import "rpc_teacher.proto";
+import "rpc_pagination.proto";
 
 option csharp_namespace = "ElearnGrpc";
 
 
 service LectureService {
   rpc GetLecture (LectureUrl) returns (LectureModel);
-  rpc GetAllLectures (NewLectureRequest) returns (stream LectureModel);
+  rpc GetAllLectures (PaginationModel) returns (stream LectureModel);
   rpc CreateNewLecture (LectureModel) returns (LectureModel);
   rpc GetLectureById (LectureId) returns (LectureModel);
   rpc GetLectureByUserId(LectureUserId) returns (stream LectureModel);
   rpc GetUpvotedLectureByUserId(LectureUserId) returns(stream LectureModel);
+  rpc EditLecture(LectureModel) returns (LectureModel);
+  rpc DeleteLecture(LectureModel) returns (LectureResponse);
 }
 
-message NewLectureRequest {
-}
 message LectureUserId{
   int64 userId=1;
 }
@@ -36,6 +36,11 @@ message LectureModel {
   string title = 3;
   string url = 4;
   string image = 5;
-  TeacherModel teacher = 6;
-  DateModel date = 7;
+  string description = 6;
+  TeacherModel teacher = 7;
+  DateModel date = 8;
+}
+
+message LectureResponse{
+
 }

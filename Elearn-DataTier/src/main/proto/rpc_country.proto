@@ -1,0 +1,18 @@
+syntax = "proto3"; // Use the latest proto syntax
+
+option java_multiple_files = true;
+option java_package = "via.dk.elearn.protobuf";
+
+service CountryService {
+  rpc GetCountries(CountryRequest) returns (stream CountryModel);
+  rpc GetCountryById(CountryId) returns (CountryModel);
+}
+message CountryModel{
+  int64 id = 1;
+  string name = 2;
+}
+message CountryId{
+  int64 id = 1;
+}
+message CountryRequest{
+}

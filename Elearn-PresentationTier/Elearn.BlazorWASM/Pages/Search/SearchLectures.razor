@@ -1,0 +1,63 @@
+@page "/SearchLectures"
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@inject ISearchService SearchService 
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+<h3>@Localizer["SearchLectures"]</h3>
+@inject IStringLocalizer<App> Localizer
+
+
+<MudTextField Class="mb-5" @bind-Value="_searchInput" Label="Search" Variant="Variant.Text"></MudTextField>
+
+<MudButton Color="Color.Primary" Variant="Variant.Outlined" OnClick="@(() => OnSearchAsync())">@Localizer["Search"]</MudButton>
+<br/>
+<br/>
+@if (string.IsNullOrWhiteSpace(_searchInput))
+{
+    <p></p>
+}
+else
+{
+    @if (_lectures is null)
+    {
+        <p>@Localizer["Loading"]...</p>
+        return;
+    }
+    else
+    {
+        @if (_lectures.Count == 0)
+        {
+            <p>@Localizer["No results found"]</p>
+            return;
+        }
+        else
+        {
+            
+            <MudGrid Justify="Justify.SpaceEvenly" Class="align-items-center">
+                @foreach (var lectures in _lectures)
+                {
+                    <MudItem xs="3" >
+                        <LectureCard Lecture="@lectures"></LectureCard>
+                    </MudItem>
+                }
+            </MudGrid>
+            
+            
+        }
+    }
+}
+
+@code {
+    private string _searchInput = string.Empty;
+    private List<LectureDto>? _lectures;
+
+    private async Task OnSearchAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(_searchInput))
+        {
+            _lectures = null;
+            _lectures = await SearchService.SearchLecturesAsync(_searchInput);
+        }
+    }
+
+}

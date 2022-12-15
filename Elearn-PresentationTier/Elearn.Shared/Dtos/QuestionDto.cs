@@ -2,6 +2,7 @@ namespace Elearn.Shared.Dtos;
 
 public class QuestionDto
 {
+    public long Id { get; set; }
     public string Title { get; set; }
     
     public string Body { get; set; }
@@ -13,16 +14,7 @@ public class QuestionDto
     public long CorrectAnswerId { get; set; } 
     
     public string AuthorName { get; set; }
-
-    public QuestionDto(string title, string body, string url, DateTime creationDate, long correctAnswerId, string authorName)
-    {
-        Title = title;
-        Body = body;
-        Url = url;
-        CreationDate = creationDate;
-        CorrectAnswerId = correctAnswerId;
-        AuthorName = authorName;
-    }
+    public string Description { get; set; }
 
     public QuestionDto()
     {

@@ -1,0 +1,49 @@
+@using Elearn.BlazorWASM
+@using Elearn.HttpClients.Service
+@inject ILectureService LectureService
+@inject IUniversityService UniversityService
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@using Elearn.Shared.Dtos
+@inject IStringLocalizer<App> Localizer
+
+<MudText Typo="Typo.h3" Align="Align.Center" Class="py-6">@Localizer["Lastest-lectures-here"]</MudText>
+
+@if (_lectureDtos == null)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+}
+else
+{
+    @if (_lectureDtos.Count == 0)
+    {
+        <span> @Localizer["No lectures found"]</span>
+    }
+    else
+    {
+        <MudGrid Justify="Justify.SpaceEvenly" Class="align-items-center">
+            @foreach (var post in _lectureDtos)
+            {
+                <MudItem xs="3" >
+                    <LectureCard Lecture="@post"></LectureCard>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+}
+
+
+@code {
+
+    private List<LectureDto>? _lectureDtos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var list = await LectureService.GetLecturesAsync();
+        list.Reverse();
+        _lectureDtos = new();
+        for (int i = 0; i < (list.Count < 3 ? list.Count : 3); i++)
+        {
+            _lectureDtos.Add(list[i]);
+        }
+    }
+}

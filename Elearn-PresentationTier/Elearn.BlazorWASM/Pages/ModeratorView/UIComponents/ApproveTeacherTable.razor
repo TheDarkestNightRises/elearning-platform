@@ -1,0 +1,95 @@
+﻿@using Elearn.Shared.Dtos
+@using Elearn.BlazorWASM.Pages.ModeratorView.UIComponents
+@using Elearn.Shared.Models
+@using System.Security.Claims
+@using Elearn.Clients.Http
+@using Elearn.HttpClients.Service
+@inject NavigationManager navMgr
+@inject ILectureService _lectureService
+@inject IUserService _UserService
+@inject ILectureService httpClient
+<MudTable Items="@Users" Hover="true" Breakpoint="Breakpoint.Sm" Loading="@_loading" LoadingProgressColor="Color.Info">
+    <HeaderContent>
+           <MudTh>Id</MudTh>
+           <MudTh>Name</MudTh>
+           <MudTh>Role</MudTh>
+           <MudTh>Approval</MudTh>
+           <MudTh>Email</MudTh>
+           <MudTh>Approve</MudTh>
+       </HeaderContent>
+       <RowTemplate >
+           <MudTd DataLabel="Id">@context.Id</MudTd>
+           <MudTd DataLabel="Name">@context.Name</MudTd>
+           <MudTd DataLabel="Role">@context.Role</MudTd>
+           <MudTd DataLabel="Approve" HideSmall="_hidePosition">@context.Approved</MudTd>
+           <MudTd DataLabel="Email">@context.Email</MudTd>
+           <MudTd DataLabel="Approve">
+            <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="() => UpdateApproved(context.Name)" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Update" Color="Color.Success">Approve</MudButton>
+        </MudTd>
+    </RowTemplate>
+    <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+        </PagerContent>
+</MudTable>
+
+@code {
+    private bool _hidePosition;
+    private bool _loading;
+    private List<UserDto> Users = new();
+    // [Parameter]
+    public UserDto User { get; set; }
+
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    private UserDto? _currentUser;
+    public UpdateUserDto Dto = new();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        _currentUser = await _UserService.GetUserByUsernameAsync(username);
+
+        var list = await _UserService.GetUsersAsync();
+        list.Reverse();
+        Users = new();
+
+        foreach (var selectedUser in list)
+        {
+            if(selectedUser.SecurityLevel == 4 && selectedUser.Approved.Equals(false))
+                Users.Add(selectedUser);
+        }
+
+    }
+    private void CreateDto(UserDto userDto)
+    {
+        Dto = new UpdateUserDto
+        {
+            Name = userDto.Name,
+            Password = userDto.Password,
+            Email = userDto.Email,
+            Image = userDto.Image,
+            Approved = true
+        };
+    }
+    private async Task UpdateApproved(string name)
+    {
+        UserDto userFound = await _UserService.GetUserByNameAsync(name);
+        if (userFound.Approved.Equals(false))
+        {
+            CreateDto(userFound);
+            await _UserService.UpdateUserAsync(Dto);
+            navMgr.NavigateTo($"/Moderator", true);
+        }
+    }
+}

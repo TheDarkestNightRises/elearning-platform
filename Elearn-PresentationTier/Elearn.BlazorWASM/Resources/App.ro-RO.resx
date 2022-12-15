@@ -1,0 +1,422 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="welcome" xml:space="preserve">
+        <value>Bine ai venit</value>
+    </data>
+    <data name="Register-text" xml:space="preserve">
+        <value>Inregistrare</value>
+    </data>
+    <data name="Username-text" xml:space="preserve">
+        <value>Nume de utilizator</value>
+    </data>
+    <data name="Create an account-text" xml:space="preserve">
+        <value>Creeaza un cont</value>
+    </data>
+    <data name="Email already taken" xml:space="preserve">
+        <value>Email-ul deja exista</value>
+    </data>
+    <data name="Email-text" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="Name already taken" xml:space="preserve">
+        <value>Numele deja exista</value>
+    </data>
+    <data name="Name is required!" xml:space="preserve">
+        <value>Numele este obligatoriu</value>
+    </data>
+    <data name="Name must be at least of length 6" xml:space="preserve">
+        <value>Numele trebuie sa aibe cel putin 6 caractere</value>
+    </data>
+    <data name="Name-text" xml:space="preserve">
+        <value>Nume</value>
+    </data>
+    <data name="Password is required!" xml:space="preserve">
+        <value>Parola este obligatorie</value>
+    </data>
+    <data name="Password must be at least of length 8" xml:space="preserve">
+        <value>Parola trebuie sa aibe cel ptuin 8 caractere</value>
+    </data>
+    <data name="Password must contain at least one capital letter" xml:space="preserve">
+        <value>Parola trebuie sa contina cel putin o litera mare</value>
+    </data>
+    <data name="Password must contain at least one digit" xml:space="preserve">
+        <value>Parola trebuie sa contina cel putin o cifra</value>
+    </data>
+    <data name="Password must contain at least one lowercase letter" xml:space="preserve">
+        <value>Parola trebuie sa contina cel putin o litera mica</value>
+    </data>
+    <data name="Password-text" xml:space="preserve">
+        <value>Parola</value>
+    </data>
+    <data name="Passwords doesn't match" xml:space="preserve">
+        <value>Parola nu coincide</value>
+    </data>
+    <data name="Repeat Password-text" xml:space="preserve">
+        <value>Repeta parola</value>
+    </data>
+    <data name="Select Role-text" xml:space="preserve">
+        <value>Selecteaza rolul</value>
+    </data>
+    <data name="Select your country-text" xml:space="preserve">
+        <value>Alege tara</value>
+    </data>
+    <data name="Select your university-text" xml:space="preserve">
+        <value>Alege universitatea</value>
+    </data>
+    <data name="Username already taken-text" xml:space="preserve">
+        <value>Numele de utilizator exista deja</value>
+    </data>
+    <data name="Username is required!" xml:space="preserve">
+        <value>Numele de utilizator e obligatoriu</value>
+    </data>
+    <data name="Username must be at least of length 6" xml:space="preserve">
+        <value>Numele de utilizator trebuie sa aibe cel putin 6 caractere</value>
+    </data>
+    <data name="Validate-text" xml:space="preserve">
+        <value>Valideaza</value>
+    </data>
+    <data name="Reset-text" xml:space="preserve">
+        <value>Reseteaza</value>
+    </data>
+    <data name="Email is required!" xml:space="preserve">
+        <value>Email-ul este obligatoriu</value>
+    </data>
+    <data name="Repeat password field is required!" xml:space="preserve">
+        <value>Repetarea parolei este obligatorie</value>
+    </data>
+    <data name="The email address is invalid" xml:space="preserve">
+        <value>Adresa de email este invalida</value>
+    </data>
+    <data name="@Localizer[&quot;Save&quot;]" xml:space="preserve">
+        <value>Salveaza</value>
+    </data>
+    <data name="Account does not exist" xml:space="preserve">
+        <value>Contul nu exista</value>
+    </data>
+    <data name="Account Settings" xml:space="preserve">
+        <value>Setarile contului</value>
+    </data>
+    <data name="Add lecture" xml:space="preserve">
+        <value>Adauga o lectie</value>
+    </data>
+    <data name="Add question" xml:space="preserve">
+        <value>Adauga o intrebare</value>
+    </data>
+    <data name="address-text" xml:space="preserve">
+        <value>Adresa</value>
+    </data>
+    <data name="All Lectures" xml:space="preserve">
+        <value>Toate lectile</value>
+    </data>
+    <data name="All questions" xml:space="preserve">
+        <value>Toate intrebarile</value>
+    </data>
+    <data name="Ask a question!" xml:space="preserve">
+        <value>Pune o intrebare</value>
+    </data>
+    <data name="careers-text" xml:space="preserve">
+        <value>Cariera</value>
+    </data>
+    <data name="Change Email" xml:space="preserve">
+        <value>Schimba email-ul</value>
+    </data>
+    <data name="Change Password" xml:space="preserve">
+        <value>Schimba parola</value>
+    </data>
+    <data name="Choose a strong password" xml:space="preserve">
+        <value>Alege o parola puternica</value>
+    </data>
+    <data name="Comment section below" xml:space="preserve">
+        <value>Sectiunea de comentarii</value>
+    </data>
+    <data name="Comments" xml:space="preserve">
+        <value>Comentarii</value>
+    </data>
+    <data name="Comments Loading" xml:space="preserve">
+        <value>Comentariile se incarca</value>
+    </data>
+    <data name="contact-text" xml:space="preserve">
+        <value>Contact</value>
+    </data>
+    <data name="Country" xml:space="preserve">
+        <value>Tara</value>
+    </data>
+    <data name="Create A New Educational Lecture" xml:space="preserve">
+        <value>Creaza o noua lectie educationala</value>
+    </data>
+    <data name="Current email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="Date" xml:space="preserve">
+        <value>Data</value>
+    </data>
+    <data name="Date!" xml:space="preserve">
+        <value>Data</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>Sterge</value>
+    </data>
+    <data name="Delete account" xml:space="preserve">
+        <value>Sterge contul</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>Descriere</value>
+    </data>
+    <data name="Description is missing!" xml:space="preserve">
+        <value>Descriere lipseste</value>
+    </data>
+    <data name="Edit this lecture" xml:space="preserve">
+        <value>Editeaza lectia</value>
+    </data>
+    <data name="Email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="events-text" xml:space="preserve">
+        <value>Evenimente</value>
+    </data>
+    <data name="footer-question-text" xml:space="preserve">
+        <value>Afla mai multe</value>
+    </data>
+    <data name="for all people" xml:space="preserve">
+        <value>Pentru toti </value>
+    </data>
+    <data name="general-text" xml:space="preserve">
+        <value>General</value>
+    </data>
+    <data name="Getting the blog post" xml:space="preserve">
+        <value>Se incarca postarea</value>
+    </data>
+    <data name="Hello" xml:space="preserve">
+        <value>Buna</value>
+    </data>
+    <data name="Help other students by answering questions" xml:space="preserve">
+        <value>Ajuta-i pe ceilalti studenti prin a le raspunde la intrebari</value>
+    </data>
+    <data name="Home" xml:space="preserve">
+        <value>Acasa</value>
+    </data>
+    <data name="Image" xml:space="preserve">
+        <value>Imagine</value>
+    </data>
+    <data name="Improve yourself" xml:space="preserve">
+        <value>Dezvolta-ti cunostintele</value>
+    </data>
+    <data name="Loading" xml:space="preserve">
+        <value>Se incarca..</value>
+    </data>
+    <data name="Login" xml:space="preserve">
+        <value>Logheaza-te</value>
+    </data>
+    <data name="Look for posts with diferent categories" xml:space="preserve">
+        <value>Uitate la postari din diferite categorii</value>
+    </data>
+    <data name="more-info-text" xml:space="preserve">
+        <value>Mai multe informatii</value>
+    </data>
+    <data name="New Email" xml:space="preserve">
+        <value>Email nou</value>
+    </data>
+    <data name="New password" xml:space="preserve">
+        <value>Parola noua</value>
+    </data>
+    <data name="No body found!" xml:space="preserve">
+        <value>Nu s-a gasit continut</value>
+    </data>
+    <data name="No comments" xml:space="preserve">
+        <value>Nu exista comentarii</value>
+    </data>
+    <data name="No lectures found" xml:space="preserve">
+        <value>Nu s-au gasit lectiile</value>
+    </data>
+    <data name="No questions found" xml:space="preserve">
+        <value>Nu s-au gasit intrebarile</value>
+    </data>
+    <data name="No results found" xml:space="preserve">
+        <value>Nu s-au gasit rezultate</value>
+    </data>
+    <data name="No up voted lectures found" xml:space="preserve">
+        <value>Nu s-au gasit lecturi apreciate</value>
+    </data>
+    <data name="Old password" xml:space="preserve">
+        <value>Parola veche</value>
+    </data>
+    <data name="Only the creator of this lecture can edit it!" xml:space="preserve">
+        <value>Numai creatorul lectiei poate sa o editeze</value>
+    </data>
+    <data name="Password" xml:space="preserve">
+        <value>Parola</value>
+    </data>
+    <data name="password is wrong!" xml:space="preserve">
+        <value>Parola este gresita</value>
+    </data>
+    <data name="phone-text" xml:space="preserve">
+        <value>Telefon</value>
+    </data>
+    <data name="Please log in to ask a question" xml:space="preserve">
+        <value>Logheaza-te sa pui o intrebare</value>
+    </data>
+    <data name="Please log in to change your email" xml:space="preserve">
+        <value>Logheaza-te sa ii schimbi email-ul</value>
+    </data>
+    <data name="Please log in to change your password" xml:space="preserve">
+        <value>Logheaza-te sa iti schimbi parola</value>
+    </data>
+    <data name="Please log in to create a post" xml:space="preserve">
+        <value>Logheaza-te sa creezi un post</value>
+    </data>
+    <data name="Please log in to delete your account" xml:space="preserve">
+        <value>Logheaza-te sa iti stergi contul</value>
+    </data>
+    <data name="Please log in to manage your account" xml:space="preserve">
+        <value>Logheaza-te sa iti menegiarezi contul</value>
+    </data>
+    <data name="Please log in to view your user profile" xml:space="preserve">
+        <value>Logheaza-te sa iti vezi profilul</value>
+    </data>
+    <data name="Profile" xml:space="preserve">
+        <value>Profil</value>
+    </data>
+    <data name="project-text" xml:space="preserve">
+        <value>Proiect</value>
+    </data>
+    <data name="Question Description" xml:space="preserve">
+        <value>Descrierea intrebarii</value>
+    </data>
+    <data name="Question Title" xml:space="preserve">
+        <value>Titlul intrebarii</value>
+    </data>
+    <data name="Questions" xml:space="preserve">
+        <value>Intrebari</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Inregistrare</value>
+    </data>
+    <data name="Repeat new password" xml:space="preserve">
+        <value>Repeta parola</value>
+    </data>
+    <data name="Repeat new password password" xml:space="preserve">
+        <value>Repeta parola</value>
+    </data>
+    <data name="repeatPassword" xml:space="preserve">
+        <value>Repeta parola</value>
+    </data>
+    <data name="Reset" xml:space="preserve">
+        <value>Reset</value>
+    </data>
+    <data name="Role" xml:space="preserve">
+        <value>Rol</value>
+    </data>
+    <data name="Search" xml:space="preserve">
+        <value>Cauta</value>
+    </data>
+    <data name="SearchLectures" xml:space="preserve">
+        <value>Cauta o lectie</value>
+    </data>
+    <data name="Study more and you will become a professional" xml:space="preserve">
+        <value>Cu cat inveti mai mult cu atat devi mai bun</value>
+    </data>
+    <data name="Title" xml:space="preserve">
+        <value>Titlu</value>
+    </data>
+    <data name="Title is missing!" xml:space="preserve">
+        <value>Titlul lipseste</value>
+    </data>
+    <data name="Try to learn more" xml:space="preserve">
+        <value>Incearca sa inveti mai mult</value>
+    </data>
+    <data name="Universities" xml:space="preserve">
+        <value>Universitati</value>
+    </data>
+    <data name="University" xml:space="preserve">
+        <value>Universitate</value>
+    </data>
+    <data name="Up voted Lectures" xml:space="preserve">
+        <value>Lectii apreciate</value>
+    </data>
+    <data name="Url" xml:space="preserve">
+        <value>Url</value>
+    </data>
+    <data name="Url is missing!" xml:space="preserve">
+        <value>Url lipseste</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+        <value>Numele de utilizator </value>
+    </data>
+    <data name="Validate" xml:space="preserve">
+        <value>Valideaza</value>
+    </data>
+    <data name="We provide quality education" xml:space="preserve">
+        <value>Oferim educatie de calitate</value>
+    </data>
+    <data name="we-are-a-community-that-share-knowledge-for-learning-text" xml:space="preserve">
+        <value>Suntem-o-comuninate-care-promovam-invatatul</value>
+    </data>
+    <data name="website-text" xml:space="preserve">
+        <value>Website</value>
+    </data>
+    <data name="Wrong Password" xml:space="preserve">
+        <value>Parola gresita</value>
+    </data>
+    <data name="You can help" xml:space="preserve">
+        <value>Poti ajuta</value>
+    </data>
+    <data name="See lectures from different universities" xml:space="preserve">
+        <value>Vezi lectiile de la universitati</value>
+    </data>
+    <data name="Lastest-lectures-here" xml:space="preserve">
+        <value>Vezi cele mai noi lectii!</value>
+    </data>
+    <data name="Lastest-questions-here" xml:space="preserve">
+        <value>Intrebari recente puse de studenti</value>
+    </data>
+    <data name="Search Lectures" xml:space="preserve">
+        <value>Cauta lectii</value>
+    </data>
+    <data name="Search Questions" xml:space="preserve">
+        <value>Cauta intrebari</value>
+    </data>
+    <data name="Language" xml:space="preserve">
+        <value>Limba</value>
+    </data>
+    <data name="Verified" xml:space="preserve">
+        <value>Verificat</value>
+    </data>
+    <data name="Lectures" xml:space="preserve">
+        <value>Lecturi</value>
+    </data>
+    <data name="All Question" xml:space="preserve">
+        <value>Toate intrebarile</value>
+    </data>
+    <data name="Edit this question" xml:space="preserve">
+        <value>Editeaza aceasta intrebare</value>
+    </data>
+    <data name="Save changes" xml:space="preserve">
+        <value>Salveaza modificarile</value>
+    </data>
+    <data name="Answers section below" xml:space="preserve">
+        <value>Sectiunea de raspunsuri mai jos</value>
+    </data>
+    <data name="Answers" xml:space="preserve">
+        <value>Raspunsuri</value>
+    </data>
+    <data name="Answers Loading" xml:space="preserve">
+        <value>Raspunsurile se incarca</value>
+    </data>
+    <data name="No answers" xml:space="preserve">
+        <value>Niciun raspuns</value>
+    </data>
+    <data name="Post an answer" xml:space="preserve">
+        <value>posteaza un raspuns</value>
+    </data>
+</root>

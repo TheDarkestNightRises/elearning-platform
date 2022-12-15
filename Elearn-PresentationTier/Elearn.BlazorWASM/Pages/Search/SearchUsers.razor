@@ -1,0 +1,49 @@
+@page "/SearchUsers"
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@inject ISearchService SearchService 
+@using Elearn.BlazorWASM.Pages.Questions.UIComponents
+@using Elearn.Shared.Models
+<h3>Search Users</h3>
+
+<MudTextField @bind-Value="_searchInput" Label="Search" Class="card pb-4" Variant="Variant.Text"></MudTextField>
+
+<MudButton Color="Color.Primary"  Variant="Variant.Outlined" OnClick="@(() => OnSearchAsync())">Search</MudButton>
+
+@if (string.IsNullOrWhiteSpace(_searchInput))
+{
+    <p>Search for item</p>
+}
+else
+{
+    @if (_users is null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        @if (_users.Count == 0)
+        {
+            <p>No results found</p>
+        }
+        else
+        {
+            @foreach (var user in _users)
+            {
+                <h1>Not implemented</h1>
+            }
+        }
+    }
+}
+
+@code {
+    private string _searchInput = string.Empty;
+    private List<UserDto>? _users;
+
+    private async Task OnSearchAsync()
+    {
+        _users = null;
+        _users = await SearchService.SearchUsersAsync(_searchInput);
+    }
+
+}

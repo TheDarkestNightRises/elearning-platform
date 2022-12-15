@@ -19,10 +19,10 @@ public class LectureGrpcClient : ILectureService
         _lectureClient = new LectureService.LectureServiceClient(_grpcChannel);
     }
 
-    public async Task<List<Lecture>> GetAllPostsAsync()
+    public async Task<List<Lecture>> GetAllLecturesAsync()
     {
         List<Lecture> lectures = new List<Lecture>();
-        using (var call = _lectureClient.GetAllLectures(new NewLectureRequest()))
+        using (var call = _lectureClient.GetAllLectures(new PaginationModel()))
         {
             while (await call.ResponseStream.MoveNext())
             {
@@ -37,8 +37,17 @@ public class LectureGrpcClient : ILectureService
     public async Task<Lecture?> GetPostAsync(string url)
     {
         var lectureRequested = new LectureUrl { Url = url };
-        var postFromGrpc = await _lectureClient.GetLectureAsync(lectureRequested);
-        return postFromGrpc.AsBase();
+        try
+        {
+            var postFromGrpc = await _lectureClient.GetLectureAsync(lectureRequested);
+            return postFromGrpc.AsBase();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        return null;
     }
 
     public async Task<Lecture> CreateNewPostAsync(Lecture lecture)
@@ -53,14 +62,14 @@ public class LectureGrpcClient : ILectureService
         return createdLecture;
     }
 
-    public async Task<Lecture?> GetByIdAsync(int id)
+    public async Task<Lecture?> GetByIdAsync(long id)
     {
         var lectureRequested = new LectureId { Id = id };
         var lectureGrpcModel = await _lectureClient.GetLectureByIdAsync(lectureRequested);
         return lectureGrpcModel.AsBase();
     }
 
-    public async Task<List<Lecture>> GetLectureByUserIdAsync(long userId)
+    public async Task<List<Lecture>> GetLectureByTeacherIdAsync(long userId)
     {
         List<Lecture> lectures = new List<Lecture>();
         var request = new LectureUserId() { UserId = userId };
@@ -73,7 +82,8 @@ public class LectureGrpcClient : ILectureService
             }
         }
 
-        return lectures;    }
+        return lectures;
+    }
 
 
     public async Task<List<Lecture>> GetUpvotedLectureByUserIdAsync(long userId)
@@ -89,11 +99,41 @@ public class LectureGrpcClient : ILectureService
             }
         }
 
-        return lectures;     }
+        return lectures;
+    }
 
-   
+    public async Task<List<Lecture>> GetAllLecturesAsync(int pageNumber, int pageSize)
+    {
+        List<Lecture> lectures = new List<Lecture>();
+        PaginationModel pagination = new PaginationModel
+        {
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+        };
+        using (var call = _lectureClient.GetAllLectures(pagination))
+        {
+            while (await call.ResponseStream.MoveNext())
+            {
+                var currentLecture = call.ResponseStream.Current;
+                lectures.Add(currentLecture.AsBase());
+            }
+        }
 
+        return lectures;
+    }
+
+    public async Task<Lecture> EditLectureAsync(Lecture lecture)
+    {
+        var postModel = lecture.AsGrpcModel();
+        var createdPostFromGrpc = await _lectureClient.EditLectureAsync(postModel);
+        Lecture createdLecture = createdPostFromGrpc.AsBase();
+
+        return createdLecture;
+    }
+
+    public async Task DeleteLectureAsync(Lecture lecture)
+    {
+        var lectureModel = lecture.AsGrpcModel();
+        await _lectureClient.DeleteLectureAsync(lectureModel);
+    }
 }
-
-
-   

@@ -6,4 +6,5 @@ import via.dk.elearn.models.Student;
 
 @Repository
 public interface StudentRepository  extends JpaRepository<Student,Long> {
+    Student findFirstByUsername(String username);
 }

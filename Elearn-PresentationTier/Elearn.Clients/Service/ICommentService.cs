@@ -5,8 +5,7 @@ namespace Elearn.HttpClients.Service;
 
 public interface ICommentService 
 {
-    Task<Comment> Create(CommentCreationDto dto);
-
-
-    Task<List<CommentDto>> GetCommentsByPostUrlAsync(string url);
+    Task<CommentDto> Create(CommentCreationDto dto);
+    Task DeleteCommentAsync(long id);
+    Task<List<CommentUserDto?>> GetAllCommentsByLectureId(long id);
 }

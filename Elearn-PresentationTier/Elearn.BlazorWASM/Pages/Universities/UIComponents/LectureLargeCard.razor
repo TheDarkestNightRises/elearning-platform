@@ -1,0 +1,74 @@
+﻿@using Elearn.Shared.Dtos
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@using Elearn.HttpClients.Service
+@using System.Security.Claims
+@using Elearn.Shared.Models
+@inject NavigationManager navMgr
+@inject ILectureService _lectureService
+@inject IUserService _UserService
+<MudCard>
+    
+    <MudGrid>
+        <MudItem xs="2">
+            <LectureVote url="@Lecture.Url"/>
+        </MudItem>
+        <MudItem xs="5" >
+            <MudCardContent>
+                <MudText Typo="Typo.h4">@Lecture.Title</MudText>
+                <MudText Typo="Typo.body1">@Lecture.Username</MudText>
+                <MudText Typo="Typo.body1">@Lecture.DateCreated</MudText>
+                <MudText Typo="Typo.body1">@Lecture.Description</MudText>
+                   @if (_currentUser is not null && _currentUser!.Username.Equals(Lecture.Username))
+                                 {
+                                     <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="DeleteLecture" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+                                 }
+            </MudCardContent>
+        </MudItem>
+        <MudItem xs="5">
+            <MudImage Class="card-img pa-3" Src="@Lecture.Image" ObjectFit="ObjectFit.Contain"></MudImage>
+        </MudItem>
+    </MudGrid>
+
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="GoToUrl">View full lecture</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+@code {
+
+    [Parameter]
+    public LectureDto Lecture { get; set; }
+    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    private UserDto? _currentUser;
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        _currentUser = await _UserService.GetUserByUsernameAsync(username);
+        
+    }
+    
+    private async Task DeleteLecture()
+    {
+        await _lectureService.DeleteLectureAsync(Lecture.Url);
+        navMgr.NavigateTo($"/Profile",true);
+
+    }
+
+    private void GoToUrl()
+    {
+        navMgr.NavigateTo($"/Lectures/{Lecture.Url}");
+    }
+
+}

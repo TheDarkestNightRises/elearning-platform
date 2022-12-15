@@ -1,4 +1,5 @@
-﻿using Elearn.Application.LogicInterfaces;
+﻿using System.Security.AccessControl;
+using Elearn.Application.LogicInterfaces;
 using Elearn.Application.ServiceContracts;
 using Elearn.Shared.Dtos;
 using Elearn.Shared.Models;
@@ -9,51 +10,52 @@ namespace Elearn.Application.Logic;
 public class CommentLogic : ICommentLogic
 {
     private readonly ILectureService _lectureService;
-    private readonly ICommentService commentService;
+    private readonly ICommentService _commentService;
+    private readonly IUserService _userService;
 
-    public CommentLogic(ILectureService lectureService, ICommentService commentService)
+    public CommentLogic(ILectureService lectureService, ICommentService commentService, IUserService userService)
     {
-        this._lectureService = lectureService;
-        this.commentService = commentService;
+        _lectureService = lectureService;
+        _commentService = commentService;
+        _userService = userService;
     }
 
-    public async Task<Comment> CreateAsync(CommentCreationDto dto)
+    public async Task<Comment> CreateAsync(Comment comment)
     { 
-        Lecture? lecture = await _lectureService.GetByIdAsync(dto.PostId);
-        // if (post == null)
-        // {
-        //     throw new Exception($"Lecture was not found.");
-        // }
-        //
-        // User? user = await UserDao.GetByIdAsync(dto.post.authorId);
-        // if (post == null)
-        // {
-        //     throw new Exception($"Current user was not found.");
-        // }
-        ValidateComment(dto);
-        Comment comment = new Comment(1,lecture,dto.Text);
-        Comment created = await commentService.CreateAsync(comment);
+        Lecture? lecture = await _lectureService.GetByIdAsync(comment.Lecture.Id);
+        User? user = await _userService.GetUserByIdAsync(comment.Author.Id);
+        if (lecture == null)
+        {
+            throw new Exception($"Lecture was not found.");
+        }
+        if (user == null)
+        {
+            throw new Exception($"User was not found.");
+        }
+        ValidateComment(comment);
+        Comment commentAppended = new Comment(user,lecture,comment.Text);
+        Comment created = await _commentService.CreateAsync(commentAppended);
         return created;
     }
     
 
-    public Task<IEnumerable<Comment>> GetAsync(SearchCommentParametersDto searchParameters)
+    public async Task<List<Comment>> GetAllCommentsByLectureId(long id) 
     {
-        throw new NotImplementedException();
+        return await _commentService.GetAllCommentsByLectureId(id);
     }
 
-    public Task DeleteAsync(int id)
+    public async Task DeleteCommentAsync(long id)
     {
-        throw new NotImplementedException();
+        Comment? comment = await _commentService.GetCommentById(id);
+        if (comment == null)
+        {
+            throw new Exception($"Comment with id {id} was not found.");
+        }
+        await _commentService.DeleteCommentAsync(comment);
     }
 
-    public IQueryable<Comment> GetAllCommentsByPostUrlAsync(string url)
+    private void ValidateComment(Comment comment)
     {
-        return commentService.GetAllCommentsByPostUrlAsync(url);
-    }
-
-    private void ValidateComment(CommentCreationDto dto)
-    {
-        if (string.IsNullOrEmpty(dto.Text)) throw new Exception("Input cannot be empty.");
+        if (string.IsNullOrEmpty(comment.Text)) throw new Exception("Input cannot be empty.");
     }
 }

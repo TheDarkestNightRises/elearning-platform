@@ -5,5 +5,7 @@ namespace Elearn.Application.ServiceContracts;
 public interface ICommentService
 {
     Task<Comment> CreateAsync(Comment comment);
-    IQueryable<Comment> GetAllCommentsByPostUrlAsync(string url);
+    Task<List<Comment>> GetAllCommentsByLectureId(long id);
+    Task<Comment?> GetCommentById(long id);
+    Task DeleteCommentAsync(Comment comment);
 }

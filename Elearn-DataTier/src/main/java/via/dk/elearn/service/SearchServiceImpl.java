@@ -36,17 +36,6 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
     @Override
     public void searchLectures(SearchLecturesRequest request, StreamObserver<LectureModel> responseObserver) {
         List<Lecture> lectures = lectureRepository.findByTitleContaining(request.getTitle());
-        if (lectures.isEmpty()) {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lectures are not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lectures not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-            return;
-        }
         for (Lecture lecture : lectures) {
             LectureModel lectureModel = LectureMapper.convertLectureToGrpcModel(lecture);
             responseObserver.onNext(lectureModel);
@@ -57,17 +46,6 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
     @Override
     public void searchUsers(SearchUsersRequest request, StreamObserver<UserModel> responseObserver) {
         List<User> users = userRepository.findByUsernameContaining(request.getUserName());
-        if (users.isEmpty()) {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lectures are not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lectures not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-            return;
-        }
         for (User user : users) {
             UserModel userModel = UserMapper.convertUserToGrpcModel(user);
             responseObserver.onNext(userModel);
@@ -78,17 +56,6 @@ public class SearchServiceImpl extends SearchServiceGrpc.SearchServiceImplBase {
     @Override
     public void searchQuestions(SearchQuestionsRequest request, StreamObserver<QuestionModel> responseObserver) {
         List<Question> questions = questionRepository.findByTitleContaining(request.getTitle());
-        if (questions.isEmpty()) {
-            com.google.rpc.Status status = com.google.rpc.Status.newBuilder()
-                    .setCode(com.google.rpc.Code.NOT_FOUND.getNumber())
-                    .setMessage("The lectures are not found")
-                    .addDetails(Any.pack(ErrorInfo.newBuilder()
-                            .setReason("Lectures not found")
-                            .build()))
-                    .build();
-            responseObserver.onError(StatusProto.toStatusRuntimeException(status));
-            return;
-        }
         for (Question question : questions) {
             QuestionModel questionModel = QuestionMapper.convertQuestionToGrpcModel(question);
             responseObserver.onNext(questionModel);

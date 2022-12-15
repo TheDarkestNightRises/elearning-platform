@@ -1,0 +1,20 @@
+syntax = "proto3"; // Use the latest proto syntax
+
+option csharp_namespace = "ElearnGrpc";
+import "rpc_lecture.proto";
+
+service UniversityService {
+  rpc GetLecturesByUniversity (UniversityModel) returns (stream LectureModel);
+  rpc GetUniversities(UniversityRequest) returns (stream UniversityModel);
+  rpc GetUniversityById(UniversityId) returns (UniversityModel);
+}
+message UniversityModel{
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+}
+message UniversityId{
+  int64 id = 1;
+}
+message UniversityRequest{
+}

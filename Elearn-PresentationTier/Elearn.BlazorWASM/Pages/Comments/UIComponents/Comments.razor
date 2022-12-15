@@ -1,0 +1,38 @@
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@using Elearn.Shared.Models
+@inject ICommentService CommentService
+@inject ILectureService LectureService
+@inject IStringLocalizer<App> Localizer
+
+<div>@Localizer["Comments"]:</div>
+@if (_commentsDto == null)
+{
+    <span>@Localizer["Comments Loading"]...</span>
+}
+@if (_commentsDto.Count == 0)
+{
+    <span>@Localizer["No comments"]</span>
+}
+
+@foreach (var comment in _commentsDto)
+{
+    <CommentBody Id="comment.Id" DateCreated="comment.DateCreated" ImageText="@comment?.user.Image" Name="@comment?.user.Name" Text="@comment?.Text"></CommentBody>
+}
+<div class="pa-4"></div>
+@code {
+
+    [Parameter]
+    public string? Url { get; set; }
+
+    private List<CommentUserDto?> _commentsDto = new();
+    LectureDto? _lectureDto;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Url != null) _lectureDto = await LectureService.GetLectureByUrlAsync(Url);
+        if (_lectureDto != null) _commentsDto = await CommentService.GetAllCommentsByLectureId(_lectureDto.Id);
+     
+    }
+
+}

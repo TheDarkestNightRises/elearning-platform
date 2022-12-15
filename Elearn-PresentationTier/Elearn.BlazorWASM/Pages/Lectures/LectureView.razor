@@ -1,0 +1,80 @@
+@page "/lectures/{url}"
+@inject ILectureService LectureService
+@inject NavigationManager NavMgr 
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@using Elearn.BlazorWASM.Pages.Comments.UIComponents
+@using System.Security.Claims
+@inject IStringLocalizer<App> Localizer
+
+@if (_currentLecture == null)
+{
+    <span>@Localizer["Getting the blog post"]...</span>
+}
+else
+{
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="10" md="7">
+            <MudText Align="Align.Center" Typo="Typo.h3" Class="mt-1 my-9"> @_currentLecture.Title </MudText>
+            <MudImage Class="card-img my-6" Src="@_currentLecture.Image" ObjectFit="ObjectFit.Contain" Height="200"></MudImage>
+            <MudText Align="Align.Left" Typo="Typo.h5"> Description </MudText>
+            <MudCard Class="mx-auto pa-6 my-6">
+                <MudText Typo="Typo.body1">
+                    @(_currentLecture.Description)
+                </MudText>
+            </MudCard>
+            <MudText Align="Align.Left" Typo="Typo.h5">Text</MudText>
+            <MudCard Class="mx-auto pa-6 my-6">
+                <MudText Typo="Typo.body1">
+                    @((MarkupString)_currentLecture.Body)
+                </MudText>
+            </MudCard>
+            <LectureVote url="@_currentLecture.Url"></LectureVote>
+            @if (name is not null && name.Equals(_currentLecture.Username))
+            {
+                <MudButton Variant="Variant.Filled" OnClick="OnEdit">Edit</MudButton>
+            }
+        </MudItem>
+    </MudGrid>
+}
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="10" md="7">
+        <CreateComment CurrentLecture="@_currentLecture"></CreateComment>
+        <Comments Url="@Url"></Comments>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private LectureDto? _currentLecture;
+
+    [Parameter]
+    public String? Url { get; set; }
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    private string? name;
+    private IEnumerable<Claim>? userClaims;
+    private bool isLoggedIn;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Url != null) _currentLecture = await LectureService.GetLectureByUrlAsync(Url);
+
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+
+        if (!isLoggedIn) return;
+
+        userClaims = user.Claims;
+        name = user.Identity!.Name!;
+    }
+
+    private void OnEdit()
+    {
+        NavMgr.NavigateTo($"/EditLecture/{_currentLecture?.Url}");
+    }
+
+}

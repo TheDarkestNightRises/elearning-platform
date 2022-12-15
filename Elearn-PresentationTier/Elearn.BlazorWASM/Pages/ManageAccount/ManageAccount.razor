@@ -1,0 +1,92 @@
+﻿@page "/ManageAccount"
+@using System.Security.Claims
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Models
+@inject IUserService _UserService
+@inject NavigationManager NavMgr 
+@inject IStringLocalizer<App> Localizer
+
+<AuthorizeView>
+    <NotAuthorized>
+        <h3>@Localizer["Please log in to manage your account"]</h3>
+    </NotAuthorized>
+    <Authorized Context="Auth">
+           <style>
+            body {
+            background-image: url("img/1426870.png");
+          
+            }
+        </style>
+   
+        <MudForm Class="pb-12">
+            <MudGrid Class="d-flex justify-center align-center mx-auto pa-4 mt-8" Elevation="0" Style="width: 900px;">
+                <MudItem xs="12" sm="7">
+                    <MudPaper Class="pa-4">
+                        <h3 class=" d-flex justify-center">@Localizer["Hello"], @CurrentUser?.Name</h3>
+
+                        <div class="form-group d-flex justify-center">
+                            <label>@Localizer["Current email"] : @CurrentUser?.Email</label>
+                        </div>
+                        <MudCardActions Class="d-flex justify-center">
+                            <MudButton Class="mx-2" OnClick="() => OpenChangePassword()" Variant="Variant.Filled" Color="Color.Success">@Localizer["Change Password"]</MudButton>
+                        </MudCardActions>
+                        <MudCardActions Class="d-flex justify-center">
+                            <MudButton Class="mx-2" OnClick="() => OpenChangeEmail()" Variant="Variant.Filled" Color="Color.Success">@Localizer["Change Email"]</MudButton>
+                        </MudCardActions>
+                        <MudCardActions Class="d-flex justify-center">
+                            <MudButton Class="mx-2" OnClick="() => OpenDeleteAccount()" Variant="Variant.Filled" Color="Color.Success">@Localizer["Delete account"]</MudButton>
+                        </MudCardActions>
+
+                    </MudPaper>
+
+                </MudItem>
+
+            </MudGrid>
+
+        </MudForm>
+
+
+    </Authorized>
+
+</AuthorizeView>
+
+
+@code {
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    public UserDto? CurrentUser;
+
+    private void OpenChangePassword()
+    {
+        NavMgr.NavigateTo($"/ChangePassword");
+    }
+
+    private void OpenChangeEmail()
+    {
+        NavMgr.NavigateTo($"/ChangeEmail");
+    }
+    
+    private void OpenDeleteAccount()
+    {
+        NavMgr.NavigateTo($"/DeleteAccount");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        CurrentUser = await _UserService.GetUserByUsernameAsync(username);
+        
+    }
+
+
+
+}

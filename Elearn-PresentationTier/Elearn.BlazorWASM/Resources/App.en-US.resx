@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="Register-text" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Username-text" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="Password-text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Repeat Password-text" xml:space="preserve">
+    <value>Repeat Password</value>
+  </data>
+  <data name="Email-text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Name-text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Select Role-text" xml:space="preserve">
+    <value>Select Role</value>
+  </data>
+  <data name="Select your university-text" xml:space="preserve">
+    <value>Select your university</value>
+  </data>
+  <data name="Select your country-text" xml:space="preserve">
+    <value>Select your country</value>
+  </data>
+  <data name="Create an account-text" xml:space="preserve">
+    <value>Create an account</value>
+  </data>
+  <data name="Validate-text" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="Username already taken-text" xml:space="preserve">
+    <value>Username already taken</value>
+  </data>
+  <data name="Name already taken" xml:space="preserve">
+    <value>Name already taken</value>
+  </data>
+  <data name="Email already taken" xml:space="preserve">
+    <value>Email already taken</value>
+  </data>
+  <data name="Password is required!" xml:space="preserve">
+    <value>Password is required</value>
+  </data>
+  <data name="Password must be at least of length 8" xml:space="preserve">
+    <value>Password must be at least 8 characters</value>
+  </data>
+  <data name="Password must contain at least one capital letter" xml:space="preserve">
+    <value>Password must contain at least one capital letter</value>
+  </data>
+  <data name="Password must contain at least one lowercase letter" xml:space="preserve">
+    <value>Password must contain at least one lowercase letter</value>
+  </data>
+  <data name="Password must contain at least one digit" xml:space="preserve">
+    <value>Password must contain at least one digit</value>
+  </data>
+  <data name="Passwords doesn't match" xml:space="preserve">
+    <value>Password does not match</value>
+  </data>
+  <data name="Username is required!" xml:space="preserve">
+    <value>Username is required</value>
+  </data>
+  <data name="Username must be at least of length 6" xml:space="preserve">
+    <value>Username must be at least 6 characters</value>
+  </data>
+  <data name="Name is required!" xml:space="preserve">
+    <value>Name is required</value>
+  </data>
+  <data name="Name must be at least of length 6" xml:space="preserve">
+    <value>Name must be at least 6 characters</value>
+  </data>
+  <data name="Reset-text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Repeat password field is required!" xml:space="preserve">
+    <value>Repeat password is required</value>
+  </data>
+  <data name="The email address is invalid" xml:space="preserve">
+    <value>The email adress is invalid</value>
+  </data>
+  <data name="Email is required!" xml:space="preserve">
+    <value>Email is required</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username </value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="Account does not exist" xml:space="preserve">
+    <value>Account does not exist!</value>
+  </data>
+  <data name="Wrong Password" xml:space="preserve">
+    <value>Wrong password</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Add lecture" xml:space="preserve">
+    <value>Add a lecture</value>
+  </data>
+  <data name="Add question" xml:space="preserve">
+    <value>Add a question</value>
+  </data>
+  <data name="Universities" xml:space="preserve">
+    <value>Universities</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Account Settings" xml:space="preserve">
+    <value>Account Settings</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="footer-question-text" xml:space="preserve">
+    <value>Learn more</value>
+  </data>
+  <data name="we-are-a-community-that-share-knowledge-for-learning-text" xml:space="preserve">
+    <value>We-are-a-community-that-share-knowledge-for-learning</value>
+  </data>
+  <data name="website-text" xml:space="preserve">
+    <value>Webiste</value>
+  </data>
+  <data name="more-info-text" xml:space="preserve">
+    <value>More info</value>
+  </data>
+  <data name="project-text" xml:space="preserve">
+    <value>Project-Text</value>
+  </data>
+  <data name="careers-text" xml:space="preserve">
+    <value>Career</value>
+  </data>
+  <data name="contact-text" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="events-text" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="phone-text" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="address-text" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="general-text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="Comments Loading" xml:space="preserve">
+    <value>Comments Loading</value>
+  </data>
+  <data name="No comments" xml:space="preserve">
+    <value>No comments</value>
+  </data>
+  <data name="Comment section below" xml:space="preserve">
+    <value>Comment section below</value>
+  </data>
+  <data name="Getting the blog post" xml:space="preserve">
+    <value>Getting the blog post</value>
+  </data>
+  <data name="Please log in to create a post" xml:space="preserve">
+    <value>Please log in to create a post</value>
+  </data>
+  <data name="Edit this lecture" xml:space="preserve">
+    <value>Edit this lecture</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Image" xml:space="preserve">
+    <value>Image</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Only the creator of this lecture can edit it!" xml:space="preserve">
+    <value>Only the creator of this lecture can edit it</value>
+  </data>
+  <data name="No body found!" xml:space="preserve">
+    <value>No body found!</value>
+  </data>
+  <data name="Description is missing!" xml:space="preserve">
+    <value>Description is missing</value>
+  </data>
+  <data name="Title is missing!" xml:space="preserve">
+    <value>Title is missing</value>
+  </data>
+  <data name="Url is missing!" xml:space="preserve">
+    <value>Url is missing</value>
+  </data>
+  <data name="Create A New Educational Lecture" xml:space="preserve">
+    <value>Create a new Educational Lecture</value>
+  </data>
+  <data name="No lectures found" xml:space="preserve">
+    <value>No lectures found</value>
+  </data>
+  <data name="We provide quality education" xml:space="preserve">
+    <value>We provide quality education</value>
+  </data>
+  <data name="for all people" xml:space="preserve">
+    <value>For all people</value>
+  </data>
+  <data name="Help other students by answering questions" xml:space="preserve">
+    <value>Help other students by answering questions</value>
+  </data>
+  <data name="You can help" xml:space="preserve">
+    <value>You can help</value>
+  </data>
+  <data name="Study more and you will become a professional" xml:space="preserve">
+    <value>Study more and you will become a professional</value>
+  </data>
+  <data name="Improve yourself" xml:space="preserve">
+    <value>Improve yourself</value>
+  </data>
+  <data name="Look for posts with diferent categories" xml:space="preserve">
+    <value>Look for posts with diferent categories</value>
+  </data>
+  <data name="Try to learn more" xml:space="preserve">
+    <value>Try to learn more</value>
+  </data>
+  <data name="Please log in to change your email" xml:space="preserve">
+    <value>Please log in to change your email</value>
+  </data>
+  <data name="Change Email" xml:space="preserve">
+    <value>Change Email</value>
+  </data>
+  <data name="New Email" xml:space="preserve">
+    <value>New Email</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="password is wrong!" xml:space="preserve">
+    <value>Password is wrong</value>
+  </data>
+  <data name="Change Password" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="Please log in to change your password" xml:space="preserve">
+    <value>Please log in to change your password</value>
+  </data>
+  <data name="Old password" xml:space="preserve">
+    <value>Old password</value>
+  </data>
+  <data name="New password" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="Choose a strong password" xml:space="preserve">
+    <value>Choose a strong password</value>
+  </data>
+  <data name="Repeat new password password" xml:space="preserve">
+    <value>Repeat new password</value>
+  </data>
+  <data name="repeatPassword" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="Please log in to delete your account" xml:space="preserve">
+    <value>Please log in to delete your account</value>
+  </data>
+  <data name="Delete account" xml:space="preserve">
+    <value>Delete Account</value>
+  </data>
+  <data name="Please log in to manage your account" xml:space="preserve">
+    <value>Please log in to manage your account</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="Current email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Please log in to view your user profile" xml:space="preserve">
+    <value>Please log in to view your user profile</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="University" xml:space="preserve">
+    <value>University</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="@Localizer[&quot;Save&quot;]" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="All Lectures" xml:space="preserve">
+    <value>All Lectures</value>
+  </data>
+  <data name="Up voted Lectures" xml:space="preserve">
+    <value>Up voted Lectures</value>
+  </data>
+  <data name="No up voted lectures found" xml:space="preserve">
+    <value>No up voted lectures found</value>
+  </data>
+  <data name="All questions" xml:space="preserve">
+    <value>All Questions</value>
+  </data>
+  <data name="No questions found" xml:space="preserve">
+    <value>No questions found</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Questions</value>
+  </data>
+  <data name="Please log in to ask a question" xml:space="preserve">
+    <value>Please log in to ask a question</value>
+  </data>
+  <data name="Ask a question!" xml:space="preserve">
+    <value>Ask a question!</value>
+  </data>
+  <data name="Question Title" xml:space="preserve">
+    <value>Question title</value>
+  </data>
+  <data name="Url" xml:space="preserve">
+    <value>Url</value>
+  </data>
+  <data name="Question Description" xml:space="preserve">
+    <value>Question description</value>
+  </data>
+  <data name="Date!" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading</value>
+  </data>
+  <data name="No results found" xml:space="preserve">
+    <value>No results found</value>
+  </data>
+  <data name="SearchLectures" xml:space="preserve">
+    <value>Search Lecture</value>
+  </data>
+  <data name="Repeat new password" xml:space="preserve">
+    <value>Repeat new password</value>
+  </data>
+  <data name="See lectures from different universities" xml:space="preserve">
+    <value>See lectures from different universities</value>
+  </data>
+  <data name="Lastest-lectures-here" xml:space="preserve">
+    <value>See the lastest lectures!</value>
+  </data>
+  <data name="Lastest-questions-here" xml:space="preserve">
+    <value>Students have recently asked these questions</value>
+  </data>
+  <data name="Search Lectures" xml:space="preserve">
+    <value>Search Lectures</value>
+  </data>
+  <data name="Search Questions" xml:space="preserve">
+    <value>Search Questions</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Verified" xml:space="preserve">
+    <value>Verified</value>
+  </data>
+  <data name="Lectures" xml:space="preserve">
+    <value>Lectures</value>
+  </data>
+  <data name="All Question" xml:space="preserve">
+    <value>All Questions</value>
+  </data>
+  <data name="Edit this question" xml:space="preserve">
+    <value>Edit this question</value>
+  </data>
+  <data name="Save changes" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="Answers section below" xml:space="preserve">
+    <value>Answers section below</value>
+  </data>
+  <data name="Answers" xml:space="preserve">
+    <value>Answers</value>
+  </data>
+  <data name="Answers Loading" xml:space="preserve">
+    <value>Answers loading</value>
+  </data>
+  <data name="No answers" xml:space="preserve">
+    <value>No answers</value>
+  </data>
+  <data name="Post an answer" xml:space="preserve">
+    <value>Post an answer</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+</root>

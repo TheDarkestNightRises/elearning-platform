@@ -17,7 +17,7 @@ public class SearchController : ControllerBase
         _searchLogic = searchLogic;
     }
 
-    /*[HttpGet("/user/{name}")]
+    /*[HttpGet("/users/{name}")]
     public async Task<ActionResult<List<UserDto>>> SearchUsers(string name)
     {
         try
@@ -33,7 +33,7 @@ public class SearchController : ControllerBase
         
     }*/
 
-    [HttpGet, Route("question/{title}")]
+    [HttpGet, Route("questions/{title}")]
     public async Task<ActionResult<List<QuestionDto>>> SearchQuestions(string title)
     {
         try
@@ -48,7 +48,7 @@ public class SearchController : ControllerBase
         }
     }
 
-    [HttpGet, Route("lecture/{title}")]
+    [HttpGet, Route("lectures/{title}")]
     public async Task<ActionResult<List<LectureDto>>> SearchLecture(string title)
     {
         try

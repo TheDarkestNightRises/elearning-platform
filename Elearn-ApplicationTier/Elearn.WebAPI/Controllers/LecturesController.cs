@@ -26,7 +26,7 @@ public class LecturesController : ControllerBase
             Lecture lecture = dto.AsBaseFromCreation();
             Lecture created = await _lectureLogic.CreateAsync(lecture);
             LectureDto createdDto = created.AsDto();
-            return Created($"/lectures/{createdDto.Url}", createdDto);// ???
+            return Created($"/Lectures/{createdDto.Url}", createdDto);// ???
         }
         catch (Exception e)
         {
@@ -41,6 +41,7 @@ public class LecturesController : ControllerBase
         try
         {
             var lectures = await _lectureLogic.GetAllLecturesAsync();
+            //HttpContext.AddPaginationHeader(lectures, paginationDto.PageSize);
             return Ok(lectures.AsDtos());
         }
         catch (Exception e)
@@ -51,7 +52,7 @@ public class LecturesController : ControllerBase
    
     }
 
-    [HttpGet("/get-lecture/{url}")]
+    [HttpGet("{url}")]
     public async Task<ActionResult<LectureDto>> GetLectureAsync(string url)
     {
         try
@@ -70,13 +71,13 @@ public class LecturesController : ControllerBase
         }
     }
     
-    [HttpGet("/user-lecture/{userId}")]
-    public async Task<ActionResult<List<LectureDto>>> GetLectureByUserIdAsync(long userId)
+    [HttpGet, Route("/Teachers/{teacherId}/lectures")]
+    public async Task<ActionResult<List<LectureDto>>> GetLectureByTeacherIdAsync(long teacherId)
     {
         try
         {   
             
-            var lectures = await _lectureLogic.GetLectureByUserIdAsync(userId);
+            var lectures = await _lectureLogic.GetLectureByTeacherIdAsync(teacherId);
             return Ok(lectures.AsDtos());
         }
         catch (Exception e)
@@ -87,7 +88,7 @@ public class LecturesController : ControllerBase
    
     }
     
-    [HttpGet("/upvote-lecture/{userId}")]
+    [HttpGet, Route("/Users/{userId}/history")]
     public async Task<ActionResult<List<LectureDto>>> GetUpvotedLectureByUserIdAsync(long userId)
     {
         try
@@ -101,6 +102,57 @@ public class LecturesController : ControllerBase
             return StatusCode(500, e.Message);
         }
    
+    }
+    
+    [HttpGet, Route("/Universities/{universityId}/lectures")]
+    public async Task<ActionResult<List<LectureDto>>> GetLectureByUniversityAsync(long universityId)
+    {
+        try
+        {
+            University university = new University()
+            {
+                Id = universityId
+            };
+            var lectures = await _lectureLogic.GetLecturesByUniversityAsync(university);
+            return Ok(lectures.AsDtos());
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e); 
+            return StatusCode(500, e.Message);
+        }
+   
+    }
+    
+    [HttpPatch]
+    public async Task<ActionResult> UpdateLectureAsync([FromBody] LectureUpdateDto dto)
+    {
+        try
+        {
+            
+            await _lectureLogic.EditLectureAsync(dto.AsBaseFromUpdate());
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpDelete("{url}")]
+    public async Task<ActionResult> DeleteAsync([FromRoute] string url)
+    {
+        try
+        {
+            await _lectureLogic.DeleteLectureAsync(url);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            return StatusCode(500, e.Message);
+        }
     }
 
 }

@@ -1,0 +1,206 @@
+@page "/Register"
+@using Microsoft.AspNetCore.Components
+@using Elearn.Shared.Dtos
+@using Elearn.Shared.Enum
+@using Elearn.HttpClients.Service
+@using System.Text.RegularExpressions
+@using System.Security.AccessControl
+@using System.ComponentModel.DataAnnotations
+@using Elearn.Shared.Models
+@inject IAuthService authService
+@inject IUniversityService universityService
+@inject IUserService UserService
+@inject ICountryService CountryService
+@inject NavigationManager NavMgr 
+@inject IStringLocalizer<App> Localizer
+
+
+
+<style>
+    body {
+    background-image: url("img/1426870.png");
+    }
+</style>
+
+
+<MudForm Model="@newUser" @ref="form" @bind-IsValid="@success" Class="pb-8">
+    <MudGrid Class="d-flex justify-center align-center mx-auto " Style="width: 900px;" Elevation="0">
+        <MudItem xs="12" sm="7">
+            <MudPaper Class="pa-4">
+                <h3>
+                    <MudInputLabel Class="d-flex align-center justify-center ">@Localizer["Register-text"]</MudInputLabel>
+                </h3>
+
+                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(UsernameError))" Typo="Typo.subtitle2" Label="@Localizer["Username-text"]" Required="true" @bind-Value="newUser.Username" InputType="InputType.Text"
+                              For="@(() => newUser.Username)" RequiredError="Username field is required!">
+                </MudTextField>
+                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Label=@Localizer["Password-text"] Required="true" @bind-Value="newUser.Password" InputType="InputType.Password"
+                              For="@(() => newUser.Password)" RequiredError="Password filed is required!">
+                </MudTextField>
+                <MudTextField T="string" Required="true" Label=@Localizer["Repeat Password-text"] @bind-Value="@repeatPassword" InputType="InputType.Password"
+                              For="@(() => @repeatPassword)" RequiredError=@Localizer["password field is required!"] Validation="@(new Func<string, string>(PasswordMatch))">
+                </MudTextField>
+                <MudTextField T="string" Label="@Localizer["Email-text"]" Required="true" @bind-Value="newUser.Email" InputType="InputType.Email"
+                              Validation="@(new EmailAddressAttribute() { ErrorMessage = "The email address is invalid" })" For="@(() => newUser.Email)" RequiredError="Email is required!">
+                </MudTextField>
+                <MudTextField T="string" Validation="@(new Func<string, IEnumerable<string>>(NameError))" Label="@Localizer["Name-text"]" Required="true" @bind-Value="newUser.Name" InputType="InputType.Text"
+                              For="@(() => newUser.Name)" RequiredError="Name of user is required!">
+                </MudTextField>
+
+
+                <MudSelect @bind-Value="newUser.Role" Label="@Localizer["Select Role-text"]" AdornmentColor="Color.Secondary">
+                    @foreach (var item in Enum.GetValues(typeof(RoleEnum)))
+                    {
+                        <MudSelectItem Value="@item.ToString()">@item</MudSelectItem>
+                    }
+                </MudSelect>
+
+                <MudSelect @bind-Value="@currentunivesity" Required="true" Dense="true" ToStringFunc="@convertUniversity" Label="@Localizer["Select your university-text"]" AdornmentColor="Color.Secondary">
+                    @foreach (UniversityDto item in _universityDtos)
+                    {
+                        <MudSelectItem Value="@item"/>
+                    }
+                </MudSelect>
+                
+                <MudSelect @bind-Value="@currentCountry" Required="true" Dense="true" ToStringFunc="@convertCountry" Label="@Localizer["Select your country-text"]" AdornmentColor="Color.Secondary">
+                    @foreach (CountryDto item in countryDtos)
+                    {
+                        <MudSelectItem Value="@item"/>
+                    }
+                </MudSelect>
+                <div Class="d-flex justify-center align-center">@Error</div>
+
+
+                <MudCardActions Class="d-flex justify-center">
+                    <MudButton Class="mx-2" OnClick="CreateNewUserAsync" Variant="Variant.Filled" Disabled="@(!success)" Color="Color.Success">@Localizer["Create an account-text"]</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@(() => form.Validate())">@Localizer["Validate-text"]</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(() => form.Reset())" Class="mx-2">@Localizer["Reset-text"]</MudButton>
+                </MudCardActions>
+            </MudPaper>
+        </MudItem>
+
+    </MudGrid>
+
+
+</MudForm>
+
+
+@code {
+    public UserCreationDto newUser = new();
+    public string repeatPassword;
+    public bool success;
+    public MudForm form;
+    public string Error = "";
+    public List<UserDto> users = new();
+    public string defaultImage = "data:image/png;base64,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";
+    
+    private List<UniversityDto>? _universityDtos = new List<UniversityDto>();
+    private UniversityDto? currentunivesity;
+    private Func<UniversityDto, string> convertUniversity = ci => ci?.Name;
+    
+    private List<CountryDto>? countryDtos = new List<CountryDto>();
+    private CountryDto? currentCountry;
+    private Func<CountryDto, string> convertCountry = ci => ci?.Name;
+    
+    MudTextField<string> pwField1;
+
+    public string errorUniversity = "Select one of the universities above";
+
+    private async Task CreateNewUserAsync()
+    {
+        foreach (var user in users)
+        {
+            if (user.Username.Equals(newUser.Username))
+            {
+                Error = Localizer["Username already taken-text"];
+                return;
+            }
+
+            if (user.Name.Equals(newUser.Name))
+            {
+                Error = Localizer["Name already taken"];
+                return;
+            }
+
+            if (user.Email.Equals(newUser.Email))
+            {
+                Error = Localizer["Email already taken"];
+                return;
+            }
+        }
+
+        if (newUser.Role.Equals(RoleEnum.Student.ToString()))
+            newUser.SecurityLevel = 2;
+        if (newUser.Role.Equals(RoleEnum.Teacher.ToString()))
+            newUser.SecurityLevel = 4;
+
+        newUser.Image = defaultImage;
+
+        if (currentunivesity is not null)
+            newUser.UniversityId = currentunivesity.Id;
+
+        if (currentCountry is not null)
+            newUser.CountryId = currentCountry.Id;
+
+        if (repeatPassword.Equals(newUser.Password))
+            await authService.RegisterAsync(newUser);
+
+        NavMgr.NavigateTo("/Login");
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _universityDtos = await universityService.GetAllUniveritiesAsync();
+        countryDtos = await CountryService.GetAllCountriesAsync();
+        users = await UserService.GetUsersAsync();
+    }
+
+    private IEnumerable<string> PasswordStrength(string pw)
+    {
+        if (string.IsNullOrWhiteSpace(pw))
+        {
+            yield return Localizer["Password is required!"];
+            yield break;
+        }
+        if (pw.Length < 8)
+            yield return Localizer["Password must be at least of length 8"];
+        if (!Regex.IsMatch(pw, @"[A-Z]"))
+            yield return Localizer["Password must contain at least one capital letter"];
+        if (!Regex.IsMatch(pw, @"[a-z]"))
+            yield return Localizer["Password must contain at least one lowercase letter"];
+        if (!Regex.IsMatch(pw, @"[0-9]"))
+            yield return Localizer["Password must contain at least one digit"];
+    }
+
+    private string PasswordMatch(string arg)
+    {
+        if (newUser.Password != arg)
+            return Localizer["Passwords doesn't match"];
+        return null;
+    }
+
+
+    private IEnumerable<string> UsernameError(string username)
+    {
+        if (string.IsNullOrWhiteSpace(username))
+        {
+            yield return Localizer["Username is required!"];
+            yield break;
+        }
+        if (username.Length < 6)
+            yield return Localizer["Username must be at least of length 6"];
+    }
+
+    private IEnumerable<string> NameError(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            yield return Localizer["Name is required!"];
+            yield break;
+        }
+        if (name.Length < 6)
+            yield return Localizer["Name must be at least of length 6"];
+    }
+
+}

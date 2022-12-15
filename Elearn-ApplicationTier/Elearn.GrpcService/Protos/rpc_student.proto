@@ -1,0 +1,26 @@
+syntax = "proto3"; // Use the latest proto syntax
+
+option csharp_namespace = "ElearnGrpc";
+
+import "rpc_university.proto";
+
+service StudentService {
+  rpc getStudentByUsername(StudentUsername) returns (StudentModel);
+}
+
+message StudentUsername{
+  string username = 1;
+}
+
+message StudentModel {
+  int64 id = 1;
+  string username = 2;
+  string email = 3;
+  string name = 4;
+  string password =5;
+  string image = 6;
+  string role = 7;
+  int32 securityLevel = 8;
+  UniversityModel university = 9;
+  bool approved = 10;
+}

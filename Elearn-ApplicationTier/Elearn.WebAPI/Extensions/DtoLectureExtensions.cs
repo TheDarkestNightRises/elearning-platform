@@ -15,6 +15,7 @@ public static class LectureExtensions
             Image = lecture.Image,
             Title = lecture.Title,
             Body = lecture.Body,
+            Description = lecture.Description,
             DateCreated = lecture.DateCreated,
             Username = lecture.Author != null ? lecture.Author.Username : String.Empty
         };
@@ -30,6 +31,7 @@ public static class LectureExtensions
                 Image = lecture.Image,
                 Title = lecture.Title,
                 Body = lecture.Body,
+                Description = lecture.Description,
                 DateCreated = lecture.DateCreated,
                 Username = lecture.Author != null ? lecture.Author.Username : String.Empty
             });
@@ -45,6 +47,7 @@ public static class LectureExtensions
             Image = lectureDto.Image,
             Title = lectureDto.Title,
             Body = lectureDto.Body,
+            Description = lectureDto.Description,
             DateCreated = lectureDto.DateCreated,
             
         };
@@ -60,8 +63,25 @@ public static class LectureExtensions
             Url = lectureDto.Url,
             Image = lectureDto.Image,
             Title = lectureDto.Title,
-            Body = lectureDto.Body
-            
+            Body = lectureDto.Body,
+            Description = lectureDto.Description
+
+        };
+        lecture.Author = new Teacher();
+        lecture.Author.Username = lectureDto.Username;
+        return lecture;
+    }
+    
+    public static Lecture AsBaseFromUpdate(this LectureUpdateDto lectureDto) 
+    {
+        Lecture lecture = new Lecture
+        {
+            Url = lectureDto.Url,
+            Image = lectureDto.Image,
+            Title = lectureDto.Title,
+            Body = lectureDto.Body,
+            Description = lectureDto.Description
+
         };
         lecture.Author = new Teacher();
         lecture.Author.Username = lectureDto.Username;

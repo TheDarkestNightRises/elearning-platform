@@ -9,10 +9,14 @@ namespace Elearn.Application.Logic;
 public class AuthLogic : IAuthLogic
 {
     private readonly IUserService _userService;
+    private readonly IUniversityService _universityService;
+    private readonly ICountryService _countryService;
 
-    public AuthLogic(IUserService userService)
+    public AuthLogic(IUserService userService, IUniversityService universityService, ICountryService countryService)
     {
         _userService = userService;
+        _universityService = universityService;
+        _countryService = countryService;
     }
 
     public async Task<User> ValidateUserAsync(string username, string password)
@@ -55,7 +59,24 @@ public class AuthLogic : IAuthLogic
         {
             throw new ValidationException("Name cannot be null");
         }
-        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role, dto.SecurityLevel);
+        
+        if (dto.UniversityId == 0)
+        {
+            throw new ValidationException("University cannot be null");
+        }
+
+        University university = await _universityService.GetUniversityByIdAsync(dto.UniversityId);
+        if (university is null)
+        {
+            throw new ValidationException("University does not exist");
+        }
+
+        Country country = await _countryService.GetCountryByIdAsync(dto.CountryId);
+        if (country is null)
+        {
+            throw new ValidationException("Country does not exist");
+        }
+        User user = new User(dto.Username, dto.Password, dto.Email, dto.Name, dto.Role, dto.Image ,dto.SecurityLevel,university,dto.Approved, country);
         User created = await _userService.CreateNewUserAsync(user);
         return created;
     }

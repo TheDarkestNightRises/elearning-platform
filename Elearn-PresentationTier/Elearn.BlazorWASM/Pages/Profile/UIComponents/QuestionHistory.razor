@@ -1,0 +1,65 @@
+﻿@using Elearn.Shared.Dtos
+@using Elearn.Shared.Models
+@using System.Security.Claims
+@using Elearn.HttpClients.Service
+@inject NavigationManager navMgr
+@inject IUserService _UserService
+@inject IQuestionService _QuestionService
+<link href="QuestionCard.razor.css" rel="stylesheet"/>
+<MudCard>
+    <MudCardHeader>
+        <CardHeaderContent>
+            <MudText Typo="Typo.h5">@QuestionDto.Title</MudText>
+            <MudIconButton Icon="@Icons.Material.Filled.QuestionMark" Color="Color.Default"/>
+        </CardHeaderContent>
+    </MudCardHeader>
+    <MudCardContent>
+        <MudText Typo="Typo.body2">@QuestionDto.CreationDate</MudText>
+         @if (_currentUser is not null && _currentUser!.Username.Equals(QuestionDto.AuthorName))
+                {
+                    <MudButton Class="d-flex justify-center align-center" Size="Size.Small" OnClick="DeleteLecture" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">Delete</MudButton>
+                }
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="GoToUrl">Learn More</MudButton>
+    </MudCardActions>
+</MudCard>
+
+
+@code {
+    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    private UserDto? _currentUser;
+
+    [Parameter]
+    public QuestionDto QuestionDto { get; set; }
+
+    private void GoToUrl()
+    {
+        navMgr.NavigateTo($"/questions/{QuestionDto.Url}");
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        _currentUser = await _UserService.GetUserByUsernameAsync(username);
+    }
+
+    private async Task DeleteLecture()
+    {
+        await _QuestionService.DeleteLectureAsync(QuestionDto.Url);
+        navMgr.NavigateTo($"/Profile", true);
+    }
+
+
+}

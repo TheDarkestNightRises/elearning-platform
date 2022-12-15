@@ -15,26 +15,41 @@ public class CommentHttpClient : ICommentService
         this.client = client;
     }
 
-    public async Task<Comment> Create(CommentCreationDto dto)
+    public async Task<CommentDto> Create(CommentCreationDto dto)
     {
-        HttpResponseMessage response = await client.PostAsJsonAsync("/comments", dto);
+        HttpResponseMessage response = await client.PostAsJsonAsync("/Comments", dto);
         string result = await response.Content.ReadAsStringAsync();
         if (!response.IsSuccessStatusCode)
         {
             throw new Exception(result);
         }
 
-        Comment comment = JsonSerializer.Deserialize<Comment>(result, new JsonSerializerOptions
+        CommentDto comment = JsonSerializer.Deserialize<CommentDto>(result, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         })!;
         return comment;
     }
 
-    public async Task<List<CommentDto>> GetCommentsByPostUrlAsync(string url)
+    public async Task DeleteCommentAsync(long id)
     {
-        //Todo: Refactor this so it fits with dtos
-        return await client.GetFromJsonAsync<List<CommentDto>>($"/comments/{url}");
+        HttpResponseMessage response = await client.DeleteAsync($"Comments/{id}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+    }
+
+    public async Task<List<CommentUserDto?>> GetAllCommentsByLectureId(long id)
+    {
+        HttpResponseMessage response = await client.GetAsync($"/Comments/Lecture/{id}");
+        if (!response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            throw new Exception(content);
+        }
+        return await response.Content.ReadFromJsonAsync<List<CommentUserDto?>>();
     }
     
 }

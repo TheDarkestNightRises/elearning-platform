@@ -1,31 +1,86 @@
-﻿@inject NavigationManager navMgr
+﻿@using System.Security.Claims
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Models
+@inject NavigationManager navMgr
+@inject IUserService _UserService
+@inject IStringLocalizer<App> Localizer
 
 <MudToolBar>
-    <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" Class="mr-5" OnClick="GoHome"/>
-    <MudIconButton Icon="@Icons.Material.Outlined.Add" OnClick="GoToAddAPost"/>
-    <MudButton Variant="Variant.Text" OnClick="GoToAddAPost">Add post</MudButton>
-    <MudButton Variant="Variant.Text" OnClick="GoToLectures">Lectures</MudButton>
-    <MudSpacer/>
-    <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
-        <MudButton Variant="Variant.Text" OnClick="GoToProfile">Profile </MudButton>
-    <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="GoToLogin"/>
-    <MudButton Variant="Variant.Text" OnClick="GoToLogin">Login </MudButton>
-    <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
-    <MudButton Variant="Variant.Text" OnClick="GoToRegister">Register </MudButton>
-    <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToAccountSettings"/>
-        <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">Account Settings </MudButton>
+    <AuthorizeView>
+        <Authorized>
+            <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" OnClick="GoHome"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToHome">@Localizer["Home"]</MudButton>
+
+            @if (CurrentUser?.SecurityLevel == 4)
+            {
+                <MudButton Variant="Variant.Text" OnClick="GoToAddALecture">@Localizer["Add lecture"]</MudButton>
+            }
+
+            @if (CurrentUser?.SecurityLevel == 2)
+            {
+                <MudButton Variant="Variant.Text" OnClick="GoToAddAQuestion">@Localizer["Add question"]</MudButton>
+            }
+
+            <MudButton Variant="Variant.Text" OnClick="GoToUniversities">@Localizer["Universities"]</MudButton>
+            
+         
+            <MudButton Variant="Variant.Text" OnClick="GoToSearchLecture">@Localizer["Search Lectures"]</MudButton>
+            <MudButton Variant="Variant.Text" OnClick="GoToSearchQuestion">@Localizer["Search Questions"]</MudButton>
+            
+            <MudButton Variant="Variant.Text" OnClick="GoToLectures">@Localizer["Lectures"]</MudButton>
+                        <MudButton Variant="Variant.Text" OnClick="GoToQuestions">@Localizer["Questions"]</MudButton>
+
+            
+
+
+            @if (CurrentUser?.SecurityLevel == 10)
+            {
+                <MudIconButton Icon="@Icons.Material.Outlined.People" OnClick="GoToModerator"/>
+                <MudButton Variant="Variant.Text" OnClick="GoToModerator">Moderator View </MudButton>
+            }
+            <MudSpacer/>
+            <MudIconButton Icon="@Icons.Material.Outlined.PeopleAlt" OnClick="GoToProfile"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToProfile">@Localizer["Profile"]</MudButton>
+            <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToAccountSettings"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToAccountSettings">@Localizer["Account Settings"]</MudButton>
+            <MudIconButton Icon="@Icons.Material.Outlined.Logout" OnClick="GoToLogout"/>
+        </Authorized>
+        <NotAuthorized>
+            <MudIconButton Icon="@Icons.Material.Outlined.Home" Color="Color.Inherit" OnClick="GoHome"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToHome">@Localizer["Home"]</MudButton>
+            <MudSpacer/>
+            <MudIconButton Icon="@Icons.Material.Outlined.Login" OnClick="GoToLogin"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToLogin">@Localizer["Login"] </MudButton>
+            <MudIconButton Icon="@Icons.Material.Outlined.Book" OnClick="GoToRegister"/>
+            <MudButton Variant="Variant.Text" OnClick="GoToRegister">@Localizer["Register"]</MudButton>
+        </NotAuthorized>
+    </AuthorizeView>
+
+
 </MudToolBar>
 
 @code {
 
-    private void GoToAddAPost()
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    private UserDto? CurrentUser;
+
+
+    public string SelectContent = "Search";
+    
+
+    private void GoToAddALecture()
     {
         navMgr.NavigateTo("/Create-lecture");
     }
 
     private void GoToLogin()
     {
-        navMgr.NavigateTo("/LoginTest");
+        navMgr.NavigateTo("/Login");
     }
 
     private void GoToRegister()
@@ -42,14 +97,66 @@
     {
         navMgr.NavigateTo("/Profile");
     }
-    
+
     private void GoToAccountSettings()
     {
         navMgr.NavigateTo("/ManageAccount");
     }
+
+    private void GoToUniversities()
+    {
+        navMgr.NavigateTo("/Universities");
+    }
+
+    private void GoToLogout()
+    {
+        navMgr.NavigateTo("/Logout");
+    }
+
+    private void GoToHome()
+    {
+        navMgr.NavigateTo("/");
+    }
+
+    private void GoToAddAQuestion()
+    {
+        navMgr.NavigateTo("/Create-question");
+    }
+
+    private void GoToModerator()
+    {
+        navMgr.NavigateTo("/Moderator");
+    }
+
+    private void GoToSearchLecture()
+    {
+        navMgr.NavigateTo("/SearchLectures");
+    }
+
+    private void GoToSearchQuestion()
+    {
+        navMgr.NavigateTo("/SearchQuestions");
+    }
+    
     private void GoToLectures()
     {
-        navMgr.NavigateTo("/Lectures");
+        navMgr.NavigateTo("/AllLectures");
     }
-}
+    
+    private void GoToQuestions()
+    {
+        navMgr.NavigateTo("/AllQuestions");
+    }
 
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        CurrentUser = await _UserService.GetUserByUsernameAsync(username);
+    }
+
+}

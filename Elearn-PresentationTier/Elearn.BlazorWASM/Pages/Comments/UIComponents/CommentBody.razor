@@ -1,0 +1,66 @@
+@using System.Security.Claims
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Models
+@inject IUserService _UserService
+@inject ICommentService CommentService
+@inject IStringLocalizer<App> Localizer
+
+<link href="CommentBody.razor.css" rel="stylesheet"/>
+<div></div>
+<div class="comments">
+    <div class="card">
+        <div class="d-flex justify-center align-center">
+            <MudAvatar Size="Size.Medium" Image="@ImageText"/>
+            <div class="user-name">@Name (@DateCreated):</div>
+            <div class="comment-content">@Text</div>
+                 @if (_currentUser is not null && _currentUser!.Name.Equals(Name))
+                 {
+                  
+                     <MudButton Class="d-flex justify-center align-center" Size = "Size.Small" OnClick="DeleteComment" Variant="Variant.Text" EndIcon="@Icons.Material.Filled.Delete" Color="Color.Error">@Localizer["Delete"]</MudButton>
+                 }
+        </div>
+    </div>
+</div>
+
+@code {
+    
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+    private IEnumerable<Claim>? userClaims;
+    private string? username;
+    private bool isLoggedIn;
+    private UserDto? _currentUser;
+
+
+    [Parameter]
+    public string Text { get; set; }
+
+    [Parameter]
+    public string Name { get; set; }
+    
+    [Parameter]
+    public long Id { get; set; }
+    
+    [Parameter]
+    public string ImageText { get; set; }
+    
+    [Parameter]
+    public DateTime DateCreated { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+        if (!isLoggedIn) return;
+        userClaims = user.Claims;
+        username = user.Identity!.Name;
+        _currentUser = await _UserService.GetUserByUsernameAsync(username);
+        
+    }
+
+    private async Task DeleteComment()
+    {
+        await CommentService.DeleteCommentAsync(Id);
+    }
+}

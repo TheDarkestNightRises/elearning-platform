@@ -1,0 +1,60 @@
+﻿@page "/AllLectures"
+
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@inject ISearchService SearchService 
+@using Elearn.BlazorWASM.Pages.Lectures.UIComponents
+@inject IStringLocalizer<App> Localizer
+@inject ILectureService LectureService
+
+<h3>@Localizer["All Lectures"]</h3>
+
+<br/>
+<br/>
+
+
+  @if (_lectures is null)
+     {
+         <p>@Localizer["Loading"]...</p>
+     }
+     else
+     {
+         @if (_lectures.Count == 0)
+         {
+             <p>@Localizer["No results found"]</p>
+         }
+         else
+         {
+             
+             <MudGrid Justify="Justify.SpaceEvenly" Class="align-items-center">
+                 @foreach (var lectures in _lectures)
+                 {
+                     <MudItem xs="3" >
+                         <LectureCard Lecture="@lectures"></LectureCard>
+                     </MudItem>
+                 }
+             </MudGrid>
+             
+             
+         }
+     }
+
+
+@code {
+  
+    private List<LectureDto>? _lectures;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _lectures = null;
+        
+        var list = await LectureService.GetLecturesAsync();
+        list.Reverse();
+        _lectures = new();
+        for (int i = 0; i < (list.Count < 100 ? list.Count : 100); i++)
+        {
+            _lectures.Add(list[i]);
+        }
+    }
+
+}

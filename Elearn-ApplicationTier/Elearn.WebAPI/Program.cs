@@ -22,17 +22,26 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ILectureService, LectureGrpcClient>();
 builder.Services.AddScoped<ICommentService, CommentGrpcClient>();
 builder.Services.AddScoped<IUserService, UserGrpcClient>();
-builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<ISearchService, SearchGrpcClient>();
 builder.Services.AddScoped<IQuestionService, QuestionGrpcClient>();
 builder.Services.AddScoped<ITeacherService, TeacherGrpcClient>();
+builder.Services.AddScoped<IModeratorService, ModeratorGrpcClient>();
 builder.Services.AddScoped<ILectureVoteService, LectureVoteGrpcClient>();
+builder.Services.AddScoped<IUniversityService, UniversityGrpcClient>();
+builder.Services.AddScoped<IAnswerService, AnswerGrpcClient>();
+builder.Services.AddScoped<IStudentService, StudentGrpcClient>();
+builder.Services.AddScoped<ICountryService, CountryGrpcClient>();
 builder.Services.AddScoped<ICommentLogic, CommentLogic>();
 builder.Services.AddScoped<ILectureLogic, LectureLogic>();
+builder.Services.AddScoped<IUserLogic, UserLogic>();
 builder.Services.AddScoped<ISearchLogic, SearchLogic>();
 builder.Services.AddScoped<IAuthLogic, AuthLogic>();
+builder.Services.AddScoped<IAnswerLogic,AnswerLogic>();
 builder.Services.AddScoped<ILectureVoteLogic, LectureVoteLogic>();
 builder.Services.AddScoped<IQuestionLogic,QuestionLogic>();
+builder.Services.AddScoped<IUniversityLogic, UniversityLogic>();
+builder.Services.AddScoped<ICountryLogic, CountryLogic>();
+builder.Services.AddGrpcClient<AnswerGrpcClient>();
 builder.Services.AddGrpcClient<SearchGrpcClient>();
 builder.Services.AddGrpcClient<CommentGrpcClient>();
 builder.Services.AddGrpcClient<LectureGrpcClient>();
@@ -40,6 +49,10 @@ builder.Services.AddGrpcClient<UserGrpcClient>();
 builder.Services.AddGrpcClient<QuestionGrpcClient>();
 builder.Services.AddGrpcClient<TeacherGrpcClient>();
 builder.Services.AddGrpcClient<LectureVoteGrpcClient>();
+builder.Services.AddGrpcClient<UniversityGrpcClient>();
+builder.Services.AddGrpcClient<ModeratorGrpcClient>();
+builder.Services.AddGrpcClient<StudentGrpcClient>();
+builder.Services.AddGrpcClient<StudentGrpcClient>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
 {
@@ -79,12 +92,14 @@ app.UseAuthorization();
 app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapGrpcService<AnswerGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<CommentGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<LectureGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<UserGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<QuestionGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<TeacherGrpcClient>().EnableGrpcWeb();
     endpoints.MapGrpcService<SearchGrpcClient>().EnableGrpcWeb();
+    endpoints.MapGrpcService<ModeratorGrpcClient>().EnableGrpcWeb();
 });
 app.UseHttpsRedirection();
 

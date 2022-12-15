@@ -1,0 +1,45 @@
+﻿@page "/Universities"
+@using Elearn.Shared.Dtos
+@using Elearn.HttpClients.Service
+@using Elearn.BlazorWASM.Pages.Universities.UIComponents
+@inject IUniversityService UniversityService
+@inject IStringLocalizer<App> Localizer
+<MudText Align="Align.Center" Typo="Typo.h3">@Localizer["See lectures from different universities"]</MudText>
+@if (_universityDtos == null)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+}
+else
+{
+    @if (_universityDtos.Count == 0)
+    {
+        <span> No universities found</span>
+    }
+    else
+    {
+        <MudGrid Class="my-6" Justify="Justify.Center">
+            @foreach (var post in _universityDtos)
+            {
+                <MudItem xs="12" sm="9" md="7">
+                    <UniversityCard University="@post"></UniversityCard>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+}
+
+@code {
+    private List<UniversityDto>? _universityDtos;
+    private UniversityDto? currentunivesity;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _universityDtos = await UniversityService.GetAllUniveritiesAsync();
+    }
+
+    public async Task GetLecturesByCurrentUniversity()
+    {
+        Console.WriteLine("On change activated");
+    }
+
+}

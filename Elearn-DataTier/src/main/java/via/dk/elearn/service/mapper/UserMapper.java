@@ -11,8 +11,10 @@ public class UserMapper {
                 .setEmail(user.getEmail())
                 .setName(user.getName())
                 .setPassword(user.getPassword())
+                .setImage(user.getImage())
                 .setRole(user.getRole())
                 .setSecurityLevel(user.getSecurity_level())
+                .setApproved(user.isApproved())
                 .build();
     }
 
@@ -23,8 +25,10 @@ public class UserMapper {
                 .email(userModel.getEmail())
                 .name(userModel.getName())
                 .password(userModel.getPassword())
+                .image(userModel.getImage())
                 .role(userModel.getRole())
                 .security_level(userModel.getSecurityLevel())
+                .approved(userModel.getApproved())
                 .build();
     }
 

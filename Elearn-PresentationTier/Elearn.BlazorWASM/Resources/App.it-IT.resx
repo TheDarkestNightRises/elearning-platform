@@ -1,0 +1,434 @@
+﻿<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="welcome" xml:space="preserve">
+        <value>Benvenuto</value>
+    </data>
+    <data name="@Localizer[&quot;Save&quot;]" xml:space="preserve">
+        <value>Salva</value>
+    </data>
+    <data name="Account does not exist" xml:space="preserve">
+        <value>L'account non esiste!</value>
+    </data>
+    <data name="Account Settings" xml:space="preserve">
+        <value>Impostazioni dell'account</value>
+    </data>
+    <data name="Add lecture" xml:space="preserve">
+        <value>Aggiungi una lezione</value>
+    </data>
+    <data name="Add question" xml:space="preserve">
+        <value>Aggiungi una domanda</value>
+    </data>
+    <data name="address-text" xml:space="preserve">
+        <value>Indirizzo</value>
+    </data>
+    <data name="All Lectures" xml:space="preserve">
+        <value>Tutte le lezioni</value>
+    </data>
+    <data name="All questions" xml:space="preserve">
+        <value>Tutte le domande</value>
+    </data>
+    <data name="Ask a question!" xml:space="preserve">
+        <value>Fai una domanda!</value>
+    </data>
+    <data name="careers-text" xml:space="preserve">
+        <value>Carriera</value>
+    </data>
+    <data name="Change Email" xml:space="preserve">
+        <value>Cambia e-mail</value>
+    </data>
+    <data name="Change Password" xml:space="preserve">
+        <value>Cambia password</value>
+    </data>
+    <data name="Choose a strong password" xml:space="preserve">
+        <value>Scegliere una password forte</value>
+    </data>
+    <data name="Comment section below" xml:space="preserve">
+        <value>Sezione commenti qui sotto</value>
+    </data>
+    <data name="Comments" xml:space="preserve">
+        <value>Commenti</value>
+    </data>
+    <data name="Comments Loading" xml:space="preserve">
+        <value>Caricamento commenti  in corso</value>
+    </data>
+    <data name="contact-text" xml:space="preserve">
+        <value>Contatto</value>
+    </data>
+    <data name="Country" xml:space="preserve">
+        <value>Paese</value>
+    </data>
+    <data name="Create A New Educational Lecture" xml:space="preserve">
+        <value>Creare una nuova lezione</value>
+    </data>
+    <data name="Create an account-text" xml:space="preserve">
+        <value>Creare un account</value>
+    </data>
+    <data name="Current email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="Date" xml:space="preserve">
+        <value>Data</value>
+    </data>
+    <data name="Date!" xml:space="preserve">
+        <value>Data</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>Cancella</value>
+    </data>
+    <data name="Delete account" xml:space="preserve">
+        <value>Cancellare l'account</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>Descrizione</value>
+    </data>
+    <data name="Description is missing!" xml:space="preserve">
+        <value>Manca la descrizione</value>
+    </data>
+    <data name="Edit this lecture" xml:space="preserve">
+        <value>Modifica questa lezione</value>
+    </data>
+    <data name="Email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="Email already taken" xml:space="preserve">
+        <value>Email già presente</value>
+    </data>
+    <data name="Email is required!" xml:space="preserve">
+        <value>L'e-mail è necessaria</value>
+    </data>
+    <data name="Email-text" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="events-text" xml:space="preserve">
+        <value>Eventi</value>
+    </data>
+    <data name="footer-question-text" xml:space="preserve">
+        <value>Scopri di più</value>
+    </data>
+    <data name="for all people" xml:space="preserve">
+        <value>Per tutte le persone</value>
+    </data>
+    <data name="general-text" xml:space="preserve">
+        <value>Generale</value>
+    </data>
+    <data name="Getting the blog post" xml:space="preserve">
+        <value>Ottieni il post del blog</value>
+    </data>
+    <data name="Hello" xml:space="preserve">
+        <value>Ciao</value>
+    </data>
+    <data name="Help other students by answering questions" xml:space="preserve">
+        <value>Aiuta gli altri studenti rispondendo alle domande</value>
+    </data>
+    <data name="Home" xml:space="preserve">
+        <value>Home</value>
+    </data>
+    <data name="Image" xml:space="preserve">
+        <value>Immagine</value>
+    </data>
+    <data name="Improve yourself" xml:space="preserve">
+        <value>Migliorarsi</value>
+    </data>
+    <data name="Loading" xml:space="preserve">
+        <value>Caricamento</value>
+    </data>
+    <data name="Login" xml:space="preserve">
+        <value>Accesso</value>
+    </data>
+    <data name="Look for posts with diferent categories" xml:space="preserve">
+        <value>Cerca post con categorie diverse</value>
+    </data>
+    <data name="more-info-text" xml:space="preserve">
+        <value>Più informazioni</value>
+    </data>
+    <data name="Name already taken" xml:space="preserve">
+        <value>Nome già assegnato</value>
+    </data>
+    <data name="Name is required!" xml:space="preserve">
+        <value>Il nome è richiesto</value>
+    </data>
+    <data name="Name must be at least of length 6" xml:space="preserve">
+        <value>Il nome deve avere almeno 6 caratteri</value>
+    </data>
+    <data name="Name-text" xml:space="preserve">
+        <value>Nome</value>
+    </data>
+    <data name="New Email" xml:space="preserve">
+        <value>Nuova e-mail </value>
+    </data>
+    <data name="New password" xml:space="preserve">
+        <value>Nuova password</value>
+    </data>
+    <data name="No body found!" xml:space="preserve">
+        <value>Nessun contenuto trovato!</value>
+    </data>
+    <data name="No comments" xml:space="preserve">
+        <value>Nessun commento</value>
+    </data>
+    <data name="No lectures found" xml:space="preserve">
+        <value>Nessuna lezione trovata</value>
+    </data>
+    <data name="No questions found" xml:space="preserve">
+        <value>Nessuna domanda trovata</value>
+    </data>
+    <data name="No results found" xml:space="preserve">
+        <value>Non sono stati trovati risultati</value>
+    </data>
+    <data name="No up voted lectures found" xml:space="preserve">
+        <value>Non sono state trovate lezioni votate</value>
+    </data>
+    <data name="Old password" xml:space="preserve">
+        <value>Password precedente</value>
+    </data>
+    <data name="Only the creator of this lecture can edit it!" xml:space="preserve">
+        <value>Solo il creatore di questa lezione può modificarla.</value>
+    </data>
+    <data name="Password" xml:space="preserve">
+        <value>Password</value>
+    </data>
+    <data name="Password is required!" xml:space="preserve">
+        <value>La password è necessaria</value>
+    </data>
+    <data name="password is wrong!" xml:space="preserve">
+        <value>La password è errata</value>
+    </data>
+    <data name="Password must be at least of length 8" xml:space="preserve">
+        <value>La password deve essere di almeno 8 caratteri</value>
+    </data>
+    <data name="Password must contain at least one capital letter" xml:space="preserve">
+        <value>La password deve contenere almeno una lettera maiuscola</value>
+    </data>
+    <data name="Password must contain at least one digit" xml:space="preserve">
+        <value>La password deve contenere almeno una cifra</value>
+    </data>
+    <data name="Password must contain at least one lowercase letter" xml:space="preserve">
+        <value>La password deve contenere almeno una lettera minuscola</value>
+    </data>
+    <data name="Password-text" xml:space="preserve">
+        <value>Password</value>
+    </data>
+    <data name="Passwords doesn't match" xml:space="preserve">
+        <value>La password non corrisponde</value>
+    </data>
+    <data name="phone-text" xml:space="preserve">
+        <value>Telefono</value>
+    </data>
+    <data name="Please log in to ask a question" xml:space="preserve">
+        <value>Effettuare il login per fare una domanda</value>
+    </data>
+    <data name="Please log in to change your email" xml:space="preserve">
+        <value>Effettuare il login per modificare l'e-mail</value>
+    </data>
+    <data name="Please log in to change your password" xml:space="preserve">
+        <value>Effettuare il login per modificare la password</value>
+    </data>
+    <data name="Please log in to create a post" xml:space="preserve">
+        <value>Effettuare il login per creare un post</value>
+    </data>
+    <data name="Please log in to delete your account" xml:space="preserve">
+        <value>Effettuare il login per eliminare il proprio account</value>
+    </data>
+    <data name="Please log in to manage your account" xml:space="preserve">
+        <value>Effettuare il login per gestire il proprio account</value>
+    </data>
+    <data name="Please log in to view your user profile" xml:space="preserve">
+        <value>Effettuare il login per visualizzare il proprio profilo utente</value>
+    </data>
+    <data name="Profile" xml:space="preserve">
+        <value>Profilo</value>
+    </data>
+    <data name="project-text" xml:space="preserve">
+        <value>Progetto-Testo</value>
+    </data>
+    <data name="Question Description" xml:space="preserve">
+        <value>Descrizione della domanda</value>
+    </data>
+    <data name="Question Title" xml:space="preserve">
+        <value>Titolo della domanda</value>
+    </data>
+    <data name="Questions" xml:space="preserve">
+        <value>Domande</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Registrazione</value>
+    </data>
+    <data name="Register-text" xml:space="preserve">
+        <value>Registrazione</value>
+    </data>
+    <data name="Repeat new password" xml:space="preserve">
+        <value>Ripetere la nuova password</value>
+    </data>
+    <data name="Repeat new password password" xml:space="preserve">
+        <value>Ripetere la nuova password</value>
+    </data>
+    <data name="Repeat password field is required!" xml:space="preserve">
+        <value>È necessario ripetere la password</value>
+    </data>
+    <data name="Repeat Password-text" xml:space="preserve">
+        <value>Ripetere la password</value>
+    </data>
+    <data name="repeatPassword" xml:space="preserve">
+        <value>Ripetere la password</value>
+    </data>
+    <data name="Reset" xml:space="preserve">
+        <value>Reset</value>
+    </data>
+    <data name="Reset-text" xml:space="preserve">
+        <value>Reset</value>
+    </data>
+    <data name="Role" xml:space="preserve">
+        <value>Ruolo</value>
+    </data>
+    <data name="Search" xml:space="preserve">
+        <value>Ricerca</value>
+    </data>
+    <data name="SearchLectures" xml:space="preserve">
+        <value>Cerca Lezione</value>
+    </data>
+    <data name="See lectures from different universities" xml:space="preserve">
+        <value>Visializza le lezioni di diverse università</value>
+    </data>
+    <data name="Select Role-text" xml:space="preserve">
+        <value>Seleziona il ruolo</value>
+    </data>
+    <data name="Select your country-text" xml:space="preserve">
+        <value>Seleziona il tuo paese</value>
+    </data>
+    <data name="Select your university-text" xml:space="preserve">
+        <value>Seleziona la tua università</value>
+    </data>
+    <data name="Study more and you will become a professional" xml:space="preserve">
+        <value>Studia di più e diventerai un professionista</value>
+    </data>
+    <data name="The email address is invalid" xml:space="preserve">
+        <value>L'indirizzo e-mail non è valido</value>
+    </data>
+    <data name="Title" xml:space="preserve">
+        <value>Titolo</value>
+    </data>
+    <data name="Title is missing!" xml:space="preserve">
+        <value>Manca il titolo</value>
+    </data>
+    <data name="Try to learn more" xml:space="preserve">
+        <value>Per saperne di più</value>
+    </data>
+    <data name="Universities" xml:space="preserve">
+        <value>Università</value>
+    </data>
+    <data name="University" xml:space="preserve">
+        <value>Università</value>
+    </data>
+    <data name="Up voted Lectures" xml:space="preserve">
+        <value>Lezioni votate</value>
+    </data>
+    <data name="Url" xml:space="preserve">
+        <value>Url</value>
+    </data>
+    <data name="Url is missing!" xml:space="preserve">
+        <value>L'URL è assente</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+        <value>Nome </value>
+    </data>
+    <data name="Username already taken-text" xml:space="preserve">
+        <value>Nome utente già preso</value>
+    </data>
+    <data name="Username is required!" xml:space="preserve">
+        <value>Il nome utente è obbligatorio</value>
+    </data>
+    <data name="Username must be at least of length 6" xml:space="preserve">
+        <value>Il nome utente deve essere composto da almeno 6 caratteri</value>
+    </data>
+    <data name="Username-text" xml:space="preserve">
+        <value>Nome utente</value>
+    </data>
+    <data name="Validate" xml:space="preserve">
+        <value>Convalida</value>
+    </data>
+    <data name="Validate-text" xml:space="preserve">
+        <value>Convalida</value>
+    </data>
+    <data name="We provide quality education" xml:space="preserve">
+        <value>Offriamo un'istruzione di qualità</value>
+    </data>
+    <data name="we-are-a-community-that-share-knowledge-for-learning-text" xml:space="preserve">
+        <value>Siamo-una-comunità-che-condivide-la-conoscenza-per-l'apprendimento</value>
+    </data>
+    <data name="website-text" xml:space="preserve">
+        <value>Sito web</value>
+    </data>
+    <data name="Wrong Password" xml:space="preserve">
+        <value>Password errata</value>
+    </data>
+    <data name="You can help" xml:space="preserve">
+        <value>Potete aiutarci</value>
+    </data>
+    <data name="Lastest-lectures-here" xml:space="preserve">
+        <value>Le ultime lezioni
+ qui</value>
+    </data>
+    <data name="Lastest-questions-here" xml:space="preserve">
+        <value>Ultime domande qui</value>
+    </data>
+    <data name="Search Lectures" xml:space="preserve">
+        <value>Cerca Lezioni</value>
+    </data>
+    <data name="Search Questions" xml:space="preserve">
+        <value>
+Cerca domande</value>
+    </data>
+    <data name="Language" xml:space="preserve">
+        <value>
+Lingua</value>
+    </data>
+    <data name="Verified" xml:space="preserve">
+        <value>
+verificato</value>
+    </data>
+    <data name="Lectures" xml:space="preserve">
+        <value>lezioni</value>
+    </data>
+    <data name="All Question" xml:space="preserve">
+        <value>Tutte le domande</value>
+    </data>
+    <data name="Edit this question" xml:space="preserve">
+        <value>
+Modifica questa domanda</value>
+    </data>
+    <data name="Save changes" xml:space="preserve">
+        <value>Salvare le modifiche
+</value>
+    </data>
+    <data name="Answers section below" xml:space="preserve">
+        <value>Sezione Risposte di seguito</value>
+    </data>
+    <data name="Answers" xml:space="preserve">
+        <value>Risposte</value>
+    </data>
+    <data name="Answers Loading" xml:space="preserve">
+        <value>Caricamento delle risposte
+</value>
+    </data>
+    <data name="No answers" xml:space="preserve">
+        <value>
+nessuna risposta</value>
+    </data>
+    <data name="Post an answer" xml:space="preserve">
+        <value>
+posta una risposta</value>
+    </data>
+    <data name="Edit" xml:space="preserve">
+        <value>Modifica</value>
+    </data>
+</root>

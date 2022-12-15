@@ -1,0 +1,64 @@
+@page "/questions/{url}"
+@using Elearn.HttpClients.Service
+@using Elearn.Shared.Dtos
+@using System.Security.Claims
+@inject IQuestionService _questionService
+@inject NavigationManager NavMgr 
+@inject IStringLocalizer<App> Localizer
+@using Elearn.BlazorWASM.Pages.Answers.UIComponents
+
+
+
+@if (CurrentQuestion is null)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7"/>
+}
+else
+{
+    <MudText Align="Align.Center" Typo="Typo.h3" Class="mt-1 my-9"> @CurrentQuestion.Title </MudText>
+    <MudCard Class="mx-auto pa-6 mt-12 mb-4">
+        @((MarkupString)CurrentQuestion.Body)
+    </MudCard>
+    @if (name is not null && name.Equals(CurrentQuestion.AuthorName))
+    {
+        <MudButton Variant="Variant.Filled" OnClick="OnEdit">@Localizer["Edit"]</MudButton>
+    }
+    
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="10" md="7">
+            <CreateAnswer CurrentQuestion="@CurrentQuestion"></CreateAnswer>
+            <Answers Url="@Url"></Answers>
+        </MudItem>
+    </MudGrid>
+
+}
+
+@code {
+    [Parameter]
+    public string? Url { get; set; }
+    public QuestionDto? CurrentQuestion { get; set; }
+
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; } = null!;
+
+    private string? name;
+    private IEnumerable<Claim>? userClaims;
+    private bool isLoggedIn;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        CurrentQuestion = await _questionService.GetQuestionByUrlAsync(Url);
+        AuthenticationState authState = await AuthState;
+        ClaimsPrincipal user = authState.User;
+        isLoggedIn = user.Identity != null;
+
+        if (!isLoggedIn) return;
+
+        userClaims = user.Claims;
+        name = user.Identity!.Name!;
+    }
+    private void OnEdit()
+    {
+        NavMgr.NavigateTo($"/EditQuestion/{CurrentQuestion?.Url}");
+    }
+}
