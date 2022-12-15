@@ -6,6 +6,7 @@ namespace Elearn.BlazorWASM.Localization;
 
 public static class WebAssemblyHostExtensions
 {
+    // the source code was inspired by https://www.youtube.com/watch?v=e8IkSFQmonE 
     public async static Task SetDefaultCulture(this WebAssemblyHost host)
     {
         var localStorage = host.Services.GetRequiredService<ILocalStorageService>();
