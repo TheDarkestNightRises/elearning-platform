@@ -1,5 +1,5 @@
 # E-learningApp
-A E-learning application as a heterogeneous distribute system written in c# and java and using Blazor for the UI, mySQL for database and Web API/gRPC as middlewares. Available in multiple langauges where students all over Europe can get access to free and high quality study materials.
+A E-learning application as a heterogeneous distributed system written in c# and java and using Blazor for the UI, mySQL for database and Web API/gRPC as middlewares. Available in multiple langauges where students all over Europe can get access to free and high quality study materials.
 <br>
 [Documentation.pdf](https://github.com/Andrei-Lichi/E-learningApp/files/10439966/ProjectAndProcessReport.pdf)
 <br>
